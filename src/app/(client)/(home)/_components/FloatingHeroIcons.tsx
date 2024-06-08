@@ -49,6 +49,7 @@ const FloatingHeroIcons = () => {
       ].map((style, i) => (
         <Image
           src={iconsToShow[i]}
+          key={i}
           height={40}
           width={40}
           quality={100}
