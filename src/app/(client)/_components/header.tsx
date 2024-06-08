@@ -100,7 +100,7 @@ const Header = () => {
       <div
         //@ts-ignore
         ref={mobileNavRef}
-        className="flex gap-12 z-50 justify-between flex-col items-center text-foreground/80 bg-background shadow-lg backdrop-blur-sm fixed top-0 right-0 h-screen w-[245px] py-16 pt-20 px-7 translate-x-full transition-transform"
+        className="flex gap-12 z-50 justify-between flex-col text-foreground/80 bg-background shadow-lg backdrop-blur-sm fixed top-0 right-0 h-screen w-[245px] py-16 pt-20 px-7 translate-x-full transition-transform"
       >
         {/* close button */}
         <button
