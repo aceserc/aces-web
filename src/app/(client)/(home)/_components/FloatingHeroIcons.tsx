@@ -44,7 +44,7 @@ const FloatingHeroIcons = () => {
         },
         {
           bottom: "12%",
-          right: "9%",
+          right: "1%",
         },
       ].map((style, i) => (
         <Image
@@ -55,7 +55,7 @@ const FloatingHeroIcons = () => {
           alt=""
           style={style}
           className={cn(
-            "object-contain object-center absolute z-20 hover:scale-105 transition-transform"
+            "object-contain object-center select-none absolute z-20 hover:scale-105 transition-transform"
           )}
         />
       ))}

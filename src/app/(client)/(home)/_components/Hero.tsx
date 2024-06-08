@@ -10,15 +10,15 @@ const Hero = () => {
   return (
     <>
       <section id="hero" className="relative">
-        <div className="flex items-center gap-9 justify-between wrapper py-9">
-          <div className="max-w-xl flex flex-col gap-7">
-            <h3 className="uppercase text-sm tracking-wider text-[#DF6951] font-medium">
+        <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper py-9">
+          <div className="max-w-lg xl:max-w-xl flex items-center lg:items-start flex-col gap-5 md:gap-7">
+            <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium">
               Association of computer engineering students
             </h3>
-            <h1 className="text-7xl font-bold">
+            <h1 className="text-3xl xs:text-4xl md:text-5xl xl:text-7xl font-bold">
               Transform Your Tech Journey with ACES
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-sm sm:text-base">
               Join the Association of Computer Engineering Students (ACES) and
               embark on a journey that bridges the gap between academic learning
               and professional excellence.
@@ -33,7 +33,7 @@ const Hero = () => {
               </Button>
             </div>
           </div>
-          <div className="flex-grow flex items-center justify-end relative p-4">
+          <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0">
             <Image
               src={heroImage}
               alt=""
@@ -53,7 +53,7 @@ const Hero = () => {
           height={400}
           width={400}
           alt=""
-          className="absolute top-0 right-0 -z-10 opacity-80"
+          className="absolute h-[350px] w-[350px] xl:h-[500px] xl:w-[500px] top-0 right-0 -z-10 opacity-80"
         />
       </section>
       <Image
