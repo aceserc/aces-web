@@ -1,0 +1,71 @@
+import React from "react";
+import heroImage from "@/assets/svg/hero-image.svg";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import heroBlob from "@/assets/svg/hero-blob.svg";
+import heroShade from "@/assets/svg/hero-shade.svg";
+import FloatingHeroIcons from "./FloatingHeroIcons";
+
+const Hero = () => {
+  return (
+    <>
+      <section id="hero" className="relative">
+        <div className="flex items-center gap-9 justify-between wrapper py-9">
+          <div className="max-w-xl flex flex-col gap-7">
+            <h3 className="uppercase text-sm tracking-wider text-[#DF6951] font-medium">
+              Association of computer engineering students
+            </h3>
+            <h1 className="text-7xl font-bold">
+              Transform Your Tech Journey with ACES
+            </h1>
+            <p className="text-muted-foreground">
+              Join the Association of Computer Engineering Students (ACES) and
+              embark on a journey that bridges the gap between academic learning
+              and professional excellence.
+            </p>
+            <div className="flex gap-5">
+              <Button>Find Out More</Button>
+              <Button
+                variant="secondary"
+                className="hover:shadow-[20px_20px_60px_#d9d9d9,-20px_-20px_60px_#ffffff] transition-colors"
+              >
+                Register Now
+              </Button>
+            </div>
+          </div>
+          <div className="flex-grow flex items-center justify-end relative p-4">
+            <Image
+              src={heroImage}
+              alt=""
+              height={600}
+              width={600}
+              className="object-contain object-right z-20"
+            />
+            <FloatingHeroIcons />
+          </div>
+        </div>
+
+        {/* hero blob */}
+
+        <Image
+          src={heroBlob}
+          quality={100}
+          height={400}
+          width={400}
+          alt=""
+          className="absolute top-0 right-0 -z-10 opacity-80"
+        />
+      </section>
+      <Image
+        src={heroShade}
+        quality={100}
+        height={400}
+        width={400}
+        alt=""
+        className="absolute top-0 left-0 -z-10"
+      />
+    </>
+  );
+};
+
+export default Hero;

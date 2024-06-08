@@ -20,7 +20,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@admin/*": ["./src/app/admin/*"],
-      "@client/*": ["./src/app/client/*"]
+      "@client/*": ["./src/app/client/*"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
