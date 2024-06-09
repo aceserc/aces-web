@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
   try {
+    // todo: add admin role check
     const formData = await req.formData();
     const image = formData.get("file") as unknown as File;
     const folder = formData.get("folder") as string;
@@ -52,3 +53,5 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+// !delete api with public id -> q -> public id, public id
