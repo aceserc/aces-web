@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
-import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,15 +31,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider
-            appearance={{
-              elements: {
-                footer: "hidden",
-              },
-            }}
-          >
-            {children}
-          </ClerkProvider>
+          {children}
         </ThemeProvider>
         <Toaster richColors position="top-right" />
       </body>
