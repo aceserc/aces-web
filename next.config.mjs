@@ -12,6 +12,11 @@ const nextConfig = {
         pathname: "**/*",
         protocol: "http",
       },
+      {
+        hostname: "aces.ioepc.edu.np",
+        pathname: "**/*",
+        protocol: "https",
+      },
     ],
   },
 };

@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <>
       <section id="hero" className="relative">
-        <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper pt-20 lg:pt-9 py-9">
+        <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper pt-20 lg:pt-9">
           <div className="max-w-lg xl:max-w-xl flex items-center lg:items-start flex-col gap-5 md:gap-7">
             <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium">
               Association of computer engineering students
