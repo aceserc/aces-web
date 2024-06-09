@@ -23,6 +23,7 @@ import { toast } from "sonner";
 
 const AddSponsor = () => {
   const [logo, setLogo] = useState<File | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const {
     register,
@@ -43,6 +44,7 @@ const AddSponsor = () => {
     },
     onSuccess: (data) => {
       toast.success(data);
+      setIsOpen(false);
       queryClient.invalidateQueries({
         queryKey: ["sponsors"],
       });
@@ -55,7 +57,7 @@ const AddSponsor = () => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
       <DialogTrigger asChild>
         <Button className="flex items-center justify-center gap-2">
           <span>Add Sponsor</span>

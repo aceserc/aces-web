@@ -28,7 +28,9 @@ export const handleAddSponsorService = async (
   });
 };
 
-export const handleDeleteSponsorService = async (id: string) => {
+export const handleDeleteSponsorService = async (
+  id: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     axios
       .delete(`${API.sponsor}?id=${id}`, { withCredentials: true })
