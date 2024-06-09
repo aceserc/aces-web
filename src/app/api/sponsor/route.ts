@@ -1,9 +1,9 @@
 import { ADMIN_AUTH_TOKEN } from "@/constants/keys.constants";
 import dbConnect from "@/db/connect";
-import { verifyToken } from "@/helpers/verify-token";
 import sponsorModel from "@/models/sponsor.model";
 import UserSchema from "@/models/users.model";
 import { SponsorSchema as ZodSponsorSchema } from "@/zod/sponsor.schema";
+import { currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: Response) => {
@@ -11,7 +11,16 @@ export const POST = async (req: NextRequest, res: Response) => {
     // connect to database and parse request body
     await dbConnect();
 
-    const cookie = req.cookies.get(ADMIN_AUTH_TOKEN);
+    const authUser = await currentUser();
+
+    if (!authUser || authUser.publicMetadata.role !== "admin") {
+      const response = {
+        status: 401,
+        message: "Unauthorized",
+      };
+      return NextResponse.json(response, { status: response.status });
+    }
+
     let body = await req.json();
 
     try {
@@ -20,36 +29,6 @@ export const POST = async (req: NextRequest, res: Response) => {
       const response = {
         status: 422,
         message: "Unprocessable Entity",
-      };
-      return NextResponse.json(response, { status: response.status });
-    }
-
-    const email = await verifyToken(cookie?.value!);
-
-    if (!email) {
-      const response = {
-        status: 401,
-        message: "Unauthorized",
-      };
-      return NextResponse.json(response, { status: response.status });
-    }
-
-    const user = await UserSchema.findOne({
-      email,
-    });
-
-    if (!user) {
-      const response = {
-        status: 404,
-        message: "User not found",
-      };
-      return NextResponse.json(response, { status: response.status });
-    }
-
-    if (!user.isAdmin) {
-      const response = {
-        status: 401,
-        message: "Unauthorized",
       };
       return NextResponse.json(response, { status: response.status });
     }
@@ -94,6 +73,16 @@ export const GET = async (req: NextRequest, res: Response) => {
 export const DELETE = async (req: NextRequest, res: Response) => {
   try {
     await dbConnect();
+
+    const authUser = await currentUser();
+
+    if (!authUser || authUser.publicMetadata.role !== "admin") {
+      const response = {
+        status: 401,
+        message: "Unauthorized",
+      };
+      return NextResponse.json(response, { status: response.status });
+    }
 
     const id = req.nextUrl.searchParams.get("id");
 
