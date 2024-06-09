@@ -18,14 +18,14 @@ const config = {
     container: {
       center: true,
       padding: "2rem",
+    },
+    extend: {
       screens: {
         xs: "375px",
         "2xl": "1400px",
         "3xl": "1600px",
         "4xl": "1800px",
       },
-    },
-    extend: {
       colors: {
         border: "hsl(var(--border))",
         shade: "hsl(var(--shade))",
