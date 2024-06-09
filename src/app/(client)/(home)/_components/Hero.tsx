@@ -1,5 +1,5 @@
 import React from "react";
-import heroImage from "@/assets/svg/hero-image.svg";
+import heroImage from "@/assets/images/hero-image.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import heroBlob from "@/assets/svg/hero-blob.svg";
@@ -38,6 +38,7 @@ const Hero = () => {
               src={heroImage}
               alt=""
               height={600}
+              quality={100}
               width={600}
               className="object-contain object-right z-20"
             />

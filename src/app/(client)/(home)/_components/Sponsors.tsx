@@ -6,7 +6,10 @@ import Marquee from "react-fast-marquee";
 
 const Sponsors = () => {
   return (
-    <div className="flex flex-col gap-4 items-center justify-center wrapper">
+    <div
+      id="sponsors"
+      className="flex flex-col gap-4 items-center justify-center wrapper"
+    >
       <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
       <Marquee
         gradient={true}
