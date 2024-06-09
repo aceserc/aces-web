@@ -2,12 +2,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { LuLayoutDashboard } from "react-icons/lu";
-
+import { GoSponsorTiers } from "react-icons/go";
 export const ADMIN_SIDEBAR_ITEMS = [
   {
     href: "/admin",
     icon: LuLayoutDashboard,
     label: "Dashboard",
+  },
+  {
+    href: "/admin/sponsors",
+    icon: GoSponsorTiers,
+    label: "Sponsors",
   },
 ];
 

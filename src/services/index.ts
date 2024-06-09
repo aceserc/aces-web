@@ -13,6 +13,9 @@ const API = {
 
   //files
   file: "/api/file",
+
+  //sponsor
+  sponsor: "/api/sponsor",
 } as const;
 
 export default API;

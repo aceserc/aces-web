@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <>
       <section id="hero" className="relative">
-        <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper py-9">
+        <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper pt-20 lg:pt-9 py-9">
           <div className="max-w-lg xl:max-w-xl flex items-center lg:items-start flex-col gap-5 md:gap-7">
             <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium">
               Association of computer engineering students
@@ -23,7 +23,7 @@ const Hero = () => {
               embark on a journey that bridges the gap between academic learning
               and professional excellence.
             </p>
-            <div className="flex gap-5">
+            <div className="flex gap-5 mt-3 lg:mt-0">
               <Button>Find Out More</Button>
               <Button
                 variant="secondary"
