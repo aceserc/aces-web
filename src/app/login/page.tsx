@@ -1,8 +1,9 @@
 "use client";
-
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import signupIllustration from "@/assets/svg/signup.svg";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -17,9 +18,22 @@ const LoginPage = () => {
           <div className="hidden md:block w-4/6">
             <Image src={signupIllustration} alt="signup" />
           </div>
-          <Button className="mt-4 w-full" type="submit">
-            Login!
-          </Button>
+          <SignedIn>
+            <Button className="w-full">
+              <Link href="/admin">Go to Admin Panel</Link>
+            </Button>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton
+              fallbackRedirectUrl={"/admin"}
+              signUpFallbackRedirectUrl={"/admin"}
+              mode="modal"
+            >
+              <Button className="mt-4 w-full" type="submit">
+                Login!
+              </Button>
+            </SignInButton>
+          </SignedOut>
         </div>
       </div>
     </div>
