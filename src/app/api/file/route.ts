@@ -1,12 +1,11 @@
 import { uploadFile } from "@/helpers/upload-file";
 import { NextRequest, NextResponse } from "next/server";
-import { currentUser } from "@clerk/nextjs/server";
 import { deleteImageFromCloudinary } from "@/helpers/delete-image";
+import { isAdmin } from "@/helpers/is-admin";
 
 export const POST = async (req: NextRequest) => {
   try {
-    const user = await currentUser();
-    if (!user || !user.id || !(user.publicMetadata.role === "admin")) {
+    if (!(await isAdmin())) {
       return NextResponse.json(
         {
           status: 401,
@@ -15,6 +14,7 @@ export const POST = async (req: NextRequest) => {
         { status: 401 }
       );
     }
+
     const formData = await req.formData();
     const image = formData.get("file") as unknown as File;
     const folder = formData.get("folder") as string;
@@ -67,8 +67,7 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const user = await currentUser();
-    if (!user || !user.id || !(user.publicMetadata.role === "admin")) {
+    if (!(await isAdmin())) {
       return NextResponse.json(
         {
           status: 401,
