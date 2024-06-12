@@ -1,42 +1,97 @@
 "use client";
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import signupIllustration from "@/assets/svg/signup.svg";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignedIn,
+  SignedOut,
+  SignOutButton,
+  SignInButton,
+  useUser,
+} from "@clerk/nextjs";
 import Link from "next/link";
+import { TbInfoTriangle, TbLoader3 } from "react-icons/tb";
+import { Button } from "@/components/ui/button";
+const Page = () => {
+  const { user, isLoaded } = useUser();
 
-const LoginPage = () => {
   return (
-    <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5 shadow-2xl shadow-blue-500/20">
-      <div className="w-fit h-fit relative animate-scale-up">
-        <div className="absolute top-0 left-0 w-full h-full bg-shade z-[-1] rounded-3xl -rotate-2" />
-        <div className="rounded-3xl shadow-xl w-full flex flex-col items-center justify-center gap-4 p-9 overflow-hidden bg-shade">
-          <div className="text-center mb-10">
-            <h1 className="font-bold text-3xl text-black-800">LOGIN</h1>
-            <p>Authorized personnel only!</p>
+    <div>
+      <main className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 py-12 dark:bg-gray-900">
+        <div className="mx-auto w-full max-w-md space-y-6">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
+              Welcome to the ACES CMS
+            </h1>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">
+              Manage your content with ease.
+            </p>
           </div>
-          <div className="hidden md:block w-4/6">
-            <Image src={signupIllustration} alt="signup" />
+          <ClerkLoading>
+            <div className="w-full flex items-center justify-center">
+              <TbLoader3 className="h-5 w-5  text-muted-foreground animate-spin" />
+            </div>
+          </ClerkLoading>
+          <ClerkLoaded>
+            <SignedIn>
+              {user?.publicMetadata.role === "admin" ? (
+                <Link href="/admin">
+                  <Button className="inline-flex w-full justify-center rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-900">
+                    Go to Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <div className="flex items-center flex-col justify-center gap-3">
+                  <p className="text-red-500 w-full text-center">
+                    You are not an admin.
+                  </p>
+                  <SignOutButton>
+                    <Button className="w-full">
+                      {!isLoaded ? "Loading..." : "Sign out"}
+                    </Button>
+                  </SignOutButton>
+                </div>
+              )}
+            </SignedIn>
+            <SignedOut>
+              <SignInButton
+                fallbackRedirectUrl={"/admin"}
+                signUpFallbackRedirectUrl={"/admin"}
+                mode="modal"
+              >
+                <Button className="inline-flex w-full justify-center rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white shadow-sm transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-900">
+                  Login
+                </Button>
+              </SignInButton>
+            </SignedOut>
+          </ClerkLoaded>
+
+          <div className="rounded-md bg-red-100 p-4 text-center text-sm text-red-700 dark:bg-red-900 dark:text-red-50 flex items-center justify-center gap-2">
+            <TbInfoTriangle className="h-10 w-10 text-red-600 dark:text-red-400" />
+            <p>
+              If you are not an authorized person to visit this page then leave
+              immediately. Each and every action are being recorded.
+            </p>
           </div>
-          <SignedIn>
-            <Button className="w-full">
-              <Link href="/admin">Go to Admin Panel</Link>
-            </Button>
-          </SignedIn>
-          <SignedOut>
-            <SignInButton
-              fallbackRedirectUrl={"/admin"}
-              signUpFallbackRedirectUrl={"/admin"}
-              mode="modal"
-            >
-              <Button className="mt-4 w-full" type="submit">
-                Login!
-              </Button>
-            </SignInButton>
-          </SignedOut>
+          <div className=" flex  justify-center items-center mx-auto w-full max-w-md space-y-6">
+            <p className="mt-2 text-gray-500 dark:text-gray-400">
+              Developed By:{" "}
+              <a className="text-purple-400" href="https://github.com/jrTilak">
+                jrTilak
+              </a>{" "}
+              and{" "}
+              <a
+                className="text-purple-400"
+                href="https://github.com/dev-sandip"
+              >
+                dev-sandip
+              </a>{" "}
+              with ❤️
+            </p>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
-export default LoginPage;
+
+export default Page;
