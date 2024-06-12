@@ -7,7 +7,7 @@ export const CommitteeSchema = z.object({
     .min(MIN_LENGTH_NAME, "Too short!")
     .max(MAX_LENGTH_NAME, "Too long!"),
   post: z.string(),
-  socialLinks: z.array(z.string().url("Invalid URL")).optional(),
+  socialLinks: z.array(z.string()).optional(),
 });
 
 export const CommitteeMemberSchemaWithAvatar = CommitteeSchema.extend({

@@ -33,7 +33,7 @@ const Sidebar = () => {
   return (
     <aside className="hidden shadow-2xl h-screen w-64 flex-col overflow-y-auto overflow-x-hidden rounded-tr-[90px] border-r bg-accent py-8 pl-5 lg:flex">
       <Link href="/admin" className="text-3xl font-bold text-foreground">
-        Admin
+        ACES
       </Link>
       <div className="mt-12 flex flex-1 flex-col justify-between">
         <nav className="ml-2 flex flex-col gap-1">
