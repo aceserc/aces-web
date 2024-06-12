@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoSponsorTiers } from "react-icons/go";
 import { AiOutlineNotification } from "react-icons/ai";
+import { GoPeople } from "react-icons/go";
 export const ADMIN_SIDEBAR_ITEMS = [
   {
     href: "/admin",
@@ -19,6 +20,11 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/notices",
     icon: AiOutlineNotification,
     label: "Notices",
+  },
+  {
+    href: "/admin/committees",
+    icon: GoPeople,
+    label: "Committees",
   },
 ];
 

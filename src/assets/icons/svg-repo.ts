@@ -10,4 +10,9 @@ export const ICONS = {
   gitlab: "https://www.svgrepo.com/show/448226/gitlab.svg",
   figma: "https://www.svgrepo.com/show/452202/figma.svg",
   github: "https://www.svgrepo.com/show/452211/github.svg",
+  facebook: "https://www.svgrepo.com/show/448224/facebook.svg",
+  twitter: "https://www.svgrepo.com/show/176772/twitter-social-media.svg",
+  linkedin: "https://www.svgrepo.com/show/452047/linkedin-1.svg",
+  instagram: "https://www.svgrepo.com/show/452229/instagram-1.svg",
+  external: "https://www.svgrepo.com/show/458672/external-1.svg",
 };

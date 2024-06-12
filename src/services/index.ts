@@ -18,6 +18,7 @@ const API = {
   sponsor: "/api/sponsor",
 
   notice: "/api/notice",
+  committee: "/api/committee",
 } as const;
 
 export default API;
