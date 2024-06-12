@@ -53,6 +53,7 @@ export const POST = async (req: NextRequest) => {
       {
         ...RESPONSES.CREATED,
         message: "File uploaded successfully",
+        data,
       },
       {
         status: RESPONSES.CREATED.status,

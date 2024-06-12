@@ -12,7 +12,10 @@ const AdminProvider = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <div>{children}</div>
         {process.env.NODE_ENV === "development" && (
-          <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-left"
+          />
         )}
       </QueryClientProvider>
     </GoogleOAuthProvider>

@@ -16,6 +16,8 @@ const API = {
 
   //sponsor
   sponsor: "/api/sponsor",
+
+  notice: "/api/notice",
 } as const;
 
 export default API;
