@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoSponsorTiers } from "react-icons/go";
+import { AiOutlineNotification } from "react-icons/ai";
 export const ADMIN_SIDEBAR_ITEMS = [
   {
     href: "/admin",
@@ -13,6 +14,11 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/sponsors",
     icon: GoSponsorTiers,
     label: "Sponsors",
+  },
+  {
+    href: "/admin/notices",
+    icon: AiOutlineNotification,
+    label: "Notices",
   },
 ];
 

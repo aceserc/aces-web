@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.1.4",
     "@hookform/resolvers": "^3.4.2",
+    "@mdxeditor/editor": "^3.4.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -43,6 +44,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@tanstack/react-query-devtools": "^5.40.0",
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.6",
