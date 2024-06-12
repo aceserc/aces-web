@@ -51,12 +51,11 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json(
       {
-        ...RESPONSES.SUCCESS,
+        ...RESPONSES.CREATED,
         message: "File uploaded successfully",
-        data,
       },
       {
-        status: RESPONSES.SUCCESS.status,
+        status: RESPONSES.CREATED.status,
       }
     );
   } catch (error) {

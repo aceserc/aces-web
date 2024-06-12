@@ -23,4 +23,18 @@ export const RESPONSES = {
     message: "Something went wrong! Please try again later.",
     error: "Unknown error occurred",
   },
+  UNPROCESSABLE_ENTITY: {
+    status: 422,
+    message: "The request body is invalid!",
+    error: "Unprocessable Entity",
+  },
+  CREATED: {
+    status: 201,
+    message: "Resource created successfully",
+  },
+  NOT_FOUND: {
+    status: 404,
+    message: "Resource not found",
+    error: "Resource not found",
+  },
 };
