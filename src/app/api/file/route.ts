@@ -2,90 +2,95 @@ import { uploadFile } from "@/helpers/upload-file";
 import { NextRequest, NextResponse } from "next/server";
 import { deleteImageFromCloudinary } from "@/helpers/delete-image";
 import { isAdmin } from "@/helpers/is-admin";
+import { RESPONSES } from "@/constants/response.constant";
 
+/**
+ * Handles the POST request for uploading a file.
+ *
+ * @body file - The file to upload.
+ * @body folder - The folder to upload the file to.
+ *
+ * @returns data - The uploaded file data.
+ */
 export const POST = async (req: NextRequest) => {
   try {
     if (!(await isAdmin())) {
-      return NextResponse.json(
-        {
-          status: 401,
-          message: "Unauthorized Access!",
-        },
-        { status: 401 }
-      );
+      return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
+        status: RESPONSES.UNAUTHORIZED_ACCESS.status,
+      });
     }
 
     const formData = await req.formData();
-    const image = formData.get("file") as unknown as File;
+    const file = formData.get("file") as unknown as File;
     const folder = formData.get("folder") as string;
 
-    if (!image)
+    if (!file)
       return NextResponse.json(
         {
-          status: 400,
-          message: "Image is required",
+          ...RESPONSES.INSUFFICIENT_REQUEST_BODY,
+          message: "Please provide a file to upload",
         },
         {
-          status: 400,
+          status: RESPONSES.INSUFFICIENT_REQUEST_BODY.status,
         }
       );
 
-    if (!folder)
+    if (!folder) {
       return NextResponse.json(
         {
-          status: 400,
-          message: "Folder is required",
+          ...RESPONSES.INSUFFICIENT_REQUEST_BODY,
+          message: "Please provide a folder to upload the file",
         },
         {
-          status: 400,
+          status: RESPONSES.INSUFFICIENT_REQUEST_BODY.status,
         }
-      );
-
-    const data: any = await uploadFile(image, folder);
-
-    return NextResponse.json(
-      {
-        data,
-        message: "File uploaded successfully",
-      },
-      {
-        status: 200,
-      }
-    );
-  } catch (error) {
-    return NextResponse.json(
-      {
-        status: 500,
-        message: "Internal server error",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-};
-
-export const DELETE = async (req: NextRequest) => {
-  try {
-    if (!(await isAdmin())) {
-      return NextResponse.json(
-        {
-          status: 401,
-          message: "Unauthorized Access!",
-        },
-        { status: 401 }
       );
     }
 
+    const data: any = await uploadFile(file, folder);
+
+    return NextResponse.json(
+      {
+        ...RESPONSES.SUCCESS,
+        message: "File uploaded successfully",
+        data,
+      },
+      {
+        status: RESPONSES.SUCCESS.status,
+      }
+    );
+  } catch (error) {
+    return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
+      status: RESPONSES.INTERNAL_SERVER_ERROR.status,
+    });
+  }
+};
+
+/**
+ *  Handles the DELETE request for deleting a file.
+ *
+ * @body publicIds - The publicIds of the files to delete.
+ *
+ * @returns message - The response message.
+ */
+export const DELETE = async (req: NextRequest) => {
+  try {
+    if (!(await isAdmin())) {
+      return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
+        status: RESPONSES.UNAUTHORIZED_ACCESS.status,
+      });
+    }
+
     const { publicIds } = await req.json();
+
     if (!publicIds || !Array.isArray(publicIds)) {
       return NextResponse.json(
         {
-          status: 400,
-          message: "Invalid publicIds",
+          ...RESPONSES.INSUFFICIENT_REQUEST_BODY,
+          message: "Please provide an array of publicIds to delete",
         },
         {
-          status: 400,
+          status: RESPONSES.INSUFFICIENT_REQUEST_BODY.status,
         }
       );
     }
@@ -96,35 +101,32 @@ export const DELETE = async (req: NextRequest) => {
       }
       return NextResponse.json(
         {
-          status: 200,
-          publicIds,
+          ...RESPONSES.SUCCESS,
           message: "Files deleted successfully",
         },
         {
-          status: 200,
+          status: RESPONSES.SUCCESS.status,
         }
       );
     } catch (error) {
       return NextResponse.json(
         {
-          status: 400,
-          message: "Error deleting files",
+          ...RESPONSES.SOMETHING_WENT_WRONG,
+          message: "Failed to delete files",
         },
         {
-          status: 400,
+          status: RESPONSES.SOMETHING_WENT_WRONG.status,
         }
       );
     }
-
-    // Your code to delete files with the given publicIds goes here
   } catch (error) {
     return NextResponse.json(
       {
-        status: 500,
-        message: "Internal server error",
+        ...RESPONSES.INTERNAL_SERVER_ERROR,
+        message: "Failed to delete files",
       },
       {
-        status: 500,
+        status: RESPONSES.INTERNAL_SERVER_ERROR.status,
       }
     );
   }
