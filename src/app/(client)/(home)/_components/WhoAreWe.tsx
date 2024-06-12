@@ -7,7 +7,7 @@ const WhoAreWe = () => {
   return (
     <div id="who-are-we">
       <div className="wrapper flex flex-col gap-16">
-        <div className="flex gap-16">
+        <div className="flex flex-row-reverse gap-16">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <span className="text-destructive text-xs md:text-base font-medium uppercase tracking-widest">
