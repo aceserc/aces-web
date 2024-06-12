@@ -68,7 +68,6 @@ const allPlugins = ({
   headingsPlugin(),
   linkPlugin(),
   linkDialogPlugin(),
-  // eslint-disable-next-line @typescript-eslint/require-await
   imagePlugin({
     imageUploadHandler: async (img): Promise<string> => {
       const dialog = document.getElementById("radix-:r1h:");
