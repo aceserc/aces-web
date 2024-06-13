@@ -26,10 +26,14 @@ export type IFileUploadResponse = {
 };
 
 export const handleUploadFileService = async (
-  file: File,
+  file: File | string,
   folder: string
-): Promise<IFileUploadResponse> => {
+): Promise<Partial<IFileUploadResponse>> => {
   return new Promise((resolve, reject) => {
+    if (typeof file === "string") {
+      resolve({ url: file });
+      return;
+    }
     const formData = new FormData();
     formData.append("file", file);
     formData.append("folder", folder);

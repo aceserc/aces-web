@@ -41,24 +41,55 @@ const SponsorsPage = () => {
           </div>
         </div>
         {/*  sponsor list */}
-        {isLoading ? (
-          <div className="flex justify-center items-center h-48">
-            <Loading />
-          </div>
-        ) : filteredData && filteredData.length > 0 ? (
-          <div className="flex gap-4 flex-wrap">
-            {filteredData.map((sponsor) => (
-              <SponsorCard key={sponsor._id} {...sponsor} />
-            ))}
-          </div>
-        ) : (
-          <div className="flex justify-center items-center h-48">
-            <span className="text-muted-foreground">No sponsors found</span>
-          </div>
-        )}
+        <div className="flex flex-col gap-2">
+          <span className="text-muted-foreground">Current Sponsors</span>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-48">
+              <Loading />
+            </div>
+          ) : filteredData &&
+            filteredData.length > 0 &&
+            filteredData.filter((sponsor) => sponsor.isActive).length > 0 ? (
+            <div className="flex gap-4 flex-wrap">
+              {filteredData
+                .filter((sponsor) => sponsor.isActive)
+                .map((sponsor) => (
+                  <SponsorCard key={sponsor._id} {...sponsor} />
+                ))}
+            </div>
+          ) : (
+            <NoSponsorsFound msg="No current sponsors found!" />
+          )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <span className="text-muted-foreground">Other Sponsors</span>
+          {isLoading ? (
+            <div className="flex justify-center items-center h-48">
+              <Loading />
+            </div>
+          ) : filteredData &&
+            filteredData.length > 0 &&
+            filteredData.filter((sponsor) => !sponsor.isActive).length > 0 ? (
+            <div className="flex gap-4 flex-wrap">
+              {filteredData
+                .filter((sponsor) => !sponsor.isActive)
+                .map((sponsor) => (
+                  <SponsorCard key={sponsor._id} {...sponsor} />
+                ))}
+            </div>
+          ) : (
+            <NoSponsorsFound msg="No other sponsors found!" />
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default SponsorsPage;
+
+const NoSponsorsFound = ({ msg }: { msg?: string }) => (
+  <div className="flex justify-center items-center h-48">
+    <span className="text-muted-foreground">{msg ?? "No sponsors found"}</span>
+  </div>
+);

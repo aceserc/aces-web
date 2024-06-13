@@ -1,6 +1,5 @@
 "use client";
 import { ISponsorSchema } from "@/zod/sponsor.schema";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
@@ -68,8 +67,12 @@ const SponsorCard = (props: Props) => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <Link href={props.website ?? "#"} target="_blank">
-        <Image
+      <Link
+        href={props.website ?? "#"}
+        target="_blank"
+        className="flex items-center justify-center w-full h-full"
+      >
+        <img
           src={props.logo}
           alt={props.name}
           width={80}

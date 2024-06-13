@@ -4,7 +4,7 @@ import axios from "axios";
 import API from ".";
 
 export const handleAddSponsorService = async (
-  data: Omit<ISponsorSchema, "logo"> & { logo: File }
+  data: Omit<ISponsorSchema, "logo"> & { logo: File | string }
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.logo, "sponsors")

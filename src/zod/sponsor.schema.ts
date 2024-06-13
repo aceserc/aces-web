@@ -8,6 +8,7 @@ export const SponsorSchema = z.object({
     .max(MAX_LENGTH_NAME, "Too long!"),
   logo: z.string().url("Invalid image URL"),
   website: z.string().url("Invalid website URL").optional(),
+  isActive: z.boolean().optional(),
 });
 
 export type ISponsorSchema = z.infer<typeof SponsorSchema> & {
