@@ -41,8 +41,6 @@ const AddMember = () => {
     resolver: zodResolver(CommitteeSchema.omit({ socialLinks: true })),
   });
 
-  console.log("Rendering AddMember");
-
   const { mutate, isPending } = useMutation({
     mutationFn: handleAddCommitteeService,
     onError: (err: string) => {

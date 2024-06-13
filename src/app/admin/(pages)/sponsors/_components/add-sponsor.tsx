@@ -59,7 +59,6 @@ const AddSponsor = () => {
 
   const onSubmit: SubmitHandler<ISponsorSchema> = (data) => {
     if (!logo) return toast.error("Please upload a logo");
-    console.log(data);
     mutate({ ...data, logo });
   };
 

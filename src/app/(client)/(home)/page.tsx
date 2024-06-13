@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import Hero from "./_components/Hero";
 import Sponsors from "./_components/Sponsors";
@@ -25,7 +23,6 @@ const getData = async () => {
   const sponsors = await fetchData<ISponsorSchema[]>(
     `${API.sponsor}?isActive=false`
   );
-  console.log("sponsors: ", sponsors);
   return {
     sponsors,
   };
