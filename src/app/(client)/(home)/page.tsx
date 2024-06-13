@@ -8,16 +8,6 @@ import { fetchData } from "@/services/fetch";
 import { ISponsorSchema } from "@/zod/sponsor.schema";
 import API from "@/services";
 
-export const getData = async () => {
-  const sponsors = await fetchData<ISponsorSchema[]>(
-    `${API.sponsor}?isActive=false`
-  );
-  console.log("sponsors: ", sponsors);
-  return {
-    sponsors,
-  };
-};
-
 const Home = async () => {
   const { sponsors } = await getData();
   return (
@@ -29,6 +19,16 @@ const Home = async () => {
       <WhoAreWe />
     </div>
   );
+};
+
+const getData = async () => {
+  const sponsors = await fetchData<ISponsorSchema[]>(
+    `${API.sponsor}?isActive=false`
+  );
+  console.log("sponsors: ", sponsors);
+  return {
+    sponsors,
+  };
 };
 
 export default Home;

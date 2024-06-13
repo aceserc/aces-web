@@ -71,7 +71,6 @@ export const GET = async (req: NextRequest) => {
     const isActive = req.nextUrl.searchParams.get("isActive");
 
     let sponsors: any;
-    console.log("isActive: ", isActive);
     if (isActive === "true") {
       sponsors = await sponsorModel.find({ isActive: true });
     } else if (isActive === "false") {
@@ -80,7 +79,6 @@ export const GET = async (req: NextRequest) => {
       sponsors = await sponsorModel.find();
     }
 
-    console.log("sponsors: ", sponsors);
     return NextResponse.json({
       data: sponsors,
       isActive,
