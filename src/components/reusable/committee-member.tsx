@@ -9,7 +9,7 @@ type Props = ICommitteeSchemaWithAvatar;
 
 const CommitteeMember = ({ avatar, name, post, socialLinks }: Props) => {
   return (
-    <div className="flex flex-col gap-3 items-center shadow-md justify-center bg-background py-6 px-12 rounded-md">
+    <div className="flex flex-col gap-3 items-center shadow-[rgba(7,_65,_210,_0.1)_0px_9px_10px] justify-center bg-background py-6 px-12 rounded-md">
       <Image
         src={avatar}
         alt="avatar"
@@ -22,26 +22,30 @@ const CommitteeMember = ({ avatar, name, post, socialLinks }: Props) => {
         <h3 className="text-lg font-semibold">{name}</h3>
         <p className="text-sm text-muted-foreground">{post}</p>
       </div>
-      <div className="flex gap-4 items-center justify-center">
-        {socialLinks?.map((link, index) => {
-          const type = identifyUrl(link);
-          return (
-            <Link key={index} href={type.href} target="_blank">
-              <Image
-                // @ts-ignore
-                src={ICONS[type.type]}
-                alt="social"
-                width={20}
-                height={20}
-                className="cursor-pointer"
-                quality={100}
-                onError={(e) => {
-                  e.currentTarget.src = ICONS.external;
-                }}
-              />
-            </Link>
-          );
-        })}
+      <div className="flex gap-4 items-center justify-center min-h-8">
+        {socialLinks && socialLinks?.length < 1 ? (
+          <span className="text-muted-foreground">No social links</span>
+        ) : (
+          socialLinks?.map((link, index) => {
+            const type = identifyUrl(link);
+            return (
+              <Link key={index} href={type.href} target="_blank">
+                <Image
+                  // @ts-ignore
+                  src={ICONS[type.type]}
+                  alt="social"
+                  width={30}
+                  height={30}
+                  className="cursor-pointer"
+                  quality={100}
+                  onError={(e) => {
+                    e.currentTarget.src = ICONS.external;
+                  }}
+                />
+              </Link>
+            );
+          })
+        )}
       </div>
     </div>
   );

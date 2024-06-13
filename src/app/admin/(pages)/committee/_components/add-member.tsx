@@ -25,7 +25,11 @@ import { Input } from "@/components/ui/input";
 import { MdDeleteOutline } from "react-icons/md";
 import { handleAddCommitteeService } from "@/services/committee";
 
-const AddMember = () => {
+type Props = {
+  occupiedPosts: string[];
+};
+
+const AddMember = ({ occupiedPosts }: Props) => {
   const [avatar, setLogo] = useState<File | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [socialLinks, setSocialLinks] = useState<string[]>([]);
@@ -50,7 +54,7 @@ const AddMember = () => {
       toast.success(data);
       setIsOpen(false);
       queryClient.invalidateQueries({
-        queryKey: ["sponsors"],
+        queryKey: ["committees"],
       });
       reset();
       setLogo(null);
@@ -60,7 +64,6 @@ const AddMember = () => {
 
   const onSubmit: SubmitHandler<ICommitteeSchema> = (data) => {
     if (!avatar) return toast.error("Please upload a avatar");
-    if (socialLinks.length === 0) return toast.error("Please add social links");
     mutate({ ...data, avatar, socialLinks });
   };
 
@@ -111,7 +114,7 @@ const AddMember = () => {
             />
             <div className="flex flex-col">
               <SelectPost
-                occupiedPosts={["Advisor"]}
+                occupiedPosts={occupiedPosts}
                 setPost={(post) => {
                   setValue("post", post);
                 }}

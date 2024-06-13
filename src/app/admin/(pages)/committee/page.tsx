@@ -39,7 +39,7 @@ const CommitteesPage = () => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <AddMember />
+            <AddMember occupiedPosts={data?.map((c) => c.post) ?? []} />
           </div>
         </div>
         {/*  member list */}

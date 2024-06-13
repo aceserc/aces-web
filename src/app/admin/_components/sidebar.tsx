@@ -22,9 +22,9 @@ export const ADMIN_SIDEBAR_ITEMS = [
     label: "Notices",
   },
   {
-    href: "/admin/committees",
+    href: "/admin/committee",
     icon: GoPeople,
-    label: "Committees",
+    label: "Committee",
   },
 ];
 
