@@ -78,10 +78,10 @@ const allPlugins = ({
       submitButton.innerText = "Loading...";
 
       const res = await handleUploadFileService(img, imageFolder);
-      if (updateUsedImagesList) updateUsedImagesList(res.url);
+      if (updateUsedImagesList) updateUsedImagesList(res.url!);
       submitButton.innerText = "Upload";
 
-      return res.url;
+      return res.url!;
     },
     imageAutocompleteSuggestions,
   }),
