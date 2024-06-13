@@ -1,14 +1,21 @@
-import { SPONSORS } from "@/mock-data/sponsors";
+import { ISponsorSchema } from "@/zod/sponsor.schema";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const Sponsors = () => {
+type Props = {
+  sponsors: ISponsorSchema[];
+};
+
+const Sponsors = async ({ sponsors }: Props) => {
+  if (!sponsors || sponsors.length === 0) {
+    return null;
+  }
   return (
     <div
       id="sponsors"
-      className="flex flex-col gap-4 items-center justify-center wrapper"
+      className="flex flex-col gap-4 items-center justify-center wrapper min-h-10"
     >
       <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
       <Marquee
@@ -18,7 +25,7 @@ const Sponsors = () => {
         pauseOnHover={true}
         className="flex gap-12 items-center justify-center"
       >
-        {SPONSORS.map((sponsor, i) => (
+        {sponsors.map((sponsor, i) => (
           <Link href={sponsor.website ?? "#"} key={i} target="_blank">
             <Image
               src={sponsor.logo}

@@ -68,11 +68,22 @@ export const POST = async (req: NextRequest) => {
 export const GET = async (req: NextRequest) => {
   try {
     await dbConnect();
+    const isActive = req.nextUrl.searchParams.get("isActive");
 
-    const sponsors = await sponsorModel.find();
+    let sponsors: any;
+    console.log("isActive: ", isActive);
+    if (isActive === "true") {
+      sponsors = await sponsorModel.find({ isActive: true });
+    } else if (isActive === "false") {
+      sponsors = await sponsorModel.find({ isActive: false });
+    } else {
+      sponsors = await sponsorModel.find();
+    }
 
+    console.log("sponsors: ", sponsors);
     return NextResponse.json({
       data: sponsors,
+      isActive,
     });
   } catch (e) {
     return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
