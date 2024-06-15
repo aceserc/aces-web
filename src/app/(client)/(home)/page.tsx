@@ -5,6 +5,7 @@ import WhoAreWe from "./_components/WhoAreWe";
 import { fetchData } from "@/services/fetch";
 import { ISponsorSchema } from "@/zod/sponsor.schema";
 import API from "@/services";
+import UpcomingEvents from "./_components/UpcomingEvents";
 
 const Home = async () => {
   const { sponsors } = await getData();
@@ -12,17 +13,19 @@ const Home = async () => {
     <div className="flex flex-col gap-24 xl:gap-32">
       <div className="flex flex-col gap-4">
         <Hero />
-        <Sponsors sponsors={sponsors} />
+        <Sponsors sponsors={sponsors.data} />
       </div>
       <WhoAreWe />
+      <UpcomingEvents />
     </div>
   );
 };
 
 const getData = async () => {
-  const sponsors = await fetchData<ISponsorSchema[]>(
+  const sponsors = await fetchData<{ data: ISponsorSchema[] }>(
     `${API.sponsor}?isActive=false`
   );
+
   return {
     sponsors,
   };

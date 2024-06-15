@@ -5,6 +5,7 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { GoSponsorTiers } from "react-icons/go";
 import { AiOutlineNotification } from "react-icons/ai";
 import { GoPeople } from "react-icons/go";
+import { CiCalendarDate } from "react-icons/ci";
 export const ADMIN_SIDEBAR_ITEMS = [
   {
     href: "/admin",
@@ -25,6 +26,11 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/committee",
     icon: GoPeople,
     label: "Committee",
+  },
+  {
+    href: "/admin/events",
+    icon: CiCalendarDate,
+    label: "Events",
   },
 ];
 
