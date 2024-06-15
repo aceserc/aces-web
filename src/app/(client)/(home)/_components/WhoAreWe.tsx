@@ -7,7 +7,16 @@ const WhoAreWe = () => {
   return (
     <div id="who-are-we">
       <div className="wrapper flex flex-col gap-16">
-        <div className="flex flex-row-reverse gap-16">
+        <div className="flex gap-16">
+          <div className="hidden lg:flex flex-col gap-9 items-center justify-center">
+            <Image
+              src={whoAreWe}
+              alt=""
+              height={600}
+              width={600}
+              className="object-contain object-center h-72 xl:h-auto"
+            />
+          </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <span className="text-destructive text-xs md:text-base font-medium uppercase tracking-widest">
@@ -33,15 +42,6 @@ const WhoAreWe = () => {
                 <StatsCard key={i} stat={stat} />
               ))}
             </div>
-          </div>
-          <div className="hidden lg:flex flex-col gap-9 items-center justify-center">
-            <Image
-              src={whoAreWe}
-              alt=""
-              height={600}
-              width={600}
-              className="object-contain object-center h-72 xl:h-auto"
-            />
           </div>
         </div>
         <div className="hidden lg:grid grid-cols-4 gap-4 xl:hidden w-[800px] m-auto">

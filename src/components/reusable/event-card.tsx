@@ -21,7 +21,10 @@ const EventCard = ({
 }) => {
   const resoledDate = resolveDate(props.startDate);
   return (
-    <Link href={`/events/${props._id}`}>
+    <Link
+      href={`/events/${props._id}`}
+      className="w-full sm:min-w-[400px] md:min-w-[500px] sm:w-[400px] md:w-[500px]"
+    >
       <div
         className={cn(
           "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl",
