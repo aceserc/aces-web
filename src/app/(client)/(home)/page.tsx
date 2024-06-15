@@ -13,7 +13,7 @@ const Home = async () => {
     <div className="flex flex-col gap-24 xl:gap-32">
       <div className="flex flex-col gap-4">
         <Hero />
-        <Sponsors sponsors={sponsors.data} />
+        <Sponsors sponsors={sponsors?.data!} />
       </div>
       <WhoAreWe />
       <UpcomingEvents />
