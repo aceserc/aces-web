@@ -75,11 +75,18 @@ const allPlugins = ({
         "button[type=submit]"
       ) as HTMLButtonElement;
 
-      submitButton.innerText = "Loading...";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.innerText = "Loading...";
+      }
 
       const res = await handleUploadFileService(img, imageFolder);
       if (updateUsedImagesList) updateUsedImagesList(res.url!);
-      submitButton.innerText = "Upload";
+
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerText = "Submit";
+      }
 
       return res.url!;
     },
