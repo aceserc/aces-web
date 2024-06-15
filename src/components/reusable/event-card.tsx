@@ -76,10 +76,10 @@ const EventCard = ({
             <div className="flex gap-4 items-center">
               {/* show month and day  */}
               {/* 
-            One year passed: 2020 Dec
-            Old Date: 12 Dec, 2020
-            Else: 12 Dec
-            */}
+                One year passed: 2020 Dec
+                Old Date: 12 Dec, 2020
+                Else: 12 Dec
+                */}
               <span>
                 {resoledDate.isOneYearPassed
                   ? `${resoledDate.mm} ${resoledDate.yyyy}`
@@ -91,7 +91,15 @@ const EventCard = ({
                 <>
                   <hr className="h-4 w-px bg-muted-foreground/40" />
                   {/* time format : 12:03 AM */}
-                  <span className="uppercase">{props.startTime}</span>
+                  <span className="uppercase">
+                    {/* // the extra date is added to convert the time to date otherwise it will not work */}
+                    {new Date(
+                      `1970-01-01T${props.startTime}`
+                    ).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
                 </>
               )}
             </div>
