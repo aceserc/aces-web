@@ -10,6 +10,7 @@ export const fetchData = async <T>(
       revalidate: revalidate,
     },
   });
+  if (!data.ok) return null;
   const json = await data.json();
   return json as T;
 };

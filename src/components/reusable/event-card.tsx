@@ -3,6 +3,7 @@ import { IEventsSchemaResponse } from "@/services/events";
 import Link from "next/link";
 import { CiLocationOn } from "react-icons/ci";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { AiOutlineLaptop } from "react-icons/ai";
 import {
   Tooltip,
   TooltipContent,
@@ -20,6 +21,11 @@ const EventCard = ({
   className?: string;
 }) => {
   const resoledDate = resolveDate(props.startDate);
+  const LocationIcon = ["online", "virtual", "remote"].includes(
+    props.location?.toLowerCase() ?? ""
+  )
+    ? AiOutlineLaptop
+    : CiLocationOn;
   return (
     <Link
       href={`/events/${props._id}`}
@@ -35,8 +41,8 @@ const EventCard = ({
         {props.location && (
           <TooltipProvider delayDuration={0}>
             <Tooltip>
-              <TooltipTrigger className="absolute top-2 right-2 shadow-inner bg-muted/40 rounded-full p-1">
-                <CiLocationOn className="text-primary h-5 w-5" />
+              <TooltipTrigger className="absolute top-2 right-2 shadow-inner bg-muted/40 rounded-full p-1.5">
+                <LocationIcon className="text-primary h-5 w-5" />
               </TooltipTrigger>
               <TooltipContent>{props.location}</TooltipContent>
             </Tooltip>

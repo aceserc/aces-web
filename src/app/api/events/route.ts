@@ -73,7 +73,7 @@ export const GET = async (req: NextRequest) => {
   try {
     await dbConnect();
 
-    const events = await eventsModel.find();
+    const events = await eventsModel.find().sort({ startDate: -1 });
 
     const eventId = req.nextUrl.searchParams.get("id");
 
