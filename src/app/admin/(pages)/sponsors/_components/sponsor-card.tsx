@@ -75,9 +75,9 @@ const SponsorCard = (props: Props) => {
         <img
           src={props.logo}
           alt={props.name}
-          width={80}
-          height={80}
-          className="object-center object-contain"
+          width={60}
+          height={60}
+          className="object-center object-contain aspect-square"
         />
       </Link>
     </div>

@@ -23,11 +23,12 @@ export const POST = async (req: NextRequest) => {
     try {
       body = ZodSponsorSchema.parse(body);
     } catch (e) {
-      const validationError = fromError(e) ?? JSON.stringify(e);
+      const message = fromError(e).toString();
       return NextResponse.json(
         {
           ...RESPONSES.UNPROCESSABLE_ENTITY,
-          error: validationError,
+          error: JSON.stringify(e),
+          message,
         },
         {
           status: RESPONSES.UNPROCESSABLE_ENTITY.status,

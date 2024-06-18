@@ -30,7 +30,7 @@ export const handleUploadFileService = async (
   folder: string
 ): Promise<Partial<IFileUploadResponse>> => {
   return new Promise((resolve, reject) => {
-    if (typeof file === "string") {
+    if (!file || typeof file === "string") {
       resolve({ url: file });
       return;
     }
