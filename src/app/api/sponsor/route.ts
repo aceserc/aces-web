@@ -3,16 +3,10 @@ import dbConnect from "@/db/connect";
 import { isAdmin } from "@/helpers/is-admin";
 import sponsorModel from "@/models/sponsor.model";
 import { SponsorSchema as ZodSponsorSchema } from "@/zod/sponsor.schema";
-import { currentUser } from "@clerk/nextjs/server";
+import { fromError } from "zod-validation-error";
 import { NextRequest, NextResponse } from "next/server";
 
-/**
- *  Handles the POST request for adding a sponsor.
- *
- * @body name - The name of the sponsor.
- * @body logo - The logo of the sponsor.
- * @body link - The link to the sponsor's website.
- */
+// Handles the POST request for adding a sponsor.
 export const POST = async (req: NextRequest) => {
   try {
     // connect to database and parse request body
@@ -29,10 +23,11 @@ export const POST = async (req: NextRequest) => {
     try {
       body = ZodSponsorSchema.parse(body);
     } catch (e) {
+      const validationError = fromError(e) ?? JSON.stringify(e);
       return NextResponse.json(
         {
           ...RESPONSES.UNPROCESSABLE_ENTITY,
-          errors: JSON.stringify(e),
+          error: validationError,
         },
         {
           status: RESPONSES.UNPROCESSABLE_ENTITY.status,
@@ -46,7 +41,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         ...RESPONSES.CREATED,
-        message: "Sponsor added successfully",
+        message: "Sponsor added successfully!",
       },
       {
         status: RESPONSES.CREATED.status,
@@ -59,12 +54,6 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-/**
- * Handles the GET request for fetching all sponsors.
- *
- * @returns data - The list of sponsors.
- *
- */
 export const GET = async (req: NextRequest) => {
   try {
     await dbConnect();
@@ -111,7 +100,7 @@ export const DELETE = async (req: NextRequest) => {
 
     if (!sponsor) {
       return NextResponse.json(
-        { ...RESPONSES.NOT_FOUND, message: "Sponsor not found" },
+        { ...RESPONSES.NOT_FOUND, message: "Sponsor not found!" },
         {
           status: RESPONSES.NOT_FOUND.status,
         }
@@ -121,7 +110,7 @@ export const DELETE = async (req: NextRequest) => {
     return NextResponse.json(
       {
         ...RESPONSES.SUCCESS,
-        message: "Sponsor deleted successfully",
+        message: "Sponsor deleted successfully!",
       },
       {
         status: RESPONSES.SUCCESS.status,
