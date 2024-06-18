@@ -4,18 +4,10 @@ import { isAdmin } from "@/helpers/is-admin";
 import omit from "@/helpers/omit";
 import eventsModel from "@/models/events.model";
 import { EventsSchemaExtended } from "@/zod/events.schema";
+import { fromError } from "zod-validation-error";
 import { NextRequest, NextResponse } from "next/server";
 
-/**
- *  Handles the POST request for adding a event.
- *
- * @body title - The title of the event.
- * @body body - The body of the event.
- * @body thumbnail - The thumbnail of the event.
- * @body images - The images of the event. @optional
- * @body metaDescription - The meta description of the event.
- *
- */
+// handle POST request for adding a event
 export const POST = async (req: NextRequest) => {
   try {
     // connect to database and parse request body
@@ -32,10 +24,12 @@ export const POST = async (req: NextRequest) => {
     try {
       body = EventsSchemaExtended.parse(body);
     } catch (e) {
+      const message = fromError(e).toString();
       return NextResponse.json(
         {
           ...RESPONSES.UNPROCESSABLE_ENTITY,
           errors: JSON.stringify(e),
+          message,
         },
         {
           status: RESPONSES.UNPROCESSABLE_ENTITY.status,
@@ -64,25 +58,24 @@ export const POST = async (req: NextRequest) => {
 
 /**
  * Handles the GET request for fetching all events.
- *
- * @query id - The id of the event to fetch. @optional
- *
- * @returns data - The list of events or a event.
+ * sortBy: startDate, endDate, createdAt, updatedAt, title
+ * order: asc, desc
+ * limit: number
+ * page: number
+ * search: string // search by title
+ * onlyIds: boolean // return only ids
  */
 export const GET = async (req: NextRequest) => {
   try {
     await dbConnect();
 
-    const events = await eventsModel.find().sort({ startDate: -1 });
-
+    // find by id if id is present in query
     const eventId = req.nextUrl.searchParams.get("id");
-
     if (eventId) {
       const event = await eventsModel.findById(eventId);
-
       if (!event) {
         return NextResponse.json(
-          { ...RESPONSES.NOT_FOUND, message: "Events not found" },
+          { ...RESPONSES.NOT_FOUND, message: "Event not found!" },
           {
             status: RESPONSES.NOT_FOUND.status,
           }
@@ -94,8 +87,45 @@ export const GET = async (req: NextRequest) => {
       });
     }
 
+    // return only ids if onlyIds is present in query
+    const onlyIds = req.nextUrl.searchParams.get("onlyIds");
+    if (onlyIds === "true") {
+      const events = await eventsModel.find().select("_id");
+      return NextResponse.json({
+        data: events.map((event) => event._id),
+      });
+    }
+
+    const pageNo = parseInt(req.nextUrl.searchParams.get("page") || "1");
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10");
+    const sortBy = req.nextUrl.searchParams.get("sortBy") || "startDate";
+    const order = req.nextUrl.searchParams.get("order") || "desc";
+    const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
+
+    // find  relevant events
+    const events = await eventsModel
+      .find({
+        title: { $regex: new RegExp(search, "i") },
+      })
+      .sort({ [sortBy]: order === "asc" ? 1 : -1 })
+      .skip((pageNo - 1) * limit)
+      .limit(limit)
+      .select("-body -__v -images -registrationLink");
+
+    const totalEvents = await eventsModel.countDocuments({
+      title: { $regex: new RegExp(search, "i") },
+    });
+
+    const remainingResults = Math.max(0, totalEvents - pageNo * limit);
+
     return NextResponse.json({
-      data: events.map((event) => omit(event.toJSON(), ["body", "images"])),
+      data: events || [],
+      pageNo: pageNo,
+      results: events.length,
+      total: totalEvents,
+      remainingResults,
+      resultsOnNextPage:
+        remainingResults > 0 ? Math.min(remainingResults, limit) : 0,
     });
   } catch (e) {
     return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {

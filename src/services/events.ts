@@ -38,12 +38,15 @@ export type IEventsSchemaResponse = Omit<
   "body" | "images"
 >;
 
-export const handleGetEventsService = async (): Promise<
-  IEventsSchemaResponse[]
-> => {
+export const handleGetEventsService = async (
+  query?: object
+): Promise<IEventsSchemaResponse[]> => {
   return new Promise((resolve, reject) => {
     axios
-      .get(API.events)
+      .get(API.events, {
+        withCredentials: true,
+        params: query,
+      })
       .then((res) => {
         resolve(res.data?.data);
       })

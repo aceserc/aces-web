@@ -50,7 +50,7 @@ const EventCard = ({
         )}
         {/* badge */}
         <Badge
-          className="absolute top-0 left-0 rounded-tl-md rounded-br-md rounded-tr-none rounded-bl-none"
+          className="absolute top-0 uppercase left-0 rounded-tl-md rounded-br-md rounded-tr-none rounded-bl-none"
           variant={
             resoledDate.isToday
               ? "destructive"
