@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import heroBlob from "@/assets/svg/hero-blob.svg";
 import heroShade from "@/assets/svg/hero-shade.svg";
-import FloatingHeroIcons from "./FloatingHeroIcons";
+import FloatingHeroIcons from "./floating-hero-icons";
 
 const Hero = () => {
   return (

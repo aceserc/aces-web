@@ -9,7 +9,7 @@ const useScrollPosition = (scrollThreshold: number = 50) => {
         window.scrollY || document.documentElement.scrollTop;
       setIsScrolled(currentScrollPosition > scrollThreshold);
     };
-
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
 
     return () => {

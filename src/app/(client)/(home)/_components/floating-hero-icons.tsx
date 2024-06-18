@@ -1,8 +1,6 @@
-"use client";
-
 import { ICONS } from "@/assets/icons/svg-repo";
 import { cn } from "@/helpers/cn";
-import generateUniqueRandomNumbers from "@/helpers/generateUniqueRandomNumbers";
+import generateUniqueRandomNumbers from "@/helpers/generate-unique-random-numbers";
 import Image from "next/image";
 import React from "react";
 

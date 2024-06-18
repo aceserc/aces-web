@@ -1,11 +1,11 @@
 import React from "react";
-import Hero from "./_components/Hero";
-import Sponsors from "./_components/Sponsors";
-import WhoAreWe from "./_components/WhoAreWe";
+import Hero from "./_components/hero";
+import Sponsors from "./_components/sponsors";
+import WhoAreWe from "./_components/who-are-we";
 import { fetchData } from "@/services/fetch";
 import { ISponsorSchema } from "@/zod/sponsor.schema";
 import API from "@/services";
-import UpcomingEvents from "./_components/UpcomingEvents";
+import UpcomingEvents from "./_components/upcoming-events";
 
 const Home = async () => {
   const { sponsors } = await getData();
