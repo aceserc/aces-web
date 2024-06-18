@@ -15,7 +15,7 @@ const Sponsors = async ({ sponsors }: Props) => {
   return (
     <div
       id="sponsors"
-      className="flex flex-col gap-4 items-center justify-center wrapper"
+      className="flex flex-col gap-4 items-center justify-center wrapper min-h-16"
     >
       <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
       <Marquee
@@ -23,7 +23,7 @@ const Sponsors = async ({ sponsors }: Props) => {
         gradientWidth={80}
         autoFill={true}
         pauseOnHover={true}
-        className="flex gap-12 items-center justify-center min-h-16"
+        className="flex items-center justify-center"
       >
         {sponsors.map((sponsor, i) => (
           <Link href={sponsor.website ?? "#"} key={i} target="_blank">
@@ -32,7 +32,7 @@ const Sponsors = async ({ sponsors }: Props) => {
               alt={sponsor.name}
               height={60}
               width={60}
-              className="ml-9 md:ml-20 object-contain object-center aspect-square"
+              className="mr-9 md:mr-20 object-contain object-center aspect-square"
             />
           </Link>
         ))}
