@@ -66,13 +66,9 @@ const EventDetailPage = async ({ params: { id } }: Props) => {
 
 export default EventDetailPage;
 
-export async function getStaticProps() {
+export async function generateStaticParams() {
   const response = await fetchData<{
     data: string[];
   }>(`${API.events}?onlyIds=true`);
-  return {
-    props: {
-      id: response?.data,
-    },
-  };
+  return response?.data.map((id) => ({ params: { id } }));
 }
