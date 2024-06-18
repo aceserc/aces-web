@@ -117,6 +117,11 @@ const Header = () => {
         <nav className="flex flex-col gap-5 ">
           {HEADER_LINKS.map(({ label, href }) => (
             <Link
+              onClick={() => {
+                if (mobileNavRef.current) {
+                  mobileNavRef.current.classList.add("translate-x-full");
+                }
+              }}
               key={label}
               href={href}
               className="hover:text-foreground underline-offset-1"
@@ -126,7 +131,15 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex gap-3 items-center w-full">
-          <Link href="/contact" className="flex-grow">
+          <Link
+            onClick={() => {
+              if (mobileNavRef.current) {
+                mobileNavRef.current.classList.add("translate-x-full");
+              }
+            }}
+            href="/contact"
+            className="flex-grow"
+          >
             <Button variant="outline" className="!py-1 h-[36px] w-full">
               Contact
             </Button>
