@@ -97,7 +97,7 @@ export const GET = async (req: NextRequest) => {
     }
 
     const pageNo = parseInt(req.nextUrl.searchParams.get("page") || "1");
-    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "10");
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "9");
     const sortBy = req.nextUrl.searchParams.get("sortBy") || "startDate";
     const order = req.nextUrl.searchParams.get("order") || "desc";
     const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive

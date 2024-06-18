@@ -30,8 +30,8 @@ const Sponsors = async ({ sponsors }: Props) => {
             <img
               src={sponsor.logo}
               alt={sponsor.name}
-              height={60}
-              width={60}
+              height={50}
+              width={50}
               className="mr-9 md:mr-20 object-contain object-center aspect-square"
             />
           </Link>

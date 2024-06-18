@@ -20,7 +20,7 @@ const Events = () => {
         <h3 className="text-xl md:text-2xl font-bold self-start">Events</h3>
         <hr className="w-1/2" />
       </div>
-      <div className="flex gap-12 flex-wrap justify-center xl:justify-normal">
+      <div className="flex mx-auto gap-6 flex-wrap justify-center xl:justify-normal">
         {isLoading ? (
           <>
             <Skeleton className="w-full sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] rounded-md sm:min-w-[400px] md:min-w-[500px]" />

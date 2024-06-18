@@ -21,19 +21,14 @@ const EventCard = ({
   className?: string;
 }) => {
   const resoledDate = resolveDate(props.startDate);
-  const LocationIcon = ["online", "virtual", "remote"].includes(
-    props.location?.toLowerCase() ?? ""
-  )
-    ? AiOutlineLaptop
-    : CiLocationOn;
   return (
     <Link
       href={`/events/${props._id}`}
-      className="w-full sm:min-w-[400px] md:min-w-[500px] sm:w-[400px] md:w-[500px]"
+      className="min-w-full w-full sm:min-w-[400px] sm:w-[400px] snap-center"
     >
       <div
         className={cn(
-          "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl",
+          "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl overflow-hidden",
           className
         )}
       >
@@ -42,7 +37,7 @@ const EventCard = ({
           <TooltipProvider delayDuration={0}>
             <Tooltip>
               <TooltipTrigger className="absolute top-2 right-2 shadow-inner bg-muted/40 rounded-full p-1.5">
-                <LocationIcon className="text-primary h-5 w-5" />
+                <CiLocationOn className="text-primary h-5 w-5" />
               </TooltipTrigger>
               <TooltipContent>{props.location}</TooltipContent>
             </Tooltip>
@@ -67,7 +62,7 @@ const EventCard = ({
             ? "Upcoming"
             : "completed"}
         </Badge>
-        <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] md:w-[500px] h-[250px] sm:h-[300px] overflow-hidden">
+        <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] h-[200px] overflow-hidden">
           <img
             src={props.thumbnail}
             alt={props.title}

@@ -34,13 +34,13 @@ const UpcomingEvents = () => {
           <hr className="w-1/2" />
         </div>
         <div className="w-full overflow-hidden">
-          <div className="flex gap-12 w-full overflow-x-auto">
+          <div className="flex gap-6 w-full overflow-x-auto snap-x snap-mandatory">
             {isLoading ? (
               <>
-                <Skeleton className="w-full sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] rounded-md sm:min-w-[400px] md:min-w-[500px]" />
-                <Skeleton className="w-full sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] rounded-md sm:min-w-[400px] md:min-w-[500px]" />
-                <Skeleton className="w-full sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] rounded-md sm:min-w-[400px] md:min-w-[500px]" />
-                <Skeleton className="w-full sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] rounded-md sm:min-w-[400px] md:min-w-[500px]" />
+                <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md snap-center" />
+                <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md snap-center" />
+                <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md snap-center" />
+                <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md snap-center" />
               </>
             ) : (
               upcomingEvents?.data.map((event, i) => (
