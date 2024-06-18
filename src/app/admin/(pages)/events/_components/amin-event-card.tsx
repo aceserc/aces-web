@@ -50,7 +50,7 @@ const AdminEventCard = ({
       >
         <AlertDialogTrigger asChild>
           <button className="absolute -top-2 z-20 -right-2 p-1 bg-red-500 rounded-full scale-0 group-hover:scale-100 transition-transform">
-            <MdDeleteOutline className="text-white" />
+            <MdDeleteOutline className="text-white h-5 w-5" />
           </button>
         </AlertDialogTrigger>
         <AlertDialogContent>
