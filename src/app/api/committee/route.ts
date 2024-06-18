@@ -4,7 +4,7 @@ import { isAdmin } from "@/helpers/is-admin";
 import committeesModel from "@/models/committees.model";
 import { CommitteeMemberSchemaWithAvatar } from "@/zod/committee.schema";
 import { NextRequest, NextResponse } from "next/server";
-
+import { fromError } from "zod-validation-error";
 /**
  *  Handles the POST request for adding a committees.
  */
@@ -24,10 +24,12 @@ export const POST = async (req: NextRequest) => {
     try {
       body = CommitteeMemberSchemaWithAvatar.parse(body);
     } catch (e) {
+      const message = fromError(e).toString();
       return NextResponse.json(
         {
           ...RESPONSES.UNPROCESSABLE_ENTITY,
           errors: JSON.stringify(e),
+          message,
         },
         {
           status: RESPONSES.UNPROCESSABLE_ENTITY.status,
