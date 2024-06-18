@@ -67,7 +67,7 @@ const EventCard = ({
             ? "Upcoming"
             : "completed"}
         </Badge>
-        <div className="w-full sm:min-w-[400px] md:min-w-[500px] sm:w-[400px] md:w-[500px] h-[250px] sm:h-[300px] overflow-hidden">
+        <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] md:w-[500px] h-[250px] sm:h-[300px] overflow-hidden">
           <img
             src={props.thumbnail}
             alt={props.title}

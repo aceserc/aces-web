@@ -38,9 +38,19 @@ export type IEventsSchemaResponse = Omit<
   "body" | "images"
 >;
 
+export type IHandleGetEventsServiceResponse = {
+  data: IEventsSchemaResponse[];
+  pageNo: number;
+  results: number;
+  total: number;
+  remainingResults: number;
+  totalPages: number;
+  resultsOnNextPage: number;
+};
+
 export const handleGetEventsService = async (
   query?: object
-): Promise<IEventsSchemaResponse[]> => {
+): Promise<IHandleGetEventsServiceResponse> => {
   return new Promise((resolve, reject) => {
     axios
       .get(API.events, {
@@ -48,12 +58,28 @@ export const handleGetEventsService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data?.data);
+        resolve(res.data);
       })
       .catch((err) => {
         reject(
           err?.response?.data?.message ??
             "Failed to fetch events. Please try again later."
+        );
+      });
+  });
+};
+
+export const handleDeleteEventService = async (id: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${API.events}?id=${id}`, { withCredentials: true })
+      .then((res) => {
+        resolve(res.data?.message ?? "Events deleted successfully!");
+      })
+      .catch((err) => {
+        reject(
+          err?.response?.data?.message ??
+            "Failed to delete the events. Please try again later."
         );
       });
   });

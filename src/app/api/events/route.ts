@@ -117,6 +117,7 @@ export const GET = async (req: NextRequest) => {
     });
 
     const remainingResults = Math.max(0, totalEvents - pageNo * limit);
+    const totalPages = Math.ceil(totalEvents / limit);
 
     return NextResponse.json({
       data: events || [],
@@ -124,6 +125,7 @@ export const GET = async (req: NextRequest) => {
       results: events.length,
       total: totalEvents,
       remainingResults,
+      totalPages,
       resultsOnNextPage:
         remainingResults > 0 ? Math.min(remainingResults, limit) : 0,
     });

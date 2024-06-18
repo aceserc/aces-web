@@ -8,6 +8,7 @@ import { GoPlus } from "react-icons/go";
 import Link from "next/link";
 import {
   IEventsSchemaResponse,
+  IHandleGetEventsServiceResponse,
   handleGetEventsService,
 } from "@/services/events";
 import AdminEventCard from "./_components/amin-event-card";
@@ -19,6 +20,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import debounce from "@/helpers/debounce";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface IDefaultQueryParam {
   page: number;
@@ -46,14 +56,14 @@ const NoticesPage = () => {
   ); //callback to ensure that setSearchParams is not called on every render
 
   const [filteredData, setFilteredData] = useState<IEventsSchemaResponse[]>();
-  const { data, isLoading } = useQuery<IEventsSchemaResponse[]>({
+  const { data, isLoading } = useQuery<IHandleGetEventsServiceResponse>({
     queryKey: ["events", queryParams],
     queryFn: () => handleGetEventsService(queryParams),
   });
 
   useEffect(() => {
     if (isLoading) return;
-    setFilteredData(data);
+    setFilteredData(data?.data);
   }, [isLoading, data]);
 
   return (
@@ -166,6 +176,71 @@ const NoticesPage = () => {
           <div className="flex justify-center items-center h-48">
             <span className="text-muted-foreground">No events found</span>
           </div>
+        )}
+        {!isLoading && (
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  className={
+                    queryParams.page === 1
+                      ? "opacity-70 pointer-events-none"
+                      : "cursor-pointer"
+                  }
+                  onClick={() => {
+                    if (queryParams.page === 1) return;
+                    setQueryParams((prev) => ({
+                      ...prev,
+                      page: prev.page - 1,
+                    }));
+                  }}
+                />
+              </PaginationItem>
+              {Array.from(
+                { length: data?.totalPages ?? 0 },
+                (_, i) => i + 1
+              ).map((page) => {
+                if (page > 3) return null;
+
+                return (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      isActive={queryParams.page === page}
+                      onClick={() => {
+                        setQueryParams((prev) => ({ ...prev, page }));
+                      }}
+                      className={
+                        queryParams.page !== page ? "cursor-pointer" : ""
+                      }
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              {data?.totalPages! > 3 && (
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )}
+              <PaginationItem>
+                <PaginationNext
+                  className={
+                    data?.resultsOnNextPage! < 1
+                      ? "opacity-70 pointer-events-none"
+                      : "cursor-pointer"
+                  }
+                  onClick={() => {
+                    if (data?.resultsOnNextPage! < 1) return;
+                    setQueryParams((prev) => ({
+                      ...prev,
+                      page: prev.page + 1,
+                    }));
+                  }}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         )}
       </div>
     </div>
