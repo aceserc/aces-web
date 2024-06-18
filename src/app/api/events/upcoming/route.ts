@@ -18,7 +18,7 @@ export const GET = async () => {
       .find({
         startDate: { $gte: today },
       })
-      .sort({ startDate: 1 })
+      .sort({ startDate: -1 })
       .limit(4);
 
     // if no upcoming events, find max 4 events that are most recent

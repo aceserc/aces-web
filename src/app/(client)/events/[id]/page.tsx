@@ -70,5 +70,8 @@ export async function generateStaticParams() {
   const response = await fetchData<{
     data: string[];
   }>(`${API.events}?onlyIds=true`);
+
+  if (!response) return [];
+
   return response?.data.map((id) => ({ params: { id } }));
 }
