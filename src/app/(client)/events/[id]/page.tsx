@@ -4,13 +4,6 @@ import { IEventsSchemaResponse } from "@/services/events";
 import { fetchData } from "@/services/fetch";
 import React from "react";
 import { marked } from "marked";
-import { CiCalendarDate } from "react-icons/ci";
-import { PiClockLight } from "react-icons/pi";
-import { resolveDuration } from "@/helpers/date-fns";
-import { IoIosTimer } from "react-icons/io";
-import { CiLocationOn } from "react-icons/ci";
-import { PiKeyThin } from "react-icons/pi";
-import Link from "next/link";
 import MoreInfo from "./_components/more-info";
 import API from "@/services";
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
+import TopLoader from "@/components/reusable/top-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <TopLoader />
           </ThemeProvider>
           <Toaster richColors position="top-right" />
         </ClerkProvider>

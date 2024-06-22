@@ -39,6 +39,7 @@
     "multer": "1.4.5-lts.1",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
+    "nextjs-toploader": "^1.6.12",
     "react": "^18",
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.4",
