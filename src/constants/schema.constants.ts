@@ -7,3 +7,5 @@ export const MIN_LENGTH_META_DESCRIPTION = 25 as const;
 export const MAX_LENGTH_META_DESCRIPTION = 250 as const;
 
 export const MARKDOWN_BODY_MIN_LENGTH = 25 as const;
+
+export const MIN_LENGTH_CONTACT_BODY = 5 as const;
