@@ -43,7 +43,7 @@ export const ADMIN_SIDEBAR_ITEMS = [
     label: "Blogs",
   },
   {
-    href: "/admin/contact",
+    href: "/admin/contacts",
     icon: AiOutlineMessage,
     label: "Contacts",
     adminOnly: true,

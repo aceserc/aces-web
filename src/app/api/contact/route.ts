@@ -75,16 +75,17 @@ export const GET = async (req: NextRequest) => {
     const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
 
     // find  relevant contacts
+
     const contacts = await contactModel
       .find({
-        body: { $regex: new RegExp(search, "i") },
+        subject: { $regex: new RegExp(search, "i") },
       })
       .sort({ [sortBy]: order === "asc" ? 1 : -1 })
       .skip((pageNo - 1) * limit)
       .limit(limit);
 
     const totalContacts = await contactModel.countDocuments({
-      title: { $regex: new RegExp(search, "i") },
+      subject: { $regex: new RegExp(search, "i") },
     });
 
     const remainingResults = Math.max(0, totalContacts - pageNo * limit);
@@ -100,50 +101,6 @@ export const GET = async (req: NextRequest) => {
       resultsOnNextPage:
         remainingResults > 0 ? Math.min(remainingResults, limit) : 0,
     });
-  } catch (e) {
-    return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
-      status: RESPONSES.INTERNAL_SERVER_ERROR.status,
-    });
-  }
-};
-
-/**
- *  Handles the DELETE request for deleting a contact.
- *
- * @query id - The id of the contact to delete.
- */
-export const DELETE = async (req: NextRequest) => {
-  try {
-    await dbConnect();
-
-    if (!(await isAdmin())) {
-      return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
-        status: RESPONSES.UNAUTHORIZED_ACCESS.status,
-      });
-    }
-
-    const id = req.nextUrl.searchParams.get("id");
-
-    const contact = await contactModel.findByIdAndDelete(id);
-
-    if (!contact) {
-      return NextResponse.json(
-        { ...RESPONSES.NOT_FOUND, message: "Contact not found!" },
-        {
-          status: RESPONSES.NOT_FOUND.status,
-        }
-      );
-    }
-
-    return NextResponse.json(
-      {
-        ...RESPONSES.SUCCESS,
-        message: "Contact deleted successfully!",
-      },
-      {
-        status: RESPONSES.SUCCESS.status,
-      }
-    );
   } catch (e) {
     return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
       status: RESPONSES.INTERNAL_SERVER_ERROR.status,
