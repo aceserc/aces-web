@@ -59,12 +59,12 @@ const NoticesDetailsPage = async ({ params: { id } }: Props) => {
 
 export default NoticesDetailsPage;
 
-export async function generateStaticParams() {
-  const response = await fetchData<{
-    data: string[];
-  }>(`${API.notices}?onlyIds=true`);
+// export async function generateStaticParams() {
+//   const response = await fetchData<{
+//     data: string[];
+//   }>(`${API.notices}?onlyIds=true`);
 
-  if (!response) return [];
-  let params = response?.data.map((id) => ({ id }));
-  return params;
-}
+//   if (!response) return [];
+//   let params = response?.data.map((id) => ({ id }));
+//   return params;
+// }
