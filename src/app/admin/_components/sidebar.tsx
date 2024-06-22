@@ -6,6 +6,8 @@ import { GoSponsorTiers } from "react-icons/go";
 import { AiOutlineNotification } from "react-icons/ai";
 import { GoPeople } from "react-icons/go";
 import { CiCalendarDate } from "react-icons/ci";
+import { CiTextAlignLeft } from "react-icons/ci";
+
 export const ADMIN_SIDEBAR_ITEMS = [
   {
     href: "/admin",
@@ -31,6 +33,11 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/events",
     icon: CiCalendarDate,
     label: "Events",
+  },
+  {
+    href: "/admin/blogs",
+    icon: CiTextAlignLeft,
+    label: "Blogs",
   },
 ];
 

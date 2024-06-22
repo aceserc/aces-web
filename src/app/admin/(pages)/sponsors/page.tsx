@@ -8,8 +8,11 @@ import { ISponsorSchema } from "@/zod/sponsor.schema";
 import Loading from "@/components/reusable/loading";
 import search from "@/helpers/search";
 import SponsorCard from "./_components/sponsor-card";
+import { useUser } from "@clerk/nextjs";
+import { ADMIN_ROLES } from "@/constants/roles.constants";
 
 const SponsorsPage = () => {
+  const { user } = useUser();
   const [queryParam, setQueryParam] = useState("");
   const [filteredData, setFilteredData] = useState<ISponsorSchema[]>();
   const { data, isLoading } = useQuery<ISponsorSchema[]>({
@@ -37,7 +40,9 @@ const SponsorsPage = () => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <AddSponsor />
+            {ADMIN_ROLES.includes(user?.publicMetadata.role as string) && (
+              <AddSponsor />
+            )}
           </div>
         </div>
         {/*  sponsor list */}

@@ -29,6 +29,8 @@ import {
   handleGetNoticesService,
 } from "@/services/notice";
 import AdminNoticeCard from "./_components/amin-notice-card";
+import { useUser } from "@clerk/nextjs";
+import { ADMIN_ROLES } from "@/constants/roles.constants";
 
 interface IDefaultQueryParam {
   page: number;
@@ -38,6 +40,7 @@ interface IDefaultQueryParam {
 }
 
 const NoticesPage = () => {
+  const { user } = useUser();
   const [queryParams, setQueryParams] = useState<IDefaultQueryParam>({
     page: 1,
     sortBy: "createdAt",
@@ -153,12 +156,14 @@ const NoticesPage = () => {
               </SelectContent>
             </Select>
 
-            <Link href="/admin/notices/new" className="ml-5">
-              <Button className="flex items-center justify-center gap-2">
-                <span>New Notice</span>
-                <GoPlus className="w-5 h-5" />
-              </Button>
-            </Link>
+            {ADMIN_ROLES.includes(user?.publicMetadata.role as string) && (
+              <Link href="/admin/notices/new" className="ml-5">
+                <Button className="flex items-center justify-center gap-2">
+                  <span>New Notice</span>
+                  <GoPlus className="w-5 h-5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
         {/*  event list */}

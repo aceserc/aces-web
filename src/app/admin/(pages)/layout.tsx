@@ -21,7 +21,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <ClerkLoaded>
         {width < 800 || height < 600 ? (
           <DeviceNotSupported />
-        ) : user?.publicMetadata.role !== "admin" ? (
+        ) : !user?.publicMetadata.isAuthorized ? (
           <NotFound />
         ) : (
           <div className="flex h-screen overflow-hidden bg-secondary">

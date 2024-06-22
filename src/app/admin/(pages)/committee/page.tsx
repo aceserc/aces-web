@@ -8,8 +8,11 @@ import AddMember from "./_components/add-member";
 import { ICommitteeSchemaWithAvatar } from "@/zod/committee.schema";
 import { handleGetCommitteesService } from "@/services/committee";
 import AdminCommitteeMember from "./_components/admin-committee-member";
+import { useUser } from "@clerk/nextjs";
+import { ADMIN_ROLES } from "@/constants/roles.constants";
 
 const CommitteesPage = () => {
+  const { user } = useUser();
   const [queryParam, setQueryParam] = useState("");
   const [filteredData, setFilteredData] =
     useState<ICommitteeSchemaWithAvatar[]>();
@@ -39,7 +42,9 @@ const CommitteesPage = () => {
             />
           </div>
           <div className="flex items-center gap-2">
-            <AddMember occupiedPosts={data?.map((c) => c.post) ?? []} />
+            {ADMIN_ROLES.includes(user?.publicMetadata.role as string) && (
+              <AddMember occupiedPosts={data?.map((c) => c.post) ?? []} />
+            )}
           </div>
         </div>
         {/*  member list */}
