@@ -25,11 +25,17 @@ const ViewContactModal = (props: Props) => {
         <DialogHeader>
           <DialogTitle>Subject: {props.subject}</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-3 p-2">
+        <div className="flex flex-col gap-1 p-2">
           <div className="flex gap-2">
             <span className="font-medium">Name:</span>
             <span>{props.name ?? "Anonymous"}</span>
           </div>
+          {props.email && (
+            <div className="flex gap-2">
+              <span className="font-medium">Email:</span>
+              <span>{props.email ?? "Anonymous"}</span>
+            </div>
+          )}
           <div className="flex gap-2">
             <span className="font-medium">Sent At:</span>
             <span>{new Date(props.createdAt).toLocaleString()}</span>
