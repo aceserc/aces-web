@@ -23,6 +23,7 @@ const API = {
   notices: "/api/notices",
   blogs: "/api/blogs",
   contact: "/api/contact",
+  testimonials: "/api/testimonials",
 } as const;
 
 export default API;

@@ -10,6 +10,7 @@ import { CiTextAlignLeft } from "react-icons/ci";
 import { AiOutlineMessage } from "react-icons/ai";
 import { useUser } from "@clerk/nextjs";
 import { ADMIN_ROLES } from "@/constants/roles.constants";
+import { LiaQuoteLeftSolid } from "react-icons/lia";
 
 export const ADMIN_SIDEBAR_ITEMS = [
   {
@@ -47,6 +48,11 @@ export const ADMIN_SIDEBAR_ITEMS = [
     icon: AiOutlineMessage,
     label: "Contacts",
     adminOnly: true,
+  },
+  {
+    href: "/admin/testimonials",
+    icon: LiaQuoteLeftSolid,
+    label: "Testimonials",
   },
 ];
 
