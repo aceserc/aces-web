@@ -3,10 +3,11 @@
 import Loading from "@/components/reusable/loading";
 import NotFound from "@/components/reusable/not-found";
 import { usePathname } from "next/navigation";
-import Sidebar from "../_components/sidebar";
+import Sidebar, { ADMIN_SIDEBAR_ITEMS } from "../_components/sidebar";
 import { useInnerSize } from "@/hooks/use-inner-size";
 import DeviceNotSupported from "@/components/reusable/device-not-supported";
 import { ClerkLoaded, ClerkLoading, UserButton, useUser } from "@clerk/nextjs";
+import { ADMIN_ROLES } from "@/constants/roles.constants";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -21,7 +22,9 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <ClerkLoaded>
         {width < 800 || height < 600 ? (
           <DeviceNotSupported />
-        ) : !user?.publicMetadata.isAuthorized ? (
+        ) : !user?.publicMetadata.isAuthorized ||
+          (ADMIN_SIDEBAR_ITEMS.find((i) => i.href === pathname)?.adminOnly &&
+            !ADMIN_ROLES.includes(user.publicMetadata.role as string)) ? (
           <NotFound />
         ) : (
           <div className="flex h-screen overflow-hidden bg-secondary">

@@ -74,7 +74,7 @@ const ContactPage = () => {
         <div className="flex justify-between items-center">
           <div className="flex gap-4">
             <SearchInput
-              placeholder="Search by title..."
+              placeholder="Search by subject..."
               onChange={(e) => {
                 debouncedSetQueryParams({ search: e.target.value });
               }}
