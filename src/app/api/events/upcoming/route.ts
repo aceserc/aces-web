@@ -9,7 +9,6 @@ export const GET = async () => {
     await dbConnect();
 
     let events: any[] = [];
-    let type = "Upcoming Events";
 
     // find max 4 events that are upcoming or today
     const today = new Date();
@@ -19,17 +18,11 @@ export const GET = async () => {
         startDate: { $gte: today },
       })
       .sort({ startDate: -1 })
-      .limit(4);
-
-    // if no upcoming events, find max 4 events that are most recent
-    if (!events || events.length === 0) {
-      events = await eventsModel.find().sort({ startDate: -1 }).limit(4);
-      type = "Recent Events";
-    }
+      .limit(4)
+      .select("-body -images");
 
     return NextResponse.json({
-      data: events.map((event) => omit(event.toJSON(), ["body", "images"])),
-      type,
+      data: events,
     });
   } catch (e) {
     return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {

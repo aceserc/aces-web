@@ -6,7 +6,7 @@ import API from "@/services";
 import { IEventsSchemaResponse } from "@/services/events";
 import React from "react";
 
-type IUpcomingEvents = { data: IEventsSchemaResponse[]; type: string };
+type IUpcomingEvents = { data: IEventsSchemaResponse[] };
 
 const UpcomingEvents = () => {
   const {
@@ -28,9 +28,7 @@ const UpcomingEvents = () => {
     >
       <div className="flex flex-col gap-12 items-center justify-center wrapper">
         <div className="flex flex-col items-center gap-2 justify-center ">
-          <h3 className="text-xl md:text-2xl font-bold">
-            {upcomingEvents?.type ?? <Skeleton className="h-8 w-48" />}
-          </h3>
+          <h3 className="text-xl md:text-2xl font-bold">Upcoming Events</h3>
           <hr className="w-1/2" />
         </div>
         <div className="w-full overflow-hidden">
