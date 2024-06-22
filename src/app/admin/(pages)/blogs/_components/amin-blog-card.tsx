@@ -14,28 +14,28 @@ import {
 import { MdDeleteOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import {
-  INoticesSchemaResponse,
-  handleDeleteNoticeService,
-} from "@/services/notice";
-import NoticeCard from "@/components/reusable/notice-card";
+  IBlogsSchemaResponse,
+  handleDeleteBlogService,
+} from "@/services/blogs";
+import BlogCard from "@/components/reusable/blog-card";
 
-const AdminNoticeCard = ({
+const AdminBlogCard = ({
   ...props
-}: INoticesSchemaResponse & {
+}: IBlogsSchemaResponse & {
   className?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: handleDeleteNoticeService,
+    mutationFn: handleDeleteBlogService,
     onError: (err: string) => {
       toast.error(err);
     },
     onSuccess: (msg) => {
       toast.success(msg);
       queryClient.invalidateQueries({
-        queryKey: ["events"],
+        queryKey: ["blogs"],
       });
       setIsOpen(false);
     },
@@ -71,8 +71,8 @@ const AdminNoticeCard = ({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <NoticeCard {...props} className="shadow-none" />
+      <BlogCard {...props} className="shadow-none" />
     </div>
   );
 };
-export default AdminNoticeCard;
+export default AdminBlogCard;

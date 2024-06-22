@@ -1,7 +1,7 @@
 export const RESPONSES = {
   UNAUTHORIZED_ACCESS: {
     status: 401,
-    message: "You are not authorized to access this resource!",
+    message: "You are not authorized for this action!",
     error: "Unauthorized Access!",
   },
   INSUFFICIENT_REQUEST_BODY: {

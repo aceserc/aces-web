@@ -21,6 +21,7 @@ const API = {
   events: "/api/events",
   upcomingEvents: "/api/events/upcoming",
   notices: "/api/notices",
+  blogs: "/api/blogs",
 } as const;
 
 export default API;

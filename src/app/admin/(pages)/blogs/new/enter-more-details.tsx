@@ -1,7 +1,7 @@
 "use client";
 import SelectImage from "@/app/admin/_components/select-image";
-import TextareaWithErrorField from "@/components/reusable/text-area-with-error-field";
 import InputWithErrorField from "@/components/reusable/input-with-error-field";
+import TextareaWithErrorField from "@/components/reusable/text-area-with-error-field";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -11,12 +11,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { handleAddEventsService } from "@/services/events";
-import { EventsSchema, IEventsSchema } from "@/zod/events.schema";
+import { handleAddBlogsService } from "@/services/blogs";
+import { BlogSchema, IBlogSchema } from "@/zod/blog.schema.";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiUploadCloud } from "react-icons/fi";
 import { toast } from "sonner";
@@ -39,17 +39,17 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
     formState: { errors },
     watch,
     handleSubmit,
-  } = useForm<IEventsSchema>({
-    resolver: zodResolver(EventsSchema),
+  } = useForm<IBlogSchema>({
+    resolver: zodResolver(BlogSchema),
   });
 
-  const onSubmit: SubmitHandler<IEventsSchema> = (data) => {
+  const onSubmit: SubmitHandler<IBlogSchema> = (data) => {
     if (!thumbnail) {
       toast.error("Please upload a thumbnail");
       return;
     }
     if (!body) {
-      toast.error("Please enter some content for the event!");
+      toast.error("Please enter some content for the blog!");
       return;
     }
     console.log(data);
@@ -57,15 +57,15 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: handleAddEventsService,
+    mutationFn: handleAddBlogsService,
     onError: (err: string) => {
       toast.error(err);
     },
     onSuccess: (data) => {
       toast.success(data);
-      router.push("/admin/events");
+      router.push("/admin/blogs");
       queryClient.invalidateQueries({
-        queryKey: ["events"],
+        queryKey: ["blogs"],
       });
     },
   });
@@ -127,53 +127,12 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
               register={register}
               error={errors.title?.message}
             />
-            <InputWithErrorField
-              inputKey="location"
-              label="Location"
+            <TextareaWithErrorField
+              inputKey="metaDescription"
+              label="Meta Description*"
               register={register}
-              error={errors.location?.message}
+              error={errors.metaDescription?.message}
             />
-            <InputWithErrorField
-              inputKey="registrationLink"
-              label="Registration Link"
-              register={register}
-              error={errors.registrationLink?.message}
-            />
-            <hr className="my-2 w-1/2 mx-auto" />
-            <div className="flex gap-5 items-center">
-              <InputWithErrorField
-                inputKey="startDate"
-                label="Start Date*"
-                type="date"
-                min={new Date().toISOString().split("T")[0]}
-                register={register}
-                error={errors.startDate?.message}
-              />
-              <InputWithErrorField
-                inputKey="startTime"
-                label="Start Time"
-                type="time"
-                register={register}
-                error={errors.startTime?.message}
-              />
-            </div>
-            <div className="flex gap-5 items-center">
-              <InputWithErrorField
-                inputKey="endDate"
-                label="End Date"
-                type="date"
-                min={watch("startDate")}
-                register={register}
-                error={errors.endDate?.message}
-              />
-              <InputWithErrorField
-                inputKey="endTime"
-                label="End Time"
-                type="time"
-                register={register}
-                error={errors.endTime?.message}
-              />
-            </div>
             <hr className="my-2 w-1/2 mx-auto" />
             <Button
               isLoading={isPending}

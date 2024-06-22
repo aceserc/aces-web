@@ -1,18 +1,21 @@
 import { RESPONSES } from "@/constants/response.constant";
 import dbConnect from "@/db/connect";
-import { isAdmin } from "@/helpers/is-admin";
 import { fromError } from "zod-validation-error";
 import { NextRequest, NextResponse } from "next/server";
-import { NoticesSchemaExtended } from "@/zod/notices.schema";
-import noticeModel from "@/models/notice.model";
+import { isAdmin, isEditor } from "@/helpers/is-admin";
+import { BlogSchemaExtended } from "@/zod/blog.schema.";
+import { currentUser } from "@clerk/nextjs/server";
+import blogsModel from "@/models/blogs.model";
+import { clerkClient } from "@clerk/nextjs/server";
 
-// handle POST request for adding a notice
+// handle POST request for adding a blog
 export const POST = async (req: NextRequest) => {
+  const user = await currentUser();
   try {
     // connect to database and parse request body
     await dbConnect();
 
-    if (!(await isAdmin())) {
+    if (!(await isEditor())) {
       return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
         status: RESPONSES.UNAUTHORIZED_ACCESS.status,
       });
@@ -21,7 +24,7 @@ export const POST = async (req: NextRequest) => {
     let body = await req.json();
 
     try {
-      body = NoticesSchemaExtended.parse(body);
+      body = BlogSchemaExtended.parse(body);
     } catch (e) {
       const message = fromError(e).toString();
       return NextResponse.json(
@@ -36,13 +39,17 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const notice = await noticeModel.create(body);
-    await notice.save();
+    const blog = await blogsModel.create({
+      ...body,
+      authorId: user?.id,
+    });
+
+    await blog.save();
 
     return NextResponse.json(
       {
         ...RESPONSES.CREATED,
-        message: "Notice posted successfully!",
+        message: "Blog posted successfully!",
       },
       {
         status: RESPONSES.CREATED.status,
@@ -56,7 +63,7 @@ export const POST = async (req: NextRequest) => {
 };
 
 /**
- * Handles the GET request for fetching all notices.
+ * Handles the GET request for fetching all blogs.
  * sortBy: startDate, endDate, createdAt, updatedAt, title
  * order: asc, desc
  * limit: number
@@ -69,29 +76,39 @@ export const GET = async (req: NextRequest) => {
     await dbConnect();
 
     // find by id if id is present in query
-    const noticeId = req.nextUrl.searchParams.get("id");
-    if (noticeId) {
-      const notice = await noticeModel.findById(noticeId);
-      if (!notice) {
+    const blogId = req.nextUrl.searchParams.get("id");
+    if (blogId) {
+      const blog = await blogsModel.findById(blogId);
+      if (!blog) {
         return NextResponse.json(
-          { ...RESPONSES.NOT_FOUND, message: "Notice not found!" },
+          { ...RESPONSES.NOT_FOUND, message: "Blog not found!" },
           {
             status: RESPONSES.NOT_FOUND.status,
           }
         );
       }
 
+      const author = await clerkClient.users.getUser(blog.authorId);
       return NextResponse.json({
-        data: notice.toJSON(),
+        data: {
+          blog: blog.toJSON(),
+          author: {
+            avatar: author.imageUrl,
+            firstName: author.firstName,
+            lastName: author.lastName,
+            username: author.username,
+            contact: author.publicMetadata.contact,
+          },
+        },
       });
     }
 
     // return only ids if onlyIds is present in query
     const onlyIds = req.nextUrl.searchParams.get("onlyIds");
     if (onlyIds === "true") {
-      const notices = await noticeModel.find().select("_id");
+      const blogs = await blogsModel.find().select("_id");
       return NextResponse.json({
-        data: notices.map((notice) => notice._id),
+        data: blogs.map((blog) => blog._id),
       });
     }
 
@@ -101,28 +118,28 @@ export const GET = async (req: NextRequest) => {
     const order = req.nextUrl.searchParams.get("order") || "desc";
     const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
 
-    // find  relevant notices
-    const notices = await noticeModel
+    // find  relevant blogs
+    const blogs = await blogsModel
       .find({
         title: { $regex: new RegExp(search, "i") },
       })
       .sort({ [sortBy]: order === "asc" ? 1 : -1 })
       .skip((pageNo - 1) * limit)
       .limit(limit)
-      .select("-body -__v -images");
+      .select("-body -__v -images -authorId");
 
-    const totalNotices = await noticeModel.countDocuments({
+    const Blogs = await blogsModel.countDocuments({
       title: { $regex: new RegExp(search, "i") },
     });
 
-    const remainingResults = Math.max(0, totalNotices - pageNo * limit);
-    const totalPages = Math.ceil(totalNotices / limit);
+    const remainingResults = Math.max(0, Blogs - pageNo * limit);
+    const totalPages = Math.ceil(Blogs / limit);
 
     return NextResponse.json({
-      data: notices || [],
+      data: blogs || [],
       pageNo: pageNo,
-      results: notices.length,
-      total: totalNotices,
+      results: blogs.length,
+      total: Blogs,
       remainingResults,
       totalPages,
       resultsOnNextPage:
@@ -136,9 +153,9 @@ export const GET = async (req: NextRequest) => {
 };
 
 /**
- *  Handles the DELETE request for deleting a notice.
+ *  Handles the DELETE request for deleting a blog.
  *
- * @query id - The id of the notice to delete.
+ * @query id - The id of the blog to delete.
  */
 export const DELETE = async (req: NextRequest) => {
   try {
@@ -152,11 +169,11 @@ export const DELETE = async (req: NextRequest) => {
 
     const id = req.nextUrl.searchParams.get("id");
 
-    const notice = await noticeModel.findByIdAndDelete(id);
+    const blog = await blogsModel.findByIdAndDelete(id);
 
-    if (!notice) {
+    if (!blog) {
       return NextResponse.json(
-        { ...RESPONSES.NOT_FOUND, message: "Notices not found!" },
+        { ...RESPONSES.NOT_FOUND, message: "Blogs not found!" },
         {
           status: RESPONSES.NOT_FOUND.status,
         }
@@ -166,7 +183,7 @@ export const DELETE = async (req: NextRequest) => {
     return NextResponse.json(
       {
         ...RESPONSES.SUCCESS,
-        message: "Notice deleted successfully!",
+        message: "Blog deleted successfully!",
       },
       {
         status: RESPONSES.SUCCESS.status,
