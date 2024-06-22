@@ -20,8 +20,8 @@ const HEADER_LINKS = [
     href: "/about",
   },
   {
-    label: "News",
-    href: "/news",
+    label: "Notices",
+    href: "/notices",
   },
   {
     label: "Blogs",

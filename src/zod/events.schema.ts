@@ -1,14 +1,12 @@
 import {
   MARKDOWN_BODY_MIN_LENGTH,
-  MAX_LENGTH_META_DESCRIPTION,
-  MIN_LENGTH_META_DESCRIPTION,
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import { z } from "zod";
 
 export const EventsSchema = z.object({
   title: z.string().min(MIN_LENGTH_TITLE, "Title is too short"),
-  images: z.array(z.string().url("Images is not a valid URL")).optional(),
+  images: z.array(z.string().url("Images contains invalid URL")).optional(),
   startDate: z.string().min(1, "Start date is required"),
   startTime: z.string().optional(),
   endDate: z.string().optional(),

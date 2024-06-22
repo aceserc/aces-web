@@ -17,10 +17,10 @@ const API = {
   //sponsor
   sponsor: "/api/sponsor",
 
-  notice: "/api/notice",
   committee: "/api/committee",
   events: "/api/events",
   upcomingEvents: "/api/events/upcoming",
+  notices: "/api/notices",
 } as const;
 
 export default API;

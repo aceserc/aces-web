@@ -36,6 +36,8 @@ export const ADMIN_SIDEBAR_ITEMS = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  // extract the item.href from the pathname
+  const path = pathname.split("/").slice(0, 3).join("/");
   return (
     <aside className="hidden shadow-2xl h-screen w-64 flex-col overflow-y-auto overflow-x-hidden rounded-tr-[90px] border-r bg-accent py-8 pl-5 lg:flex">
       <Link href="/admin" className="text-3xl font-bold text-foreground">
@@ -48,7 +50,7 @@ const Sidebar = () => {
               <div
                 className={twMerge(
                   "flex transform items-center rounded-l-full px-4 py-3 text-muted-foreground transition-colors duration-300 hover:bg-primary/10 hover:text-primary ",
-                  item.href === pathname && "bg-primary/10 text-primary"
+                  item.href === path && "bg-primary/10 text-primary"
                 )}
               >
                 <Icon className="h-5 w-5" aria-hidden="true" />

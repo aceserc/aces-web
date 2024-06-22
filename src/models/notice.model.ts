@@ -1,12 +1,10 @@
 import {
   MARKDOWN_BODY_MIN_LENGTH,
-  MAX_LENGTH_META_DESCRIPTION,
-  MIN_LENGTH_META_DESCRIPTION,
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import mongoose from "mongoose";
 
-const NoticeSchema = new mongoose.Schema(
+const NoticesSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -25,11 +23,6 @@ const NoticeSchema = new mongoose.Schema(
     images: {
       type: [String],
     },
-    metaDescription: {
-      type: String,
-      minLength: MIN_LENGTH_META_DESCRIPTION,
-      maxLength: MAX_LENGTH_META_DESCRIPTION,
-    },
   },
   {
     timestamps: true,
@@ -37,5 +30,5 @@ const NoticeSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.models.NoticeSchema ||
-  mongoose.model("NoticeSchema", NoticeSchema);
+export default mongoose.models.NoticesSchema ||
+  mongoose.model("NoticesSchema", NoticesSchema);
