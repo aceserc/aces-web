@@ -7,7 +7,7 @@ import { handleUploadFileService } from "./file";
 export type ITestimonialSchemaResponse = ITestimonialSchema & ICreatedUpdatedAt;
 
 export type IHandleGetTestimonialServiceResponse = {
-  data: ITestimonialSchemaResponse[];
+  testimonials: ITestimonialSchemaResponse[];
   pageNo: number;
   results: number;
   total: number;
@@ -26,7 +26,7 @@ export const handleGetAllTestimonialService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data?.data);
       })
       .catch((err) => {
         reject(
@@ -71,14 +71,14 @@ export const handleCreateTestimonialService = async (
 
 export const handleDeleteTestimonialService = async (
   id: string
-): Promise<void> => {
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     axios
       .delete(`${API.testimonials}?id=${id}`, {
         withCredentials: true,
       })
-      .then(() => {
-        resolve();
+      .then((res) => {
+        resolve(res?.data?.message ?? "Testimonial deleted successfully.");
       })
       .catch((err) => {
         reject(
