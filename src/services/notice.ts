@@ -39,7 +39,7 @@ export type INoticesSchemaResponse = Omit<
 >;
 
 export type IHandleGetNoticesServiceResponse = {
-  data: INoticesSchemaResponse[];
+  notices: INoticesSchemaResponse[];
   pageNo: number;
   results: number;
   total: number;
@@ -58,7 +58,7 @@ export const handleGetNoticesService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data?.data);
       })
       .catch((err) => {
         reject(

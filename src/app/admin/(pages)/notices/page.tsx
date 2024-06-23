@@ -66,7 +66,7 @@ const NoticesPage = () => {
 
   useEffect(() => {
     if (isLoading) return;
-    setFilteredData(data?.data);
+    setFilteredData(data?.notices);
   }, [isLoading, data]);
 
   return (
@@ -104,14 +104,6 @@ const NoticesPage = () => {
                   {
                     label: "Updated At",
                     value: "updatedAt",
-                  },
-                  {
-                    label: "Start Date",
-                    value: "startDate",
-                  },
-                  {
-                    label: "End Date",
-                    value: "endDate",
                   },
                   {
                     label: "Title",

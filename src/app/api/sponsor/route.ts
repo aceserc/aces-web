@@ -27,36 +27,6 @@ export const POST = applyMiddleware(
 export const GET = applyMiddleware(
   connectToDBMiddleware,
   catchAsyncError(async (req: NextRequest) => {
-    const sponsorId = req.nextUrl.searchParams.get("id");
-    if (sponsorId) {
-      const sponsor = await sponsorModel.findById(sponsorId);
-      if (!sponsor) {
-        return sendNextResponse({
-          status: 404,
-          message: "Sponsor not found!",
-        });
-      }
-
-      return sendNextResponse({
-        status: 200,
-        data: sponsor.toJSON(),
-      });
-    }
-
-    // return only ids if onlyIds is present
-    const onlyIds = req.nextUrl.searchParams.get("onlyIds");
-    if (onlyIds === "true") {
-      const sponsors = await sponsorModel.find().select("_id");
-      return sendNextResponse({
-        status: 200,
-        data: sponsors.map((sponsor) => sponsor._id),
-      });
-    }
-
-    const pageNo = parseInt(req.nextUrl.searchParams.get("page") || "1");
-    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "9");
-    const sortBy = req.nextUrl.searchParams.get("sortBy") || "name";
-    const order = req.nextUrl.searchParams.get("order") || "asc";
     const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
 
     // find  relevant sponsors
@@ -64,28 +34,12 @@ export const GET = applyMiddleware(
       .find({
         name: { $regex: new RegExp(search, "i") },
       })
-      .sort({ [sortBy]: order === "asc" ? 1 : -1 })
-      .skip((pageNo - 1) * limit)
-      .limit(limit)
+      .sort({ createdAt: -1 })
       .select("-__v");
-
-    const totalSponsors = await sponsorModel.countDocuments({
-      name: { $regex: new RegExp(search, "i") },
-    });
-
-    const remainingResults = Math.max(0, totalSponsors - pageNo * limit);
-    const totalPages = Math.ceil(totalSponsors / limit);
 
     return sendNextResponse({
       status: 200,
-      data: {
-        sponsors: sponsors || [],
-        pageNo: pageNo,
-        results: sponsors.length,
-        total: totalSponsors,
-        remainingResults,
-        totalPages,
-      },
+      data: sponsors || [],
     });
   })
 );
