@@ -6,7 +6,7 @@ import { IContactSchema } from "@/zod/contact.schema";
 export type IContactSchemaResponse = IContactSchema & ICreatedUpdatedAt;
 
 export type IHandleGetContactServiceResponse = {
-  data: IContactSchemaResponse[];
+  contact: IContactSchemaResponse[];
   pageNo: number;
   results: number;
   total: number;
@@ -25,12 +25,32 @@ export const handleGetAllContactService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data?.data);
       })
       .catch((err) => {
         reject(
           err?.response?.data?.message ??
             "Failed to fetch notices. Please try again later."
+        );
+      });
+  });
+};
+
+export const handleDeleteContactService = async (
+  id: string
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${API.contact}?id=${id}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        resolve(res.data?.message ?? "Contact deleted successfully!");
+      })
+      .catch((err) => {
+        reject(
+          err?.response?.data?.message ??
+            "Failed to delete the contact. Please try again later."
         );
       });
   });

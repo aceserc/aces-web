@@ -64,7 +64,7 @@ const ContactPage = () => {
 
   useEffect(() => {
     if (isLoading) return;
-    setFilteredData(data?.data);
+    setFilteredData(data?.contact);
   }, [isLoading, data]);
 
   return (
