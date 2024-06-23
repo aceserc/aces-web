@@ -39,7 +39,7 @@ export type IEventsSchemaResponse = Omit<
 >;
 
 export type IHandleGetEventsServiceResponse = {
-  data: IEventsSchemaResponse[];
+  events: IEventsSchemaResponse[];
   pageNo: number;
   results: number;
   total: number;
@@ -58,7 +58,7 @@ export const handleGetEventsService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data?.data);
       })
       .catch((err) => {
         reject(

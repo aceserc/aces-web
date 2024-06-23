@@ -66,7 +66,7 @@ const NoticesPage = () => {
 
   useEffect(() => {
     if (isLoading) return;
-    setFilteredData(data?.data);
+    setFilteredData(data?.events);
   }, [isLoading, data]);
 
   return (
