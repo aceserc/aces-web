@@ -1,10 +1,6 @@
-import { RESPONSES } from "@/constants/response.constant";
-import dbConnect from "@/db/connect";
-import { isAdmin } from "@/helpers/is-admin";
 import eventsModel from "@/models/events.model";
 import { EventsSchemaExtended } from "@/zod/events.schema";
-import { fromError } from "zod-validation-error";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { applyMiddleware } from "@/middlewares/apply.middleware";
 import { isAdminMiddleware } from "@/middlewares/auth.middleware";
 import { connectToDBMiddleware } from "@/middlewares/db.middleware";

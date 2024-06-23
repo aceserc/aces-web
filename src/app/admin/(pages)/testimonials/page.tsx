@@ -188,7 +188,10 @@ const ContactPage = () => {
                   testimonials.endorserName,
                   new Date(testimonials.createdAt).toLocaleString(),
                   testimonials.body,
-                  <TestimonialAction {...testimonials} />,
+                  <TestimonialAction
+                    key="TestimonialAction"
+                    {...testimonials}
+                  />,
                 ].map((item, i) => (
                   <span key={i} className="truncate">
                     {item}

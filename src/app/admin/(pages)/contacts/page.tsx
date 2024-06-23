@@ -178,7 +178,7 @@ const ContactPage = () => {
                   contact.name ?? "Anonymous",
                   new Date(contact.createdAt).toLocaleString(),
                   contact.subject,
-                  <ViewContactModal {...contact} />,
+                  <ViewContactModal key="ViewContactModal" {...contact} />,
                 ].map((item, i) => (
                   <span key={i} className="truncate">
                     {item}
@@ -216,7 +216,6 @@ const ContactPage = () => {
                 (_, i) => i + 1
               ).map((page) => {
                 if (page > 3) return null;
-
                 return (
                   <PaginationItem key={page}>
                     <PaginationLink

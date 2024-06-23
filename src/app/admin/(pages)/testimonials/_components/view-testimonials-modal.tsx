@@ -102,7 +102,7 @@ const ViewTestimonialModal = (props: Props) => {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete{" "}
-              <span className="font-bold">{props.endorserName}</span>'s{" "}
+              <span className="font-bold">{props.endorserName}</span>&apos;s{" "}
               testimonial! list.
             </AlertDialogDescription>
           </AlertDialogHeader>
