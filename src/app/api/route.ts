@@ -1,5 +1,5 @@
-import catchAsyncError from "@/constants/error-handler";
-import { sendNextResponse } from "@/constants/send-response";
+import catchAsyncError from "@/middlewares/error-handler.middleware";
+import { sendNextResponse } from "@/middlewares/send-response";
 
 export const GET = catchAsyncError(async () => {
   return sendNextResponse({

@@ -1,5 +1,5 @@
+import { STATUS } from "@/constants/status.constant";
 import { NextResponse } from "next/server";
-import { STATUS } from "./status.constant";
 
 export interface IResponse {
   status: number;
