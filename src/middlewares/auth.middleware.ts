@@ -7,7 +7,13 @@ import { NextRequest } from "next/server";
 export const isAdminMiddleware = async (req: NextRequest) => {
   const user = await currentUser();
   // @ts-ignore
-  req.user = user;
+  if (!req.data) {
+    // @ts-ignore
+    req.data = {} as any;
+  }
+
+  // @ts-ignore
+  req.data.user = user;
 
   if (
     !user ||
@@ -25,8 +31,15 @@ export const isAdminMiddleware = async (req: NextRequest) => {
 
 export const isEditorMiddleware = async (req: NextRequest) => {
   const user = await currentUser();
+
   // @ts-ignore
-  req.user = user;
+  if (!req.data) {
+    // @ts-ignore
+    req.data = {} as any;
+  }
+
+  // @ts-ignore
+  req.data.user = user;
 
   if (
     !user ||

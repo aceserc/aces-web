@@ -10,6 +10,11 @@ export const STATUS: IStatus = {
     status: 200,
     statusText: "OK",
   },
+  201: {
+    message: "Resource created successfully!",
+    status: 201,
+    statusText: "Created",
+  },
 
   400: {
     message: "The request is invalid!",

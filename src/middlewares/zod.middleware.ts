@@ -7,7 +7,13 @@ export const zodValidator = (schema: any) => {
   return async (req: NextRequest, res: NextResponse) => {
     try {
       // @ts-ignore
-      req.body = schema.parse(req.body);
+      if (!req.data) {
+        // @ts-ignore
+        req.data = {} as any;
+      }
+      let body = await req.json();
+      // @ts-ignore
+      req.data.body = schema.parse(body);
       return CALL_NEXT_FUNCTION;
     } catch (e) {
       const message = fromError(e).toString();

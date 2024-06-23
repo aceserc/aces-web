@@ -1,125 +1,112 @@
-import { RESPONSES } from "@/constants/response.constant";
-import dbConnect from "@/db/connect";
-import { isAdmin } from "@/helpers/is-admin";
 import sponsorModel from "@/models/sponsor.model";
 import { SponsorSchema as ZodSponsorSchema } from "@/zod/sponsor.schema";
-import { fromError } from "zod-validation-error";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { applyMiddleware } from "@/middlewares/apply.middleware";
+import { isAdminMiddleware } from "@/middlewares/auth.middleware";
+import { connectToDBMiddleware } from "@/middlewares/db.middleware";
+import { zodValidator } from "@/middlewares/zod.middleware";
+import catchAsyncError from "@/middlewares/error-handler.middleware";
+import { sendNextResponse } from "@/middlewares/send-response";
 
-// Handles the POST request for adding a sponsor.
-export const POST = async (req: NextRequest) => {
-  try {
-    // connect to database and parse request body
-    await dbConnect();
-
-    if (!(await isAdmin())) {
-      return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
-        status: RESPONSES.UNAUTHORIZED_ACCESS.status,
-      });
-    }
-
-    let body = await req.json();
-
-    try {
-      body = ZodSponsorSchema.parse(body);
-    } catch (e) {
-      const message = fromError(e).toString();
-      return NextResponse.json(
-        {
-          ...RESPONSES.UNPROCESSABLE_ENTITY,
-          error: JSON.stringify(e),
-          message,
-        },
-        {
-          status: RESPONSES.UNPROCESSABLE_ENTITY.status,
-        }
-      );
-    }
-
+export const POST = applyMiddleware(
+  isAdminMiddleware,
+  connectToDBMiddleware,
+  zodValidator(ZodSponsorSchema),
+  catchAsyncError(async (req: NextRequest) => {
+    //@ts-ignore
+    const body = req.data.body;
     const sponsor = await sponsorModel.create(body);
     await sponsor.save();
+    return sendNextResponse({
+      status: 201,
+      message: "Sponsor added successfully!",
+    });
+  })
+);
 
-    return NextResponse.json(
-      {
-        ...RESPONSES.CREATED,
-        message: "Sponsor added successfully!",
-      },
-      {
-        status: RESPONSES.CREATED.status,
+export const GET = applyMiddleware(
+  connectToDBMiddleware,
+  catchAsyncError(async (req: NextRequest) => {
+    const sponsorId = req.nextUrl.searchParams.get("id");
+    if (sponsorId) {
+      const sponsor = await sponsorModel.findById(sponsorId);
+      if (!sponsor) {
+        return sendNextResponse({
+          status: 404,
+          message: "Sponsor not found!",
+        });
       }
-    );
-  } catch (e) {
-    return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
-      status: RESPONSES.INTERNAL_SERVER_ERROR.status,
-    });
-  }
-};
 
-export const GET = async (req: NextRequest) => {
-  try {
-    await dbConnect();
-    const isActive = req.nextUrl.searchParams.get("isActive");
-
-    let sponsors: any;
-    if (isActive === "true") {
-      sponsors = await sponsorModel.find({ isActive: true });
-    } else if (isActive === "false") {
-      sponsors = await sponsorModel.find({ isActive: false });
-    } else {
-      sponsors = await sponsorModel.find();
-    }
-
-    return NextResponse.json({
-      data: sponsors,
-      isActive,
-    });
-  } catch (e) {
-    return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
-      status: RESPONSES.INTERNAL_SERVER_ERROR.status,
-    });
-  }
-};
-
-/**
- *  Handles the DELETE request for deleting a sponsor.
- *
- * @query id - The id of the sponsor to delete.
- */
-export const DELETE = async (req: NextRequest) => {
-  try {
-    await dbConnect();
-
-    if (!(await isAdmin())) {
-      return NextResponse.json(RESPONSES.UNAUTHORIZED_ACCESS, {
-        status: RESPONSES.UNAUTHORIZED_ACCESS.status,
+      return sendNextResponse({
+        status: 200,
+        data: sponsor.toJSON(),
       });
     }
 
-    const id = req.nextUrl.searchParams.get("id");
-
-    const sponsor = await sponsorModel.findByIdAndDelete(id);
-
-    if (!sponsor) {
-      return NextResponse.json(
-        { ...RESPONSES.NOT_FOUND, message: "Sponsor not found!" },
-        {
-          status: RESPONSES.NOT_FOUND.status,
-        }
-      );
+    // return only ids if onlyIds is present
+    const onlyIds = req.nextUrl.searchParams.get("onlyIds");
+    if (onlyIds === "true") {
+      const sponsors = await sponsorModel.find().select("_id");
+      return sendNextResponse({
+        status: 200,
+        data: sponsors.map((sponsor) => sponsor._id),
+      });
     }
 
-    return NextResponse.json(
-      {
-        ...RESPONSES.SUCCESS,
-        message: "Sponsor deleted successfully!",
-      },
-      {
-        status: RESPONSES.SUCCESS.status,
-      }
-    );
-  } catch (e) {
-    return NextResponse.json(RESPONSES.INTERNAL_SERVER_ERROR, {
-      status: RESPONSES.INTERNAL_SERVER_ERROR.status,
+    const pageNo = parseInt(req.nextUrl.searchParams.get("page") || "1");
+    const limit = parseInt(req.nextUrl.searchParams.get("limit") || "9");
+    const sortBy = req.nextUrl.searchParams.get("sortBy") || "name";
+    const order = req.nextUrl.searchParams.get("order") || "asc";
+    const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
+
+    // find  relevant sponsors
+    const sponsors = await sponsorModel
+      .find({
+        name: { $regex: new RegExp(search, "i") },
+      })
+      .sort({ [sortBy]: order === "asc" ? 1 : -1 })
+      .skip((pageNo - 1) * limit)
+      .limit(limit)
+      .select("-__v");
+
+    const totalSponsors = await sponsorModel.countDocuments({
+      name: { $regex: new RegExp(search, "i") },
     });
-  }
-};
+
+    const remainingResults = Math.max(0, totalSponsors - pageNo * limit);
+    const totalPages = Math.ceil(totalSponsors / limit);
+
+    return sendNextResponse({
+      status: 200,
+      data: {
+        sponsors: sponsors || [],
+        pageNo: pageNo,
+        results: sponsors.length,
+        total: totalSponsors,
+        remainingResults,
+        totalPages,
+      },
+    });
+  })
+);
+
+export const DELETE = applyMiddleware(
+  isAdminMiddleware,
+  connectToDBMiddleware,
+  catchAsyncError(async (req: NextRequest) => {
+    const sponsorId = req.nextUrl.searchParams.get("id");
+    if (!sponsorId) {
+      return sendNextResponse({
+        status: 400,
+        message: "Sponsor id is required!",
+      });
+    }
+
+    await sponsorModel.findByIdAndDelete(sponsorId);
+
+    return sendNextResponse({
+      status: 200,
+      message: "Sponsor deleted successfully!",
+    });
+  })
+);

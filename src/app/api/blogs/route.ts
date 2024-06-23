@@ -71,12 +71,12 @@ export const GET = applyMiddleware(
       .limit(limit)
       .select("-body -__v -images -authorId");
 
-    const Blogs = await blogsModel.countDocuments({
+    const totalBlogs = await blogsModel.countDocuments({
       title: { $regex: new RegExp(search, "i") },
     });
 
-    const remainingResults = Math.max(0, Blogs - pageNo * limit);
-    const totalPages = Math.ceil(Blogs / limit);
+    const remainingResults = Math.max(0, totalBlogs - pageNo * limit);
+    const totalPages = Math.ceil(totalBlogs / limit);
 
     return sendNextResponse({
       status: 200,
@@ -84,7 +84,7 @@ export const GET = applyMiddleware(
         blogs: blogs || [],
         pageNo: pageNo,
         results: blogs.length,
-        total: Blogs,
+        total: totalBlogs,
         remainingResults,
         totalPages,
         resultsOnNextPage:
@@ -99,7 +99,8 @@ export const POST = applyMiddleware(
   connectToDBMiddleware,
   zodValidator(BlogSchemaExtended),
   catchAsyncError(async (req: NextRequest) => {
-    const { body, user } = req as any;
+    // @ts-ignore
+    const { body, user } = req.data as any;
     const blog = await blogsModel.create({
       ...body,
       authorId: user?.id,
@@ -107,7 +108,7 @@ export const POST = applyMiddleware(
 
     await blog.save();
     return sendNextResponse({
-      status: 200,
+      status: 201,
       message: "Blog created successfully!",
     });
   })
