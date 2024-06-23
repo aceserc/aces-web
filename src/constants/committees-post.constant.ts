@@ -29,15 +29,15 @@ export const COMMITTEES_POST = [
     multiple: false,
   },
   {
-    post: "Developer",
-    multiple: true,
-  },
-  {
     post: "Technical Team",
     multiple: true,
   },
   {
     post: "PR Team",
+    multiple: true,
+  },
+  {
+    post: "Developer",
     multiple: true,
   },
   {
