@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import catchAsyncError from "@/constants/error-handler";
+import { sendNextResponse } from "@/constants/send-response";
 
-// Health check route
-export const GET = async () => {
-  return NextResponse.json({
-    message: "Hello World!",
+export const GET = catchAsyncError(async () => {
+  return sendNextResponse({
+    status: 200,
+    message: "Hello World",
   });
-};
+});
