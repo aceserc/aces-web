@@ -39,7 +39,7 @@ export type IBlogsSchemaResponse = Omit<
 >;
 
 export type IHandleGetBlogsServiceResponse = {
-  data: IBlogsSchemaResponse[];
+  blogs: IBlogsSchemaResponse[];
   pageNo: number;
   results: number;
   total: number;
@@ -58,7 +58,7 @@ export const handleGetBlogsService = async (
         params: query,
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data?.data);
       })
       .catch((err) => {
         reject(

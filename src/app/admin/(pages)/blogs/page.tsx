@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/pagination";
 import { useUser } from "@clerk/nextjs";
 import { EDITOR_ROLES } from "@/constants/roles.constants";
-import { IBlogSchema } from "@/zod/blog.schema.";
 import {
   IBlogsSchemaResponse,
   IHandleGetBlogsServiceResponse,
@@ -35,7 +34,7 @@ import AdminBlogCard from "./_components/amin-blog-card";
 
 interface IDefaultQueryParam {
   page: number;
-  sortBy: "startDate" | "endDate" | "createdAt" | "updatedAt" | "title";
+  sortBy: "createdAt" | "updatedAt" | "title";
   order: "asc" | "desc";
   search: string;
 }
@@ -67,7 +66,7 @@ const BlogsPage = () => {
 
   useEffect(() => {
     if (isLoading) return;
-    setFilteredData(data?.data);
+    setFilteredData(data?.blogs);
   }, [isLoading, data]);
 
   return (
@@ -105,14 +104,6 @@ const BlogsPage = () => {
                   {
                     label: "Updated At",
                     value: "updatedAt",
-                  },
-                  {
-                    label: "Start Date",
-                    value: "startDate",
-                  },
-                  {
-                    label: "End Date",
-                    value: "endDate",
                   },
                   {
                     label: "Title",
