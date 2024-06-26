@@ -59,12 +59,12 @@ const EventDetailPage = async ({ params: { id } }: Props) => {
 
 export default EventDetailPage;
 
-export async function generateStaticParams() {
-  const response = await fetchData<{
-    data: string[];
-  }>(`${API.events}?onlyIds=true`);
+// export async function generateStaticParams() {
+//   const response = await fetchData<{
+//     data: string[];
+//   }>(`${API.events}?onlyIds=true`);
 
-  if (!response) return [];
-  let params = response?.data.map((id) => ({ id }));
-  return params;
-}
+//   if (!response) return [];
+//   let params = response?.data.map((id) => ({ id }));
+//   return params;
+// }
