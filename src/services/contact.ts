@@ -55,3 +55,26 @@ export const handleDeleteContactService = async (
       });
   });
 };
+
+export const handleCreateContactService = async (
+  data: IContactSchema
+): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(API.contact, data, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        resolve(
+          res.data?.message ??
+            "Thank you for contacting us, we will get back to you soon!"
+        );
+      })
+      .catch((err) => {
+        reject(
+          err?.response?.data?.message ??
+            "Failed to send message. Please try again later."
+        );
+      });
+  });
+};
