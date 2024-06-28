@@ -41,90 +41,52 @@ const ContactForm = () => {
   };
 
   return (
-    <div
-      style={{
-        filter: "drop-shadow(0px 17px 44px rgba(179, 179, 179, 0.25))",
-      }}
-      className="flex flex-col items-center justify-center gap-12 px-3 sm:px-6 py-9 xl:px-20 xl:py-20 bg-white rounded-xl max-w-4xl m-auto"
-    >
-      <h2 className="text-4xl md:text-5xl font-semibold text-center">
-        Get in touch today!
-      </h2>
-      <div className="flex gap-4 items-center">
-        {[
-          {
-            type: "email",
-            value: "hi@example.com",
-            icon: IoMailOpenOutline,
-          },
-          {
-            type: "phone",
-            value: "1234567890",
-            icon: PiPhoneLight,
-          },
-        ].map((item, index) => (
-          <a
-            style={{
-              boxShadow: "0px 8px 33px 0px rgba(181, 181, 181, 0.25)",
-            }}
-            key={index}
-            href={
-              item.type === "email"
-                ? `mailto:${item.value}`
-                : `tel:${item.value}`
-            }
-            className="flex gap-2 items-center justify-center px-4 py-3 rounded-xl border border-muted hover:scale-[1.005] transition-transform "
-          >
-            <item.icon className="text-xl" />
-            <span>{item.value}</span>
-          </a>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <div className="flex gap-8 items-center">
-          <ContactInput
-            register={register}
-            inputKey="name"
-            label="Name"
-            error={errors.name?.message}
-          />
-          <ContactInput
-            register={register}
-            inputKey="email"
-            label="Email"
-            type="email"
-            error={errors.email?.message}
-          />
-        </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <div className="flex gap-4 sm:gap-8 flex-col sm:flex-row items-center">
         <ContactInput
           register={register}
-          inputKey="subject"
-          label="Subject*"
-          error={errors.subject?.message}
-          placeholder="I would like to..."
-          autoComplete="off"
+          inputKey="name"
+          label="Name"
+          placeholder="John Doe"
+          error={errors.name?.message}
         />
-        <div className="w-full group">
-          <label htmlFor="body" className="text-base font-medium px-1">
-            Message*
-          </label>
-          <textarea
-            {...register("body")}
-            placeholder="Hi there!..."
-            className="w-full px-3 py-1.5 text-base min-h-28 rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform"
-          />
-          {errors.body && <FormErrorLine error={errors.body.message} />}
-        </div>
-        <Button
-          isLoading={isLoading}
-          type="submit"
-          className="self-end hover:scale-[1.005] min-w-44 text-lg"
-          size="lg"
-        >
-          Submit
-        </Button>
-      </form>
-    </div>
+        <ContactInput
+          placeholder="hey@gmail.com"
+          register={register}
+          inputKey="email"
+          label="Email"
+          type="email"
+          error={errors.email?.message}
+        />
+      </div>
+      <ContactInput
+        register={register}
+        inputKey="subject"
+        label="Subject*"
+        error={errors.subject?.message}
+        placeholder="I would like to..."
+        autoComplete="off"
+      />
+      <div className="w-full group">
+        <label htmlFor="body" className="text-base font-medium px-1">
+          Message*
+        </label>
+        <textarea
+          {...register("body")}
+          placeholder="Hi there!..."
+          className="w-full px-3 py-1.5 text-base min-h-28 rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform"
+        />
+        {errors.body && <FormErrorLine error={errors.body.message} />}
+      </div>
+      <Button
+        isLoading={isLoading}
+        type="submit"
+        className="self-end hover:scale-[1.005] min-w-44 text-lg"
+        size="lg"
+      >
+        Submit
+      </Button>
+    </form>
   );
 };
 
