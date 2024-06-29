@@ -35,7 +35,7 @@ const ContactPage = () => {
           </div>
           <hr className="opacity-50" />
           <div className="grid mt-10 md:grid-cols-2 gap-6">
-            <div className="my-10">
+            <div className="md:my-10">
               <h2 className="text-2xl font-semibold">ACES</h2>
               <p className="max-w-sm mt-5 opacity-80">
                 Have something to say? We are here to help. Fill up the form or
@@ -55,7 +55,7 @@ const ContactPage = () => {
                 ))}
               </div>
             </div>
-            <div className="mt-10">
+            <div className="sm:mt-10">
               <ContactForm />
             </div>
           </div>
