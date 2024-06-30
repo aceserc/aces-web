@@ -4,14 +4,26 @@ import { Skeleton } from "@/components/ui/skeleton";
 import useFetch from "@/hooks/use-fetch";
 import API from "@/services";
 import { IEventsSchemaResponse } from "@/services/events";
+import { IApiResponse } from "@/types/response";
 import React from "react";
 
-type IEvents = { data: IEventsSchemaResponse[] };
+type IEvents = IEventsSchemaResponse[];
 
 const Events = () => {
-  const { data: events, isLoading, isError } = useFetch<IEvents>(API.events);
+  const {
+    data: events,
+    isLoading,
+    isError,
+  } = useFetch<
+    IApiResponse<{
+      events: IEvents
+    }>
+  >(API.events);
 
-  if (isError || (!isLoading && (!events || events?.data?.length === 0))) {
+  if (
+    isError ||
+    (!isLoading && (!events || events?.data?.events?.length === 0))
+  ) {
     return null;
   }
   return (
@@ -29,7 +41,9 @@ const Events = () => {
             <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md" />
           </>
         ) : (
-          events?.data.map((event, i) => <EventCard key={i} {...event} />)
+          events?.data?.events?.map((event, i) => (
+            <EventCard key={i} {...event} />
+          ))
         )}
       </div>
     </div>
