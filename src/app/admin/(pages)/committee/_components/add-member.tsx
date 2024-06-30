@@ -24,14 +24,16 @@ import FormErrorLine from "@/components/reusable/form-error-line";
 import { Input } from "@/components/ui/input";
 import { MdDeleteOutline } from "react-icons/md";
 import { handleAddCommitteeService } from "@/services/committee";
+import SelectImage from "@/app/admin/_components/select-image";
 
 type Props = {
   occupiedPosts: string[];
 };
 
 const AddMember = ({ occupiedPosts }: Props) => {
-  const [avatar, setLogo] = useState<File | null>(null);
+  const [avatar, setAvatar] = useState<File | string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isSelectImageOpen, setIsSelectImageOpen] = useState(false);
   const [socialLinks, setSocialLinks] = useState<string[]>([]);
   const [socialLinkValue, setSocialLinkValue] = useState<string>("");
   const queryClient = useQueryClient();
@@ -57,7 +59,7 @@ const AddMember = ({ occupiedPosts }: Props) => {
         queryKey: ["committees"],
       });
       reset();
-      setLogo(null);
+      setAvatar(null);
       setSocialLinks([]);
     },
   });
@@ -68,118 +70,130 @@ const AddMember = ({ occupiedPosts }: Props) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
-      <DialogTrigger asChild>
-        <Button className="flex items-center justify-center gap-2">
-          <span>Add Member</span>
-          <GoPlus className="w-5 h-5" />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogHeader>
-            <DialogTitle>Add Member</DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col gap-4 my-6">
-            <label
-              htmlFor="avatar"
-              style={{
-                backgroundImage: `url(${
-                  avatar ? URL.createObjectURL(avatar) : ""
-                })`,
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-              className="w-full h-32 border flex-col rounded-md cursor-pointer border-dashed border-muted-foreground/50 hover:border-muted-foreground flex items-center justify-center text-muted-foreground"
-            >
-              <input
-                type="file"
-                id="avatar"
-                className="hidden sr-only"
-                onChange={(e) => {
-                  if (e.target.files) setLogo(e.target.files[0]);
+    <>
+      <SelectImage
+        isOpen={isSelectImageOpen}
+        onClose={() => {
+          setIsSelectImageOpen(false);
+          setIsOpen(true);
+        }}
+        onSelect={(file) => {
+          setAvatar(file);
+          setIsSelectImageOpen(false);
+          setIsOpen(true);
+        }}
+      />
+      <Dialog open={isOpen} onOpenChange={(val) => setIsOpen(val)}>
+        <DialogTrigger asChild>
+          <Button className="flex items-center justify-center gap-2">
+            <span>Add Member</span>
+            <GoPlus className="w-5 h-5" />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DialogHeader>
+              <DialogTitle>Add Member</DialogTitle>
+            </DialogHeader>
+            <div className="flex flex-col gap-4 my-6">
+              <div
+                onClick={() => {
+                  setIsSelectImageOpen(true);
+                  setIsOpen(false);
                 }}
-              />
-              <IoCloudUploadOutline className="w-12 h-12" />
-              <span className="text-xs">
-                {avatar ? avatar.name : "Upload avatar"}
-              </span>
-            </label>
-            <InputWithErrorField
-              label="Name*"
-              inputKey="name"
-              error={errors.name?.message}
-              register={register}
-            />
-            <div className="flex flex-col">
-              <SelectPost
-                occupiedPosts={occupiedPosts}
-                setPost={(post) => {
-                  setValue("post", post);
+                role="button"
+                style={{
+                  backgroundImage: `url(${
+                    avatar instanceof File
+                      ? URL.createObjectURL(avatar)
+                      : avatar
+                  })`,
+                  backgroundSize: "contain",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
+                className="w-full h-32 border flex-col rounded-md cursor-pointer border-dashed border-muted-foreground/50 hover:border-muted-foreground flex items-center justify-center text-muted-foreground"
+              >
+                <IoCloudUploadOutline className="w-12 h-12" />
+                <span className="text-xs">
+                  {avatar ? "Change Avatar" : "Upload avatar"}
+                </span>
+              </div>
+              <InputWithErrorField
+                label="Name*"
+                inputKey="name"
+                error={errors.name?.message}
+                register={register}
               />
-              {errors.post && <FormErrorLine error={errors.post.message} />}
-            </div>
-            <div className="w-full group">
-              <label htmlFor="contact" className="text-xs font-semibold px-1">
-                Contact
-              </label>
-              <input
-                value={socialLinkValue}
-                onChange={(e) => setSocialLinkValue(e.currentTarget.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    if (socialLinks.length === 3) {
-                      toast.error("You can only add 3 social links");
-                      return;
+              <div className="flex flex-col">
+                <SelectPost
+                  occupiedPosts={occupiedPosts}
+                  setPost={(post) => {
+                    setValue("post", post);
+                  }}
+                />
+                {errors.post && <FormErrorLine error={errors.post.message} />}
+              </div>
+              <div className="w-full group">
+                <label htmlFor="contact" className="text-xs font-semibold px-1">
+                  Contact
+                </label>
+                <input
+                  value={socialLinkValue}
+                  onChange={(e) => setSocialLinkValue(e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      if (socialLinks.length === 3) {
+                        toast.error("You can only add 3 social links");
+                        return;
+                      }
+                      setSocialLinks((prev) => [...prev, socialLinkValue]);
+                      setSocialLinkValue("");
                     }
-                    setSocialLinks((prev) => [...prev, socialLinkValue]);
-                    setSocialLinkValue("");
-                  }
-                }}
-                className="w-full px-3 py-1.5 text-sm rounded-sm outline-none border focus:border-indigo-500 group-hover:scale-[1.01] transition-transform"
-              />
+                  }}
+                  className="w-full px-3 py-1.5 text-sm rounded-sm outline-none border focus:border-indigo-500 group-hover:scale-[1.01] transition-transform"
+                />
+              </div>
+              <div className="flex flex-col text-sm gap-1 max-h-24 overflow-y-auto">
+                {socialLinks?.length === 0 ? (
+                  <span className="text-red-500">No social links added</span>
+                ) : (
+                  socialLinks?.map((link, index) => (
+                    <div key={index} className="flex gap-2 items-center">
+                      <input
+                        className="w-full px-3 py-1.5 text-sm rounded-sm outline-none border focus:border-indigo-500"
+                        value={link}
+                        disabled
+                      />
+                      <button
+                        onClick={() => {
+                          setSocialLinks((prev) =>
+                            prev.filter((_, i) => i !== index)
+                          );
+                        }}
+                        className="text-base text-red-500"
+                      >
+                        <MdDeleteOutline />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
-            <div className="flex flex-col text-sm gap-1 max-h-24 overflow-y-auto">
-              {socialLinks?.length === 0 ? (
-                <span className="text-red-500">No social links added</span>
-              ) : (
-                socialLinks?.map((link, index) => (
-                  <div key={index} className="flex gap-2 items-center">
-                    <input
-                      className="w-full px-3 py-1.5 text-sm rounded-sm outline-none border focus:border-indigo-500"
-                      value={link}
-                      disabled
-                    />
-                    <button
-                      onClick={() => {
-                        setSocialLinks((prev) =>
-                          prev.filter((_, i) => i !== index)
-                        );
-                      }}
-                      className="text-base text-red-500"
-                    >
-                      <MdDeleteOutline />
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-          <DialogFooter className="sm:justify-end">
-            <Button
-              isLoading={isPending}
-              className="min-w-24"
-              variant="secondary"
-            >
-              Save
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+            <DialogFooter className="sm:justify-end">
+              <Button
+                isLoading={isPending}
+                className="min-w-24"
+                variant="secondary"
+              >
+                Save
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

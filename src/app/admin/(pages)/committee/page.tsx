@@ -10,6 +10,7 @@ import { handleGetCommitteesService } from "@/services/committee";
 import AdminCommitteeMember from "./_components/admin-committee-member";
 import { useUser } from "@clerk/nextjs";
 import { ADMIN_ROLES } from "@/constants/roles.constants";
+import { sortCommitteeMembers } from "@/helpers/sort-committee-members";
 
 const CommitteesPage = () => {
   const { user } = useUser();
@@ -54,7 +55,7 @@ const CommitteesPage = () => {
           </div>
         ) : filteredData && filteredData.length > 0 ? (
           <div className="flex gap-4 flex-wrap">
-            {filteredData.map((c) => (
+            {sortCommitteeMembers(filteredData).map((c) => (
               <AdminCommitteeMember key={c._id} {...c} />
             ))}
           </div>

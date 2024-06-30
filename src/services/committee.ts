@@ -7,7 +7,7 @@ import {
 } from "@/zod/committee.schema";
 
 export const handleAddCommitteeService = async (
-  data: ICommitteeSchema & { avatar: File }
+  data: ICommitteeSchema & { avatar: File | string }
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.avatar, "committees")

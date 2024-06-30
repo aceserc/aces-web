@@ -49,3 +49,5 @@ export const COMMITTEES_POST = [
     multiple: true,
   },
 ];
+
+export const TOP_COMMITTEE_POSTS = ["President", "Advisor"];

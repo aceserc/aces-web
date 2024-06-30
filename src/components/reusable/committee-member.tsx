@@ -10,13 +10,10 @@ type Props = ICommitteeSchemaWithAvatar;
 const CommitteeMember = ({ avatar, name, post, socialLinks }: Props) => {
   return (
     <div className="flex flex-col gap-3 items-center shadow-[rgba(7,_65,_210,_0.1)_0px_9px_10px] justify-center bg-background py-6 px-12 rounded-md">
-      <Image
+      <img
         src={avatar}
         alt="avatar"
-        width={100}
-        height={100}
         className="rounded-full object-cover object-center h-24 w-24"
-        quality={100}
       />
       <div className="text-center">
         <h3 className="text-lg font-semibold">{name}</h3>
