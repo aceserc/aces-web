@@ -3,6 +3,8 @@ import { CiMail } from "react-icons/ci";
 import { PiPhoneThin } from "react-icons/pi";
 import Link from "next/link";
 import ContactForm from "./_components/contact-form";
+import FAQs from "@/components/reusable/faq";
+import { FAQS } from "@/constants/faqs.contants";
 
 const CONTACTS = [
   {
@@ -65,6 +67,11 @@ const ContactPage = () => {
             loading="lazy"
             className="w-full h-[250px] sm:h-[400px] rounded-md border-none outline-none xl:grayscale-[40%] hover:grayscale-0 transition-colors"
           ></iframe>
+
+          <hr className="my-9" />
+          <div className="mt-12">
+            <FAQs faqs={FAQS} />
+          </div>
         </div>
       </div>
     </>
