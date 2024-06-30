@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import MailLayout from "@/components/layouts/main-layout";
+import MainLayout from "@/components/layouts/main-layout";
 import { CONTACT_LINKS } from "@/constants/contacts.constants";
 import Link from "next/link";
 import SectionLayout from "@/components/layouts/section-layout";
@@ -12,7 +12,7 @@ import { IoCheckmarkCircleOutline } from "react-icons/io5";
 const AboutPage = () => {
   return (
     <div className="flex flex-col gap-8 md:gap-12">
-      <MailLayout title="About">
+      <MainLayout title="About">
         <div className="mt-12 sm:mt-20 flex flex-col gap-12">
           <div className="flex flex-col lg:flex-row gap-12 max-w-6xl m-auto">
             <div className="flex flex-col items-center space-x-2 lg:min-w-[400px]">
@@ -74,7 +74,7 @@ const AboutPage = () => {
             </div>
           </div>
         </div>
-      </MailLayout>
+      </MainLayout>
       <hr className="wrapper my-5" />
       <SectionLayout title="What we do?">
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">

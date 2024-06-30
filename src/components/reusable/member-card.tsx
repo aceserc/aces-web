@@ -20,10 +20,10 @@ const MemberCard = (props: Props) => {
         "border border-gray-3 max-sm:w-full h-fit hover:drop-shadow-1 hover:-translate-y-0.5 transition-all flex items-center",
         hasTopCommitteePost
           ? "px-5 xs:px-6 py-2 sm:py-3 rounded-xl bg-muted-foreground/[0.03] md:min-w-[340px]"
-          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg min-w-[310px]"
+          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg"
       )}
     >
-      <div className="flex flex-wrap items-center gap-8">
+      <div className="flex items-center gap-8">
         <div
           className={cn(
             "rounded-full overflow-hidden shadow-inner border border-accent",
@@ -61,7 +61,7 @@ const MemberCard = (props: Props) => {
           >
             {props.socialLinks && props.socialLinks?.length < 1 ? (
               <span className="text-muted-foreground text-sm">
-                Not available!
+                No contact info!
               </span>
             ) : (
               props.socialLinks?.map((link, index) => {

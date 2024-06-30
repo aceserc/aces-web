@@ -1,3 +1,4 @@
+import MainLayout from "@/components/layouts/main-layout";
 import MemberCard from "@/components/reusable/member-card";
 import { sortCommitteeMembers } from "@/helpers/sort-committee-members";
 import API from "@/services";
@@ -14,22 +15,26 @@ const CommitteePage = async () => {
     (m) => m.post !== "President" && m.post !== "Advisor"
   );
   return (
-    <section className="wrapper flex items-center justify-center flex-col gap-9 sm:gap-12 mt-12 sm:mt-20">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-center">
-        ACES 11<sup>th</sup> Committee
-      </h1>
-      <div className="flex gap-4 xs:gap-9 flex-col">
-        <div className="flex gap-4 flex-col sm:flex-row items-center justify-center">
+    <MainLayout
+      title={
+        <>
+          ACES 11<sup>th</sup> Committee
+        </>
+      }
+      headingClassName="sm:text-center"
+    >
+      <div className="flex gap-4 xs:gap-9 flex-col w-full mt-12 sm:mt-20">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-[700px] m-auto w-full">
           {president && <MemberCard {...president} />}
           {adviser && <MemberCard {...adviser} />}
         </div>
-        <div className="flex gap-4 flex-wrap items-center justify-center">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {sortCommitteeMembers(restMembers)?.map((member) => (
             <MemberCard key={member._id} {...member} />
           ))}
         </div>
       </div>
-    </section>
+    </MainLayout>
   );
 };
 
