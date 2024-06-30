@@ -18,6 +18,7 @@ export const BlogSchema = z.object({
 export const BlogSchemaExtended = BlogSchema.extend({
   body: z.string().min(MARKDOWN_BODY_MIN_LENGTH, "Body is too short"),
   thumbnail: z.string().url("Thumbnail is not a valid URL"),
+  tags: z.array(z.string()),
 });
 
 export type IBlogSchema = z.infer<typeof BlogSchema>;

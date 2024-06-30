@@ -35,6 +35,10 @@ const BlogSchema = new mongoose.Schema(
       min: MIN_LENGTH_META_DESCRIPTION,
       max: MAX_LENGTH_META_DESCRIPTION,
     },
+    tags: {
+      type: [String],
+      required: true,
+    },
   },
   {
     timestamps: true,

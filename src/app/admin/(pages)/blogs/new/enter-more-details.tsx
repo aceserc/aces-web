@@ -1,5 +1,6 @@
 "use client";
 import SelectImage from "@/app/admin/_components/select-image";
+import AddTags from "@/components/reusable/add-tags";
 import InputWithErrorField from "@/components/reusable/input-with-error-field";
 import TextareaWithErrorField from "@/components/reusable/text-area-with-error-field";
 import { Button } from "@/components/ui/button";
@@ -11,10 +12,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
 import { handleAddBlogsService } from "@/services/blogs";
+import { handleGetTags } from "@/services/tags";
 import { BlogSchema, IBlogSchema } from "@/zod/blog.schema.";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -33,6 +36,12 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
   const queryClient = useQueryClient();
   const [thumbnail, setThumbnail] = useState<File | string | null>(null);
   const [isThumbnailUploadOpen, setIsThumbnailUploadOpen] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const { data: suggestedTags, isLoading: isSuggestedTagsLoading } = useQuery({
+    queryKey: ["tags", "blogs"],
+    queryFn: () => handleGetTags("blogs"),
+  });
 
   const {
     register,
@@ -52,8 +61,12 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
       toast.error("Please enter some content for the blog!");
       return;
     }
+    if (selectedTags.length < 1) {
+      toast.error("Please add some tags!");
+      return;
+    }
     console.log(data);
-    mutate({ ...data, thumbnail, body, images });
+    mutate({ ...data, thumbnail, body, images, tags: selectedTags });
   };
 
   const { mutate, isPending } = useMutation({
@@ -133,10 +146,21 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
               register={register}
               error={errors.metaDescription?.message}
             />
+            {isSuggestedTagsLoading ? (
+              <Skeleton className="w-full h-8" />
+            ) : (
+              <AddTags
+                selectedTags={selectedTags}
+                onChange={(tags) => setSelectedTags(tags)}
+                suggestions={suggestedTags?.tags || []}
+              />
+            )}
             <hr className="my-2 w-1/2 mx-auto" />
             <Button
               isLoading={isPending}
-              disabled={!thumbnail}
+              disabled={
+                !thumbnail || selectedTags.length < 1 || isSuggestedTagsLoading
+              }
               type="submit"
               className="ml-auto mt-6 min-w-36"
             >

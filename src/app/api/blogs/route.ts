@@ -11,6 +11,7 @@ import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import { NextRequest } from "next/server";
+import tagsModel from "@/models/tags.model";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
@@ -105,6 +106,12 @@ export const POST = applyMiddleware(
       ...body,
       authorId: user?.id,
     });
+
+    await tagsModel.findOneAndUpdate(
+      { name: "blogs" },
+      { $addToSet: { tags: { $each: body.tags } } }, // Use $addToSet with $each to add tags uniquely
+      { upsert: true }
+    );
 
     await blog.save();
     return sendNextResponse({
