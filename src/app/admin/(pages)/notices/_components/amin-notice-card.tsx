@@ -35,7 +35,7 @@ const AdminNoticeCard = ({
     onSuccess: (msg) => {
       toast.success(msg);
       queryClient.invalidateQueries({
-        queryKey: ["events"],
+        queryKey: ["notices"],
       });
       setIsOpen(false);
     },

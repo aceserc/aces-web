@@ -6,18 +6,22 @@ import { fetchData } from "@/services/fetch";
 import { ISponsorSchema } from "@/zod/sponsor.schema";
 import API from "@/services";
 import UpcomingEvents from "./_components/upcoming-events";
+import PopupDialog from "./_components/popup-dialog";
 
 const Home = async () => {
   const { sponsors } = await getData();
   return (
-    <div className="flex flex-col gap-24 xl:gap-32">
-      <div className="flex flex-col gap-4">
-        <Hero />
-        <Sponsors sponsors={sponsors?.data!} />
+    <>
+      <div className="flex flex-col gap-24 xl:gap-32">
+        <div className="flex flex-col gap-4">
+          <Hero />
+          <Sponsors sponsors={sponsors?.data!} />
+        </div>
+        <WhoAreWe />
+        <UpcomingEvents />
+        <PopupDialog />
       </div>
-      <WhoAreWe />
-      <UpcomingEvents />
-    </div>
+    </>
   );
 };
 
