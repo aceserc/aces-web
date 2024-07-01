@@ -15,6 +15,7 @@ const SecondaryBlogCard = (props: Props) => {
         <div className="flex gap-2">
           {props.tags.map((tag) => (
             <Link
+              key={tag}
               href={`/blogs/tag/${tag}`}
               className="inline-flex text-purple-500 bg-purple-400/[0.08] font-medium text-xs py-1 px-3 rounded-full mb-4 opacity-70"
             >
