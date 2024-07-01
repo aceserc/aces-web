@@ -28,6 +28,8 @@ const API = {
   tags: "/api/tags",
   blogTags: "/api/blogs/tags",
   blogAuthors: "/api/blogs/authors",
+  blogByTag: "/api/blogs/tags",
+  blogByAuthor: "/api/blogs/authors",
 } as const;
 
 export default API;

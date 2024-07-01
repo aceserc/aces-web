@@ -10,6 +10,7 @@ export const GET = applyMiddleware(
   connectToDBMiddleware,
   catchAsyncError(async (req: NextRequest) => {
     let onlyTags = req.nextUrl.searchParams.get("onlyAuthors");
+    const authorId = req.nextUrl.searchParams.get("authorId");
     if (onlyTags === "true") {
       let authors = await blogsModel.find().distinct("authorId");
 
@@ -31,9 +32,36 @@ export const GET = applyMiddleware(
         data: allAuthorDetails,
       });
     } else {
+      let blogs = await blogsModel
+        .find({ authorId })
+        .select("-body -__v -images");
+
+      if (!blogs) {
+        return sendNextResponse({
+          status: 404,
+          message: "No blogs found!",
+        });
+      }
+
+      // get all the authors of the blogs
+      const authorIds = blogs.map((blog) => blog.authorId);
+      const authors = await Promise.all(
+        authorIds.map((id) => clerkClient.users.getUser(id))
+      );
+
       return sendNextResponse({
-        status: 400,
-        message: "Invalid request",
+        status: 200,
+        data: blogs.map((blog, index) => ({
+          ...blog.toJSON(),
+          author: {
+            avatar: authors[index].imageUrl,
+            firstName: authors[index].firstName,
+            lastName: authors[index].lastName,
+            username: authors[index].username,
+            contact: authors[index].publicMetadata.contact,
+            id: authors[index].id,
+          },
+        })),
       });
     }
   })
