@@ -6,10 +6,14 @@ type Props = IHandleGetBlogsServiceResponse["blogs"][0];
 
 const BlogCard = (props: Props) => {
   return (
-    <div className="w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
-      <div className="lg:max-w-[238px] w-full">
-        <Link href={`/blogs/${props._id}`}>
-          <img className="w-full rounded-md" src={props.thumbnail} alt="hero" />
+    <div className="w-full flex h-full flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
+      <div className="lg:max-w-[238px] lg:max-h-[160px] w-full overflow-hidden flex items-center justify-center">
+        <Link href={`/blogs/${props._id}`} className="w-full h-full">
+          <img
+            className="w-full rounded-md object-cover object-center h-full"
+            src={props.thumbnail}
+            alt="hero"
+          />
         </Link>
       </div>
       <div className="w-full">
