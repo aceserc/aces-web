@@ -58,7 +58,8 @@ const BlogsPage = () => {
     [] // dependencies
   ); //callback to ensure that setSearchParams is not called on every render
 
-  const [filteredData, setFilteredData] = useState<IBlogsSchemaResponse[]>();
+  const [filteredData, setFilteredData] =
+    useState<IHandleGetBlogsServiceResponse["blogs"]>();
   const { data, isLoading } = useQuery<IHandleGetBlogsServiceResponse>({
     queryKey: ["blogs", queryParams],
     queryFn: () => handleGetBlogsService(queryParams),
