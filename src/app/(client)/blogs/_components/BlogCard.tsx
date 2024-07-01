@@ -6,32 +6,14 @@ type Props = IHandleGetBlogsServiceResponse["blogs"][0];
 
 const BlogCard = (props: Props) => {
   return (
-    <div className="flex gap-6 w-full bg-white shadow-md px-4 py-2 rounded-md">
-      <img
-        className="hidden sm:block w-40 h-auto object-cover object-center rounded-md"
-        src={props.thumbnail}
-        alt="thumbnail"
-      />
-      <div className="flex-grow w-full">
-        <div className="text-sm text-gray-500 flex justify-between items-center">
-          <span>
-            {new Date(props.createdAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </span>
-          <Link
-            href={`/blogs/author/${props.author.id}`}
-            className="hover:underline"
-          >
-            By {props.author.firstName} {props.author.lastName}
-          </Link>
-        </div>
-        <Link href={`/blogs/${props._id}`} className="hover:underline">
-          <h2 className="font-semibold text-lg">{props.title}</h2>
+    <div className="w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
+      <div className="lg:max-w-[238px] w-full">
+        <Link href={`/blogs/${props._id}`}>
+          <img className="w-full rounded-md" src={props.thumbnail} alt="hero" />
         </Link>
-        <div className="flex gap-2 flex-wrap">
+      </div>
+      <div className="w-full">
+        <div className="flex gap-2">
           {props.tags.map((tag) => (
             <Link
               key={tag}
@@ -42,10 +24,31 @@ const BlogCard = (props: Props) => {
             </Link>
           ))}
         </div>
+        <Link href={`/blogs/${props._id}`} className="hover:underline">
+          <h2 className="font-semibold text-base mb-3">{props.title}</h2>
+        </Link>
         <p className="text-sm text-gray-600">
           {props.metaDescription.substring(0, 150)}
           {props.metaDescription.length > 150 ? "..." : ""}
         </p>
+        <div className="flex items-center gap-2.5 mt-2">
+          <p className="text-sm">
+            <Link
+              href={`/blogs/author/${props.author.id}`}
+              className="hover:underline"
+            >
+              By {props.author.firstName} {props.author.lastName}
+            </Link>
+          </p>
+          <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />
+          <p className="text-sm">
+            {new Date(props.createdAt).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
+        </div>
       </div>
     </div>
   );
