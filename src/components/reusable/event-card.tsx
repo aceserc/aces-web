@@ -24,7 +24,7 @@ const EventCard = ({
   return (
     <Link
       href={`/events/${props._id}`}
-      className="min-w-full w-full sm:min-w-[400px] sm:w-[400px] snap-center"
+      className="min-w-full w-full snap-center"
     >
       <div
         className={cn(

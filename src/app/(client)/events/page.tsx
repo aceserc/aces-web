@@ -1,4 +1,5 @@
 "use client";
+import MainLayout from "@/components/layouts/main-layout";
 import EventCard from "@/components/reusable/event-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import useFetch from "@/hooks/use-fetch";
@@ -16,7 +17,7 @@ const Events = () => {
     isError,
   } = useFetch<
     IApiResponse<{
-      events: IEvents
+      events: IEvents;
     }>
   >(API.events);
 
@@ -27,18 +28,14 @@ const Events = () => {
     return null;
   }
   return (
-    <div className="flex flex-col gap-12 items-center justify-center wrapper rounded-lg pt-16">
-      <div className="flex flex-col items-center gap-2 justify-center ">
-        <h3 className="text-xl md:text-2xl font-bold self-start">Events</h3>
-        <hr className="w-1/2" />
-      </div>
-      <div className="flex mx-auto gap-6 flex-wrap justify-center xl:justify-normal w-full">
+    <MainLayout title="Events">
+      <div className="grid grid-cols-1 mx-auto gap-6 mt-12 w-full sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {isLoading ? (
           <>
-            <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md" />
-            <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md" />
-            <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md" />
-            <Skeleton className="w-full min-w-full sm:min-w-[400px] sm:w-[400px] h-[300px] rounded-md" />
+            <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+            <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+            <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+            <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
           </>
         ) : (
           events?.data?.events?.map((event, i) => (
@@ -46,7 +43,7 @@ const Events = () => {
           ))
         )}
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
