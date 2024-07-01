@@ -64,7 +64,7 @@ const Blogs = async () => {
 
 export default Blogs;
 
-export const getBlogs = async () => {
+const getBlogs = async () => {
   const res = await fetchData<IApiResponse<IHandleGetBlogsServiceResponse>>(
     `${API.blogs}?limit=0`
   );
