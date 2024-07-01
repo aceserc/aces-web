@@ -30,7 +30,7 @@ import {
   IHandleGetBlogsServiceResponse,
   handleGetBlogsService,
 } from "@/services/blogs";
-import AdminBlogCard from "./_components/amin-blog-card";
+import AdminBlogCard from "./_components/admin-blog-card";
 
 interface IDefaultQueryParam {
   page: number;

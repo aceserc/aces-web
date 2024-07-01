@@ -14,16 +14,14 @@ import {
 import { MdDeleteOutline } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 import {
-  IBlogsSchemaResponse,
+  IHandleGetBlogsServiceResponse,
   handleDeleteBlogService,
 } from "@/services/blogs";
 import BlogCard from "@/components/reusable/blog-card";
 
 const AdminBlogCard = ({
   ...props
-}: IBlogsSchemaResponse & {
-  className?: string;
-}) => {
+}: IHandleGetBlogsServiceResponse["blogs"][0]) => {
   const [isOpen, setIsOpen] = useState(false);
   const queryClient = useQueryClient();
 
@@ -71,7 +69,7 @@ const AdminBlogCard = ({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <BlogCard {...props} className="shadow-none" />
+      <BlogCard {...props} />
     </div>
   );
 };
