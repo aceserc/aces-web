@@ -55,9 +55,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                   </div>
                 </div>
               </div>
-              <main className="relative flex-1 overflow-y-auto bg-background focus:outline-none p-6 py-12">
-                {children}
-              </main>
+              <div className="bg-background w-full h-full">
+                <main className="relative flex-1 overflow-y-auto focus:outline-none wrapper py-12">
+                  {children}
+                </main>
+              </div>
             </div>
           </div>
         )}

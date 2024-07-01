@@ -164,7 +164,7 @@ const NoticesPage = () => {
             <Loading />
           </div>
         ) : filteredData && filteredData.length > 0 ? (
-          <div className="flex gap-4 flex-wrap">
+          <div className="grid mx-auto gap-6 grid-cols-3 w-full lg:max-w-[1100px] 2xl:grid-cols-4 2xl:max-w-[1500px]">
             {filteredData.map((notice) => (
               <AdminNoticeCard key={notice._id} {...notice} />
             ))}

@@ -41,7 +41,7 @@ const AdminNoticeCard = ({
     },
   });
   return (
-    <div className="relative group">
+    <div className="relative group w-full">
       {/* delete button */}
       <AlertDialog
         open={isOpen}

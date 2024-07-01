@@ -172,7 +172,7 @@ const NoticesPage = () => {
             <Loading />
           </div>
         ) : filteredData && filteredData.length > 0 ? (
-          <div className="flex gap-4 flex-wrap">
+          <div className=" gap-4 grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {filteredData.map((event) => (
               <AdminEventCard key={event._id} {...event} />
             ))}
