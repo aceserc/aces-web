@@ -40,6 +40,7 @@ export const GET = applyMiddleware(
             lastName: author.lastName,
             username: author.username,
             contact: author.publicMetadata.contact,
+            id: author.id,
           },
         },
       });
