@@ -8,7 +8,7 @@ type Props = {
 const MdRender = ({ md }: Props) => {
   const htmlContent = marked(md);
   return (
-    <div className="prose prose-p:mb-0 prose-p:mt-0 prose-p:w-full w-full min-w-fit prose-thead:text-left prose-hr:mt-3 prose-hr:mb-3 prose-a:text-blue-600">
+    <div className="prose prose-p:mb-0 prose-p:mt-0 prose-p:w-full w-full prose-thead:text-left prose-hr:mt-3 prose-hr:mb-3 prose-a:text-blue-600">
       <div
         className="w-full"
         dangerouslySetInnerHTML={{

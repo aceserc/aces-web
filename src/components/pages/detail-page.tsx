@@ -31,9 +31,13 @@ const DetailPage = (props: Props) => {
               </Link>
             ))}
         </div>
-        <h1 className="text-4xl font-bold mt-1">{props.title}</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold mt-1">
+          {props.title}
+        </h1>
         {props.metaDescription && (
-          <p className="max-w-3xl">{props.metaDescription}</p>
+          <p className="text-sm md:text-base max-w-3xl">
+            {props.metaDescription}
+          </p>
         )}
         {props.author && props.type === "blogs" && (
           <div className="flex items-center justify-center gap-4 mt-4">
@@ -76,7 +80,7 @@ const DetailPage = (props: Props) => {
         alt="thumbnail"
         className="w-full h-auto object-cover object-center rounded-xl mt-6 max-h-[550px] shadow-md"
       />
-      <div className="mt-12 w-full overflow-x-auto ">
+      <div className="mt-12 w-full overflow-x-auto max-w-3xl m-auto">
         <MdRender md={props.body} />
       </div>
     </section>
