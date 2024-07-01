@@ -164,7 +164,7 @@ const BlogsPage = () => {
             <Loading />
           </div>
         ) : filteredData && filteredData.length > 0 ? (
-          <div className="flex gap-4 flex-wrap">
+          <div className="grid grid-cols-2 gap-6">
             {filteredData.map((blog) => (
               <AdminBlogCard key={blog._id} {...blog} />
             ))}

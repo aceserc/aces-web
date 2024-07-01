@@ -1,67 +1,57 @@
+import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
 import Link from "next/link";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import { cn } from "@/helpers/cn";
-import { IBlogsSchemaResponse } from "@/services/blogs";
+import React from "react";
 
-const BlogCard = ({
-  className,
-  ...props
-}: IBlogsSchemaResponse & {
-  className?: string;
-}) => {
+type Props = IHandleGetBlogsServiceResponse["blogs"][0];
+
+const BlogCard = (props: Props) => {
   return (
-    <Link
-      href={`/blogs/${props._id}`}
-      className="min-w-full w-full sm:min-w-[400px] sm:w-[400px] snap-center"
-    >
-      <div
-        className={cn(
-          "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl overflow-hidden",
-          className
-        )}
-      >
-        <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] h-[200px] overflow-hidden">
-          <img
-            src={props.thumbnail}
-            alt={props.title}
-            className="rounded-t-md w-full h-full object-top object-cover"
-          />
+    <div className="w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
+      <div className="lg:max-w-[238px] w-full">
+        <Link href={`/blogs/${props._id}`}>
+          <img className="w-full rounded-md" src={props.thumbnail} alt="hero" />
+        </Link>
+      </div>
+      <div className="w-full">
+        <div className="flex gap-2">
+          {props.tags.map((tag) => (
+            <Link
+              key={tag}
+              href={`/blogs/tag/${tag}`}
+              className="inline-flex text-purple-500 bg-purple-400/[0.08] font-medium text-xs py-1 px-3 rounded-full mb-4 opacity-70"
+            >
+              {tag}
+            </Link>
+          ))}
         </div>
-        {/* title */}
-        <div className="px-4 pt-2 pb-5 flex flex-col gap-4">
-          <h3 className="text-lg font-bold truncate">{props.title}</h3>
-          <div className="flex justify-between text-muted-foreground">
-            <button className="flex gap-1 group">
-              <span>Know More</span>
-              <IoIosArrowRoundForward className="h-5 w-5 relative group-hover:left-2 transition-transform" />
-            </button>
-            <div className="flex gap-4 items-center">
-              {/* show month and day  */}
-              {/* 
-                One year passed: 2020 Dec
-                Old Date: 12 Dec, 2020
-                Else: 12 Dec
-                */}
-              <span>
-                {new Date(props.createdAt).toLocaleDateString([], {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </span>
-
-              <hr className="h-4 w-px bg-muted-foreground/40" />
-              {/* time format : 12:03 AM */}
-              <span className="uppercase">
-                {new Date(props.createdAt).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
-            </div>
-          </div>
+        <Link href={`/blogs/${props._id}`} className="hover:underline">
+          <h2 className="font-semibold text-base mb-3">{props.title}</h2>
+        </Link>
+        <p className="text-sm text-gray-600">
+          {props.metaDescription.substring(0, 150)}
+          {props.metaDescription.length > 150 ? "..." : ""}
+        </p>
+        <div className="flex items-center gap-2.5 mt-2">
+          <p className="text-sm">
+            <Link
+              href={`/blogs/author/${props.author.id}`}
+              className="hover:underline"
+            >
+              By {props.author.firstName} {props.author.lastName}
+            </Link>
+          </p>
+          <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />
+          <p className="text-sm">
+            {new Date(props.createdAt).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
+
 export default BlogCard;

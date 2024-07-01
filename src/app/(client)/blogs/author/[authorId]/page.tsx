@@ -4,9 +4,9 @@ import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
 import { fetchData } from "@/services/fetch";
 import { IApiResponse } from "@/types/response";
 import React from "react";
-import AllTagsAuthors from "../../_components/AllTagsAuthors";
+import AllTagsAuthors from "../../_components/all-tags-and-authors";
 import { IAuthor } from "@/types/author";
-import BlogCard from "../../_components/BlogCard";
+import BlogCard from "../../../../../components/reusable/blog-card";
 import Link from "next/link";
 
 type Props = {
