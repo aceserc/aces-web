@@ -5,7 +5,7 @@ import readingTime from "reading-time";
 import MdRender from "../reusable/md-renderer";
 
 type Props = {
-  type: "blogs";
+  type: "blogs" | "notices";
   tags?: Array<string>;
   title: string;
   metaDescription?: string;
@@ -66,6 +66,7 @@ const DetailPage = (props: Props) => {
                     month: "short",
                     day: "numeric",
                     year: "numeric",
+                    weekday: "short",
                   })}
                 </p>
                 <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />
@@ -74,11 +75,25 @@ const DetailPage = (props: Props) => {
             </div>
           </div>
         )}
+        {props.createdAt && props.type === "notices" && (
+          <div className="flex items-center gap-1.5 text-gray-600">
+            <p>
+              Published on{" "}
+              {new Date(props.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />
+            <p>{rTime.text}</p>
+          </div>
+        )}
       </div>
       <img
         src={props.thumbnail}
         alt="thumbnail"
-        className="w-full h-auto object-cover object-center rounded-xl mt-6 max-h-[550px] shadow-md"
+        className="w-full border border-gray-300 h-auto object-cover object-center rounded-xl mt-6 max-h-[550px] shadow-md"
       />
       <div className="mt-12 w-full overflow-x-auto max-w-3xl m-auto">
         <MdRender md={props.body} />

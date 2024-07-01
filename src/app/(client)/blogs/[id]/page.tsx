@@ -1,4 +1,5 @@
 import DetailPage from "@/components/pages/detail-page";
+import NotFound from "@/components/reusable/not-found";
 import API from "@/services";
 import { fetchData } from "@/services/fetch";
 import { IAuthor } from "@/types/author";
@@ -15,6 +16,9 @@ type Props = {
 
 const page = async ({ params: { id } }: Props) => {
   const data = await getBlogById(id);
+
+  if (!data || !data.blog) return <NotFound />;
+
   return (
     <div className="mt-12">
       <DetailPage
