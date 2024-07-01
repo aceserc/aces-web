@@ -23,6 +23,8 @@ import {
 } from "@/components/ui/popover";
 import { Check, ChevronsUpDown, Plus } from "lucide-react";
 import { cn } from "@/helpers/cn";
+import { TAG_REGEX } from "@/constants/regex.constants";
+import { toast } from "sonner";
 
 const AddTags = ({ onChange, selectedTags, suggestions }: Props) => {
   const [newSuggestions, setNewSuggestions] = useState(suggestions);
@@ -63,7 +65,19 @@ const AddTags = ({ onChange, selectedTags, suggestions }: Props) => {
             <CommandInput
               placeholder="Search or add tag..."
               value={inputValue}
-              onValueChange={(value) => setInputValue(value)}
+              onValueChange={(value) => {
+                if (!value) {
+                  setInputValue("");
+                  return;
+                }
+                if (TAG_REGEX.test(value)) {
+                  setInputValue(value);
+                } else {
+                  toast.error(
+                    "Only lowercase alphabets and hyphen are allowed."
+                  );
+                }
+              }}
             />
             <CommandList>
               <CommandEmpty>No framework found.</CommandEmpty>

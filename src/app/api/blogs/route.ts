@@ -57,7 +57,7 @@ export const GET = applyMiddleware(
 
     const pageNo = parseInt(req.nextUrl.searchParams.get("page") || "1");
     const limit = parseInt(req.nextUrl.searchParams.get("limit") || "9");
-    const sortBy = req.nextUrl.searchParams.get("sortBy") || "startDate";
+    const sortBy = req.nextUrl.searchParams.get("sortBy") || "createdAt";
     const order = req.nextUrl.searchParams.get("order") || "desc";
     // search by title case insensitive
     const search = req.nextUrl.searchParams.get("search") || "";
@@ -70,7 +70,7 @@ export const GET = applyMiddleware(
       .sort({ [sortBy]: order === "asc" ? 1 : -1 })
       .skip((pageNo - 1) * limit)
       .limit(limit)
-      .select("-body -__v -images -authorId");
+      .select("-body -__v -images");
 
     const totalBlogs = await blogsModel.countDocuments({
       title: { $regex: new RegExp(search, "i") },
@@ -79,10 +79,29 @@ export const GET = applyMiddleware(
     const remainingResults = Math.max(0, totalBlogs - pageNo * limit);
     const totalPages = Math.ceil(totalBlogs / limit);
 
+    // get all the authors of the blogs
+    const authorIds = blogs.map((blog) => blog.authorId);
+    const authors = await Promise.all(
+      authorIds.map((id) => clerkClient.users.getUser(id))
+    );
+
     return sendNextResponse({
       status: 200,
       data: {
-        blogs: blogs || [],
+        blogs: blogs.map((blog, index) => {
+          const author = authors[index];
+          return {
+            ...blog.toJSON(),
+            author: {
+              avatar: author.imageUrl,
+              firstName: author.firstName,
+              lastName: author.lastName,
+              username: author.username,
+              contact: author.publicMetadata.contact,
+              id: author.id,
+            },
+          };
+        }),
         pageNo: pageNo,
         results: blogs.length,
         total: totalBlogs,

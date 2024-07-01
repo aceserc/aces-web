@@ -65,6 +65,10 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
       toast.error("Please add some tags!");
       return;
     }
+    if (selectedTags.length > 3) {
+      toast.error("You can only add upto 3 tags!");
+      return;
+    }
     console.log(data);
     mutate({ ...data, thumbnail, body, images, tags: selectedTags });
   };

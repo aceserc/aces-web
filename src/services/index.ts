@@ -26,6 +26,8 @@ const API = {
   testimonials: "/api/testimonials",
   recentNotices: "/api/notices/recent",
   tags: "/api/tags",
+  blogTags: "/api/blogs/tags",
+  blogAuthors: "/api/blogs/authors",
 } as const;
 
 export default API;

@@ -3,6 +3,7 @@ import axios from "axios";
 import API from ".";
 import { ICreatedUpdatedAt } from "@/types/created-update";
 import { IBlogSchemaExtended } from "@/zod/blog.schema.";
+import { IAuthor } from "@/types/author";
 
 export const handleAddBlogsService = async (
   data: Omit<IBlogSchemaExtended, "thumbnail"> & { thumbnail: File | string }
@@ -39,7 +40,11 @@ export type IBlogsSchemaResponse = Omit<
 >;
 
 export type IHandleGetBlogsServiceResponse = {
-  blogs: IBlogsSchemaResponse[];
+  blogs: Array<
+    IBlogsSchemaResponse & {
+      author: IAuthor;
+    }
+  >;
   pageNo: number;
   results: number;
   total: number;
