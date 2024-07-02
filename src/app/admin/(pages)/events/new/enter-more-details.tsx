@@ -20,10 +20,11 @@ import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiUploadCloud } from "react-icons/fi";
 import { toast } from "sonner";
+import { IFile } from "@/zod/file.schema";
 
 type Props = {
   disableTrigger?: boolean;
-  images: string[];
+  images: IFile[];
   body: string;
 };
 

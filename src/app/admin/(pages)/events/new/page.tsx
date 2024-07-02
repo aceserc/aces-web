@@ -27,7 +27,7 @@ const AddNewNotice = () => {
         />
       </div>
       <EnterMoreDetails
-        images={usedImages}
+        images={usedImages.map((image) => ({ url: image }))}
         body={body}
         disableTrigger={body.length < MARKDOWN_BODY_MIN_LENGTH}
       />

@@ -31,7 +31,7 @@ const MemberCard = (props: Props) => {
           )}
         >
           <img
-            src={props.avatar}
+            src={props.avatar?.url}
             alt="user"
             className="w-full h-full object-cover object-center"
           />
