@@ -8,6 +8,7 @@ import { CiCalendarDate, CiLocationOn } from "react-icons/ci";
 import { resolveDuration } from "@/helpers/date-fns";
 import { IoIosTimer } from "react-icons/io";
 import { cn } from "@/helpers/cn";
+import { IFile } from "@/zod/file.schema";
 
 type Props = {
   type: "blogs" | "notices" | "events";
@@ -17,7 +18,7 @@ type Props = {
   author?: IAuthor;
   createdAt: string;
   body: string;
-  thumbnail: string;
+  thumbnail: IFile;
   startTime?: string;
   endDate?: string;
   endTime?: string;
@@ -181,7 +182,7 @@ const DetailPage = (props: Props) => {
         )}
       </div>
       <img
-        src={props.thumbnail}
+        src={props.thumbnail.url}
         alt="thumbnail"
         className="w-full border border-gray-300 h-auto object-cover object-center rounded-xl mt-6 max-h-[550px] shadow-md"
       />

@@ -19,13 +19,20 @@ const Blogs = async () => {
   return (
     <MainLayout className="max-w-7xl">
       <div className="flex flex-col gap-6 md:gap-12 xl:gap-24">
+        {blogs.length === 0 && (
+          <div className="flex items-center justify-center flex-col gap-3">
+            <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold mt-12">
+              No blogs available
+            </h1>
+          </div>
+        )}
         <div className="flex flex-col gap-y-4 md:gap-y-7 xl:gap-y-9">
           {/* first blog */}
-          <PrimaryBlogCard {...blogs[0]} />
+          {blogs.length > 0 && <PrimaryBlogCard {...blogs[0]} />}
           {/* second and third blogs */}
           <div className="grid gap-x-7 gap-y-9 grid-cols-1 lg:grid-cols-2">
-            <SecondaryBlogCard {...blogs[1]} />
-            <SecondaryBlogCard {...blogs[2]} />
+            {blogs.length > 1 && <SecondaryBlogCard {...blogs[1]} />}
+            {blogs.length > 2 && <SecondaryBlogCard {...blogs[2]} />}
           </div>
         </div>
         {blogs.length > 3 && (
