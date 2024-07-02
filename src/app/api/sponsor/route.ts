@@ -7,6 +7,7 @@ import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import catchAsyncError from "@/middlewares/error-handler.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
+import { deleteFiles } from "@/helpers/upload-file";
 
 export const POST = applyMiddleware(
   isAdminMiddleware,
@@ -56,11 +57,14 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    await sponsorModel.findByIdAndDelete(sponsorId);
+    const sponsor = await sponsorModel.findByIdAndDelete(sponsorId);
+
+    deleteFiles(sponsor?.logo?.fileId);
 
     return sendNextResponse({
       status: 200,
       message: "Sponsor deleted successfully!",
+      data: sponsor || {},
     });
   })
 );

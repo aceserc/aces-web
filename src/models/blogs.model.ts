@@ -5,6 +5,7 @@ import {
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import mongoose from "mongoose";
+import { FileSchema } from "./file.schema";
 
 const BlogSchema = new mongoose.Schema(
   {
@@ -18,12 +19,9 @@ const BlogSchema = new mongoose.Schema(
       required: true,
       minLength: MARKDOWN_BODY_MIN_LENGTH,
     },
-    thumbnail: {
-      type: String,
-      required: true,
-    },
+    thumbnail: FileSchema,
     images: {
-      type: [String],
+      type: [FileSchema],
     },
     authorId: {
       type: String,

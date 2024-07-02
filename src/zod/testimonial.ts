@@ -5,6 +5,7 @@ import {
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import { z } from "zod";
+import { FileSchema } from "./file.schema";
 
 export const TestimonialSchema = z.object({
   body: z.string().min(MIN_LENGTH_CONTACT_BODY, "Body is too short"),
@@ -20,7 +21,7 @@ export const TestimonialSchema = z.object({
     .string()
     .min(MIN_LENGTH_TITLE, "Endorser position is too short")
     .optional(),
-  endorserAvatar: z.string().url("Avatar URL is not a valid URL").optional(),
+  endorserAvatar: FileSchema.optional(),
 });
 
 export type ITestimonialSchema = z.infer<typeof TestimonialSchema>;

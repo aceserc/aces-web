@@ -44,13 +44,12 @@ export const handleCreateTestimonialService = async (
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.endorserAvatar, "testimonials").then((res) => {
-      const { url } = res;
       axios
         .post(
           API.testimonials,
           {
             ...data,
-            endorserAvatar: url,
+            endorserAvatar: res,
           },
           {
             withCredentials: true,

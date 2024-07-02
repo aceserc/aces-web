@@ -10,11 +10,10 @@ export const handleAddNoticesService = async (
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.thumbnail, "notices")
       .then((res) => {
-        const { url } = res;
         axios
           .post(
             API.notices,
-            { ...data, thumbnail: url },
+            { ...data, thumbnail: res },
             { withCredentials: true }
           )
           .then((res) => {
@@ -69,7 +68,9 @@ export const handleGetNoticesService = async (
   });
 };
 
-export const handleDeleteNoticeService = async (id: string): Promise<string> => {
+export const handleDeleteNoticeService = async (
+  id: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     axios
       .delete(`${API.notices}?id=${id}`, { withCredentials: true })

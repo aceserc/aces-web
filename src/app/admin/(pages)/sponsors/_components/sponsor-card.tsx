@@ -73,7 +73,7 @@ const SponsorCard = (props: Props) => {
         className="flex items-center justify-center w-full h-full"
       >
         <img
-          src={props.logo}
+          src={props.logo.url}
           alt={props.name}
           width={60}
           height={60}

@@ -10,11 +10,10 @@ export const handleAddEventsService = async (
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.thumbnail, "events")
       .then((res) => {
-        const { url } = res;
         axios
           .post(
             API.events,
-            { ...data, thumbnail: url },
+            { ...data, thumbnail: res },
             { withCredentials: true }
           )
           .then((res) => {

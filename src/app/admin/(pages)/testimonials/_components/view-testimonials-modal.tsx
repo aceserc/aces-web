@@ -56,6 +56,13 @@ const ViewTestimonialModal = (props: Props) => {
             <DialogTitle>By: {props.endorserName}</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col gap-1 p-2">
+            {props.endorserAvatar && (
+              <img
+                src={props.endorserAvatar.url}
+                alt={props.endorserName}
+                className="w-20 h-20 rounded-full object-cover object-center"
+              />
+            )}
             {props.endorserPosition && (
               <div className="flex gap-2">
                 <span className="font-medium">Position:</span>

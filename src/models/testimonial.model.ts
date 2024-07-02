@@ -5,6 +5,7 @@ import {
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import mongoose from "mongoose";
+import { FileSchema } from "./file.schema";
 
 const TestimonialSchema = new mongoose.Schema(
   {
@@ -28,10 +29,7 @@ const TestimonialSchema = new mongoose.Schema(
       required: false,
       minLength: MIN_LENGTH_TITLE,
     },
-    endorserAvatar: {
-      type: String,
-      required: false,
-    },
+    endorserAvatar: FileSchema,
   },
   {
     timestamps: true,

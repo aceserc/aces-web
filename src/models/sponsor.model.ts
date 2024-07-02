@@ -1,5 +1,6 @@
 import { MAX_LENGTH_NAME, MIN_LENGTH_NAME } from "@/constants/schema.constants";
 import mongoose from "mongoose";
+import { FileSchema } from "./file.schema";
 
 const SponsorSchema = new mongoose.Schema(
   {
@@ -12,10 +13,7 @@ const SponsorSchema = new mongoose.Schema(
     website: {
       type: String,
     },
-    logo: {
-      type: String,
-      required: true,
-    },
+    logo: FileSchema,
     isActive: {
       type: Boolean,
       default: false,

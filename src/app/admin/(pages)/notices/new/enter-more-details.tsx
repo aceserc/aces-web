@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { handleAddNoticesService } from "@/services/notice";
+import { IFile } from "@/zod/file.schema";
 import { INoticesSchema, NoticesSchema } from "@/zod/notices.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -22,7 +23,7 @@ import { toast } from "sonner";
 
 type Props = {
   disableTrigger?: boolean;
-  images: string[];
+  images: IFile[];
   body: string;
 };
 

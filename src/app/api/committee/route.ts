@@ -1,3 +1,4 @@
+import { deleteFiles } from "@/helpers/upload-file";
 import { applyMiddleware } from "@/middlewares/apply.middleware";
 import { isAdminMiddleware } from "@/middlewares/auth.middleware";
 import { connectToDBMiddleware } from "@/middlewares/db.middleware";
@@ -51,7 +52,8 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    await committeesModel.findByIdAndDelete(id);
+    const member = await committeesModel.findByIdAndDelete(id);
+    deleteFiles(member.avatar.fileId);
 
     return sendNextResponse({
       status: 200,

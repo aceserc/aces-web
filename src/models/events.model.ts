@@ -1,10 +1,9 @@
 import {
   MARKDOWN_BODY_MIN_LENGTH,
-  MAX_LENGTH_META_DESCRIPTION,
-  MIN_LENGTH_META_DESCRIPTION,
   MIN_LENGTH_TITLE,
 } from "@/constants/schema.constants";
 import mongoose from "mongoose";
+import { FileSchema } from "./file.schema";
 
 const EventsSchema = new mongoose.Schema(
   {
@@ -18,12 +17,9 @@ const EventsSchema = new mongoose.Schema(
       required: true,
       minLength: MARKDOWN_BODY_MIN_LENGTH,
     },
-    thumbnail: {
-      type: String,
-      required: true,
-    },
+    thumbnail: FileSchema,
     images: {
-      type: [String],
+      type: [FileSchema],
     },
     startDate: {
       type: Date,

@@ -1,6 +1,5 @@
-import { uploadFile } from "@/helpers/upload-file";
+import { deleteFiles, uploadFile } from "@/helpers/upload-file";
 import { NextRequest } from "next/server";
-import { deleteImageFromCloudinary } from "@/helpers/delete-image";
 import { applyMiddleware } from "@/middlewares/apply.middleware";
 import { isAdminMiddleware } from "@/middlewares/auth.middleware";
 import { connectToDBMiddleware } from "@/middlewares/db.middleware";
@@ -45,7 +44,7 @@ export const DELETE = applyMiddleware(
   isAdminMiddleware,
   connectToDBMiddleware,
   catchAsyncError(async (req: NextRequest) => {
-    const { publicId } = await req.json();
+    const { publicId } = await req.json(); // publicId can be a string or an array of strings
 
     if (!publicId) {
       return sendNextResponse({
@@ -54,18 +53,8 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    let publicIds: string[] = [];
-    if (typeof publicId === "string") {
-      publicIds = [publicId];
-    } else {
-      publicIds = publicId;
-    }
-
     try {
-      for (const publicId of publicIds) {
-        if (!publicId) continue;
-        await deleteImageFromCloudinary(publicId);
-      }
+      await deleteFiles(publicId);
       return sendNextResponse({
         status: 200,
         message: "Files deleted successfully!",

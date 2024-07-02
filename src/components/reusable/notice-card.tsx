@@ -18,7 +18,7 @@ const NoticeCard = ({
     >
       <div className="w-full sm:min-w-[350px] max-w-full sm:w-[350px] h-[200px] xs:h-[280px] overflow-hidden shadow-inner flex items-center justify-center">
         <img
-          src={props.thumbnail}
+          src={props.thumbnail.url}
           alt={props.title}
           className="rounded-t-md w-full h-full object-top object-cover"
         />

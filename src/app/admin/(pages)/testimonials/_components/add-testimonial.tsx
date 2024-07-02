@@ -15,7 +15,7 @@ import { ITestimonialSchema, TestimonialSchema } from "@/zod/testimonial";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiUploadCloud } from "react-icons/fi";
 import { GoPlus } from "react-icons/go";
@@ -57,6 +57,10 @@ const AddTestimonial = () => {
       setAvatar(null);
     },
   });
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   return (
     <>

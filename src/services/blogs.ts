@@ -11,11 +11,10 @@ export const handleAddBlogsService = async (
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.thumbnail, "blogs")
       .then((res) => {
-        const { url } = res;
         axios
           .post(
             API.blogs,
-            { ...data, thumbnail: url },
+            { ...data, thumbnail: res },
             { withCredentials: true }
           )
           .then((res) => {

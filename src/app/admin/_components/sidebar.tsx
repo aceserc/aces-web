@@ -22,21 +22,25 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/sponsors",
     icon: GoSponsorTiers,
     label: "Sponsors",
+    adminOnly: true,
   },
   {
     href: "/admin/notices",
     icon: AiOutlineNotification,
     label: "Notices",
+    adminOnly: true,
   },
   {
     href: "/admin/committee",
     icon: GoPeople,
     label: "Committee",
+    adminOnly: true,
   },
   {
     href: "/admin/events",
     icon: CiCalendarDate,
     label: "Events",
+    adminOnly: true,
   },
   {
     href: "/admin/blogs",
@@ -53,6 +57,7 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/testimonials",
     icon: LiaQuoteLeftSolid,
     label: "Testimonials",
+    adminOnly: true,
   },
 ];
 

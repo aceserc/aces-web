@@ -1,5 +1,6 @@
 import { MAX_LENGTH_NAME, MIN_LENGTH_NAME } from "@/constants/schema.constants";
 import { z } from "zod";
+import { FileSchema } from "./file.schema";
 
 export const CommitteeSchema = z.object({
   name: z
@@ -11,7 +12,7 @@ export const CommitteeSchema = z.object({
 });
 
 export const CommitteeMemberSchemaWithAvatar = CommitteeSchema.extend({
-  avatar: z.string(),
+  avatar: FileSchema,
 });
 
 export type ICommitteeSchema = z.infer<typeof CommitteeSchema> & {

@@ -12,6 +12,8 @@ import { sendNextResponse } from "@/middlewares/send-response";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import { NextRequest } from "next/server";
 import tagsModel from "@/models/tags.model";
+import { deleteFiles } from "@/helpers/upload-file";
+import { IFile } from "@/zod/file.schema";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
@@ -154,7 +156,11 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    await blogsModel.findByIdAndDelete(id);
+    const blog = await blogsModel.findByIdAndDelete(id);
+    deleteFiles([
+      blog.thumbnail.fileId,
+      ...blog.images.map((i: IFile) => i.fileId),
+    ]);
 
     return sendNextResponse({
       status: 200,

@@ -12,11 +12,10 @@ export const handleAddCommitteeService = async (
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.avatar, "committees")
       .then((res) => {
-        const { url } = res;
         axios
           .post(
             API.committee,
-            { ...data, avatar: url },
+            { ...data, avatar: res },
             { withCredentials: true }
           )
           .then((res) => {

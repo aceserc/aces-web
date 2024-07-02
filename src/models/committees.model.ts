@@ -1,5 +1,6 @@
 import { MAX_LENGTH_NAME, MIN_LENGTH_NAME } from "@/constants/schema.constants";
 import mongoose from "mongoose";
+import { FileSchema } from "./file.schema";
 
 const CommitteeMemberModel = new mongoose.Schema(
   {
@@ -13,10 +14,7 @@ const CommitteeMemberModel = new mongoose.Schema(
       type: String,
       required: true,
     },
-    avatar: {
-      type: String,
-      required: true,
-    },
+    avatar: FileSchema,
     socialLinks: {
       type: [String],
     },

@@ -7,6 +7,8 @@ import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import catchAsyncError from "@/middlewares/error-handler.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
+import { deleteFiles } from "@/helpers/upload-file";
+import { IFile } from "@/zod/file.schema";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
@@ -106,7 +108,11 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    await noticeModel.findByIdAndDelete(noticeId);
+    const notice = await noticeModel.findByIdAndDelete(noticeId);
+    deleteFiles([
+      notice?.thumbnail?.fileId,
+      ...notice?.images.map((image: IFile) => image.fileId),
+    ]);
 
     return sendNextResponse({
       status: 200,

@@ -7,6 +7,7 @@ import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import catchAsyncError from "@/middlewares/error-handler.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
+import { deleteFiles } from "@/helpers/upload-file";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
@@ -89,7 +90,8 @@ export const DELETE = applyMiddleware(
       });
     }
 
-    await testimonialModel.findByIdAndDelete(testimonialId);
+    const t = await testimonialModel.findByIdAndDelete(testimonialId);
+    deleteFiles(t.endorserAvatar.fileId);
 
     return sendNextResponse({
       status: 200,

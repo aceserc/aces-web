@@ -10,7 +10,7 @@ const SecondaryBlogCard = (props: Props) => {
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
             className="w-full h-full rounded-md object-cover object-center"
-            src={props.thumbnail}
+            src={props.thumbnail.url}
             alt="hero"
           />
         </Link>

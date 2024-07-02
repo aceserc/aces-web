@@ -1,5 +1,6 @@
 "use client";
 import { handleUploadFileService } from "@/services/file";
+import { IFile } from "@/zod/file.schema";
 import {
   toolbarPlugin,
   KitchenSinkToolbar,
@@ -54,7 +55,7 @@ type PluginsProps = {
   diffMarkdown: string;
   imageAutocompleteSuggestions: string[];
   imageFolder: string;
-  updateUsedImagesList?: (image: string) => void;
+  updateUsedImagesList?: (image: IFile) => void;
 };
 const allPlugins = ({
   diffMarkdown,
@@ -81,7 +82,9 @@ const allPlugins = ({
       }
 
       const res = await handleUploadFileService(img, imageFolder);
-      if (updateUsedImagesList) updateUsedImagesList(res.url!);
+
+      // @ts-ignore
+      if (updateUsedImagesList) updateUsedImagesList(res);
 
       if (submitButton) {
         submitButton.disabled = false;
@@ -115,7 +118,7 @@ type Props = {
   value: string;
   imageFolder?: string;
   usedImagesList?: string[];
-  updateUsedImagesList?: (image: string) => void;
+  updateUsedImagesList?: (image: IFile) => void;
 };
 
 export default function MarkDownEditor({

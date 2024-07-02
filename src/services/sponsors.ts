@@ -9,9 +9,8 @@ export const handleAddSponsorService = async (
   return new Promise((resolve, reject) => {
     handleUploadFileService(data.logo, "sponsors")
       .then((res) => {
-        const { url } = res;
         axios
-          .post(API.sponsor, { ...data, logo: url }, { withCredentials: true })
+          .post(API.sponsor, { ...data, logo: res }, { withCredentials: true })
           .then((res) => {
             resolve(res.data?.message ?? "Sponsor added successfully");
           })
