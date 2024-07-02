@@ -28,7 +28,7 @@ const Sponsors = async ({ sponsors }: Props) => {
         {sponsors.map((sponsor, i) => (
           <Link href={sponsor.website ?? "#"} key={i} target="_blank">
             <img
-              src={sponsor.logo}
+              src={sponsor.logo.url}
               alt={sponsor.name}
               height={50}
               width={50}
