@@ -1,6 +1,7 @@
 "use client";
 
 import MainLayout from "@/components/layouts/main-layout";
+import SomeErrorOccurred from "@/components/pages/some-error-occured";
 import NoticeCard from "@/components/reusable/notice-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import useFetch from "@/hooks/use-fetch";
@@ -22,11 +23,8 @@ const Events = () => {
     }>
   >(API.notices);
 
-  if (
-    isError ||
-    (!isLoading && (!notices || notices?.data?.notices?.length === 0))
-  ) {
-    return null;
+  if (isError) {
+    return <SomeErrorOccurred />;
   }
   return (
     <MainLayout title="Notices">
@@ -38,6 +36,10 @@ const Events = () => {
             <Skeleton className="xs:h-[386px] h-[300px]" />
             <Skeleton className="xs:h-[386px] h-[300px]" />
           </>
+        ) : notices?.data?.notices?.length === 0 ? (
+          <div className="text-center text-2xl font-medium mt-10  col-span-4 flex items-center justify-center w-full">
+            <span> No notices found</span>
+          </div>
         ) : (
           notices?.data?.notices?.map((event, i) => (
             <NoticeCard key={i} {...event} />

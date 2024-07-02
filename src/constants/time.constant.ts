@@ -1,1 +1,1 @@
-export const NEXT_REVALIDATE_TIME = 300 as const; // 5 minutes
+export const NEXT_REVALIDATE_TIME = 60 as const; // 1 minute

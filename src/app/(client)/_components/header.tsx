@@ -9,6 +9,7 @@ import Link from "next/link";
 import { RxCross2 } from "react-icons/rx";
 import { RiMenuFill } from "react-icons/ri";
 import { useRef } from "react";
+import { usePathname } from "next/navigation";
 
 const HEADER_LINKS = [
   {
@@ -40,6 +41,7 @@ const HEADER_LINKS = [
 const Header = () => {
   const isScrolled = useScrollPosition();
   const mobileNavRef = useRef<HTMLDivElement>();
+  const pathname = usePathname();
 
   return (
     <>
@@ -58,7 +60,11 @@ const Header = () => {
               <Link
                 key={label}
                 href={href}
-                className="hover:text-foreground underline-offset-1"
+                className={cn(
+                  "underline-offset-4 hover:text-red-500 transition-colors",
+                  pathname.split("/")[1] === href.split("/")[1] &&
+                    "text-red-500 underline"
+                )}
               >
                 {label}
               </Link>
@@ -124,7 +130,11 @@ const Header = () => {
               }}
               key={label}
               href={href}
-              className="hover:text-foreground underline-offset-1"
+              className={cn(
+                "hover:text-foreground underline-offset-4",
+                pathname.split("/")[1] === href.split("/")[1] &&
+                  "text-red-500 underline"
+              )}
             >
               {label}
             </Link>

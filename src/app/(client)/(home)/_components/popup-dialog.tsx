@@ -80,7 +80,7 @@ const PopupDialog = () => {
     setIsOpen(false);
   };
 
-  if (!data?.data || !isSuccess) return null;
+  if (!data?.data || data?.data?.length === 0 || !isSuccess) return null;
   return (
     <Dialog
       open={isOpen}
