@@ -30,6 +30,7 @@ const API = {
   blogAuthors: "/api/blogs/authors",
   blogByTag: "/api/blogs/tags",
   blogByAuthor: "/api/blogs/authors",
+  gallery: "/api/gallery",
 } as const;
 
 export default API;

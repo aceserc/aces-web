@@ -11,8 +11,15 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { useUser } from "@clerk/nextjs";
 import { ADMIN_ROLES } from "@/constants/roles.constants";
 import { LiaQuoteLeftSolid } from "react-icons/lia";
+import { PiImagesSquareLight } from "react-icons/pi";
+import { IconType } from "react-icons/lib";
 
-export const ADMIN_SIDEBAR_ITEMS = [
+export const ADMIN_SIDEBAR_ITEMS: {
+  href: string;
+  icon: IconType;
+  label: string;
+  adminOnly?: boolean;
+}[] = [
   {
     href: "/admin",
     icon: LuLayoutDashboard,
@@ -46,6 +53,12 @@ export const ADMIN_SIDEBAR_ITEMS = [
     href: "/admin/blogs",
     icon: CiTextAlignLeft,
     label: "Blogs",
+  },
+  {
+    href: "/admin/gallery",
+    icon: PiImagesSquareLight,
+    label: "Gallery",
+    adminOnly: true,
   },
   {
     href: "/admin/contacts",

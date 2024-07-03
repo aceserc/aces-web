@@ -80,7 +80,7 @@ const AddTags = ({ onChange, selectedTags, suggestions }: Props) => {
               }}
             />
             <CommandList>
-              <CommandEmpty>No framework found.</CommandEmpty>
+              <CommandEmpty>No tags found.</CommandEmpty>
               <CommandGroup>
                 {newSuggestions
                   .map((s) => ({
