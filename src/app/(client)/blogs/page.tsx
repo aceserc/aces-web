@@ -21,9 +21,7 @@ const Blogs = async () => {
       <div className="flex flex-col gap-6 md:gap-12 xl:gap-24">
         {blogs.length === 0 && (
           <div className="flex items-center justify-center flex-col gap-3">
-            <h1 className="text-2xl md:text-3xl xl:text-4xl font-bold mt-12">
-              No blogs available
-            </h1>
+            <h1 className="text-lg md:text-2xl mt-20">No blogs available</h1>
           </div>
         )}
         <div className="flex flex-col gap-y-4 md:gap-y-7 xl:gap-y-9">

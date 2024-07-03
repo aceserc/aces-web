@@ -4,24 +4,15 @@ import MainLayout from "@/components/layouts/main-layout";
 import SomeErrorOccurred from "@/components/pages/some-error-occured";
 import NoticeCard from "@/components/reusable/notice-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import useFetch from "@/hooks/use-fetch";
-import API from "@/services";
-import { INoticesSchemaResponse } from "@/services/notice";
-import { IApiResponse } from "@/types/response";
+import { handleGetNoticesService } from "@/services/notice";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-type INotices = INoticesSchemaResponse[];
-
 const Events = () => {
-  const {
-    data: notices,
-    isLoading,
-    isError,
-  } = useFetch<
-    IApiResponse<{
-      notices: INotices;
-    }>
-  >(API.notices);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["notices"],
+    queryFn: () => handleGetNoticesService(),
+  });
 
   if (isError) {
     return <SomeErrorOccurred />;
@@ -36,14 +27,12 @@ const Events = () => {
             <Skeleton className="xs:h-[386px] h-[300px]" />
             <Skeleton className="xs:h-[386px] h-[300px]" />
           </>
-        ) : notices?.data?.notices?.length === 0 ? (
-          <div className="text-center text-2xl font-medium mt-10  col-span-4 flex items-center justify-center w-full">
+        ) : data?.notices?.length === 0 ? (
+          <div className="text-center text-lg md:text-2xl mt-16  col-span-4 flex items-center justify-center w-full">
             <span> No notices found</span>
           </div>
         ) : (
-          notices?.data?.notices?.map((event, i) => (
-            <NoticeCard key={i} {...event} />
-          ))
+          data?.notices?.map((n, i) => <NoticeCard key={i} {...n} />)
         )}
       </div>
     </MainLayout>

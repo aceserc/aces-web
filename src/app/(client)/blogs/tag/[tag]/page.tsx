@@ -50,7 +50,7 @@ const BlogByTag = async ({ params: { tag } }: Props) => {
           {/* all remaining blogs */}
           <div className="flex flex-col gap-6 w-full">
             {blogs.length === 0 ? (
-              <div className="text-center text-2xl font-semibold mt-10">
+              <div className="text-center text-lg md:text-xl mt-12">
                 No blogs found with tag:{" "}
                 <span className="text-primary">{tag}</span>
               </div>
