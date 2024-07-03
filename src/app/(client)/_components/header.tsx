@@ -25,16 +25,20 @@ const HEADER_LINKS = [
     href: "/notices",
   },
   {
-    label: "Blogs",
-    href: "/blogs",
-  },
-  {
     label: "Events",
     href: "/events",
   },
   {
+    label: "Blogs",
+    href: "/blogs",
+  },
+  {
     label: "Committee",
     href: "/committee",
+  },
+  {
+    label: "Gallery",
+    href: "/gallery",
   },
 ];
 

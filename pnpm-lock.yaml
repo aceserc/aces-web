@@ -140,6 +140,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.3)
+      yet-another-react-lightbox:
+        specifier: ^3.21.0
+        version: 3.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -3900,6 +3903,13 @@ packages:
     resolution: {integrity: sha512-sntgmxj8o7DE7g/Qi60cqpLBA3HG3STcDA0kO+WfB05jEKhZMbY7umNm2rBpQvsmZ16/lPXCJGW2672dgOUkrg==}
     engines: {node: '>= 14'}
     hasBin: true
+
+  yet-another-react-lightbox@3.21.0:
+    resolution: {integrity: sha512-mBDnQ4dttseCxCUz1ECnnlbnD5+HfYB9LUmAd9mXyL91CwP+GYiSxk4pTMCfl6MLGyJ6aLvJKrbRP26Fbg6UrA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   yjs@13.6.15:
     resolution: {integrity: sha512-moFv4uNYhp8BFxIk3AkpoAnnjts7gwdpiG8RtyFiKbMtxKCS0zVZ5wPaaGpwC3V2N/K8TK8MwtSI3+WO9CHWjQ==}
@@ -8585,6 +8595,11 @@ snapshots:
   yallist@4.0.0: {}
 
   yaml@2.4.3: {}
+
+  yet-another-react-lightbox@3.21.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   yjs@13.6.15:
     dependencies:

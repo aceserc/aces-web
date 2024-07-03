@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import TopLoader from "@/components/reusable/top-loader";
 import { Toaster } from "sonner";
+import ReactQueryProvider from "@/providers/react-query-providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,24 +28,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClerkProvider
-          appearance={{
-            elements: {
-              footer: "hidden",
-            },
-          }}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
+        <ReactQueryProvider>
+          <ClerkProvider
+            appearance={{
+              elements: {
+                footer: "hidden",
+              },
+            }}
           >
-            {children}
-            <TopLoader />
-          </ThemeProvider>
-          <Toaster richColors position="top-right" />
-        </ClerkProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <TopLoader />
+            </ThemeProvider>
+            <Toaster richColors position="top-right" />
+          </ClerkProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
