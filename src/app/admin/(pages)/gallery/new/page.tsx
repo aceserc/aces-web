@@ -28,7 +28,7 @@ const NewImages = () => {
               </div>
             ) : (
               images.map((i, index) => (
-                <div className="w-full h-fit relative group">
+                <div key={index} className="w-full h-fit relative group">
                   <button
                     onClick={() => {
                       // filter this image
