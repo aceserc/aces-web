@@ -3,15 +3,33 @@
 import MainLayout from "@/components/layouts/main-layout";
 import SomeErrorOccurred from "@/components/pages/some-error-occured";
 import NoticeCard from "@/components/reusable/notice-card";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { handleGetNoticesService } from "@/services/notice";
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 
 const Events = () => {
-  const { data, isLoading, isError } = useQuery({
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["notices"],
-    queryFn: () => handleGetNoticesService(),
+    queryFn: ({ pageParam }) =>
+      handleGetNoticesService({
+        page: pageParam,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.resultsOnNextPage > 0) {
+        return lastPage.pageNo + 1;
+      }
+      return undefined;
+    },
   });
 
   if (isError) {
@@ -27,14 +45,28 @@ const Events = () => {
             <Skeleton className="xs:h-[386px] h-[300px]" />
             <Skeleton className="xs:h-[386px] h-[300px]" />
           </>
-        ) : data?.notices?.length === 0 ? (
+        ) : data?.pages[0]?.notices?.length === 0 ? (
           <div className="text-center text-lg md:text-2xl mt-16  col-span-4 flex items-center justify-center w-full">
             <span> No notices found</span>
           </div>
         ) : (
-          data?.notices?.map((n, i) => <NoticeCard key={i} {...n} />)
+          data?.pages
+            .map((page) => page.notices)
+            .flat()
+            .map((n, i) => <NoticeCard key={i} {...n} />)
         )}
       </div>
+      {!isLoading && hasNextPage && (
+        <div className="w-full flex items-center justify-center mt-9 sm:mt-12">
+          <Button
+            isLoading={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+            variant="default"
+          >
+            Load More...
+          </Button>
+        </div>
+      )}
     </MainLayout>
   );
 };

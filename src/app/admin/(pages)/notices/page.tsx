@@ -34,7 +34,7 @@ import { ADMIN_ROLES } from "@/constants/roles.constants";
 
 interface IDefaultQueryParam {
   page: number;
-  sortBy: "startDate" | "endDate" | "createdAt" | "updatedAt" | "title";
+  sortBy: "createdAt" | "updatedAt" | "title";
   order: "asc" | "desc";
   search: string;
 }
