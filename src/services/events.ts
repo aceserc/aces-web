@@ -83,3 +83,21 @@ export const handleDeleteEventService = async (id: string): Promise<string> => {
       });
   });
 };
+
+export const handleGetUpcomingEventsService = async (): Promise<
+  IEventsSchemaResponse[]
+> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(API.upcomingEvents, { withCredentials: true })
+      .then((res) => {
+        resolve(res.data?.data);
+      })
+      .catch((err) => {
+        reject(
+          err?.response?.data?.message ??
+            "Failed to fetch upcoming events. Please try again later."
+        );
+      });
+  });
+};

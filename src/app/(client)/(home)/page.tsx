@@ -7,11 +7,13 @@ import API from "@/services";
 import UpcomingEvents from "./_components/upcoming-events";
 import PopupDialog from "./_components/popup-dialog";
 import About from "./_components/about";
+import Gallery from "./_components/gallery";
+import RecentBlogs from "./_components/recent-blogs";
 
 const Home = async () => {
   const { sponsors } = await getData();
   return (
-    <>
+    <div className="flex flex-col gap-5 sm:gap-7 md:gap-9 xl:gap-12">
       <section id="hero" className="flex flex-col gap-24 xl:gap-32">
         <div className="flex flex-col gap-4">
           <Hero />
@@ -19,8 +21,11 @@ const Home = async () => {
         </div>
       </section>
       <About />
+      <UpcomingEvents />
+      <Gallery />
+      <RecentBlogs />
       <PopupDialog />
-    </>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ const SecondaryBlogCard = (props: Props) => {
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
             className="w-full h-full rounded-md object-cover object-center"
-            src={props.thumbnail.url}
+            src={props.thumbnail?.url}
             alt="hero"
           />
         </Link>
@@ -33,10 +33,10 @@ const SecondaryBlogCard = (props: Props) => {
         <div className="flex items-center gap-2.5">
           <p className="text-sm">
             <Link
-              href={`/blogs/author/${props.author.id}`}
+              href={`/blogs/author/${props.author?.id}`}
               className="hover:underline"
             >
-              By {props.author.firstName} {props.author.lastName}
+              By {props.author?.firstName} {props.author?.lastName}
             </Link>
           </p>
           <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />

@@ -3,7 +3,6 @@ import { IEventsSchemaResponse } from "@/services/events";
 import Link from "next/link";
 import { CiLocationOn } from "react-icons/ci";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import { AiOutlineLaptop } from "react-icons/ai";
 import {
   Tooltip,
   TooltipContent,
@@ -22,10 +21,7 @@ const EventCard = ({
 }) => {
   const resoledDate = resolveDate(props.startDate);
   return (
-    <Link
-      href={`/events/${props._id}`}
-      className="min-w-full w-full snap-center"
-    >
+    <Link href={`/events/${props._id}`} className="min-w-full w-full">
       <div
         className={cn(
           "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl overflow-hidden",
@@ -71,11 +67,13 @@ const EventCard = ({
         </div>
         {/* title */}
         <div className="px-4 pt-2 pb-5 flex flex-col gap-4">
-          <h3 className="text-lg font-bold truncate">{props.title}</h3>
-          <div className="flex justify-between text-muted-foreground">
+          <h3 className="text-base md:text-lg font-bold truncate">
+            {props.title}
+          </h3>
+          <div className="flex text-xs md:text-base xl:text-base justify-between text-muted-foreground">
             <button className="flex gap-1 group">
               <span>Know More</span>
-              <IoIosArrowRoundForward className="h-5 w-5 relative group-hover:left-2 transition-transform" />
+              <IoIosArrowRoundForward className="h-3 w-3 md:h-5 md:w-5 relative group-hover:left-2 transition-transform" />
             </button>
             <div className="flex gap-4 items-center">
               {/* show month and day  */}

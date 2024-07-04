@@ -11,7 +11,7 @@ const BlogCard = (props: Props) => {
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
             className="w-full rounded-md object-cover object-center h-full"
-            src={props.thumbnail.url}
+            src={props?.thumbnail?.url}
             alt="hero"
           />
         </Link>
@@ -32,16 +32,16 @@ const BlogCard = (props: Props) => {
           <h2 className="font-semibold text-base mb-3">{props.title}</h2>
         </Link>
         <p className="text-sm text-gray-600">
-          {props.metaDescription.substring(0, 150)}
-          {props.metaDescription.length > 150 ? "..." : ""}
+          {props.metaDescription?.substring(0, 150)}
+          {props.metaDescription?.length > 150 ? "..." : ""}
         </p>
         <div className="flex items-center gap-2.5 mt-2">
           <p className="text-sm">
             <Link
-              href={`/blogs/author/${props.author.id}`}
+              href={`/blogs/author/${props.author?.id}`}
               className="hover:underline"
             >
-              By {props.author.firstName} {props.author.lastName}
+              By {props.author?.firstName} {props.author?.lastName}
             </Link>
           </p>
           <span className="flex w-[3px] h-[3px] rounded-full bg-gray-300" />
