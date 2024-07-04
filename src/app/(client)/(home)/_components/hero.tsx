@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import heroBlob from "@/assets/svg/hero-blob.svg";
 import heroShade from "@/assets/svg/hero-shade.svg";
 import FloatingHeroIcons from "./floating-hero-icons";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -13,7 +14,7 @@ const Hero = () => {
         <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper pt-20 lg:pt-9">
           <div className="max-w-lg xl:max-w-xl flex items-center lg:items-start flex-col gap-5 md:gap-7">
             <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium">
-              Association of computer engineering students
+              Association of computer engineering students🔥
             </h3>
             <h1 className="text-3xl xs:text-4xl md:text-5xl xl:text-7xl font-bold">
               Transform Your Tech Journey with ACES
@@ -24,7 +25,9 @@ const Hero = () => {
               and professional excellence.
             </p>
             <div className="flex gap-5 mt-3 lg:mt-0">
-              <Button>Find Out More</Button>
+              <Link href="/about">
+                <Button>Find Out More</Button>
+              </Link>
               <Button
                 variant="secondary"
                 className="hover:shadow-[20px_20px_60px_#d9d9d9,-20px_-20px_60px_#ffffff] transition-colors"

@@ -13,8 +13,8 @@ const Sponsors = async ({ sponsors }: Props) => {
     return null;
   }
   return (
-    <div
-      id="sponsors"
+    <section
+      id="trusted-by"
       className="flex flex-col gap-4 items-center justify-center wrapper min-h-16"
     >
       <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
@@ -30,14 +30,12 @@ const Sponsors = async ({ sponsors }: Props) => {
             <img
               src={sponsor.logo.url}
               alt={sponsor.name}
-              height={50}
-              width={50}
-              className="mr-9 md:mr-20 object-contain object-center aspect-square"
+              className="mr-9 md:mr-20 object-contain object-center aspect-square h-16 md:h-20 rounded-md"
             />
           </Link>
         ))}
       </Marquee>
-    </div>
+    </section>
   );
 };
 
