@@ -2,9 +2,12 @@ import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
 import Link from "next/link";
 import React from "react";
 
-type Props = IHandleGetBlogsServiceResponse["blogs"][0];
+type Props = IHandleGetBlogsServiceResponse["blogs"][0] & {
+  lessDescription?: boolean;
+};
 
 const BlogCard = (props: Props) => {
+  const descriptionLength = props.lessDescription ? 80 : 150;
   return (
     <div className="w-full flex h-full flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
       <div className="lg:max-w-[238px] lg:max-h-[160px] w-full overflow-hidden flex items-center justify-center">
@@ -32,8 +35,8 @@ const BlogCard = (props: Props) => {
           <h2 className="font-semibold text-base mb-3">{props.title}</h2>
         </Link>
         <p className="text-sm text-gray-600">
-          {props.metaDescription?.substring(0, 150)}
-          {props.metaDescription?.length > 150 ? "..." : ""}
+          {props.metaDescription?.substring(0, descriptionLength)}
+          {props.metaDescription?.length > descriptionLength ? "..." : ""}
         </p>
         <div className="flex items-center gap-2.5 mt-2">
           <p className="text-sm">

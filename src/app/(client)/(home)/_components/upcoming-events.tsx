@@ -6,6 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Section from "./section";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const UpcomingEvents = () => {
   const {
     data: upcomingEvents,
@@ -25,21 +33,29 @@ const UpcomingEvents = () => {
   return (
     <Section id="upcoming-events" title="Upcoming Events">
       <div className="w-full overflow-hidden">
-        <div className="flex gap-6 w-full overflow-x-auto snap-x snap-mandatory">
-          {isLoading ? (
-            <>
-              <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
-              <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
-              <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
-              <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
-            </>
-          ) : (
-            upcomingEvents?.map((event, i) => (
-              <div key={i} className="w-[80%] snap-center max-w-[380px]">
-                <EventCard {...event} />
-              </div>
-            ))
-          )}
+        <div className="flex gap-6 w-full">
+          <Carousel className="w-full flex flex-col gap-4">
+            <CarouselContent>
+              {isLoading ? (
+                <>
+                  <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+                  <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+                  <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+                  <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
+                </>
+              ) : (
+                upcomingEvents?.map((event, i) => (
+                  <CarouselItem key={i} className="w-full max-w-[380px]">
+                    <EventCard {...event} />
+                  </CarouselItem>
+                ))
+              )}
+            </CarouselContent>
+            <div className="flex gap-4 ml-auto">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+          </Carousel>
         </div>
       </div>
     </Section>
