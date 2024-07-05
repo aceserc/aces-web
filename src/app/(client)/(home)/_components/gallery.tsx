@@ -11,6 +11,7 @@ const Gallery = async () => {
   const images = data?.data?.images;
 
   if (!images) return null;
+  if (images && images.length < 6) return null;
   return (
     <Section id="gallery" title="Gallery">
       <div className="hidden lg:grid grid-cols-6 grid-rows-6 gap-4 max-h-[600px] max-w-7xl">
