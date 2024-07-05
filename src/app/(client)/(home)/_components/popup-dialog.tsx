@@ -101,6 +101,9 @@ const PopupDialog = () => {
             <img
               src={data?.data[activeNoticeIndex].thumbnail}
               alt={data?.data[activeNoticeIndex].title}
+              onError={(e) => {
+                e.currentTarget.src = "placeholder.png";
+              }}
               className="w-full h-full object-contain max-h-[300px] object-center"
             />
           </Link>
