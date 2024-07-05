@@ -55,8 +55,8 @@ function App() {
               .map((page) => page.images)
               .flat()
               .map((image) => ({
-                src: image.image.url,
-                title: image.tag,
+                src: image?.image?.url,
+                title: image?.tag,
               }))!
           }
           onClick={(currentIndex) => setIndex(currentIndex)}
@@ -76,8 +76,8 @@ function App() {
               .map((page) => page.images)
               .flat()
               .map((image) => ({
-                src: image.image.url,
-                title: image.tag,
+                src: image?.image?.url,
+                title: image?.tag,
               }))!
           }
         />

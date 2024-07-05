@@ -64,7 +64,7 @@ const SectionLayout = (props: Props) => {
           >
             <Image
               src={image}
-              className="h-full w-full object-center object-contain"
+              className="h-full w-full object-center object-contain mix-blend-multiply"
               alt=""
             />
           </div>
