@@ -27,11 +27,11 @@ const Testimonials = async () => {
   return (
     <>
       <Section id="testimonials" title="What others say about us?">
-        <Carousel className="w-full flex flex-col gap-4 px-4">
+        <Carousel className="w-full flex flex-col gap-4">
           <CarouselContent className="p-2 gap-x-2 md:gap-x-4">
             {data?.map((t, i) => (
               <CarouselItem key={i} className="max-w-fit h-full">
-                <div className="relative rounded-lg h-full shadow max-w-sm px-8 py-4 md:px-10 md:py-10 bg-gray-100/40 leading-snug gap-4 flex flex-col justify-between">
+                <div className="relative rounded-lg h-full shadow max-w-sm px-8 py-4 md:px-10 md:py-10 bg-white leading-snug gap-4 flex flex-col justify-between">
                   <div className="-ml-4">
                     <FaQuoteLeft className="h-6 w-6 text-indigo-400" />
                   </div>

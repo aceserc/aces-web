@@ -24,8 +24,8 @@ const RecentBlogs = async () => {
     <Section id="recent-blogs" title="Recent Blogs">
       <div className="w-full overflow-hidden">
         <div className="flex w-full">
-          <Carousel className="w-full flex flex-col gap-4 px-4">
-            <CarouselContent>
+          <Carousel className="w-full flex flex-col gap-4">
+            <CarouselContent className="px-2">
               {blogs?.map((b, i) => (
                 <CarouselItem
                   key={i}

@@ -9,7 +9,7 @@ type Props = IHandleGetBlogsServiceResponse["blogs"][0] & {
 const BlogCard = (props: Props) => {
   const descriptionLength = props.lessDescription ? 80 : 150;
   return (
-    <div className="w-full flex h-full flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
+    <div className="w-full flex h-full flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl px-3.5 py-3 sm:px-5 sm:py-5">
       <div className="lg:max-w-[238px] lg:max-h-[160px] w-full overflow-hidden flex items-center justify-center">
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
