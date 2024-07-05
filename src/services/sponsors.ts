@@ -2,6 +2,7 @@ import { ISponsorSchema } from "@/zod/sponsor.schema";
 import { handleUploadFileService } from "./file";
 import axios from "axios";
 import API from ".";
+import { fetchData } from "./fetch";
 
 export const handleAddSponsorService = async (
   data: Omit<ISponsorSchema, "logo"> & { logo: File | string }
@@ -59,4 +60,11 @@ export const handleGetSponsorsService = async (): Promise<ISponsorSchema[]> => {
         );
       });
   });
+};
+
+export const getSponsors = async (isActive: boolean) => {
+  const data = await fetchData<{
+    data: ISponsorSchema[];
+  }>(`${API.sponsor}?isActive=${isActive}`);
+  return data?.data ?? [];
 };

@@ -29,6 +29,21 @@ export const GET = applyMiddleware(
   connectToDBMiddleware,
   catchAsyncError(async (req: NextRequest) => {
     const search = req.nextUrl.searchParams.get("search") || ""; // search by title case insensitive
+    const isActive = req.nextUrl.searchParams.get("isActive") || "";
+
+    if (isActive) {
+      const sponsors = await sponsorModel
+        .find({
+          isActive: isActive === "true",
+        })
+        .sort({ createdAt: -1 })
+        .select("-__v");
+
+      return sendNextResponse({
+        status: 200,
+        data: sponsors || [],
+      });
+    }
 
     // find  relevant sponsors
     const sponsors = await sponsorModel

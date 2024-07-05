@@ -32,7 +32,7 @@ const UpcomingEvents = () => {
   }
   return (
     <Section id="upcoming-events" title="Upcoming Events">
-      <div className="w-full overflow-hidden">
+      <div className="w-full">
         <div className="flex gap-6 w-full">
           <Carousel className="w-full flex flex-col gap-4">
             <CarouselContent>
@@ -44,7 +44,7 @@ const UpcomingEvents = () => {
                   <Skeleton className="w-full min-w-full h-[300px] rounded-md" />
                 </>
               ) : (
-                upcomingEvents?.map((event, i) => (
+                upcomingEvents?.map(({ location, ...event }, i) => (
                   <CarouselItem key={i} className="w-full max-w-[380px] py-2">
                     <EventCard {...event} />
                   </CarouselItem>

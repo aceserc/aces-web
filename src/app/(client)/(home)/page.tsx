@@ -10,15 +10,15 @@ import About from "./_components/about";
 import Gallery from "./_components/gallery";
 import RecentBlogs from "./_components/recent-blogs";
 import Testimonials from "@/components/reusable/testimonials";
+import CurrentSponsors from "./_components/current-sponsors";
 
-const Home = async () => {
-  const { sponsors } = await getData();
+const Home = () => {
   return (
     <div className="flex flex-col gap-5 sm:gap-7 md:gap-9 xl:gap-12">
       <section id="hero" className="flex flex-col gap-24 xl:gap-32">
         <div className="flex flex-col gap-4">
           <Hero />
-          <Sponsors sponsors={sponsors?.data!} />
+          <Sponsors />
         </div>
       </section>
       <About />
@@ -26,19 +26,10 @@ const Home = async () => {
       <Gallery />
       <RecentBlogs />
       <Testimonials />
+      <CurrentSponsors />
       <PopupDialog />
     </div>
   );
-};
-
-const getData = async () => {
-  const sponsors = await fetchData<{ data: ISponsorSchema[] }>(
-    `${API.sponsor}?isActive=false`
-  );
-
-  return {
-    sponsors,
-  };
 };
 
 export default Home;

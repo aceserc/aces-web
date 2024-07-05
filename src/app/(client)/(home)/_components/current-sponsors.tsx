@@ -5,8 +5,8 @@ import Link from "next/link";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const Sponsors = async () => {
-  const sponsors = await getSponsors(false);
+const CurrentSponsors = async () => {
+  const sponsors = await getSponsors(true);
 
   if (!sponsors || sponsors.length === 0) {
     return null;
@@ -16,7 +16,7 @@ const Sponsors = async () => {
       id="trusted-by"
       className="flex flex-col gap-4 items-center justify-center wrapper min-h-16"
     >
-      <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
+      <h3 className="text-xl md:text-2xl font-bold">Our Sponsors</h3>
       <Marquee
         gradient={true}
         gradientWidth={80}
@@ -38,4 +38,4 @@ const Sponsors = async () => {
   );
 };
 
-export default Sponsors;
+export default CurrentSponsors;
