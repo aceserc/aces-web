@@ -74,7 +74,7 @@ const ContactForm = () => {
         <textarea
           {...register("body")}
           placeholder="Hi there!..."
-          className="w-full px-3 py-1.5 text-base min-h-28 rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform"
+          className="w-full  bg-transparent px-3 py-1.5 text-base min-h-28 rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform"
         />
         {errors.body && <FormErrorLine error={errors.body.message} />}
       </div>

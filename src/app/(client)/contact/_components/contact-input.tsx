@@ -33,7 +33,7 @@ const ContactInput = React.forwardRef<HTMLInputElement, Props>(
         <input
           {...register(inputKey)}
           className={twMerge(
-            "w-full px-3 py-1.5 text-base rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform",
+            "w-full px-3 py-1.5 bg-transparent text-base rounded-md outline-none border focus:border-indigo-500 group-hover:scale-[1.005] transition-transform",
             className
           )}
           {...props}

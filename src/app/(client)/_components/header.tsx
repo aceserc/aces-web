@@ -51,8 +51,8 @@ const Header = () => {
     <>
       <header
         className={cn(
-          "flex z-50 mt-4 rounded-lg justify-between items-center fixed left-1/2 -translate-x-1/2 w-[95%] h-14 py-6 p-7 lg:px-12 transition-colors",
-          isScrolled && "bg-background/50 backdrop-blur-md"
+          "flex z-50 mt-4 rounded-lg justify-between items-center fixed left-1/2 -translate-x-1/2 w-[95%] h-14 py-6 p-7 lg:px-12 xl:py-9 transition-colors",
+          isScrolled && "bg-primary/5 backdrop-blur-md"
         )}
       >
         <Link href="/" className="font-sub-heading text-2xl font-bold">
