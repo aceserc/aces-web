@@ -3,6 +3,7 @@ import API from ".";
 import { ICreatedUpdatedAt } from "@/types/created-update";
 import { ITestimonialSchema } from "@/zod/testimonial";
 import { handleUploadFileService } from "./file";
+import { fetchData } from "./fetch";
 
 export type ITestimonialSchemaResponse = ITestimonialSchema & ICreatedUpdatedAt;
 
@@ -86,4 +87,11 @@ export const handleDeleteTestimonialService = async (
         );
       });
   });
+};
+
+export const getAllTestimonials = async () => {
+  const data = await fetchData<{
+    data: IHandleGetTestimonialServiceResponse;
+  }>(`${API.testimonials}?limit=0`);
+  return data?.data?.testimonials;
 };

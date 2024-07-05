@@ -1,5 +1,5 @@
 import React from "react";
-import Section from "./section";
+import Section from "../../../../components/reusable/section";
 import { fetchData } from "@/services/fetch";
 import API from "@/services";
 import Image from "next/image";

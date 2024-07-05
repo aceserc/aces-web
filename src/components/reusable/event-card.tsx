@@ -24,7 +24,7 @@ const EventCard = ({
     <Link href={`/events/${props._id}`} className="min-w-full w-full">
       <div
         className={cn(
-          "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl overflow-hidden",
+          "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-md overflow-hidden",
           className
         )}
       >

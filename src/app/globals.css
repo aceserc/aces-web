@@ -61,7 +61,7 @@
     @apply border-border font-body;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#f6f8fb] text-foreground;
   }
   h1,
   h2 {

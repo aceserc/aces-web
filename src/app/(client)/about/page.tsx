@@ -8,6 +8,7 @@ import { ACHIEVEMENTS, WHAT_WE_DO } from "@/constants/about.constants";
 import { MdHexagon } from "react-icons/md";
 import achievements from "@/assets/images/achievements.jpg";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import Testimonials from "@/components/reusable/testimonials";
 
 const AboutPage = () => {
   return (
@@ -118,6 +119,7 @@ const AboutPage = () => {
           </div>
         </div>
       </SectionLayout>
+      <Testimonials />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import PopupDialog from "./_components/popup-dialog";
 import About from "./_components/about";
 import Gallery from "./_components/gallery";
 import RecentBlogs from "./_components/recent-blogs";
+import Testimonials from "@/components/reusable/testimonials";
 
 const Home = async () => {
   const { sponsors } = await getData();
@@ -24,6 +25,7 @@ const Home = async () => {
       <UpcomingEvents />
       <Gallery />
       <RecentBlogs />
+      <Testimonials />
       <PopupDialog />
     </div>
   );

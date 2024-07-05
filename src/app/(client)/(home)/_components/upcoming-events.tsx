@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { handleGetUpcomingEventsService } from "@/services/events";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import Section from "./section";
+import Section from "../../../../components/reusable/section";
 
 import {
   Carousel,
@@ -45,7 +45,7 @@ const UpcomingEvents = () => {
                 </>
               ) : (
                 upcomingEvents?.map((event, i) => (
-                  <CarouselItem key={i} className="w-full max-w-[380px]">
+                  <CarouselItem key={i} className="w-full max-w-[380px] py-2">
                     <EventCard {...event} />
                   </CarouselItem>
                 ))
