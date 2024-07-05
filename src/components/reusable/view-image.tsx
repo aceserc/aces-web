@@ -19,7 +19,15 @@ const ViewImage: React.FC<ViewImageProps> = ({ src, alt, ...props }) => {
   const [index, setIndex] = useState<number>(-1);
   return (
     <>
-      <img src={src} alt={alt} onClick={() => setIndex(1)} {...props} />
+      <img
+        src={src}
+        alt={alt}
+        onClick={() => setIndex(1)}
+        {...props}
+        onError={(e) => {
+          e.currentTarget.src = "/placeholder.png";
+        }}
+      />
 
       <Lightbox
         plugins={[Captions, Download, Fullscreen, Zoom, Thumbnails]}

@@ -12,13 +12,16 @@ const NoticeCard = ({
   return (
     <div
       className={cn(
-        "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-xl overflow-hidden group sm:max-w-[350px]",
+        "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-lg overflow-hidden group sm:max-w-[350px]",
         className
       )}
     >
       <div className="w-full sm:min-w-[350px] max-w-full sm:w-[350px] h-[200px] xs:h-[280px] overflow-hidden shadow-inner flex items-center justify-center">
         <img
           src={props.thumbnail.url}
+          onError={(e) => {
+            e.currentTarget.src = "placeholder.png";
+          }}
           alt={props.title}
           className="rounded-t-md w-full h-full object-top object-cover"
         />

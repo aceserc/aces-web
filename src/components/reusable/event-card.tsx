@@ -1,5 +1,5 @@
-import getEventStatus from "@/helpers/get-event-status";
 import { IEventsSchemaResponse } from "@/services/events";
+import placeholder from "@/assets/images/placeholder.png";
 import Link from "next/link";
 import { CiLocationOn } from "react-icons/ci";
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -60,7 +60,10 @@ const EventCard = ({
         </Badge>
         <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] h-[200px] overflow-hidden">
           <img
-            src={props.thumbnail.url}
+            src={props.thumbnail?.url ?? placeholder}
+            onError={(e) => {
+              e.currentTarget.src = "placeholder.png";
+            }}
             alt={props.title}
             className="rounded-t-md w-full h-full object-top object-cover"
           />
