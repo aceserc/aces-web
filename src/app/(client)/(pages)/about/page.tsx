@@ -55,22 +55,24 @@ const AboutPage = () => {
             </div>
             <div className="flex-grow opacity-80 text-sm xs:text-base lg:text-lg flex flex-col gap-4 sm:gap-6">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Architecto qui corrupti praesentium magni dolorem, vel ex amet
-                saepe voluptates vitae alias dolore repudiandae necessitatibus
-                eaque earum velit, aspernatur fugiat dignissimos.
+                ACES, a community of Computer Engineering students established
+                in 2070 B.S at IOE Purwanchal Campus, Dharan, is dedicated to
+                the all-round development of students. Our mission is to build a
+                strong foundation for their careers by providing various
+                opportunities for growth and learning.
               </p>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Architecto qui corrupti praesentium magni dolorem, vel ex amet
-                saepe voluptates vitae alias dolore repudiandae necessitatibus
-                eaque earum velit, aspernatur fugiat dignissimos.
+                We offer comprehensive training programs for students from the
+                1st to the 4th year of their Bachelor&apos;s in Computer
+                Engineering. These programs cover a wide range of topics and are
+                designed to enhance both technical and soft skills.
               </p>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Architecto qui corrupti praesentium magni dolorem, vel ex amet
-                saepe voluptates vitae alias dolore repudiandae necessitatibus
-                eaque earum velit, aspernatur fugiat dignissimos.
+                Additionally, we organize various competitions to encourage
+                skill development and knowledge enhancement. Our events, such as
+                national-level software hackathons and the annual Techfest,
+                provide platforms for students to showcase their talents and
+                gain valuable experience.
               </p>
             </div>
           </div>

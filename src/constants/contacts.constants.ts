@@ -9,17 +9,17 @@ export const CONTACT_LINKS = {
   },
   facebook: {
     type: "facebook",
-    href: "https://www.facebook.com/aces",
+    href: "https://www.facebook.com/acesdharan/",
     icon: ICONS.facebook,
   },
   github: {
     type: "github",
-    href: "https://github.com/",
+    href: "https://github.com/aces-erc",
     icon: ICONS.github,
   },
   instagram: {
     type: "instagram",
-    href: "https://www.instagram.com/aces/",
+    href: "https://www.instagram.com/aces_erc/",
     icon: ICONS.instagram,
   },
 };
