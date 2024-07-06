@@ -1,12 +1,10 @@
 import { getSponsors } from "@/services/sponsors";
-import { ISponsorSchema } from "@/zod/sponsor.schema";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
-const CurrentSponsors = async () => {
-  const sponsors = await getSponsors(true);
+const Sponsors = async () => {
+  const sponsors = await getSponsors(false);
 
   if (!sponsors || sponsors.length === 0) {
     return null;
@@ -16,12 +14,13 @@ const CurrentSponsors = async () => {
       id="trusted-by"
       className="flex flex-col gap-4 items-center justify-center wrapper min-h-16"
     >
-      <h3 className="text-xl md:text-2xl font-bold">Our Sponsors</h3>
+      <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
       <Marquee
         gradient={true}
         gradientWidth={80}
         autoFill={true}
         pauseOnHover={true}
+        gradientColor="#f6f8fb"
         className="flex items-center justify-center"
       >
         {sponsors.map((sponsor, i) => (
@@ -38,4 +37,4 @@ const CurrentSponsors = async () => {
   );
 };
 
-export default CurrentSponsors;
+export default Sponsors;

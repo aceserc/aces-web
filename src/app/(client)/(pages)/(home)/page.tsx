@@ -1,9 +1,6 @@
 import React from "react";
 import Hero from "./_components/hero";
 import Sponsors from "./_components/sponsors";
-import { fetchData } from "@/services/fetch";
-import { ISponsorSchema } from "@/zod/sponsor.schema";
-import API from "@/services";
 import UpcomingEvents from "./_components/upcoming-events";
 import PopupDialog from "./_components/popup-dialog";
 import About from "./_components/about";

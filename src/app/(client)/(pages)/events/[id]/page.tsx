@@ -1,9 +1,7 @@
-import ImageViewer from "@/components/reusable/image-viewer";
 import NotFound from "@/components/reusable/not-found";
 import { IEventsSchemaResponse } from "@/services/events";
 import { fetchData } from "@/services/fetch";
 import React from "react";
-import { marked } from "marked";
 import DetailPage from "@/components/pages/detail-page";
 
 type IEvents = {

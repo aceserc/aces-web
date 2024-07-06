@@ -5,10 +5,9 @@ import { fetchData } from "@/services/fetch";
 import { IApiResponse } from "@/types/response";
 import SecondaryBlogCard from "./_components/secondary-blog-card";
 import PrimaryBlogCard from "./_components/primary-blog-card";
-import Link from "next/link";
 import { IAuthor } from "@/types/author";
-import BlogCard from "../../../components/reusable/blog-card";
 import AllTagsAuthors from "./_components/all-tags-and-authors";
+import BlogCard from "@/components/reusable/blog-card";
 
 const Blogs = async () => {
   const blogs = await getBlogs();

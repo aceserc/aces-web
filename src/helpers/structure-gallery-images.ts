@@ -1,4 +1,4 @@
-import { IImage } from "@/app/(client)/gallery/_components/images";
+import { IImage } from "@/app/(client)/(pages)/gallery/_components/images";
 
 export const structureGalleryImages = (images: IImage[]) => {
   let galleryImages = [];

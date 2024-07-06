@@ -1,8 +1,8 @@
 import React from "react";
-import Section from "../../../../components/reusable/section";
 import { fetchData } from "@/services/fetch";
 import API from "@/services";
 import Image from "next/image";
+import Section from "@/components/reusable/section";
 
 const Gallery = async () => {
   const data = await fetchData<{

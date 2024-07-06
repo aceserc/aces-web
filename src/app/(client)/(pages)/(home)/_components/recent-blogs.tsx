@@ -1,9 +1,7 @@
 import React from "react";
-import Section from "../../../../components/reusable/section";
 import { fetchData } from "@/services/fetch";
 import API from "@/services";
 import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
-import SecondaryBlogCard from "../../blogs/_components/secondary-blog-card";
 import {
   Carousel,
   CarouselContent,
@@ -12,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import BlogCard from "@/components/reusable/blog-card";
+import Section from "@/components/reusable/section";
 const RecentBlogs = async () => {
   const data = await fetchData<{
     data: IHandleGetBlogsServiceResponse;

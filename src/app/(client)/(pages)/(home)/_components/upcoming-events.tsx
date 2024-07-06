@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { handleGetUpcomingEventsService } from "@/services/events";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import Section from "../../../../components/reusable/section";
 
 import {
   Carousel,
@@ -13,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Section from "@/components/reusable/section";
 
 const UpcomingEvents = () => {
   const {
