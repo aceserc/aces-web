@@ -99,12 +99,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://aces.ioepc.edu.np/",
-    images: [
-      {
-        url: "/preview.png",
-        alt: "ACES - Association of Computer Engineering Students",
-      },
-    ],
+    images: "/preview.png",
     countryName: "Nepal",
     title: "ACES - Association of Computer Engineering Students",
     emails: ["aces@ioepc.edu.np"],
@@ -126,4 +121,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+
+  metadataBase: new URL("https://aces-ioepc.vercel.app"),
 };
