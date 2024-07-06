@@ -4,22 +4,22 @@ import { ICONS } from "@/assets/icons/svg-repo";
 export const CONTACT_LINKS = {
   discord: {
     type: "discord",
-    href: "https://discord.gg/FQcXxqmE",
+    href: "https://discord.gg/7ZS45YACRZ",
     icon: ICONS.discord,
   },
   facebook: {
     type: "facebook",
-    href: "https://www.facebook.com/aces",
+    href: "https://www.facebook.com/acesdharan/",
     icon: ICONS.facebook,
   },
   github: {
     type: "github",
-    href: "https://github.com/",
+    href: "https://github.com/aces-erc",
     icon: ICONS.github,
   },
   instagram: {
     type: "instagram",
-    href: "https://www.instagram.com/aces/",
+    href: "https://www.instagram.com/aces_erc/",
     icon: ICONS.instagram,
   },
 };

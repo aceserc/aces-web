@@ -15,9 +15,9 @@ const About = () => {
         What we do?
       </h3>
       <p className="text-center text-sm sm:text-base max-w-2xl text-gray-600">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam ratione
-        accusantium molestias animi omnis, ab tempore possimus velit a maxime
-        eveniet esse tempora aperiam ipsum minus aliquam atque provident enim.
+        At ACES, IOE Purwanchal Campus, Dharan, we provide training, organize
+        competitions, host podcasts, and conduct an annual Techfest to support
+        the development of Computer Engineering students.
       </p>
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 xl:gap-9">
         {WHAT_WE_DO.map((item, i) => (

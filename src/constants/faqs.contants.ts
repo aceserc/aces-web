@@ -1,21 +1,31 @@
 export const FAQS = [
   {
-    question: "What is the refund policy?",
+    question: "What is the Student Society?",
     answer:
-      "We have a 30-day refund policy. If you are not satisfied with our service, you can request a refund within 30 days of your purchase.",
+      "ACES is a Community of Computer Engineering Students established in 2070 B.S with an aim of all-round development of students and building a better foundation for their careers.",
   },
   {
-    question: "How do I cancel my subscription?",
+    question: "What training programs are available?",
     answer:
-      "You can cancel your subscription at any time by logging into your account and clicking on the 'Cancel Subscription' button.",
+      "We provide training to students from 1st to 4th year of Bachelors in Computer Engineering, covering a wide range of topics to enhance their skills and knowledge.",
   },
   {
-    question: "Can I change my plan?",
+    question: "Are there any competitions organized by the society?",
     answer:
-      "Yes, you can change your plan at any time by logging into your account and clicking on the 'Change Plan' button.",
+      "Yes, we organize various competitions for students to enhance their skills and knowledge, providing a platform for them to showcase their talents.",
+  },
+  {
+    question: "Do you have any podcast sessions?",
+    answer:
+      "Yes, we organize podcast sessions with experts in the technical field, offering students valuable insights and knowledge from industry professionals.",
+  },
+  {
+    question: "What is Techfest?",
+    answer:
+      "Techfest is an annual event organized by the society, allowing students to showcase their skills through various activities and exhibitions.",
   },
   {
     question: "How do I contact support?",
-    answer: "You can contact support by emailing us at",
+    answer: "You can contact support by emailing us at aces@iopec.edu.np",
   },
 ];

@@ -31,11 +31,12 @@ export const WHAT_WE_DO = [
 ];
 
 export const ACHIEVEMENTS = {
-  desc: "lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto qui corrupti praesentium magni dolorem, vel ex amet saepe voluptates vitae alias dolore repudiandae necessitatibus eaque earum velit, aspernatur fugiat dignissimos.",
+  desc: "ACES, a community of Computer Engineering students, has achieved several milestones since its establishment. We strive for excellence in various domains, contributing significantly to the growth and development of our members.",
   data: [
-    "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-    "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-    "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-    "lorem ipsum dolor sit amet consectetur adipisicing elit. ",
+    "Organized a national level software hackathon.",
+    "Provided extensive training programs for students from 1st to 4th year of Bachelors in Computer Engineering.",
+    "Hosted numerous competitions to enhance students' skills and knowledge.",
+    "Conducted podcast sessions with experts in the technical field.",
+    "Organized the annual Techfest, a platform for students to showcase their skills.",
   ],
 };
