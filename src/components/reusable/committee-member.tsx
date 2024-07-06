@@ -23,25 +23,27 @@ const CommitteeMember = ({ avatar, name, post, socialLinks }: Props) => {
         {socialLinks && socialLinks?.length < 1 ? (
           <span className="text-muted-foreground">No social links</span>
         ) : (
-          socialLinks?.map((link, index) => {
-            const type = identifyUrl(link);
-            return (
-              <Link key={index} href={type.href} target="_blank">
-                <Image
-                  // @ts-ignore
-                  src={ICONS[type.type]}
-                  alt="social"
-                  width={30}
-                  height={30}
-                  className="cursor-pointer"
-                  quality={100}
-                  onError={(e) => {
-                    e.currentTarget.src = ICONS.external;
-                  }}
-                />
-              </Link>
-            );
-          })
+          socialLinks
+            ?.map((link) => identifyUrl(link))
+            .sort((a, b) => a.type.localeCompare(b.type))
+            ?.map((link, index) => {
+              return (
+                <Link key={index} href={link.href} target="_blank">
+                  <Image
+                    // @ts-ignore
+                    src={ICONS[link.type]}
+                    alt="social"
+                    width={30}
+                    height={30}
+                    className="cursor-pointer"
+                    quality={100}
+                    onError={(e) => {
+                      e.currentTarget.src = ICONS.external;
+                    }}
+                  />
+                </Link>
+              );
+            })
         )}
       </div>
     </div>

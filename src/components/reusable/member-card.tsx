@@ -64,22 +64,29 @@ const MemberCard = (props: Props) => {
                 No contact info!
               </span>
             ) : (
-              props.socialLinks?.map((link, index) => {
-                const type = identifyUrl(link);
-                return (
-                  <Link key={index} href={type.href} target="_blank">
-                    <Image
-                      // @ts-ignore
-                      src={ICONS[type.type] || ICONS.external}
-                      alt="social"
-                      width={hasTopCommitteePost ? 28 : 24}
-                      height={hasTopCommitteePost ? 28 : 24}
-                      className="cursor-pointer"
-                      quality={100}
-                    />
-                  </Link>
-                );
-              })
+              props.socialLinks
+                ?.map((link) => identifyUrl(link))
+                .sort((a, b) => a.type.localeCompare(b.type))
+                .map((link, index) => {
+                  return (
+                    <Link
+                      key={index}
+                      href={link.href}
+                      target="_blank"
+                      className="group"
+                    >
+                      <Image
+                        // @ts-ignore
+                        src={ICONS[link.type] || ICONS.external}
+                        alt="social"
+                        width={hasTopCommitteePost ? 28 : 24}
+                        height={hasTopCommitteePost ? 28 : 24}
+                        className="cursor-pointer opacity-80 group-hover:opacity-100 transition-opacity"
+                        quality={100}
+                      />
+                    </Link>
+                  );
+                })
             )}
           </div>
         </div>
