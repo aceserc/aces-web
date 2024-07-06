@@ -6,7 +6,7 @@ import {
 } from "@/constants/contacts.constants";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 
 const Footer = () => {
   return (
@@ -19,9 +19,8 @@ const Footer = () => {
               <div className="flex gap-1 ">
                 {Object.keys(DEVS_CONTACT_LINKS).map((key, i) => {
                   return (
-                    <>
+                    <Fragment key={i}>
                       <Link
-                        key={i}
                         // @ts-ignore
                         href={DEVS_CONTACT_LINKS[key]}
                         target="_blank"
@@ -30,7 +29,7 @@ const Footer = () => {
                         {key}
                       </Link>
                       {i == 0 && "and"}
-                    </>
+                    </Fragment>
                   );
                 })}
               </div>

@@ -44,7 +44,7 @@ const HEADER_LINKS = [
 
 const Header = () => {
   const isScrolled = useScrollPosition();
-  const mobileNavRef = useRef<HTMLDivElement>();
+  const mobileNavRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   return (
@@ -59,6 +59,7 @@ const Header = () => {
           ACES
         </Link>
         <div className="flex gap-12 items-center text-foreground/80">
+          {/* nav links for larger devices */}
           <nav className="lg:flex gap-9 items-center hidden">
             {HEADER_LINKS.map(({ label, href }) => (
               <Link
@@ -93,6 +94,8 @@ const Header = () => {
                 className="hover:scale-110 transition-transform"
               />
             </Link>
+
+            {/* // hamburger menu */}
             <button
               onClick={() => {
                 if (mobileNavRef.current) {
@@ -108,7 +111,6 @@ const Header = () => {
       </header>
       {/* mobile nav */}
       <div
-        //@ts-ignore
         ref={mobileNavRef}
         className="flex gap-12 z-50 justify-between flex-col text-foreground/80 bg-background shadow-lg backdrop-blur-sm fixed top-0 right-0 h-screen w-[245px] py-16 pt-20 px-7 translate-x-full transition-transform"
       >
