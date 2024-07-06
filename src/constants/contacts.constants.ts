@@ -1,5 +1,6 @@
 import { ICONS } from "@/assets/icons/svg-repo";
 
+// aces contact links
 export const CONTACT_LINKS = {
   discord: {
     type: "discord",
@@ -22,3 +23,9 @@ export const CONTACT_LINKS = {
     icon: ICONS.instagram,
   },
 };
+
+// developer contact links
+export const DEVS_CONTACT_LINKS = {
+  "@jrTilak": "https://thapatilak.com.np/",
+  "@dev-sandip": "https://github.com/dev-sandip",
+} as const;
