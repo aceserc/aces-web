@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/helpers/cn";
 import useFetch from "@/hooks/use-fetch";
-
+import { useEffect, useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import API from "@/services";
 import Link from "next/link";
 
@@ -26,8 +27,7 @@ type IDoNotShowAgain = {
   notices: string[];
 };
 
-import { useEffect, useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
+// show a dialog with recent notices
 const PopupDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openNow, setOpenNow] = useState(false);

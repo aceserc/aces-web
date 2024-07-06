@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import BlogCard from "@/components/reusable/blog-card";
 import Section from "@/components/reusable/section";
+
 const RecentBlogs = async () => {
+  
   const data = await fetchData<{
     data: IHandleGetBlogsServiceResponse;
   }>(`${API.blogs}?limit=3`);

@@ -2,7 +2,6 @@ import React from "react";
 import Hero from "./_components/hero";
 import Sponsors from "./_components/sponsors";
 import UpcomingEvents from "./_components/upcoming-events";
-import PopupDialog from "./_components/popup-dialog";
 import About from "./_components/about";
 import Gallery from "./_components/gallery";
 import RecentBlogs from "./_components/recent-blogs";
@@ -24,7 +23,7 @@ const Home = () => {
       <RecentBlogs />
       <Testimonials />
       <CurrentSponsors />
-      <PopupDialog />
+      {/* <PopupDialog /> */}
     </div>
   );
 };
