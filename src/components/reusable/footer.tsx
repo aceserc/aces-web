@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="wrapper mx-auto px-4 sm:px-8 xl:px-0">
         <div className="flex flex-wrap items-center justify-center flex-col gap-4 lg:gap-0 lg:flex-row lg:justify-between">
           <div>
-            <p className="text-sm flex gap-1">
+            <div className="text-sm flex gap-1">
               <span>Developed by </span>
               <div className="flex gap-1 ">
                 {Object.keys(DEVS_CONTACT_LINKS).map((key, i) => {
@@ -33,7 +33,7 @@ const Footer = () => {
                   );
                 })}
               </div>
-            </p>
+            </div>
           </div>
           <div className="text-sm">&copy; {new Date().getFullYear()} ACES</div>
           <div>

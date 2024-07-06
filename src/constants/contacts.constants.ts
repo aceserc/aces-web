@@ -22,6 +22,11 @@ export const CONTACT_LINKS = {
     href: "https://www.instagram.com/aces_erc/",
     icon: ICONS.instagram,
   },
+  email: {
+    type: "email",
+    href: "mailto:aces@ioepc.edu.np",
+    icon: ICONS.email,
+  },
 };
 
 // developer contact links

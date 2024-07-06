@@ -7,6 +7,7 @@ import TopLoader from "@/components/reusable/top-loader";
 import { Toaster } from "sonner";
 import ReactQueryProvider from "@/providers/react-query-providers";
 import { DEVS_CONTACT_LINKS } from "@/constants/contacts.constants";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <ReactQueryProvider>
           <ClerkProvider
             appearance={{
@@ -34,6 +35,9 @@ export default function RootLayout({
             >
               {children}
               <TopLoader />
+              <GoogleAnalytics
+                gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
+              />
             </ThemeProvider>
             <Toaster richColors position="top-right" />
           </ClerkProvider>

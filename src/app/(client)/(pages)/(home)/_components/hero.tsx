@@ -6,6 +6,7 @@ import heroBlob from "@/assets/svg/hero-blob.svg";
 import heroShade from "@/assets/svg/hero-shade.svg";
 import FloatingHeroIcons from "./floating-hero-icons";
 import Link from "next/link";
+import { REGISTER_NOW_LINK } from "@/constants/links.constant";
 
 const Hero = () => {
   return (
@@ -28,12 +29,14 @@ const Hero = () => {
               <Link href="/about">
                 <Button>Find Out More</Button>
               </Link>
-              <Button
-                variant="secondary"
-                className="hover:shadow-[20px_20px_60px_#d9d9d9,-20px_-20px_60px_#ffffff] transition-colors"
-              >
-                Register Now
-              </Button>
+              <Link href={REGISTER_NOW_LINK} target="_blank">
+                <Button
+                  variant="secondary"
+                  className="hover:shadow-[20px_20px_60px_#d9d9d9,-20px_-20px_60px_#ffffff] transition-colors"
+                >
+                  Register Now
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0">
