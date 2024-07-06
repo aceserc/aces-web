@@ -1,5 +1,6 @@
 import Footer from "@/components/reusable/footer";
 import Header from "./_components/header";
+import ScrollTopTop from "@/components/reusable/scroll-top-top";
 
 type Props = {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ const ClientLayout = ({ children }: Props) => {
         {children}
       </main>
       <Footer />
+      <ScrollTopTop />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { ICONS } from "@/assets/icons/svg-repo";
 export const CONTACT_LINKS = {
   discord: {
     type: "discord",
-    href: "https://discord.gg/FQcXxqmE",
+    href: "https://discord.gg/7ZS45YACRZ",
     icon: ICONS.discord,
   },
   facebook: {
