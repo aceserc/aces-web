@@ -5,22 +5,24 @@ import Link from "next/link";
 import ContactForm from "./_components/contact-form";
 import FAQs from "@/components/reusable/faq";
 import { FAQS } from "@/constants/faqs.contants";
+import { CONTACT_LINKS } from "@/constants/contacts.constants";
+import { CiFacebook } from "react-icons/ci";
 
-const CONTACTS = [
+const CONTACT_DETAILS = [
   {
     icon: IoLocationOutline,
-    title: "1734 Sanfransico, CA 93063",
+    title: "56700 Gangalal Marga Tinkune, <br/> Dharan-8, Sunsari, Nepal.",
     href: "",
   },
   {
     icon: CiMail,
-    title: "someone@gmail.com",
-    href: "mailto:someone@gmail.com",
+    title: CONTACT_LINKS.email.href.split(":")[1],
+    href: CONTACT_LINKS.email.href,
   },
   {
-    icon: PiPhoneThin,
-    title: "+1 (987) 4587 899",
-    href: "tel:+1 (987) 4587 899",
+    icon: CiFacebook,
+    title: "ACES",
+    href: CONTACT_LINKS.facebook.href,
   },
 ];
 
@@ -45,14 +47,14 @@ const ContactPage = () => {
                 possible.
               </p>
               <div className="mt-5 opacity-80">
-                {CONTACTS.map((contact, index) => (
+                {CONTACT_DETAILS.map((contact, index) => (
                   <Link
                     href={contact.href}
                     key={index}
-                    className="flex items-center mt-2 space-x-2 text-500 hover:text-blue-500 transition-colors"
+                    className="flex items-start mt-2 space-x-2 text-500 hover:text-blue-500 transition-colors"
                   >
-                    <contact.icon className="text-xl" />
-                    <span>{contact.title}</span>
+                    <contact.icon className="text-xl mt-1" />
+                    <span dangerouslySetInnerHTML={{ __html: contact.title }} />
                   </Link>
                 ))}
               </div>
