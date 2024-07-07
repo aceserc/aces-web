@@ -12,10 +12,16 @@ import {
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
+import { cn } from "@/helpers/cn";
 
 interface ViewImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
-const ViewImage: React.FC<ViewImageProps> = ({ src, alt, ...props }) => {
+const ViewImage: React.FC<ViewImageProps> = ({
+  src,
+  alt,
+  className,
+  ...props
+}) => {
   const [index, setIndex] = useState<number>(-1);
   return (
     <>
@@ -27,6 +33,7 @@ const ViewImage: React.FC<ViewImageProps> = ({ src, alt, ...props }) => {
         onError={(e) => {
           e.currentTarget.src = "/placeholder.png";
         }}
+        className={cn("cursor-zoom-in", className)}
       />
 
       <Lightbox

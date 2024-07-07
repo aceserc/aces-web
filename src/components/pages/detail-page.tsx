@@ -186,7 +186,12 @@ const DetailPage = (props: Props) => {
         role="button"
         src={props.thumbnail.url}
         alt="thumbnail"
-        className="w-full border border-gray-300 h-auto object-cover object-center rounded-xl mt-6 max-h-[550px] shadow-md"
+        className={cn(
+          "w-full border border-gray-300 h-auto object-center rounded-xl mt-6 max-h-[550px] shadow-md",
+          props.type === "blogs"
+            ? " object-cover"
+            : "object-cover sm:object-contain"
+        )}
       />
       {
         // registration link
