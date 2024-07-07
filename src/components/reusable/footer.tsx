@@ -39,7 +39,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3">
               <p className="font-medium text-sm text-dark">Follow Us:</p>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-2">
                 {Object.keys(CONTACT_LINKS).map((key, i) => {
                   // @ts-ignore
                   const item = CONTACT_LINKS[

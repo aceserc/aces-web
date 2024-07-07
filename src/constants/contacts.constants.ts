@@ -27,6 +27,11 @@ export const CONTACT_LINKS = {
     href: "mailto:aces@ioepc.edu.np",
     icon: ICONS.email,
   },
+  youtube: {
+    type: "youtube",
+    href: "https://www.youtube.com/channel/UCbWiVnH9XPE8aixz32MAA8A",
+    icon: ICONS.youtube,
+  },
 };
 
 // developer contact links

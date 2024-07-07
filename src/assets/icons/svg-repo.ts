@@ -15,6 +15,7 @@ export const ICONS = {
   linkedin: "https://www.svgrepo.com/show/452047/linkedin-1.svg",
   instagram: "https://www.svgrepo.com/show/452229/instagram-1.svg",
   external: "https://www.svgrepo.com/show/458672/external-1.svg",
-  email: "https://www.svgrepo.com/show/349378/gmail.svg",
+  email: "https://www.svgrepo.com/show/353812/google-gmail.svg",
   tel: "https://www.svgrepo.com/show/518546/phone-alt2.svg",
+  youtube: "https://www.svgrepo.com/show/475700/youtube-color.svg",
 };

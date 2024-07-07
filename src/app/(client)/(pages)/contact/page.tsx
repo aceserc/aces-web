@@ -53,7 +53,7 @@ const ContactPage = () => {
                     key={index}
                     className="flex items-start mt-2 space-x-2 text-500 hover:text-blue-500 transition-colors"
                   >
-                    <contact.icon className="text-xl mt-1" />
+                    <contact.icon className="text-xl mt-0.5" />
                     <span dangerouslySetInnerHTML={{ __html: contact.title }} />
                   </Link>
                 ))}
