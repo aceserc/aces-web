@@ -7,9 +7,10 @@ type Return = {
   isUpcoming: boolean;
   isOneYearPassed: boolean;
   isTomorrow: boolean;
+  isOngoing: boolean;
 };
 
-export const resolveDate = (startDate: string) => {
+export const resolveDate = (startDate: string, endDate?: string) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Set the time to the start of the day
   const eventDate = new Date(startDate);
@@ -25,6 +26,8 @@ export const resolveDate = (startDate: string) => {
     eventDate.getMonth() === today.getMonth() &&
     eventDate.getFullYear() === today.getFullYear();
 
+  const isOngoing = endDate ? today < new Date(endDate) : false;
+
   return {
     mm: eventDate.toLocaleString("default", { month: "short" }),
     dd: eventDate.getDate().toString(),
@@ -34,6 +37,7 @@ export const resolveDate = (startDate: string) => {
     isUpcoming,
     isOneYearPassed,
     isTomorrow,
+    isOngoing,
   } as Return;
 };
 

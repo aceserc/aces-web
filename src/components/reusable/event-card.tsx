@@ -19,7 +19,7 @@ const EventCard = ({
 }: IEventsSchemaResponse & {
   className?: string;
 }) => {
-  const resoledDate = resolveDate(props.startDate);
+  const resoledDate = resolveDate(props.startDate, props.endDate);
   return (
     <Link href={`/events/${props._id}`} className="min-w-full w-full">
       <div
@@ -43,7 +43,9 @@ const EventCard = ({
         <Badge
           className="absolute top-0 uppercase left-0 rounded-tl-md rounded-br-md rounded-tr-none rounded-bl-none"
           variant={
-            resoledDate.isToday
+            resoledDate.isOngoing
+              ? "default"
+              : resoledDate.isToday
               ? "destructive"
               : resoledDate.isOldDate
               ? "secondary"
@@ -52,6 +54,8 @@ const EventCard = ({
         >
           {resoledDate.isToday
             ? "It's Today"
+            : resoledDate.isOngoing
+            ? "Ongoing"
             : resoledDate.isTomorrow
             ? "Tomorrow"
             : resoledDate.isUpcoming
