@@ -17,24 +17,31 @@ const Sponsors = async () => {
       <h3 className="text-xl md:text-2xl font-bold animate-in-from-bottom delay-500">
         Trusted By
       </h3>
-      <Marquee
-        gradient={true}
-        gradientWidth={80}
-        autoFill={true}
-        pauseOnHover={true}
-        gradientColor="#f6f8fb"
-        className="flex items-center justify-center animate-in-from-bottom delay-[600]"
+      <div
+        className="animate-in-from-bottom"
+        style={{
+          animationDelay: "600ms",
+        }}
       >
-        {sponsors.map((sponsor, i) => (
-          <Link href={sponsor.website ?? "#"} key={i} target="_blank">
-            <img
-              src={sponsor.logo.url}
-              alt={sponsor.name}
-              className="mr-9 md:mr-20 object-contain object-center aspect-square h-16 md:h-20 rounded-md"
-            />
-          </Link>
-        ))}
-      </Marquee>
+        <Marquee
+          gradient={true}
+          gradientWidth={80}
+          autoFill={true}
+          pauseOnHover={true}
+          gradientColor="#f6f8fb"
+          className="flex items-center justify-center"
+        >
+          {sponsors.map((sponsor, i) => (
+            <Link href={sponsor.website ?? "#"} key={i} target="_blank">
+              <img
+                src={sponsor.logo.url}
+                alt={sponsor.name}
+                className="mr-9 md:mr-20 object-contain object-center aspect-square h-16 md:h-20 rounded-md"
+              />
+            </Link>
+          ))}
+        </Marquee>
+      </div>
     </section>
   );
 };
