@@ -13,6 +13,7 @@ type Props = {
   sectionClassName?: string;
   imageContainerClassName?: string;
   dir?: "normal" | "reverse";
+  headerClassName?: string;
 };
 
 const SectionLayout = (props: Props) => {
@@ -25,6 +26,7 @@ const SectionLayout = (props: Props) => {
     sectionClassName,
     dir = "normal",
     imageContainerClassName,
+    headerClassName,
   } = props;
 
   return (
@@ -36,7 +38,12 @@ const SectionLayout = (props: Props) => {
       )}
     >
       {!withImage && (
-        <div className="flex flex-col items-center justify-center gap-1">
+        <div
+          className={cn(
+            "flex flex-col items-center justify-center gap-1",
+            headerClassName
+          )}
+        >
           {subTitle && (
             <h3 className="text-sm sm:text-base xl:text-xl text-center text-red-500">
               {subTitle}

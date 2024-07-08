@@ -14,18 +14,18 @@ const Hero = () => {
       <section id="hero" className="relative">
         <div className="flex lg:flex-row flex-col text-center lg:text-left items-center gap-14 lg:gap-9 justify-between wrapper pt-20 lg:pt-9">
           <div className="max-w-lg xl:max-w-xl flex items-center lg:items-start flex-col gap-5 md:gap-7">
-            <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium">
+            <h3 className="uppercase text-xs lg:text-sm tracking-wider text-[#DF6951] font-medium animate-in-from-left">
               Association of computer engineering students🔥
             </h3>
-            <h1 className="text-3xl xs:text-4xl md:text-5xl xl:text-7xl font-bold">
+            <h1 className="text-3xl xs:text-4xl md:text-5xl xl:text-7xl font-bold animate-in-from-left delay-100">
               Transform Your Tech Journey with ACES
             </h1>
-            <p className="text-muted-foreground text-sm sm:text-base">
+            <p className="text-muted-foreground text-sm sm:text-base animate-in-from-left delay-200">
               Join the Association of Computer Engineering Students (ACES) and
               embark on a journey that bridges the gap between academic learning
               and professional excellence.
             </p>
-            <div className="flex gap-5 mt-3 lg:mt-0">
+            <div className="flex gap-5 mt-3 lg:mt-0 animate-in-from-left delay-300">
               <Link href="/about">
                 <Button>Find Out More</Button>
               </Link>
@@ -39,14 +39,14 @@ const Hero = () => {
               </Link>
             </div>
           </div>
-          <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0">
+          <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0 ">
             <Image
               src={heroImage}
               alt=""
               height={600}
               quality={100}
               width={600}
-              className="object-contain object-right z-20"
+              className="object-contain object-right z-20 animate-in-from-right delay-200"
             />
             <FloatingHeroIcons />
           </div>

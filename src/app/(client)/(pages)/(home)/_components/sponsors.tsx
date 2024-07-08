@@ -14,14 +14,16 @@ const Sponsors = async () => {
       id="trusted-by"
       className="flex flex-col gap-4 items-center justify-center wrapper min-h-16"
     >
-      <h3 className="text-xl md:text-2xl font-bold">Trusted By</h3>
+      <h3 className="text-xl md:text-2xl font-bold animate-in-from-bottom delay-500">
+        Trusted By
+      </h3>
       <Marquee
         gradient={true}
         gradientWidth={80}
         autoFill={true}
         pauseOnHover={true}
         gradientColor="#f6f8fb"
-        className="flex items-center justify-center"
+        className="flex items-center justify-center animate-in-from-bottom delay-[600]"
       >
         {sponsors.map((sponsor, i) => (
           <Link href={sponsor.website ?? "#"} key={i} target="_blank">

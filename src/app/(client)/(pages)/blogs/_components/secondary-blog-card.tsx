@@ -1,12 +1,20 @@
+import { cn } from "@/helpers/cn";
 import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
 import Link from "next/link";
 
-type Props = IHandleGetBlogsServiceResponse["blogs"][0];
+type Props = IHandleGetBlogsServiceResponse["blogs"][0] & {
+  className?: string;
+};
 
 const SecondaryBlogCard = (props: Props) => {
   return (
-    <div className="w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5">
-      <div className="lg:max-w-[238px] w-full flex items-center justify-center overflow-hidden lg:max-h-[238px]">
+    <div
+      className={cn(
+        "w-full flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow-md rounded-xl p-2.5",
+        props.className
+      )}
+    >
+      <div className="lg:max-w-[238px] w-full flex items-center justify-center overflow-hidden lg:max-h-[238px] rounded-md">
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
             className="w-full h-full rounded-md object-cover object-center"

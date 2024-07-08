@@ -1,15 +1,25 @@
+import { cn } from "@/helpers/cn";
 import { IHandleGetBlogsServiceResponse } from "@/services/blogs";
 import Link from "next/link";
 
-type Props = IHandleGetBlogsServiceResponse["blogs"][0];
+type Props = IHandleGetBlogsServiceResponse["blogs"][0] & {
+  className?: string;
+  style?: React.CSSProperties;
+};
 
 const PrimaryBlogCard = (props: Props) => {
   return (
-    <div className="w-full flex flex-col lg:flex-row lg:items-center gap-7.5 lg:gap-11 bg-white shadow-lg rounded-xl p-4 lg:p-2.5 lg:py-4">
-      <div className="lg:max-w-[536px] w-full lg:max-h-[320px] flex items-center justify-center overflow-hidden">
+    <div
+      className={cn(
+        "w-full flex flex-col lg:flex-row lg:items-center gap-7.5 lg:gap-11 bg-white shadow-lg rounded-xl p-4 lg:p-2.5 lg:py-4",
+        props.className
+      )}
+      style={props.style}
+    >
+      <div className="lg:max-w-[536px] w-full lg:max-h-[320px] flex items-center justify-center overflow-hidden rounded-md">
         <Link href={`/blogs/${props._id}`} className="w-full h-full">
           <img
-            className="w-full rounded-md object-cover object-center h-full"
+            className="w-full rounded-md object-cover object-center h-full "
             src={props.thumbnail.url}
             alt="hero"
           />

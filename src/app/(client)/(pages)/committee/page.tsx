@@ -25,12 +25,26 @@ const CommitteePage = async () => {
     >
       <div className="flex gap-4 xs:gap-9 flex-col w-full mt-12 sm:mt-20">
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-[700px] m-auto w-full">
-          {president && <MemberCard {...president} />}
-          {adviser && <MemberCard {...adviser} />}
+          {president && (
+            <MemberCard className="animate-in-from-bottom" {...president} />
+          )}
+          {adviser && (
+            <MemberCard
+              {...adviser}
+              className="animate-in-from-bottom delay-75"
+            />
+          )}
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {sortCommitteeMembers(restMembers)?.map((member) => (
-            <MemberCard key={member._id} {...member} />
+          {sortCommitteeMembers(restMembers)?.map((member, i) => (
+            <MemberCard
+              key={member._id}
+              {...member}
+              className="animate-in-from-bottom"
+              style={{
+                animationDelay: `${i * 50 + 75}ms`,
+              }}
+            />
           ))}
         </div>
       </div>

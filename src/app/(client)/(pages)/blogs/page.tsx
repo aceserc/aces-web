@@ -25,17 +25,29 @@ const Blogs = async () => {
         )}
         <div className="flex flex-col gap-y-4 md:gap-y-7 xl:gap-y-9">
           {/* first blog */}
-          {blogs.length > 0 && <PrimaryBlogCard {...blogs[0]} />}
+          {blogs.length > 0 && (
+            <PrimaryBlogCard {...blogs[0]} className="animate-in-from-bottom" />
+          )}
           {/* second and third blogs */}
           <div className="grid gap-x-7 gap-y-9 grid-cols-1 lg:grid-cols-2">
-            {blogs.length > 1 && <SecondaryBlogCard {...blogs[1]} />}
-            {blogs.length > 2 && <SecondaryBlogCard {...blogs[2]} />}
+            {blogs.length > 1 && (
+              <SecondaryBlogCard
+                {...blogs[1]}
+                className="animate-in-from-bottom delay-75"
+              />
+            )}
+            {blogs.length > 2 && (
+              <SecondaryBlogCard
+                {...blogs[2]}
+                className="animate-in-from-bottom delay-150"
+              />
+            )}
           </div>
         </div>
         {blogs.length > 3 && (
           <div className="flex gap-5 md:gap-7 flex-col lg:flex-row xl:gap-24">
             {/* sidebar */}
-            <div className="flex flex-col gap-3 px-6 py-7 bg-white shadow-md h-fit rounded-md w-full lg:w-72">
+            <div className="flex flex-col gap-3 px-6 py-7 bg-white shadow-md h-fit rounded-md w-full lg:w-72 animate-in-from-left delay-200">
               <AllTagsAuthors
                 data={tags.map((t) => ({
                   label: t,
@@ -56,7 +68,16 @@ const Blogs = async () => {
             <div className="flex flex-col gap-6 w-full">
               {blogs.map((blog, i) => {
                 if (i < 3) return null;
-                return <BlogCard key={blog._id} {...blog} />;
+                return (
+                  <BlogCard
+                    className="animate-in-from-right"
+                    style={{
+                      animationDelay: `${i * 50 + 200}ms`,
+                    }}
+                    key={blog._id}
+                    {...blog}
+                  />
+                );
               })}
             </div>
           </div>

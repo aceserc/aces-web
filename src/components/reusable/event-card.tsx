@@ -18,6 +18,7 @@ const EventCard = ({
   ...props
 }: IEventsSchemaResponse & {
   className?: string;
+  style?: React.CSSProperties;
 }) => {
   const resoledDate = resolveDate(props.startDate, props.endDate);
   return (
@@ -27,6 +28,7 @@ const EventCard = ({
           "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-md overflow-hidden",
           className
         )}
+        style={props.style}
       >
         {/* tooltip location */}
         {props.location && (
