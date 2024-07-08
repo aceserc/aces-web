@@ -4,6 +4,7 @@ import React from "react";
 import API from "@/services";
 import { INoticesSchemaResponse } from "@/services/notice";
 import DetailPage from "@/components/pages/detail-page";
+import { Metadata } from "next";
 
 type IEvents = {
   data: INoticesSchemaResponse & {
@@ -46,3 +47,18 @@ export async function generateStaticParams() {
   let params = response?.data.map((id) => ({ id }));
   return params;
 }
+
+export const generateMetadata = async ({
+  params: { id },
+}: Props): Promise<Metadata | null> => {
+  const res = await fetchData<IEvents>(`${API.notices}?id=${id}`);
+
+  if (!res) return null;
+  return {
+    title: res.data.title,
+    openGraph: {
+      title: res.data.title,
+      images: [res.data.thumbnail],
+    },
+  };
+};

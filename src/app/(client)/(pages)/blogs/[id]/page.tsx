@@ -6,6 +6,7 @@ import { IAuthor } from "@/types/author";
 import { ICreatedUpdatedAt } from "@/types/created-update";
 import { IApiResponse } from "@/types/response";
 import { IBlogSchemaExtended } from "@/zod/blog.schema.";
+import { Metadata } from "next";
 import React from "react";
 
 type Props = {
@@ -45,4 +46,21 @@ const getBlogById = async (id: string) => {
     }>
   >(`${API.blogs}?id=${id}`);
   return res?.data;
+};
+
+export const generateMetadata = async ({
+  params: { id },
+}: Props): Promise<Metadata | null> => {
+  const data = await getBlogById(id);
+  if (!data || !data.blog) return null;
+  return {
+    title: data.blog.title,
+    description: data.blog.metaDescription,
+    keywords: data.blog.tags,
+    openGraph: {
+      title: data.blog.title,
+      description: data.blog.metaDescription,
+      images: [data.blog.thumbnail],
+    },
+  };
 };

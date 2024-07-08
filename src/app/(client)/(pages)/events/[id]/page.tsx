@@ -3,6 +3,7 @@ import { IEventsSchemaResponse } from "@/services/events";
 import { fetchData } from "@/services/fetch";
 import React from "react";
 import DetailPage from "@/components/pages/detail-page";
+import { Metadata } from "next";
 
 type IEvents = {
   data: IEventsSchemaResponse & {
@@ -41,3 +42,18 @@ const EventDetailPage = async ({ params: { id } }: Props) => {
 };
 
 export default EventDetailPage;
+
+export const generateMetadata = async ({
+  params: { id },
+}: Props): Promise<Metadata | null> => {
+  const res = await fetchData<IEvents>(`/api/events?id=${id}`);
+
+  if (!res) return null;
+  return {
+    title: res.data.title,
+    openGraph: {
+      title: res.data.title,
+      images: [res.data.thumbnail],
+    },
+  };
+};
