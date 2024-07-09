@@ -52,7 +52,16 @@ const Events = () => {
           data?.pages
             .map((page) => page.events)
             .flat()
-            ?.map((event, i) => <EventCard key={i} {...event} />)
+            ?.map((event, i) => (
+              <EventCard
+                className="animate-in-from-bottom"
+                style={{
+                  animationDelay: `${i * 50}ms`,
+                }}
+                key={i}
+                {...event}
+              />
+            ))
         )}
       </div>
       {!isLoading && hasNextPage && (

@@ -41,7 +41,10 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-4 animate-in-from-bottom delay-300"
+    >
       <div className="flex gap-4 sm:gap-8 flex-col sm:flex-row items-center">
         <ContactInput
           register={register}

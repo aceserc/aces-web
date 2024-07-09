@@ -53,7 +53,16 @@ const Events = () => {
           data?.pages
             .map((page) => page.notices)
             .flat()
-            .map((n, i) => <NoticeCard key={i} {...n} />)
+            .map((n, i) => (
+              <NoticeCard
+                className="animate-in-from-bottom"
+                style={{
+                  animationDelay: `${i * 50}ms`,
+                }}
+                key={i}
+                {...n}
+              />
+            ))
         )}
       </div>
       {!isLoading && hasNextPage && (

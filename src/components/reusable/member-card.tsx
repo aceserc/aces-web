@@ -8,7 +8,10 @@ import Link from "next/link";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-type Props = Partial<ICommitteeSchemaWithAvatar>;
+type Props = Partial<ICommitteeSchemaWithAvatar> & {
+  className?: string;
+  style?: React.CSSProperties;
+};
 
 const MemberCard = (props: Props) => {
   const hasTopCommitteePost = TOP_COMMITTEE_POSTS.includes(
@@ -20,8 +23,10 @@ const MemberCard = (props: Props) => {
         "border border-gray-3 max-sm:w-full h-fit hover:drop-shadow-1 hover:-translate-y-0.5 transition-all flex items-center",
         hasTopCommitteePost
           ? "px-5 xs:px-6 py-2 sm:py-3 rounded-xl md:min-w-[340px] shadow-sm"
-          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg"
+          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg",
+        props.className
       )}
+      style={props.style}
     >
       <div className="flex items-center gap-8">
         <div

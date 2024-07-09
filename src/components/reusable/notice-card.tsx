@@ -8,6 +8,7 @@ const NoticeCard = ({
   ...props
 }: INoticesSchemaResponse & {
   className?: string;
+  style?: React.CSSProperties;
 }) => {
   return (
     <div
@@ -15,6 +16,7 @@ const NoticeCard = ({
         "flex flex-col rounded-md border-muted-foreground/20 border relative shadow-lg overflow-hidden group sm:max-w-[350px]",
         className
       )}
+      style={props.style}
     >
       <div className="w-full sm:min-w-[350px] max-w-full sm:w-[350px] h-[200px] xs:h-[280px] overflow-hidden shadow-inner flex items-center justify-center">
         <img
