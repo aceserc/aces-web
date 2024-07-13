@@ -1,4 +1,5 @@
 "use client";
+import { MAX_FILE_SIZE_IN_BYTES } from "@/constants/size.constant";
 import { handleUploadFileService } from "@/services/file";
 import { IFile } from "@/zod/file.schema";
 import {
@@ -23,6 +24,7 @@ import {
   SandpackConfig,
   MDXEditor,
 } from "@mdxeditor/editor";
+import { toast } from "sonner";
 
 const defaultSnippetContent = `
 export default function App() {
@@ -71,25 +73,42 @@ const allPlugins = ({
   linkDialogPlugin(),
   imagePlugin({
     imageUploadHandler: async (img): Promise<string> => {
-      const dialog = document.getElementById("radix-:r1h:");
-      const submitButton = dialog?.querySelector(
-        "button[type=submit]"
-      ) as HTMLButtonElement;
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.innerText = "Loading...";
+      if (img.size > MAX_FILE_SIZE_IN_BYTES) {
+        toast.error(
+          `Image size should be less than ${
+            MAX_FILE_SIZE_IN_BYTES / 1024 / 1024
+          }MB`
+        );
+        throw new Error("Image size limit exceeded");
       }
+
+      let dialogs = document.querySelectorAll("[role=dialog]");
+      Array.from(dialogs).forEach((dialog) => {
+        const submitButton = dialog?.querySelector(
+          "button[type=submit]"
+        ) as HTMLButtonElement;
+
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.innerText = "Loading...";
+        }
+      });
 
       const res = await handleUploadFileService(img, imageFolder);
 
       // @ts-ignore
       if (updateUsedImagesList) updateUsedImagesList(res);
 
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.innerText = "Submit";
-      }
+      Array.from(dialogs).forEach((dialog) => {
+        const submitButton = dialog?.querySelector(
+          "button[type=submit]"
+        ) as HTMLButtonElement;
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.innerText = "Submit";
+        }
+      });
 
       return res.url!;
     },

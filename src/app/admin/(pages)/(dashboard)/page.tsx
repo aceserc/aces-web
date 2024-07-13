@@ -1,16 +1,21 @@
 "use client";
 
 import Loading from "@/components/reusable/loading";
+import { ADMIN_ROLES } from "@/constants/roles.constants";
 import {
   handleGetDashboardDataService,
   IDashboardData,
 } from "@/services/dashboard";
+import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 const BlogsPage = () => {
+  const { user } = useUser();
   const { data, isLoading } = useQuery<IDashboardData>({
     queryKey: ["dashboard"],
     queryFn: handleGetDashboardDataService,
+    enabled: ADMIN_ROLES.includes(user?.publicMetadata.role as string),
   });
 
   return (
@@ -20,6 +25,11 @@ const BlogsPage = () => {
         {isLoading ? (
           <div className="flex justify-center items-center h-48">
             <Loading />
+          </div>
+        ) : !ADMIN_ROLES.includes(user?.publicMetadata.role as string) ? (
+          <div className="w-full h-80 flex items-center justify-center gap-3 flex-col">
+            <Image src="/logo.png" alt="logo" width={60} height={60} />
+            <span>Welcome to the admin panel.</span>
           </div>
         ) : data ? (
           <div className="flex flex-col gap-12">

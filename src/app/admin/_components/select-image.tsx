@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MAX_FILE_SIZE_IN_BYTES } from "@/constants/size.constant";
 import React, { useState } from "react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { toast } from "sonner";
 
 type Props = {
   isOpen: boolean;
@@ -74,7 +76,19 @@ const SelectImage = (props: Props) => {
               </div>
               <input
                 onChange={(e) => {
-                  if (e.target.files) {
+                  if (e.target.files && e.target.files?.length > 0) {
+                    const file = e.target.files[0];
+                    const fileSizeInBytes = file.size;
+
+                    if (fileSizeInBytes > MAX_FILE_SIZE_IN_BYTES) {
+                      toast.error(
+                        `File size is too large. Please upload a file less than ${
+                          MAX_FILE_SIZE_IN_BYTES / 1024 / 1024
+                        }MB`
+                      );
+                      return;
+                    }
+
                     setFile(e.target.files[0]);
                     setFileUrl("");
                   }

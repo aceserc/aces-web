@@ -4,6 +4,8 @@ import EnterMoreDetails from "./_components/enter-more-details";
 import { Button } from "@/components/ui/button";
 import { GoPlus } from "react-icons/go";
 import { MdDeleteOutline } from "react-icons/md";
+import { MAX_FILE_SIZE_IN_BYTES } from "@/constants/size.constant";
+import { toast } from "sonner";
 
 const NewImages = () => {
   const [images, setImages] = useState<File[]>([]);
@@ -58,11 +60,21 @@ const NewImages = () => {
             type="file"
             accept="image/*"
             onChange={(e) => {
-              if (e.target.files) {
-                setImages((prev) => [
-                  ...Array.from(e.target.files || []),
-                  ...prev,
-                ]);
+              if (e.target.files && e.target.files.length > 0) {
+                const images = Array.from(e.target.files || []);
+                const newImages = images.filter(
+                  (image) => image.size <= MAX_FILE_SIZE_IN_BYTES
+                );
+                if (images.length > newImages.length) {
+                  toast.error(
+                    `${
+                      images.length - newImages.length
+                    } images filtered due to the size limit, Please upload images with size less than ${
+                      MAX_FILE_SIZE_IN_BYTES / 1024 / 1024
+                    }MB`
+                  );
+                }
+                setImages((prev) => [...newImages, ...prev]);
               }
             }}
             multiple

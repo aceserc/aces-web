@@ -1,4 +1,5 @@
 import { applyMiddleware } from "@/middlewares/apply.middleware";
+import { isAdminMiddleware } from "@/middlewares/auth.middleware";
 import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import catchAsyncError from "@/middlewares/error-handler.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
@@ -14,7 +15,7 @@ import { NextRequest } from "next/server";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
-
+  isAdminMiddleware,
   catchAsyncError(async (req: NextRequest) => {
     const totalBlogs = await blogsModel.countDocuments();
     const totalNotices = await noticeModel.countDocuments();

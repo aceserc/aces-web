@@ -116,7 +116,10 @@ const Sidebar = () => {
             );
           })}
         </nav>
-        <Link href="/" className="flex items-center justify-center mt-5">
+        <Link
+          href="/"
+          className="flex items-center justify-center mt-5 hover:scale-105 transition-all"
+        >
           <RxExit className="h-7 w-7 ml-auto mr-5 rotate-180" />
         </Link>
       </div>
