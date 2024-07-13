@@ -18,4 +18,10 @@ export const ICONS = {
   email: "https://www.svgrepo.com/show/353812/google-gmail.svg",
   tel: "https://www.svgrepo.com/show/518546/phone-alt2.svg",
   youtube: "https://www.svgrepo.com/show/475700/youtube-color.svg",
+  ubuntu: "https://www.svgrepo.com/show/452122/ubuntu.svg",
+  linux: "https://www.svgrepo.com/show/444160/os-linux.svg",
+  python: "https://www.svgrepo.com/show/452091/python.svg",
+  cpp: "https://www.svgrepo.com/show/373528/cpp3.svg",
+  nextjs: "https://www.svgrepo.com/show/368858/nextjs.svg",
+  arch: "https://www.svgrepo.com/show/349296/arch-linux.svg",
 };
