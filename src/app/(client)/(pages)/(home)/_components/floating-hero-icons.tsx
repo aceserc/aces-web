@@ -54,7 +54,7 @@ const FloatingHeroIcons = () => {
           alt=""
           style={style}
           className={cn(
-            "object-contain animate-in delay-300 animate-fade-in zoom-in  object-center select-none absolute z-20"
+            "object-contain animate-in delay-300 animate-fade-in zoom-in  object-center select-none absolute z-20 h-6 w-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
           )}
         />
       ))}

@@ -53,7 +53,9 @@ const ViewContactModal = (props: Props) => {
         </DialogTrigger>
         <DialogContent className="sm:max-w-xl">
           <DialogHeader>
-            <DialogTitle>Subject: {props.subject}</DialogTitle>
+            <DialogTitle className="break-words">
+              Subject: {props.subject}
+            </DialogTitle>
           </DialogHeader>
           <div className="flex flex-col gap-1 p-2">
             <div className="flex gap-2">
@@ -93,7 +95,7 @@ const ViewContactModal = (props: Props) => {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete
-              <span className="font-bold">{props.subject}</span> from contact!
+              <span className="font-bold"> {props.subject} </span> from contact!
               list.
             </AlertDialogDescription>
           </AlertDialogHeader>

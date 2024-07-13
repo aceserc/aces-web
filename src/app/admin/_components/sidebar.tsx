@@ -13,6 +13,8 @@ import { ADMIN_ROLES } from "@/constants/roles.constants";
 import { LiaQuoteLeftSolid } from "react-icons/lia";
 import { PiImagesSquareLight } from "react-icons/pi";
 import { IconType } from "react-icons/lib";
+import Image from "next/image";
+import { RxExit } from "react-icons/rx";
 
 export const ADMIN_SIDEBAR_ITEMS: {
   href: string;
@@ -82,7 +84,14 @@ const Sidebar = () => {
   return (
     <aside className="hidden shadow-2xl h-screen w-64 flex-col overflow-y-auto overflow-x-hidden rounded-tr-[90px] border-r bg-accent py-8 pl-5 lg:flex">
       <Link href="/admin" className="text-3xl font-bold text-foreground">
-        ACES
+        <Image
+          src="/logo.png"
+          width={70}
+          height={70}
+          alt="ACES Logo"
+          quality={100}
+          className="ml-2"
+        />
       </Link>
       <div className="mt-12 flex flex-1 flex-col justify-between">
         <nav className="ml-2 flex flex-col gap-1">
@@ -107,6 +116,9 @@ const Sidebar = () => {
             );
           })}
         </nav>
+        <Link href="/" className="flex items-center justify-center mt-5">
+          <RxExit className="h-7 w-7 ml-auto mr-5 rotate-180" />
+        </Link>
       </div>
     </aside>
   );
