@@ -76,7 +76,7 @@ const Testimonials = async () => {
                     <div className="flex items-center">
                       <div>
                         <img
-                          className="w-9 h-9 md:w-12 md:h-12 rounded-full border border-primary/40"
+                          className="w-9 h-9 md:w-12 md:h-12 rounded-full border border-primary/40 object-cover object-center"
                           src={t.endorserAvatar?.url}
                         />
                       </div>
