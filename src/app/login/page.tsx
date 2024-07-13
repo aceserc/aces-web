@@ -11,6 +11,8 @@ import {
 import Link from "next/link";
 import { TbInfoTriangle, TbLoader3 } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { DEVS_CONTACT_LINKS } from "@/constants/contacts.constants";
 const Page = () => {
   const { user, isLoaded } = useUser();
 
@@ -18,8 +20,9 @@ const Page = () => {
     <div>
       <main className="flex min-h-[100dvh] flex-col items-center justify-center bg-gray-100 px-4 py-12 dark:bg-gray-900">
         <div className="mx-auto w-full max-w-md space-y-6">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
+          <div className="text-center flex flex-col items-center justify-center">
+            <Image src="/logo.png" width={100} height={100} alt="ACES Logo" />
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl my-4">
               Welcome to the ACES CMS
             </h1>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
@@ -75,13 +78,16 @@ const Page = () => {
           <div className=" flex  justify-center items-center mx-auto w-full max-w-md space-y-6">
             <p className="mt-2 text-gray-500 dark:text-gray-400">
               Developed By:{" "}
-              <a className="text-purple-400" href="https://github.com/jrTilak">
+              <a
+                className="text-purple-400"
+                href={DEVS_CONTACT_LINKS["@jrTilak"]}
+              >
                 jrTilak
               </a>{" "}
               and{" "}
               <a
                 className="text-purple-400"
-                href="https://github.com/dev-sandip"
+                href={DEVS_CONTACT_LINKS["@dev-sandip"]}
               >
                 dev-sandip
               </a>{" "}
