@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { handleGetEventsService } from "@/services/events";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import React from "react";
 
 const Events = () => {
   const {
@@ -17,7 +16,7 @@ const Events = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["notices"],
+    queryKey: ["events"],
     queryFn: ({ pageParam }) =>
       handleGetEventsService({
         page: pageParam,
@@ -34,6 +33,7 @@ const Events = () => {
   if (isError) {
     return <SomeErrorOccurred />;
   }
+
   return (
     <MainLayout title="Events">
       <div className="grid grid-cols-1 mx-auto gap-6 mt-12 w-full sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">

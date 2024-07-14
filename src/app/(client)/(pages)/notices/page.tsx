@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { handleGetNoticesService } from "@/services/notice";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
 
 const Events = () => {
   const {
