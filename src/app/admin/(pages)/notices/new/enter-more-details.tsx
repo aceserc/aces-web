@@ -52,7 +52,6 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
       toast.error("Please enter some content for the notice!");
       return;
     }
-    console.log(data);
     mutate({ ...data, thumbnail, body, images });
   };
 

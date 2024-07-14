@@ -58,10 +58,6 @@ const AddTestimonial = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-
   return (
     <>
       <SelectImage

@@ -2,7 +2,6 @@ import { IImage } from "@/app/(client)/(pages)/gallery/_components/images";
 
 export const structureGalleryImages = (images: IImage[]) => {
   let galleryImages = [];
-  console.log(images);
 
   // push each 4 images into a new array
   // then push the remaining images into a new array
@@ -19,6 +18,5 @@ export const structureGalleryImages = (images: IImage[]) => {
   if (remainingImages > 0) {
     galleryImages.push(images.slice(imagesLength - remainingImages));
   }
-  console.log(galleryImages);
   return galleryImages;
 };

@@ -53,7 +53,6 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
       toast.error("Please enter some content for the event!");
       return;
     }
-    console.log(data);
     mutate({ ...data, thumbnail, body, images });
   };
 
