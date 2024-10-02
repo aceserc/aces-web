@@ -1,9 +1,7 @@
-
 import { MoonLoader } from "react-spinners";
 import { twMerge } from "tailwind-merge";
 
 const Loading = ({ className }: { className?: string }) => {
-  console.log("Loading");
   return (
     <div
       className={twMerge(
