@@ -66,10 +66,10 @@ export const resolveDuration = (
 
   const duration = eventEndDate.getTime() - eventStartDate.getTime(); // in milliseconds
   const durationInHours = duration / 1000 / 60 / 60;
-  const durationInDays = durationInHours / 24;
-  const durationInWeeks = durationInDays / 7;
-  const durationInMonths = durationInDays / 30;
-  const durationInYears = durationInDays / 365;
+  const durationInDays = Math.ceil(durationInHours / 24); // Round up to the nearest day
+  const durationInWeeks = Math.floor(durationInDays / 7);
+  const durationInMonths = Math.floor(durationInDays / 30);
+  const durationInYears = Math.floor(durationInDays / 365);
 
   if (durationInHours < 1) {
     return null;
@@ -78,18 +78,18 @@ export const resolveDuration = (
   if (durationInHours < 24) {
     return `${Math.floor(durationInHours)} hrs`;
   } else if (durationInDays < 7) {
-    return `${Math.floor(durationInDays)} days`;
+    return `${durationInDays} days`;
   } else if (durationInDays < 30) {
-    const weeks = Math.floor(durationInWeeks);
-    const days = Math.floor(durationInDays % 7);
+    const weeks = Math.floor(durationInDays / 7);
+    const days = durationInDays % 7;
     return `${weeks} weeks ${days} days`;
   } else if (durationInDays < 365) {
-    const months = Math.floor(durationInMonths);
-    const days = Math.floor(durationInDays % 30);
+    const months = Math.floor(durationInDays / 30);
+    const days = durationInDays % 30;
     return `${months} months ${days} days`;
   } else {
-    const years = Math.floor(durationInYears);
-    const months = Math.floor(durationInMonths % 12);
+    const years = Math.floor(durationInDays / 365);
+    const months = Math.floor((durationInDays % 365) / 30);
     return `${years} years ${months} months`;
   }
 };
