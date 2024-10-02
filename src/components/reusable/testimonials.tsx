@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import Section from "./section";
+import Image from "next/image";
 
 const Testimonials = async () => {
   const data = await getAllTestimonials();
@@ -50,19 +51,30 @@ const Testimonials = async () => {
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[425px]">
                           <DialogHeader>
-                            <DialogTitle>
-                              By -{" "}
-                              <Link
-                                href={t.endorserContactUrl ?? "#"}
-                                className="underline"
-                                target="_blank"
-                              >
-                                {t.endorserName}
-                              </Link>
+                            <DialogTitle className="flex items-center gap-2.5">
+                              <div>
+                                <Image
+                                  alt=""
+                                  height={48}
+                                  width={48}
+                                  quality={100}
+                                  className="w-12 h-12 rounded-full border border-primary/40 object-cover object-center"
+                                  src={t.endorserAvatar?.url || ""}
+                                />
+                              </div>
+                              <div className="flex flex-col gap-1.5 items-center">
+                                <Link
+                                  href={t.endorserContactUrl ?? "#"}
+                                  className="underline"
+                                  target="_blank"
+                                >
+                                  {t.endorserName}
+                                </Link>
+                                <DialogDescription className="ml-2">
+                                  {t.endorserPosition}
+                                </DialogDescription>
+                              </div>
                             </DialogTitle>
-                            <DialogDescription>
-                              {t.endorserPosition}
-                            </DialogDescription>
                           </DialogHeader>
                           <p className="text-sm sm:text-base text-gray-700">
                             {t.body}
@@ -75,9 +87,13 @@ const Testimonials = async () => {
                     <div className="mx-auto w-full border border-gray-300 my-4" />
                     <div className="flex items-center">
                       <div>
-                        <img
+                        <Image
+                          alt=""
+                          height={48}
+                          width={48}
+                          quality={100}
                           className="w-9 h-9 md:w-12 md:h-12 rounded-full border border-primary/40 object-cover object-center"
-                          src={t.endorserAvatar?.url}
+                          src={t.endorserAvatar?.url ?? ""}
                         />
                       </div>
                       <div className="ml-4">
