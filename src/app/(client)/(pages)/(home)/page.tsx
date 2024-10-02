@@ -7,6 +7,7 @@ import Gallery from "./_components/gallery";
 import RecentBlogs from "./_components/recent-blogs";
 import Testimonials from "@/components/reusable/testimonials";
 import CurrentSponsors from "./_components/current-sponsors";
+import PopupDialog from "./_components/popup-dialog";
 
 const Home = () => {
   return (
@@ -23,7 +24,7 @@ const Home = () => {
       <RecentBlogs />
       <Testimonials />
       <CurrentSponsors />
-      {/* <PopupDialog /> */}
+      <PopupDialog />
     </div>
   );
 };

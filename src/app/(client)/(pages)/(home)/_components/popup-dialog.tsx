@@ -14,11 +14,15 @@ import { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import API from "@/services";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 type INotice = {
   _id: string;
   title: string;
-  thumbnail: string;
+  thumbnail: {
+    url: string;
+  };
   createdAt: string;
 };
 
@@ -32,9 +36,16 @@ const PopupDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openNow, setOpenNow] = useState(false);
   const [activeNoticeIndex, setActiveNoticeIndex] = useState(0);
-  const { data, isLoading, isSuccess } = useFetch<{
-    data: INotice[];
-  }>(API.recentNotices);
+  const { data, isLoading, isSuccess } = useQuery<INotice[]>({
+    queryKey: ["notices", "popup"],
+    queryFn: async () =>
+      new Promise((resolve, reject) => {
+        axios
+          .get(API.recentNotices)
+          .then((res) => resolve(res.data?.data))
+          .catch((err) => reject([]));
+      }),
+  });
 
   // set open now true after 5 seconds
   useEffect(() => {
@@ -48,7 +59,7 @@ const PopupDialog = () => {
           const notices = parsedDoNotShowAgain.notices;
           if (
             JSON.stringify(notices) ===
-            JSON.stringify(data?.data.map((notice) => notice._id))
+            JSON.stringify(data?.map((notice) => notice._id))
           ) {
             setOpenNow(false);
           } else {
@@ -74,13 +85,13 @@ const PopupDialog = () => {
   const handleClose = () => {
     const doNotShowAgain: IDoNotShowAgain = {
       date: new Date().toISOString(),
-      notices: data?.data.map((notice) => notice._id) || [],
+      notices: data?.map((notice) => notice._id) || [],
     };
     localStorage.setItem("doNotShowAgain", JSON.stringify(doNotShowAgain));
     setIsOpen(false);
   };
 
-  if (!data?.data || data?.data?.length === 0 || !isSuccess) return null;
+  if (!data || data?.length === 0 || !isSuccess) return null;
   return (
     <Dialog
       open={isOpen}
@@ -92,16 +103,17 @@ const PopupDialog = () => {
       <DialogContent className="">
         <DialogHeader>
           <DialogTitle>Recent Notices</DialogTitle>
-          <DialogDescription>
-            {activeNoticeIndex + 1}. {data?.data[activeNoticeIndex].title}
+          <DialogDescription className="text-lg font-medium">
+            {activeNoticeIndex + 1}. {data?.[activeNoticeIndex].title}
           </DialogDescription>
         </DialogHeader>
         <div className="relative group">
-          <Link href={`/notices/${data?.data[activeNoticeIndex]._id}`}>
+          <Link href={`/notices/${data?.[activeNoticeIndex]._id}`}>
             <img
-              src={data?.data[activeNoticeIndex].thumbnail}
-              alt={data?.data[activeNoticeIndex].title}
+              src={data?.[activeNoticeIndex].thumbnail.url}
+              alt={data?.[activeNoticeIndex].title}
               onError={(e) => {
+                console.log(e);
                 e.currentTarget.src = "placeholder.png";
               }}
               className="w-full h-full object-contain max-h-[300px] object-center"
@@ -121,7 +133,7 @@ const PopupDialog = () => {
           {
             <button
               onClick={() => {
-                if (activeNoticeIndex === data?.data.length - 1) return;
+                if (activeNoticeIndex === data?.length - 1) return;
                 setActiveNoticeIndex((prev) => prev + 1);
               }}
               className={cn(
