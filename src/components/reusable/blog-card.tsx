@@ -25,6 +25,8 @@ const BlogCard = (props: Props) => {
             className="w-full rounded-md object-cover object-center h-full"
             src={props?.thumbnail?.url}
             alt="hero"
+            fetchPriority="low"
+            loading="lazy"
           />
         </Link>
       </div>

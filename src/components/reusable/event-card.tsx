@@ -72,6 +72,8 @@ const EventCard = ({
             }}
             alt={props.title}
             className="rounded-t-md w-full h-full object-top object-cover"
+            fetchPriority="low"
+            loading="lazy"
           />
         </div>
         {/* title */}

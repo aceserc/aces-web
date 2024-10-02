@@ -31,6 +31,8 @@ const CurrentSponsors = async () => {
               src={sponsor.logo.url}
               alt={sponsor.name}
               className="mr-9 md:mr-20 object-contain object-center aspect-square h-16 md:h-20 rounded-md"
+              loading="lazy"
+              fetchPriority="low"
             />
           </Link>
         ))}

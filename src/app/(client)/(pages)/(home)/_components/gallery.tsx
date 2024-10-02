@@ -17,6 +17,8 @@ const Gallery = async () => {
       <div className="hidden lg:grid grid-cols-6 grid-rows-6 gap-4 max-h-[600px] max-w-7xl">
         <div className="row-span-2 col-start-1 row-start-3">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[0].image.url}
             alt="gallery-image"
             height={500}
@@ -27,6 +29,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-2 row-start-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[1].image.url}
             alt="gallery-image"
             height={500}
@@ -37,6 +41,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-2 row-start-4">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[2].image.url}
             alt="gallery-image"
             height={500}
@@ -47,6 +53,8 @@ const Gallery = async () => {
         </div>
         <div className="col-span-2 row-span-6 col-start-3 row-start-1">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[3].image.url}
             alt="gallery-image"
             height={500}
@@ -57,6 +65,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-5 row-start-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[4].image.url}
             alt="gallery-image"
             height={500}
@@ -67,6 +77,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-5 row-start-4">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[5].image.url}
             alt="gallery-image"
             height={500}
@@ -77,6 +89,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-6 row-start-3">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[6].image.url}
             alt="gallery-image"
             height={500}
@@ -90,6 +104,8 @@ const Gallery = async () => {
       <div className="hidden sm:grid lg:hidden grid-cols-4 grid-rows-6 gap-4 max-h-[500px]">
         <div className="row-span-2 col-start-1 row-start-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[0].image.url}
             alt="gallery-image"
             height={500}
@@ -100,6 +116,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-1 row-start-4">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[1].image.url}
             alt="gallery-image"
             height={500}
@@ -110,6 +128,8 @@ const Gallery = async () => {
         </div>
         <div className="col-span-2 row-span-6 col-start-2 row-start-1">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[2].image.url}
             alt="gallery-image"
             height={500}
@@ -120,6 +140,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-4 row-start-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[3].image.url}
             alt="gallery-image"
             height={500}
@@ -130,6 +152,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-4 row-start-4">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[4].image.url}
             alt="gallery-image"
             height={500}
@@ -143,6 +167,8 @@ const Gallery = async () => {
       <div className="grid sm:hidden grid-cols-2 grid-rows-7 gap-2 max-h-[600px]">
         <div className="row-span-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[0].image.url}
             alt="gallery-image"
             height={500}
@@ -153,6 +179,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[1].image.url}
             alt="gallery-image"
             height={500}
@@ -163,6 +191,8 @@ const Gallery = async () => {
         </div>
         <div className="col-span-2 row-span-3 row-start-3">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[2].image.url}
             alt="gallery-image"
             height={500}
@@ -173,6 +203,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-2 row-start-6">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[3].image.url}
             alt="gallery-image"
             height={500}
@@ -183,6 +215,8 @@ const Gallery = async () => {
         </div>
         <div className="row-span-2 col-start-1 row-start-6">
           <Image
+            fetchPriority="low"
+            priority={false}
             src={images[4].image.url}
             alt="gallery-image"
             height={500}

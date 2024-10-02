@@ -117,6 +117,8 @@ const PopupDialog = () => {
                 e.currentTarget.src = "placeholder.png";
               }}
               className="w-full h-full object-contain max-h-[300px] object-center"
+              fetchPriority="low"
+              loading="lazy"
             />
           </Link>
           {activeNoticeIndex > 0 && (

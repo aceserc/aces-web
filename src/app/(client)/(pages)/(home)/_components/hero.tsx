@@ -44,9 +44,10 @@ const Hero = () => {
               src={heroImage}
               alt=""
               height={600}
-              quality={100}
               width={600}
               className="object-contain object-right z-20 animate-in-from-right delay-200"
+              fetchPriority="low"
+              priority={false}
             />
             <FloatingHeroIcons />
           </div>
@@ -61,6 +62,8 @@ const Hero = () => {
           width={400}
           alt=""
           className="absolute h-[350px] w-[350px] xl:h-[500px] xl:w-[500px] top-0 right-0 -z-10 opacity-80"
+          fetchPriority="low"
+          priority={false}
         />
       </section>
       <Image
@@ -70,6 +73,8 @@ const Hero = () => {
         width={400}
         alt=""
         className="absolute top-0 left-0 -z-10"
+        fetchPriority="low"
+        priority={false}
       />
     </>
   );

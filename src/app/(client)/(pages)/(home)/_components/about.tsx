@@ -35,6 +35,8 @@ const About = () => {
               src={card}
               alt=""
               className="absolute -bottom-6 -left-10 -z-10 h-20 opacity-0 group-hover:opacity-100 transition-all"
+              priority={false}
+              fetchPriority="low"
             />
           </div>
         ))}
