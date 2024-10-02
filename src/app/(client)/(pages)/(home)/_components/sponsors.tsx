@@ -29,7 +29,7 @@ const Sponsors = async () => {
           autoFill={true}
           pauseOnHover={true}
           gradientColor="#f6f8fb"
-          className="flex items-center justify-center"
+          className="flex items-center justify-center max-w-[90vw] mx-auto"
         >
           {sponsors.map((sponsor, i) => (
             <Link href={sponsor.website ?? "#"} key={i} target="_blank">
