@@ -45,6 +45,10 @@ export const COMMITTEES_POST = [
     multiple: true,
   },
   {
+    post: "Marketing & Business Coordinator",
+    multiple: true,
+  },
+  {
     post: "Executive Member",
     multiple: true,
   },
