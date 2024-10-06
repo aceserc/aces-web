@@ -5,6 +5,10 @@ export const COMMITTEES_POST = [
     multiple: false, // whether multiple people can hold this post
   },
   {
+    post: "Marketing & Business Coordinator",
+    multiple: true,
+  },
+  {
     post: "Mentor",
     multiple: true,
   },
@@ -42,10 +46,6 @@ export const COMMITTEES_POST = [
   },
   {
     post: "Graphics Designer",
-    multiple: true,
-  },
-  {
-    post: "Marketing & Business Coordinator",
     multiple: true,
   },
   {
