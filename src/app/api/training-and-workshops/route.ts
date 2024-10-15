@@ -1,6 +1,3 @@
-import { BlogSchemaExtended } from "@/zod/blog.schema";
-import blogsModel from "@/models/blogs.model";
-import { clerkClient } from "@clerk/nextjs/server";
 import { applyMiddleware } from "@/middlewares/apply.middleware";
 import {
   isAdminMiddleware,
@@ -11,39 +8,31 @@ import { connectToDBMiddleware } from "@/middlewares/db.middleware";
 import { sendNextResponse } from "@/middlewares/send-response";
 import { zodValidator } from "@/middlewares/zod.middleware";
 import { NextRequest } from "next/server";
-import tagsModel from "@/models/tags.model";
 import { deleteFiles } from "@/helpers/upload-file";
 import { IFile } from "@/zod/file.schema";
+import trainingAndWorkshopsModel from "@/models/training-and-workshops.model";
+import { TrainingAndWorkshopsSchemaExtended } from "@/zod/training-and-workshops.schema";
 
 export const GET = applyMiddleware(
   connectToDBMiddleware,
   catchAsyncError(async (req: NextRequest) => {
-    const blogId = req.nextUrl.searchParams.get("id");
+    const trainingId = req.nextUrl.searchParams.get("id");
 
-    // return a single blog if id is present in query
-    if (blogId) {
-      const blog = await blogsModel.findById(blogId);
+    // return a single training if id is present in query
+    if (trainingId) {
+      const training = await trainingAndWorkshopsModel.findById(trainingId);
 
-      if (!blog) {
+      if (!training) {
         return sendNextResponse({
           status: 404,
-          message: "Blog not found!",
+          message: "Training not found!",
         });
       }
 
-      const author = await clerkClient.users.getUser(blog.authorId);
       return sendNextResponse({
         status: 200,
         data: {
-          blog: blog.toJSON(),
-          author: {
-            avatar: author.imageUrl,
-            firstName: author.firstName,
-            lastName: author.lastName,
-            username: author.username,
-            contact: author.publicMetadata.contact,
-            id: author.id,
-          },
+          training: training.toJSON(),
         },
       });
     }
@@ -51,10 +40,10 @@ export const GET = applyMiddleware(
     // return only ids if onlyIds is present in query
     const onlyIds = req.nextUrl.searchParams.get("onlyIds");
     if (onlyIds === "true") {
-      const blogs = await blogsModel.find().select("_id");
+      const trainings = await trainingAndWorkshopsModel.find().select("_id");
       return sendNextResponse({
         status: 200,
-        data: blogs || [],
+        data: trainings || [],
       });
     }
 
@@ -65,8 +54,8 @@ export const GET = applyMiddleware(
     // search by title case insensitive
     const search = req.nextUrl.searchParams.get("search") || "";
 
-    // find  relevant blogs
-    const blogs = await blogsModel
+    // find  relevant trainings
+    const trainings = await trainingAndWorkshopsModel
       .find({
         title: { $regex: new RegExp(search, "i") },
       })
@@ -75,39 +64,24 @@ export const GET = applyMiddleware(
       .limit(limit)
       .select("-body -__v -images");
 
-    const totalBlogs = await blogsModel.countDocuments({
+    const totalTrainings = await trainingAndWorkshopsModel.countDocuments({
       title: { $regex: new RegExp(search, "i") },
     });
 
-    const remainingResults = Math.max(0, totalBlogs - pageNo * limit);
-    const totalPages = Math.ceil(totalBlogs / limit);
-
-    // get all the authors of the blogs
-    const authorIds = blogs.map((blog) => blog.authorId);
-    const authors = await Promise.all(
-      authorIds.map((id) => clerkClient.users.getUser(id))
-    );
+    const remainingResults = Math.max(0, totalTrainings - pageNo * limit);
+    const totalPages = Math.ceil(totalTrainings / limit);
 
     return sendNextResponse({
       status: 200,
       data: {
-        blogs: blogs.map((blog, index) => {
-          const author = authors[index];
+        trainings: trainings.map((training, index) => {
           return {
-            ...blog.toJSON(),
-            author: {
-              avatar: author.imageUrl,
-              firstName: author.firstName,
-              lastName: author.lastName,
-              username: author.username,
-              contact: author.publicMetadata.contact,
-              id: author.id,
-            },
+            ...training.toJSON(),
           };
         }),
         pageNo: pageNo,
-        results: blogs.length,
-        total: totalBlogs,
+        results: trainings.length,
+        total: totalTrainings,
         remainingResults,
         totalPages,
         resultsOnNextPage:
@@ -118,27 +92,20 @@ export const GET = applyMiddleware(
 );
 
 export const POST = applyMiddleware(
-  isEditorMiddleware,
+  isAdminMiddleware,
   connectToDBMiddleware,
-  zodValidator(BlogSchemaExtended),
+  zodValidator(TrainingAndWorkshopsSchemaExtended),
   catchAsyncError(async (req: NextRequest) => {
     // @ts-ignore
     const { body, user } = req.data as any;
-    const blog = await blogsModel.create({
+    const training = await trainingAndWorkshopsModel.create({
       ...body,
-      authorId: user?.id,
     });
 
-    await tagsModel.findOneAndUpdate(
-      { name: "blogs" },
-      { $addToSet: { tags: { $each: body.tags } } }, // Use $addToSet with $each to add tags uniquely
-      { upsert: true }
-    );
-
-    await blog.save();
+    await training.save();
     return sendNextResponse({
       status: 201,
-      message: "Blog created successfully!",
+      message: "Training added successfully!",
     });
   })
 );
@@ -152,19 +119,19 @@ export const DELETE = applyMiddleware(
     if (!id) {
       return sendNextResponse({
         status: 400,
-        message: "Blog id is required!",
+        message: "Training id is required!",
       });
     }
 
-    const blog = await blogsModel.findByIdAndDelete(id);
+    const training = await trainingAndWorkshopsModel.findByIdAndDelete(id);
     deleteFiles([
-      blog.thumbnail.fileId,
-      ...blog.images.map((i: IFile) => i.fileId),
+      training.thumbnail.fileId,
+      ...training.images.map((i: IFile) => i.fileId),
     ]);
 
     return sendNextResponse({
       status: 200,
-      message: "Blog deleted successfully!",
+      message: "Training deleted successfully!",
     });
   })
 );

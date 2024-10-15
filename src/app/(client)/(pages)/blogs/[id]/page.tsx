@@ -5,7 +5,7 @@ import { fetchData } from "@/services/fetch";
 import { IAuthor } from "@/types/author";
 import { ICreatedUpdatedAt } from "@/types/created-update";
 import { IApiResponse } from "@/types/response";
-import { IBlogSchemaExtended } from "@/zod/blog.schema.";
+import { IBlogSchemaExtended } from "@/zod/blog.schema";
 import { Metadata } from "next";
 import React from "react";
 
@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-const page = async ({ params: { id } }: Props) => {
+const Page = async ({ params: { id } }: Props) => {
   const data = await getBlogById(id);
 
   if (!data || !data.blog) return <NotFound />;
@@ -36,7 +36,7 @@ const page = async ({ params: { id } }: Props) => {
   );
 };
 
-export default page;
+export default Page;
 
 const getBlogById = async (id: string) => {
   const res = await fetchData<

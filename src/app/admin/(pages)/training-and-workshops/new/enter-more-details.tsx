@@ -1,6 +1,5 @@
 "use client";
 import SelectImage from "@/app/admin/_components/select-image";
-import AddTags from "@/components/reusable/add-tags";
 import InputWithErrorField from "@/components/reusable/input-with-error-field";
 import TextareaWithErrorField from "@/components/reusable/text-area-with-error-field";
 import { Button } from "@/components/ui/button";
@@ -12,13 +11,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
-import { handleAddBlogsService } from "@/services/blogs";
-import { handleGetTags } from "@/services/tags";
-import { BlogSchema, IBlogSchema } from "@/zod/blog.schema";
+import { handleAddTrainingsService } from "@/services/training-and-workshops";
 import { IFile } from "@/zod/file.schema";
+import {
+  ITrainingAndWorkshopsSchema,
+  TrainingAndWorkshopsSchema,
+} from "@/zod/training-and-workshops.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -37,52 +37,38 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
   const queryClient = useQueryClient();
   const [thumbnail, setThumbnail] = useState<File | string | null>(null);
   const [isThumbnailUploadOpen, setIsThumbnailUploadOpen] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
-  const { data: suggestedTags, isLoading: isSuggestedTagsLoading } = useQuery({
-    queryKey: ["tags", "blogs"],
-    queryFn: () => handleGetTags("blogs"),
-  });
 
   const {
     register,
     formState: { errors },
-    watch,
     handleSubmit,
-  } = useForm<IBlogSchema>({
-    resolver: zodResolver(BlogSchema),
+  } = useForm<ITrainingAndWorkshopsSchema>({
+    resolver: zodResolver(TrainingAndWorkshopsSchema),
   });
 
-  const onSubmit: SubmitHandler<IBlogSchema> = (data) => {
+  const onSubmit: SubmitHandler<ITrainingAndWorkshopsSchema> = (data) => {
     if (!thumbnail) {
       toast.error("Please upload a thumbnail");
       return;
     }
     if (!body) {
-      toast.error("Please enter some content for the blog!");
+      toast.error("Please enter some content for the training!");
       return;
     }
-    if (selectedTags.length < 1) {
-      toast.error("Please add some tags!");
-      return;
-    }
-    if (selectedTags.length > 3) {
-      toast.error("You can only add upto 3 tags!");
-      return;
-    }
-    mutate({ ...data, thumbnail, body, images, tags: selectedTags });
+
+    mutate({ ...data, thumbnail, body, images });
   };
 
   const { mutate, isPending } = useMutation({
-    mutationFn: handleAddBlogsService,
+    mutationFn: handleAddTrainingsService,
     onError: (err: string) => {
       toast.error(err);
     },
     onSuccess: (data) => {
       toast.success(data);
-      router.push("/admin/blogs");
+      router.push("/admin/training-and-workshops");
       queryClient.invalidateQueries({
-        queryKey: ["blogs"],
+        queryKey: ["training-and-workshops"],
       });
     },
   });
@@ -145,26 +131,23 @@ const EnterMoreDetails = ({ disableTrigger = false, body, images }: Props) => {
               error={errors.title?.message}
             />
             <TextareaWithErrorField
-              inputKey="metaDescription"
-              label="Meta Description*"
+              inputKey="inShort"
+              label="Description*"
               register={register}
-              error={errors.metaDescription?.message}
+              error={errors.inShort?.message}
             />
-            {isSuggestedTagsLoading ? (
-              <Skeleton className="w-full h-8" />
-            ) : (
-              <AddTags
-                selectedTags={selectedTags}
-                onChange={(tags) => setSelectedTags(tags)}
-                suggestions={suggestedTags?.tags || []}
-              />
-            )}
+            <InputWithErrorField
+              inputKey="duration"
+              label="Duration (optional)"
+              placeholder="Eg: One day"
+              register={register}
+              error={errors.title?.message}
+            />
+
             <hr className="my-2 w-1/2 mx-auto" />
             <Button
               isLoading={isPending}
-              disabled={
-                !thumbnail || selectedTags.length < 1 || isSuggestedTagsLoading
-              }
+              disabled={!thumbnail}
               type="submit"
               className="ml-auto mt-6 min-w-36"
             >

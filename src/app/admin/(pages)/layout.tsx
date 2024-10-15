@@ -34,7 +34,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                 <div className="flex flex-1 items-center justify-between bg-accent/10 px-4">
                   <div>
                     <h2 className="text-xl font-bold tracking-tight text-primary sm:text-3xl capitalize ml-4">
-                      {pathname.split("/")[2] ?? "Dashboard"}
+                      {pathname.replaceAll("-", " ").split("/")[2] ??
+                        "Dashboard"}
                     </h2>
                   </div>
                   <div className="ml-4 flex items-center md:ml-6">

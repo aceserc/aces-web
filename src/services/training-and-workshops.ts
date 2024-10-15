@@ -2,28 +2,29 @@ import { handleUploadFileService } from "./file";
 import axios from "axios";
 import API from ".";
 import { ICreatedUpdatedAt } from "@/types/created-update";
-import { IBlogSchemaExtended } from "@/zod/blog.schema";
-import { IAuthor } from "@/types/author";
+import { ITrainingAndWorkshopsSchemaExtended } from "@/zod/training-and-workshops.schema";
 
-export const handleAddBlogsService = async (
-  data: Omit<IBlogSchemaExtended, "thumbnail"> & { thumbnail: File | string }
+export const handleAddTrainingsService = async (
+  data: Omit<ITrainingAndWorkshopsSchemaExtended, "thumbnail"> & {
+    thumbnail: File | string;
+  }
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    handleUploadFileService(data.thumbnail, "blogs")
+    handleUploadFileService(data.thumbnail, "training-and-workshops")
       .then((res) => {
         axios
           .post(
-            API.blogs,
+            API.trainingAndWorkshops,
             { ...data, thumbnail: res },
             { withCredentials: true }
           )
           .then((res) => {
-            resolve(res.data?.message ?? "Blogs published successfully!");
+            resolve(res.data?.message ?? "Training added successfully!");
           })
           .catch((err) => {
             reject(
               err?.response?.data?.message ??
-                "Failed to publish the blogs. Please try again later."
+                "Failed to add the training. Please try again later."
             );
           });
       })
@@ -33,17 +34,13 @@ export const handleAddBlogsService = async (
   });
 };
 
-export type IBlogsSchemaResponse = Omit<
-  IBlogSchemaExtended & ICreatedUpdatedAt,
+export type ITrainingSchemaResponse = Omit<
+  ITrainingAndWorkshopsSchemaExtended & ICreatedUpdatedAt,
   "body" | "images"
 >;
 
-export type IHandleGetBlogsServiceResponse = {
-  blogs: Array<
-    IBlogsSchemaResponse & {
-      author: IAuthor;
-    }
-  >;
+export type IHandleGetTrainingsServiceResponse = {
+  trainings: Array<ITrainingSchemaResponse>;
   pageNo: number;
   results: number;
   total: number;
@@ -52,12 +49,12 @@ export type IHandleGetBlogsServiceResponse = {
   resultsOnNextPage: number;
 };
 
-export const handleGetBlogsService = async (
+export const handleGetTrainingsService = async (
   query?: object
-): Promise<IHandleGetBlogsServiceResponse> => {
+): Promise<IHandleGetTrainingsServiceResponse> => {
   return new Promise((resolve, reject) => {
     axios
-      .get(API.blogs, {
+      .get(API.trainingAndWorkshops, {
         withCredentials: true,
         params: query,
       })
@@ -67,23 +64,25 @@ export const handleGetBlogsService = async (
       .catch((err) => {
         reject(
           err?.response?.data?.message ??
-            "Failed to fetch blogs. Please try again later."
+            "Failed to fetch trainings. Please try again later."
         );
       });
   });
 };
 
-export const handleDeleteBlogService = async (id: string): Promise<string> => {
+export const handleDeleteTrainingService = async (
+  id: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(`${API.blogs}?id=${id}`, { withCredentials: true })
+      .delete(`${API.trainingAndWorkshops}?id=${id}`, { withCredentials: true })
       .then((res) => {
-        resolve(res.data?.message ?? "Blogs deleted successfully!");
+        resolve(res.data?.message ?? "Trainings deleted successfully!");
       })
       .catch((err) => {
         reject(
           err?.response?.data?.message ??
-            "Failed to delete the blogs. Please try again later."
+            "Failed to delete the trainings. Please try again later."
         );
       });
   });

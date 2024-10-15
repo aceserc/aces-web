@@ -21,6 +21,7 @@ const API = {
   blogByAuthor: "/api/blogs/authors",
   gallery: "/api/gallery",
   dashboard: "/api/dashboard",
+  trainingAndWorkshops: "/api/training-and-workshops",
 } as const;
 
 export default API;

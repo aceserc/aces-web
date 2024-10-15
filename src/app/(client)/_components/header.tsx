@@ -8,8 +8,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxCross2 } from "react-icons/rx";
 import { RiMenuFill } from "react-icons/ri";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { usePathname } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useInnerSize } from "@/hooks/use-inner-size";
+import { ChevronDownIcon } from "lucide-react";
 
 const HEADER_LINKS = [
   {
@@ -19,6 +27,10 @@ const HEADER_LINKS = [
   {
     label: "About",
     href: "/about",
+  },
+  {
+    label: "Training/Workshops",
+    href: "/training-and-workshops",
   },
   {
     label: "Notices",
@@ -46,6 +58,12 @@ const Header = () => {
   const isScrolled = useScrollPosition();
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const { width } = useInnerSize();
+
+  const visibleLinksCount = useMemo(() => {
+    if (width < 1200) return 4;
+    return 5;
+  }, [width]);
 
   return (
     <>
@@ -61,7 +79,7 @@ const Header = () => {
         <div className="flex gap-12 items-center text-foreground/80">
           {/* nav links for larger devices */}
           <nav className="lg:flex gap-9 items-center hidden">
-            {HEADER_LINKS.map(({ label, href }) => (
+            {HEADER_LINKS.slice(0, visibleLinksCount).map(({ label, href }) => (
               <Link
                 key={label}
                 href={href}
@@ -74,6 +92,23 @@ const Header = () => {
                 {label}
               </Link>
             ))}
+            {HEADER_LINKS.length > visibleLinksCount && (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-2.5 !outline-none">
+                  More <ChevronDownIcon className="size-5" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {HEADER_LINKS.map(({ label, href }, i) => {
+                    if (i < visibleLinksCount) return null;
+                    return (
+                      <DropdownMenuItem key={label}>
+                        <Link href={href}>{label}</Link>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </nav>
           <div className="flex gap-3 items-center">
             <Link href="/contact" className="hidden sm:block">

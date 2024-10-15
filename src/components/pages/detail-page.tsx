@@ -12,7 +12,7 @@ import { IFile } from "@/zod/file.schema";
 import ViewImage from "../reusable/view-image";
 
 type Props = {
-  type: "blogs" | "notices" | "events";
+  type: "blogs" | "notices" | "events" | "training";
   tags?: Array<string>;
   title: string;
   metaDescription?: string;
@@ -26,6 +26,7 @@ type Props = {
   location?: string;
   startDate?: string;
   registrationLink?: string;
+  trainingDuration?: string;
 };
 const DetailPage = (props: Props) => {
   const rTime = readingTime(props.body);
@@ -53,6 +54,11 @@ const DetailPage = (props: Props) => {
         <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl font-bold mt-1">
           {props.title}
         </h1>
+        {props.trainingDuration && (
+          <p className="text-sm md:text-base max-w-3xl text-muted-foreground">
+            Duration: {props.trainingDuration}
+          </p>
+        )}
         {props.metaDescription && (
           <p className="text-sm md:text-base max-w-3xl">
             {props.metaDescription}

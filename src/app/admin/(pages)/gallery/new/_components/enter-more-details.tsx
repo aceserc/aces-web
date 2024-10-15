@@ -17,7 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { handleAddBlogsService } from "@/services/blogs";
 import { handleAddGalleryImageService } from "@/services/gallery";
 import { handleGetTags } from "@/services/tags";
-import { BlogSchema, IBlogSchema } from "@/zod/blog.schema.";
+import { BlogSchema, IBlogSchema } from "@/zod/blog.schema";
 import { IFile } from "@/zod/file.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

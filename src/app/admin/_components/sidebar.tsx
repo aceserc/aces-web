@@ -12,13 +12,13 @@ import { useUser } from "@clerk/nextjs";
 import { ADMIN_ROLES } from "@/constants/roles.constants";
 import { LiaQuoteLeftSolid } from "react-icons/lia";
 import { PiImagesSquareLight } from "react-icons/pi";
-import { IconType } from "react-icons/lib";
 import Image from "next/image";
 import { RxExit } from "react-icons/rx";
+import { GitBranchPlusIcon } from "lucide-react";
 
 export const ADMIN_SIDEBAR_ITEMS: {
   href: string;
-  icon: IconType;
+  icon: any;
   label: string;
   adminOnly?: boolean;
 }[] = [
@@ -55,6 +55,11 @@ export const ADMIN_SIDEBAR_ITEMS: {
     href: "/admin/blogs",
     icon: CiTextAlignLeft,
     label: "Blogs",
+  },
+  {
+    href: "/admin/training-and-workshops",
+    icon: GitBranchPlusIcon,
+    label: "Trainings/Workshops",
   },
   {
     href: "/admin/gallery",
