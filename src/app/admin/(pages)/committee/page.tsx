@@ -54,7 +54,7 @@ const CommitteesPage = () => {
             <Loading />
           </div>
         ) : filteredData && filteredData.length > 0 ? (
-          <div className="flex gap-4 flex-wrap">
+          <div className="grid grid-cols-4 gap-4">
             {sortCommitteeMembers(filteredData).map((c) => (
               <AdminCommitteeMember key={c._id} {...c} />
             ))}

@@ -20,7 +20,7 @@ const MemberCard = (props: Props) => {
   return (
     <div
       className={twMerge(
-        "border border-gray-3 max-sm:w-full h-fit hover:drop-shadow-1 hover:-translate-y-0.5 transition-all flex items-center",
+        "border border-gray-3 max-sm:w-full hover:drop-shadow-1 hover:-translate-y-0.5 transition-all flex items-center h-full",
         hasTopCommitteePost
           ? "px-5 xs:px-6 py-2 sm:py-3 rounded-xl md:min-w-[340px] shadow-sm"
           : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg",
