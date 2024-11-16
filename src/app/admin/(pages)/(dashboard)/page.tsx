@@ -105,6 +105,12 @@ const BlogsPage = () => {
                           {new Date(contact.createdAt).toLocaleString()}
                         </span>
                       </div>
+                      <div >
+                        <span className="font-medium">Subject:</span>
+                        <span className="text-muted-foreground ml-2">
+                          {contact.subject}
+                        </span>
+                      </div>
                       <div className="flex gap-2 flex-col">
                         <span className="font-medium">Message:</span>
                         <p className="text-muted-foreground ml-2">

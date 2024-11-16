@@ -26,8 +26,7 @@ export const GET = applyMiddleware(
       })
       .sort({ [sortBy]: order === "asc" ? 1 : -1 })
       .skip((pageNo - 1) * limit)
-      .limit(limit)
-      .select("-body -__v -images -authorId");
+      .limit(limit);
 
     const totalContact = await contactModel.countDocuments({
       subject: { $regex: new RegExp(search, "i") },
