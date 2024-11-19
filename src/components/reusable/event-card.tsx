@@ -21,6 +21,7 @@ const EventCard = ({
   style?: React.CSSProperties;
 }) => {
   const resoledDate = resolveDate(props.startDate, props.endDate);
+  console.log(resoledDate);
   return (
     <Link href={`/events/${props._id}`} className="min-w-full w-full">
       <div
@@ -48,21 +49,23 @@ const EventCard = ({
             resoledDate.isOngoing
               ? "default"
               : resoledDate.isToday
-              ? "destructive"
-              : resoledDate.isOldDate
-              ? "secondary"
-              : "default"
+                ? "destructive"
+                : resoledDate.isOldDate
+                  ? "secondary"
+                  : "default"
           }
         >
           {resoledDate.isToday
             ? "It's Today"
-            : resoledDate.isOngoing
-            ? "Ongoing"
+
             : resoledDate.isTomorrow
-            ? "Tomorrow"
-            : resoledDate.isUpcoming
-            ? "Upcoming"
-            : "completed"}
+              ? "Tomorrow"
+              : resoledDate.isUpcoming
+                ? "Upcoming"
+                : resoledDate.isOngoing
+                  ? "Ongoing"
+                  : "completed"
+          }
         </Badge>
         <div className="w-full sm:min-w-[400px] max-w-full sm:w-[400px] h-[200px] overflow-hidden">
           <img
@@ -97,8 +100,8 @@ const EventCard = ({
                 {resoledDate.isOneYearPassed
                   ? `${resoledDate.mm} ${resoledDate.yyyy}`
                   : resoledDate.isOldDate
-                  ? `${resoledDate.dd} ${resoledDate.mm}, ${resoledDate.yyyy}`
-                  : `${resoledDate.dd} ${resoledDate.mm}`}
+                    ? `${resoledDate.dd} ${resoledDate.mm}, ${resoledDate.yyyy}`
+                    : `${resoledDate.dd} ${resoledDate.mm}`}
               </span>
               {!resoledDate.isOldDate && props.startTime && (
                 <>
