@@ -86,7 +86,7 @@ const Header = () => {
                 className={cn(
                   "underline-offset-4 hover:text-red-500 transition-colors",
                   pathname.split("/")[1] === href.split("/")[1] &&
-                    "text-red-500 underline"
+                  "text-red-500 underline"
                 )}
               >
                 {label}
@@ -102,7 +102,7 @@ const Header = () => {
                     if (i < visibleLinksCount) return null;
                     return (
                       <DropdownMenuItem key={label}>
-                        <Link href={href}>{label}</Link>
+                        <Link href={href} className="w-full h-full">{label}</Link>
                       </DropdownMenuItem>
                     );
                   })}
@@ -174,7 +174,7 @@ const Header = () => {
               className={cn(
                 "hover:text-foreground underline-offset-4",
                 pathname.split("/")[1] === href.split("/")[1] &&
-                  "text-red-500 underline"
+                "text-red-500 underline"
               )}
             >
               {label}

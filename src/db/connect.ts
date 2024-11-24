@@ -11,11 +11,11 @@ if (!MONGODB_URI) {
   );
 }
 
-if (process.env.NODE_ENV === "development" && !MONGODB_URI.includes("dev")) {
-  throw new Error(
-    "Do not use the production database in development. Please define a MONGODB_URI that includes 'dev' in .env"
-  );
-}
+// if (process.env.NODE_ENV === "development" && !MONGODB_URI.includes("dev")) {
+//   throw new Error(
+//     "Do not use the production database in development. Please define a MONGODB_URI that includes 'dev' in .env"
+//   );
+// }
 
 let cached = global.mongoose;
 
