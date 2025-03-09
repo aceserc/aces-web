@@ -116,7 +116,7 @@ export default function Page() {
                       "participant",
                       "student",
                       "attendee",
-                    ].includes(data.recipient.role) &&
+                    ].includes(data.recipient.role.toLowerCase()) &&
 
                     <>
                       as
