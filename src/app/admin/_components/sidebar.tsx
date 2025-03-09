@@ -14,7 +14,7 @@ import { LiaQuoteLeftSolid } from "react-icons/lia";
 import { PiImagesSquareLight } from "react-icons/pi";
 import Image from "next/image";
 import { RxExit } from "react-icons/rx";
-import { GitBranchPlusIcon } from "lucide-react";
+import { GitBranchPlusIcon, ScrollTextIcon } from "lucide-react";
 
 export const ADMIN_SIDEBAR_ITEMS: {
   href: string;
@@ -22,64 +22,70 @@ export const ADMIN_SIDEBAR_ITEMS: {
   label: string;
   adminOnly?: boolean;
 }[] = [
-  {
-    href: "/admin",
-    icon: LuLayoutDashboard,
-    label: "Dashboard",
-  },
-  {
-    href: "/admin/sponsors",
-    icon: GoSponsorTiers,
-    label: "Sponsors",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/notices",
-    icon: AiOutlineNotification,
-    label: "Notices",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/committee",
-    icon: GoPeople,
-    label: "Committee",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/events",
-    icon: CiCalendarDate,
-    label: "Events",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/blogs",
-    icon: CiTextAlignLeft,
-    label: "Blogs",
-  },
-  {
-    href: "/admin/training-and-workshops",
-    icon: GitBranchPlusIcon,
-    label: "Trainings/Workshops",
-  },
-  {
-    href: "/admin/gallery",
-    icon: PiImagesSquareLight,
-    label: "Gallery",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/contacts",
-    icon: AiOutlineMessage,
-    label: "Contacts",
-    adminOnly: true,
-  },
-  {
-    href: "/admin/testimonials",
-    icon: LiaQuoteLeftSolid,
-    label: "Testimonials",
-    adminOnly: true,
-  },
-];
+    {
+      href: "/admin",
+      icon: LuLayoutDashboard,
+      label: "Dashboard",
+    },
+    {
+      href: "/admin/sponsors",
+      icon: GoSponsorTiers,
+      label: "Sponsors",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/notices",
+      icon: AiOutlineNotification,
+      label: "Notices",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/committee",
+      icon: GoPeople,
+      label: "Committee",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/events",
+      icon: CiCalendarDate,
+      label: "Events",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/blogs",
+      icon: CiTextAlignLeft,
+      label: "Blogs",
+    },
+    {
+      href: "/admin/training-and-workshops",
+      icon: GitBranchPlusIcon,
+      label: "Trainings/Workshops",
+    },
+    {
+      href: "/admin/gallery",
+      icon: PiImagesSquareLight,
+      label: "Gallery",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/certificates",
+      icon: ScrollTextIcon,
+      label: "Certificates",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/contacts",
+      icon: AiOutlineMessage,
+      label: "Contacts",
+      adminOnly: true,
+    },
+    {
+      href: "/admin/testimonials",
+      icon: LiaQuoteLeftSolid,
+      label: "Testimonials",
+      adminOnly: true,
+    },
+  ];
 
 const Sidebar = () => {
   const pathname = usePathname();

@@ -22,6 +22,7 @@ const API = {
   gallery: "/api/gallery",
   dashboard: "/api/dashboard",
   trainingAndWorkshops: "/api/training-and-workshops",
+  certificates: "/api/certificates",
 } as const;
 
 export default API;

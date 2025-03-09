@@ -52,6 +52,10 @@ const HEADER_LINKS = [
     label: "Gallery",
     href: "/gallery",
   },
+  {
+    label: "Certificates",
+    href: "/certificates",
+  }
 ];
 
 const Header = () => {

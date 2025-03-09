@@ -6,6 +6,7 @@ const catchAsyncError = (fn: (req: NextRequest, res?: NextResponse) => any) => {
     try {
       return await fn(req, res);
     } catch (e) {
+      console.error(e);
       return sendNextResponse({
         status: 500,
         error: e,
