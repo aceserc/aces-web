@@ -1,0 +1,39 @@
+import React from "react";
+import NotFound from "@/components/screens/not-found";
+import { getEventBySlug } from "@/server-actions/events";
+import DetailPage from "@/components/screens/detail-page";
+
+
+type Props = {
+  params: Promise<{
+    id: string;
+  }>
+};
+
+const EventDetailPage = async ({ params }: Props) => {
+  const { id } = await params;
+  const event = await getEventBySlug(id);
+
+  if (!event) return <NotFound />;
+
+  const body = await event.body;
+
+  return (
+    <div className="mt-12">
+      <DetailPage
+        type="events"
+        title={event.title}
+        body={body}
+        createdAt={event.created_at}
+        thumbnail={event.cover_image}
+        location={event.location}
+        registrationUrl={event.registration_url}
+        duration={event.duration}
+        date={event.event_date}
+      />
+    </div>
+  );
+};
+
+export default EventDetailPage;
+

@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 
 /**
  * A hook that returns the height and width of the window
- * @returns {height: number, width: number} - The height and width of the window
  */
-export const useInnerSize = () => {
+const useInnerSize = () => {
   const [size, setSize] = useState({
     height: 0,
     width: 0,
@@ -24,3 +23,5 @@ export const useInnerSize = () => {
   }, []);
   return size;
 };
+
+export { useInnerSize };
