@@ -141,7 +141,7 @@ const DetailPage = (props: Props) => {
         src={props.thumbnail}
         alt={props.title.substring(0, 20) + "..."}
         className={cn(
-          "w-full border border-muted h-auto object-center rounded-xl mt-6 max-h-[550px] shadow-md max-w-7xl",
+          "w-full border border-muted h-auto object-center rounded-xl mt-6 min-h-40 sm:min-h-80 max-h-[550px] shadow-md max-w-7xl",
           props.type === "blogs"
             ? " object-cover"
             : "object-cover sm:object-contain"
@@ -169,4 +169,4 @@ const DetailPage = (props: Props) => {
   );
 };
 
-export default DetailPage;
+export { DetailPage };

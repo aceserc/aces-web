@@ -11,7 +11,6 @@ import {
 import { listAllSponsors } from "@/server-actions/sponsors";
 const Sponsors = async () => {
   const sponsors = await listAllSponsors();
-
   if (!sponsors || sponsors.length === 0) {
     return null;
   }

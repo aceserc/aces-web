@@ -37,7 +37,7 @@ export const CONTACT_LINKS = {
     href: "https://www.linkedin.com/company/acesioe-pc",
     icon: ICONS.linkedin,
   },
-};
+} as const;
 
 // developer contact links
 export const DEVS_CONTACT_LINKS = {

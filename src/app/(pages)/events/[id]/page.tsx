@@ -1,7 +1,8 @@
 import React from "react";
 import NotFound from "@/components/screens/not-found";
 import { getEventBySlug } from "@/server-actions/events";
-import DetailPage from "@/components/screens/detail-page";
+import { DetailPage } from "@/components/screens/detail-page";
+import { notionToMD } from "@/lib/notion";
 
 
 type Props = {
@@ -16,7 +17,7 @@ const EventDetailPage = async ({ params }: Props) => {
 
   if (!event) return <NotFound />;
 
-  const body = await event.body;
+  const body = await notionToMD(event.id);
 
   return (
     <div className="mt-12">

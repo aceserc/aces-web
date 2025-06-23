@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { Section } from "@/components/ui/section";
 import { listAllEvents } from "@/server-actions/events";
-import EventCard from "@/components/common/event-card";
+import { EventCard } from "@/components/common/event-card";
 
 const UpcomingEvents = async () => {
   const events = await listAllEvents();
@@ -42,4 +42,4 @@ const UpcomingEvents = async () => {
   );
 };
 
-export default UpcomingEvents;
+export { UpcomingEvents };

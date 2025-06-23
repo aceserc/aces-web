@@ -33,6 +33,9 @@ const ViewImage: React.FC<ViewImageProps> = ({
         onClick={() => setIndex(1)}
         {...props}
         className={cn("cursor-zoom-in", className)}
+        onError={(e) => {
+          e.currentTarget.src = "/404.png";
+        }}
       />
 
       <Lightbox

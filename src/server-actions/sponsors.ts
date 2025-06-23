@@ -19,17 +19,19 @@ export async function listAllSponsors() {
     (result): result is PageObjectResponse => result.object === "page"
   );
 
-  const sponsors = results.map((result) => {
-    return parseNotionProperties<{
-      name: string;
-      website: string;
-      logo: string;
-    }>(result, {
-      name: "title",
-      website: "url",
-      logo: "files",
-    });
-  });
+  const sponsors = await Promise.all(
+    results.map((result) => {
+      return parseNotionProperties<{
+        name: string;
+        website: string;
+        logo: string;
+      }>(result, {
+        name: "title",
+        website: "url",
+        logo: "files",
+      });
+    })
+  );
 
   return sponsors;
 }

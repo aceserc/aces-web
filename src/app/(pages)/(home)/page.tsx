@@ -1,7 +1,8 @@
+import { Testimonials } from "@/components/common/testimonails";
 import { About } from "./_components/about";
 import { Hero } from "./_components/hero";
 import { Sponsors } from "./_components/sponsors";
-import UpcomingEvents from "./_components/upcoming-events";
+import { UpcomingEvents } from "./_components/upcoming-events";
 
 
 const Home = () => {
@@ -15,11 +16,7 @@ const Home = () => {
       </section>
       <About />
       <UpcomingEvents />
-      {/* <Gallery /> */}
-      {/* <RecentBlogs /> */}
-      {/* <Testimonials /> */}
-      {/* <CurrentSponsors /> */}
-      {/* <PopupDialog /> */}
+      <Testimonials />
     </div>
   );
 };

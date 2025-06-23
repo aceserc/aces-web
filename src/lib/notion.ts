@@ -1,6 +1,6 @@
 import { Client, APIErrorCode, isNotionClientError } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { NotionConverter } from "notion-to-md";
+import { NotionToMarkdown } from "notion-to-md";
 
 export const notion = new Client({
   auth: process.env.NOTION_INTEGRATION_SECRET,
@@ -80,10 +80,11 @@ export const getSinglePage = async (
 
 export const notionToMD = async (pageId: string): Promise<string> => {
   try {
-    const n2m = new NotionConverter(notion);
-    const result = await n2m.convert(pageId);
-
-    return result.content;
+    const n2m = new NotionToMarkdown({ notionClient: notion });
+    const mdblocks = await n2m.pageToMarkdown(pageId);
+    const mdString = n2m.toMarkdownString(mdblocks);
+    console.log("mdString.parent", mdString.parent);
+    return mdString.parent;
   } catch (error) {
     console.error("Markdown conversion failed:", error);
     return "";

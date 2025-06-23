@@ -1,5 +1,5 @@
-import EventCard from "@/components/common/event-card";
-import MainLayout from "@/components/layout/main-layout";
+import { EventCard } from "@/components/common/event-card";
+import { MainLayout } from "@/components/layout/main-layout";
 import { listAllEvents } from "@/server-actions/events";
 
 const Events = async () => {

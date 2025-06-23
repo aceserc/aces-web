@@ -30,10 +30,10 @@ export const WHAT_WE_DO = [
 export const ACHIEVEMENTS = {
   desc: "ACES, a community of Computer Engineering students, has achieved several milestones since its establishment. We strive for excellence in various domains, contributing significantly to the growth and development of our members.",
   data: [
-    "Organized a national level software hackathon.",
-    "Provided extensive training programs for students from 1st to 4th year of Bachelors in Computer Engineering.",
-    "Hosted numerous competitions to enhance students' skills and knowledge.",
-    "Conducted podcast sessions with experts in the technical field.",
-    "Organized the annual Techfest, a platform for students to showcase their skills.",
+    "Organizing a national level software hackathon.",
+    "Providing extensive training programs for students",
+    "Hosting numerous competitions to enhance students' skills and knowledge.",
+    "Conducting podcast sessions with experts in the technical field.",
+    "Organizing the annual Techfest, a platform for students to showcase their skills.",
   ],
 };

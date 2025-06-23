@@ -19,23 +19,27 @@ export async function listAllEvents() {
     (result): result is PageObjectResponse => result.object === "page"
   );
 
-  const events = results.map((result) => {
-    return parseNotionProperties<Event>(result, {
-      title: "title",
-      location: "select",
-      registration_url: "url",
-      duration: "rich_text",
-      event_date: "date",
-      slug: "rich_text",
-      cover_image: "cover_image",
-      created_at: "created_time",
-    });
-  });
+  const events = await Promise.all(
+    results.map((result) => {
+      return parseNotionProperties<Event>(result, {
+        title: "title",
+        location: "select",
+        registration_url: "url",
+        duration: "rich_text",
+        event_date: "date",
+        slug: "rich_text",
+        cover_image: "cover_image",
+        created_at: "created_time",
+        id: "id",
+      });
+    })
+  );
 
   return events.filter((event) => event.slug);
 }
 
 export type Event = {
+  id: string;
   title: string;
   location: string;
   registration_url: string;
@@ -81,11 +85,7 @@ export const getEventBySlug = async (slug: string) => {
     return undefined;
   }
 
-  return parseNotionProperties<
-    Event & {
-      body: Promise<string>;
-    }
-  >(ev, {
+  return parseNotionProperties<Event>(ev, {
     title: "title",
     location: "select",
     registration_url: "url",
@@ -94,6 +94,6 @@ export const getEventBySlug = async (slug: string) => {
     slug: "rich_text",
     cover_image: "cover_image",
     created_at: "created_time",
-    body: "body",
+    id: "id",
   });
 };

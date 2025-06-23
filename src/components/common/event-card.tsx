@@ -53,4 +53,4 @@ const EventCard = ({
     </Link >
   );
 };
-export default EventCard;
+export { EventCard };
