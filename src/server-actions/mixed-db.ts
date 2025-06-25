@@ -18,12 +18,14 @@ export const getMixedDatabase = async () => {
     (result): result is PageObjectResponse => result.object === "page"
   );
 
-  const kv = results.map((result) => {
-    return parseNotionProperties<{ key: string; value: string }>(result, {
-      key: "title",
-      value: "rich_text",
-    });
-  });
+  const kv = await Promise.all(
+    results.map((result) => {
+      return parseNotionProperties<{ key: string; value: string }>(result, {
+        key: "title",
+        value: "rich_text",
+      });
+    })
+  );
 
   return Object.fromEntries(kv.map((entry) => [entry.key, entry.value]));
 };
