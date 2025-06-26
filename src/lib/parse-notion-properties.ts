@@ -4,7 +4,8 @@ type Schema = {
   [key: string]:
     | PageObjectResponse["properties"][string]["type"]
     | "cover_image"
-    | "id";
+    | "id"
+    | "files_array";
 };
 
 export const parseNotionProperties = async <T>(
@@ -54,6 +55,20 @@ export const parseNotionProperties = async <T>(
                 ? property.files[0].external.url
                 : ""
               : "";
+          break;
+
+        case "files_array":
+          const urls: string[] = [];
+          if (property.type === "files") {
+            property.files.forEach((file) => {
+              if (file.type === "file") {
+                urls.push(file.file.url);
+              } else if (file.type === "external") {
+                urls.push(file.external.url);
+              }
+            });
+          }
+          result[key] = urls;
           break;
 
         case "date":

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MainLayout } from "@/components/layout/main-layout";
 import { CONTACT_LINKS } from "@/constants/contact";
 import { SectionLayout } from "@/components/layout/section-layout";
-import Image from "next-export-optimize-images/image";
+import { Image } from "@/components/ui/image";
 import { ACHIEVEMENTS, WHAT_WE_DO } from "@/constants/about";
 import { CheckCircle2, Hexagon } from "lucide-react";
 import { Testimonials } from "@/components/common/testimonails";

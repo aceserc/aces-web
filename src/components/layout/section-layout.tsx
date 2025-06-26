@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Image from "next-export-optimize-images/image";
+import { Image } from "@/components/ui/image";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
