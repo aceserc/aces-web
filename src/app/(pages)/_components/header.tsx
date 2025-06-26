@@ -37,10 +37,10 @@ const HEADER_LINKS = [
     label: "Events",
     href: "/events",
   },
-  {
-    label: "Blogs",
-    href: "/blogs",
-  },
+  // {
+  //   label: "Blogs",
+  //   href: "/blogs",
+  // },
   {
     label: "Committee",
     href: "/committee",
@@ -49,10 +49,10 @@ const HEADER_LINKS = [
     label: "Gallery",
     href: "/gallery",
   },
-  {
-    label: "Certificates",
-    href: "/certificates",
-  }
+  // {
+  //   label: "Certificates",
+  //   href: "/certificates",
+  // }
 ];
 
 const Header = () => {
