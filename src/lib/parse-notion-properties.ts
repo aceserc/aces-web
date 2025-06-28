@@ -45,6 +45,13 @@ export const parseNotionProperties = async <T>(
         case "url":
           result[key] = property.type === "url" ? property.url || "" : "";
           break;
+        case "number":
+          result[key] = property.type === "number" ? property.number : 0;
+          break;
+
+        case "email":
+          result[key] = property.type === "email" ? property.email : "";
+          break;
 
         case "files":
           result[key] =
