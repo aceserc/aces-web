@@ -15,7 +15,7 @@ const TrainingCard = (props: Props) => {
       )}
     >
       <div className="lg:max-w-[238px] max-h-[160px] w-full overflow-hidden flex items-center justify-center h-full">
-        <Link href={`/blogs/${props.slug}`} className="w-full h-full">
+        <Link href={`/blogs/${props.slug}`} className="w-full h-full relative">
           <Image
             className="w-full rounded-md object-cover object-center h-full "
             src={props?.cover_image || ""}
