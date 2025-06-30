@@ -1,6 +1,5 @@
-import discord from "@/assets/icons/discord.svg";
 export const ICONS = {
-  discord,
+  discord: "/discord.svg",
   typescript: "https://www.svgrepo.com/show/349540/typescript.svg",
   flutter: "https://www.svgrepo.com/show/353751/flutter.svg",
   react: "https://www.svgrepo.com/show/452092/react.svg",

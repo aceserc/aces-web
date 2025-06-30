@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { ClerkProvider } from "@clerk/nextjs";
-import TopLoader from "@/components/reusable/top-loader";
 import { Toaster } from "sonner";
-import ReactQueryProvider from "@/providers/react-query-providers";
-import { DEVS_CONTACT_LINKS } from "@/constants/contacts.constants";
 import { GoogleAnalytics } from "@next/third-parties/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
+import { QueryProvider } from "@/provider/query-porvider";
+import { DEVS_CONTACT_LINKS } from "@/constants/contact";
 
 export default function RootLayout({
   children,
@@ -19,32 +15,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} overflow-x-hidden`}
+        className={`overflow-x-hidden`}
         suppressHydrationWarning
       >
-        <ReactQueryProvider>
-          <ClerkProvider
-            appearance={{
-              elements: {
-                footer: "hidden",
-              },
-            }}
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
           >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <TopLoader />
-              <GoogleAnalytics
-                gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
-              />
-            </ThemeProvider>
-            <Toaster richColors position="top-right" />
-          </ClerkProvider>
-        </ReactQueryProvider>
+            {children}
+            <NextjsTopLoader />
+            <GoogleAnalytics
+              gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
+            />
+          </ThemeProvider>
+          <Toaster richColors position="top-right" />
+        </QueryProvider>
       </body>
     </html>
   );
@@ -91,8 +79,7 @@ export const metadata: Metadata = {
   authors: Object.keys(DEVS_CONTACT_LINKS).map((key) => {
     return {
       name: key,
-      // @ts-ignore
-      url: DEVS_CONTACT_LINKS[key],
+      url: DEVS_CONTACT_LINKS[key as keyof typeof DEVS_CONTACT_LINKS],
     };
   }),
   category: "Engineering",
