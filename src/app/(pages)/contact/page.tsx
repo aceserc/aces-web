@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FAQs } from "./_components/faqs";
 import { FAQS } from "@/constants/faqs";
 import { ContactForm } from "./_components/contact-form";
+import { Metadata } from "next";
 
 const CONTACT_DETAILS = [
   {
@@ -80,3 +81,7 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+export const metadata: Metadata = {
+  title: "Contact | ACES"
+}

@@ -4,8 +4,8 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
-import { QueryProvider } from "@/provider/query-porvider";
 import { DEVS_CONTACT_LINKS } from "@/constants/contact";
+import { QueryProvider } from "@/provider/query-provider";
 
 export default function RootLayout({
   children,

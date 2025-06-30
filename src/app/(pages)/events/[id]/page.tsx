@@ -3,6 +3,7 @@ import NotFound from "@/components/screens/not-found";
 import { DetailPage } from "@/components/screens/detail-page";
 import { getCollection, getCollectionItemBySlug } from "@/lib/db";
 import { Event } from "@/lib/db/types";
+import { Metadata } from "next";
 
 
 type Props = {
@@ -44,4 +45,22 @@ export async function generateStaticParams() {
   return data.map((d) => ({
     id: d.slug,
   }));
+}
+
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { id } = await params;
+  const data = getCollectionItemBySlug("events", id) as Event;
+
+  return {
+    title: data.title!,
+    openGraph: {
+      title: data.title!,
+      images: [
+        {
+          url: data.cover_image!,
+        }
+      ]
+    }
+  }
 }

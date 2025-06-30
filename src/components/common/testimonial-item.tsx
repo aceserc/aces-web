@@ -5,6 +5,7 @@ import {
 import Link from "next/link";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -40,6 +41,7 @@ const TestimonialItem = async ({ t }: { t: Testimonial }) => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px]">
+                <DialogClose />
                 <DialogHeader>
                   <DialogTitle className="flex items-center gap-2.5 text-left">
                     <div>

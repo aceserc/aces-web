@@ -1,9 +1,11 @@
 import { MainLayout } from "@/components/layout/main-layout";
 import { TrainingCard } from "./_components/training-card";
 import { getCollection } from "@/lib/db";
+import { Training } from "@/lib/db/types";
+import { Metadata } from "next";
 
 const Trainings = async () => {
-  const trainings = getCollection("trainings")
+  const trainings = getCollection("trainings") as Training[]
 
   return (
     <MainLayout >
@@ -27,3 +29,7 @@ const Trainings = async () => {
 
 export default Trainings;
 
+
+export const metadata: Metadata = {
+  title: "Training and Workshop | ACES"
+}

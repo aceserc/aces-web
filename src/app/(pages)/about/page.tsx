@@ -7,6 +7,7 @@ import { Image } from "@/components/ui/image";
 import { ACHIEVEMENTS, WHAT_WE_DO } from "@/constants/about";
 import { CheckCircle2, Hexagon } from "lucide-react";
 import { Testimonials } from "@/components/common/testimonails";
+import { Metadata } from "next";
 
 const AboutPage = () => {
   return (
@@ -21,7 +22,7 @@ const AboutPage = () => {
                 width={192}
                 height={192}
                 quality={100}
-                className="h-36 w-36 md:h-48 md:w-48 rounded-full object-contain object-center "
+                className="h-36 w-36 md:h-48 md:w-48 rounded-full object-contain object-center bg-transparent"
               />
               <h3 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight ">
                 ACES
@@ -133,3 +134,7 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+export const metadata: Metadata = {
+  title: "About | ACES"
+}

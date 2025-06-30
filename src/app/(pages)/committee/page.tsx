@@ -2,6 +2,7 @@ import { MainLayout } from "@/components/layout/main-layout";
 import { MemberCard } from "./_components/member-card";
 import { getCollection } from "@/lib/db";
 import { Committee } from "@/lib/db/types"
+import { Metadata } from "next";
 const CommitteePage = () => {
   const members = getCollection("committee") as Committee[]
 
@@ -62,3 +63,7 @@ const CommitteePage = () => {
 };
 
 export default CommitteePage;
+
+export const metadata: Metadata = {
+  title: "Committee | ACES"
+}

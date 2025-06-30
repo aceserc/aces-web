@@ -1,9 +1,11 @@
 import { MainLayout } from "@/components/layout/main-layout";
 import { NoticeCard } from "./_components/notice-card";
 import { getCollection } from "@/lib/db";
+import { Notice } from "@/lib/db/types";
+import { Metadata } from "next";
 
 const Notices = () => {
-  const notices = getCollection("notices")
+  const notices = getCollection("notices") as Notice[]
 
   return (
     <MainLayout title="Notices">
@@ -27,3 +29,7 @@ const Notices = () => {
 };
 
 export default Notices;
+
+export const metadata: Metadata = {
+  title: "Notices | ACES"
+}
