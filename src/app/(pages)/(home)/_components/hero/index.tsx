@@ -1,5 +1,4 @@
 import React from "react";
-import heroImage from "@/assets/images/hero-image.png";
 import Image from 'next-export-optimize-images/image'
 import { Button } from "@/components/ui/button";
 import heroBlob from "@/assets/svg/hero-blob.svg";
@@ -40,7 +39,7 @@ const Hero = () => {
           </div>
           <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0 ">
             <Image
-              src={heroImage}
+              src={"/hero-image.png"}
               alt=""
               height={600}
               width={600}
