@@ -1,9 +1,9 @@
 import { MainLayout } from "@/components/layout/main-layout";
 import { NoticeCard } from "./_components/notice-card";
-import { listAllNotices } from "@/server-actions/notices";
+import { getCollection } from "@/lib/db";
 
-const Notices = async () => {
-  const notices = await listAllNotices()
+const Notices = () => {
+  const notices = getCollection("notices")
 
   return (
     <MainLayout title="Notices">

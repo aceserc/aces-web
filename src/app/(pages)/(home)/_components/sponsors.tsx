@@ -8,10 +8,11 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import { listAllSponsors } from "@/server-actions/sponsors";
 import Image from "next-export-optimize-images/image";
-const Sponsors = async () => {
-  const sponsors = await listAllSponsors();
+import { getCollection } from "@/lib/db";
+import { Sponsor } from "@/lib/db/types";
+const Sponsors = () => {
+  const sponsors = getCollection("sponsors") as Sponsor[];
   if (!sponsors || sponsors.length === 0) {
     return null;
   }

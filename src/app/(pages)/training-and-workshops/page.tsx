@@ -1,9 +1,9 @@
 import { MainLayout } from "@/components/layout/main-layout";
-import { listAllTrainings } from "@/server-actions/trainings";
 import { TrainingCard } from "./_components/training-card";
+import { getCollection } from "@/lib/db";
 
 const Trainings = async () => {
-  const trainings = await listAllTrainings();
+  const trainings = getCollection("trainings")
 
   return (
     <MainLayout >

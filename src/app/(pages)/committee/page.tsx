@@ -1,9 +1,9 @@
 import { MainLayout } from "@/components/layout/main-layout";
-import { listAllMembers, Member } from "@/server-actions/committee";
 import { MemberCard } from "./_components/member-card";
-
-const CommitteePage = async () => {
-  const members = await listAllMembers()
+import { getCollection } from "@/lib/db";
+import { Committee } from "@/lib/db/types"
+const CommitteePage = () => {
+  const members = getCollection("committee") as Committee[]
 
   let highestCommittee = 0;
 
@@ -20,7 +20,7 @@ const CommitteePage = async () => {
     }
 
     return acc;
-  }, {} as Record<number, Member[]>);
+  }, {} as Record<number, Committee[]>);
 
   // sort by weight lowest at top
   const currentCommittee = committees[highestCommittee].sort((a, b) => a.weight - b.weight)

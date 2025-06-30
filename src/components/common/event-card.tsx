@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Event } from "@/server-actions/events";
 import { cn } from "@/lib/utils";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "../ui/button";
 import { formatDistanceToNow } from "date-fns";
 import { Image } from "../ui/image";
+import { Event } from "@/lib/db/types";
 
 const EventCard = ({
   ...props
@@ -25,7 +25,7 @@ const EventCard = ({
         )}
         <div className="w-full sm:min-w-[400px] max-w-full  h-[200px] overflow-hidden">
           <Image
-            src={props.cover_image}
+            src={props.cover_image || ""}
             alt={props.title}
             className="rounded-t-md w-full h-full object-top object-cover"
             fetchPriority="low"
@@ -45,7 +45,7 @@ const EventCard = ({
               <ArrowRight className="h-3 w-3 md:h-5 md:w-5 relative group-hover:translate-x-2 transition-all" />
             </Button>
             <div>
-              {formatDistanceToNow((props.event_date), { addSuffix: true })}
+              {formatDistanceToNow((props.event_date || ""), { addSuffix: true })}
             </div>
           </div>
         </div>

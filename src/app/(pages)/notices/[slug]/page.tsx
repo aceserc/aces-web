@@ -1,7 +1,7 @@
 import { DetailPage } from "@/components/screens/detail-page";
 import NotFound from "@/components/screens/not-found";
-import { notionToMD } from "@/lib/notion";
-import { getNoticeBySlug, listAllNotices } from "@/server-actions/notices";
+import { getCollection, getCollectionItemBySlug } from "@/lib/db";
+import { Notice } from "@/lib/db/types";
 
 type Props = {
   params: Promise<{
@@ -12,20 +12,19 @@ type Props = {
 const NoticesDetailsPage = async ({ params }: Props) => {
   const { slug } = await params
 
-  const notice = await getNoticeBySlug(slug)
+  const notice = getCollectionItemBySlug("notices", slug) as Notice
 
   if (!notice) return <NotFound />;
 
-  const body = await notionToMD(notice.id);
 
   return (
     <div className="mt-12">
       <DetailPage
         type="notices"
         title={notice.title}
-        body={body}
+        body={notice.body}
         createdAt={notice.created_date}
-        thumbnail={notice.cover_image}
+        thumbnail={notice.cover_image || ""}
       />
     </div>
   );
@@ -34,7 +33,7 @@ const NoticesDetailsPage = async ({ params }: Props) => {
 export default NoticesDetailsPage;
 
 export async function generateStaticParams() {
-  const data = await listAllNotices();
+  const data = getCollection("notices") as Notice[]
 
   return data.map((d) => ({
     slug: d.slug,

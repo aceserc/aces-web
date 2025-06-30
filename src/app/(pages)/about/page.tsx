@@ -34,15 +34,12 @@ const AboutPage = () => {
                 IOE Purwanchal Campus, Dharan
               </div>
               <div className="flex items-center gap-3 pt-6">
-                {Object.keys(CONTACT_LINKS).map((key, i) => {
+                {Object.keys(CONTACT_LINKS).map((key,) => {
                   const contact = CONTACT_LINKS[key as keyof typeof CONTACT_LINKS];
                   return (
                     <Link
                       href={contact.href}
                       key={contact.type}
-                      style={{
-                        animationDelay: `${i * 50 + 200}ms`,
-                      }}
                     >
                       <Image
                         src={contact.icon}

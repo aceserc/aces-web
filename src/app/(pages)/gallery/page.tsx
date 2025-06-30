@@ -1,8 +1,9 @@
-import { listAllGalleryImages } from "@/server-actions/gallery";
+import { getCollection } from "@/lib/db";
 import { Gallery } from "./_components";
+import { Gallery as GalleryType } from "@/lib/db/types";
 
 async function Page() {
-  const images = await listAllGalleryImages()
+  const images = getCollection("gallery") as GalleryType[]
   console.log(images)
   return (
     <Gallery images={images.flatMap(i => i.images.map((img) => ({

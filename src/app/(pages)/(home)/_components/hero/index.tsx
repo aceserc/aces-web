@@ -6,10 +6,8 @@ import heroBlob from "@/assets/svg/hero-blob.svg";
 import heroShade from "@/assets/svg/hero-shade.svg";
 import Link from "next/link";
 import { FloatingHeroIcons } from "./floating-hero-icons";
-import { getMixedDatabase } from "@/server-actions/mixed-db";
 
-const Hero = async () => {
-  const mixed = await getMixedDatabase()
+const Hero = () => {
   return (
     <>
       <section id="hero" className="relative">
@@ -30,14 +28,14 @@ const Hero = async () => {
               <Link href="/about">
                 <Button>Find Out More</Button>
               </Link>
-              {mixed["register_now"] &&
-                <Link href={mixed["register_now"]} target="_blank">
-                  <Button
-                    variant="secondary"
-                  >
-                    Register Now
-                  </Button>
-                </Link>}
+
+              <Link href={"#"} target="_blank" >
+                <Button
+                  variant="secondary"
+                >
+                  Register Now
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="flex-grow flex items-center justify-end relative p-4 lg:min-h-[472px] xl:min-h-0 ">

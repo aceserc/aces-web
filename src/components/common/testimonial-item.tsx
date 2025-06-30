@@ -16,12 +16,10 @@ import toText from "markdown-to-text"
 import { Button } from "../ui/button";
 import { Avatar } from "../ui/avatar";
 import { cn } from "@/lib/utils";
-import { Testimonial } from "@/server-actions/testimonials";
-import { notionToMD } from "@/lib/notion";
+import { Testimonial } from "@/lib/db/types";
 
 const TestimonialItem = async ({ t }: { t: Testimonial }) => {
-  const body = await notionToMD(t.id)
-  const txt = toText(body)
+  const txt = toText(t.body)
   return (
     <CarouselItem className="max-w-fit h-full">
       <div className="relative rounded-lg h-full shadow max-w-sm px-8 py-4 md:px-10 md:py-10 leading-snug gap-4 flex flex-col justify-between">
@@ -34,7 +32,7 @@ const TestimonialItem = async ({ t }: { t: Testimonial }) => {
               ? txt.slice(0, 150) + "..."
               : txt}
           </span>
-          {body.length > 150 && (
+          {t.body.length > 150 && (
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={"link"} className="opacity-85 ml-1 text-sm">
@@ -66,7 +64,7 @@ const TestimonialItem = async ({ t }: { t: Testimonial }) => {
                   </DialogTitle>
                 </DialogHeader>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  {body}
+                  {t.body}
                 </p>
               </DialogContent>
             </Dialog>

@@ -7,11 +7,12 @@ import {
 } from "@/components/ui/carousel";
 
 import { Section } from "../ui/section";
-import { listAllTestimonials } from "@/server-actions/testimonials";
 import { TestimonialItem } from "./testimonial-item";
+import { getCollection } from "@/lib/db";
+import { Testimonial } from "@/lib/db/types";
 
 const Testimonials = async () => {
-  const data = await listAllTestimonials();
+  const data = getCollection("testimonials") as Testimonial[]
   if (!data || data.length === 0) return null;
   return (
     <>

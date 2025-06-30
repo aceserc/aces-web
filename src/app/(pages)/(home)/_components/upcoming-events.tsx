@@ -8,11 +8,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Section } from "@/components/ui/section";
-import { listAllEvents } from "@/server-actions/events";
 import { EventCard } from "@/components/common/event-card";
+import { getCollection } from "@/lib/db";
+import { Event } from "@/lib/db/types";
 
-const UpcomingEvents = async () => {
-  const events = await listAllEvents();
+const UpcomingEvents = () => {
+  const events = getCollection("events") as Event[]
 
   if (!events || events.length === 0) {
     return null;

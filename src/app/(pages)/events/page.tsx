@@ -1,9 +1,10 @@
 import { EventCard } from "@/components/common/event-card";
 import { MainLayout } from "@/components/layout/main-layout";
-import { listAllEvents } from "@/server-actions/events";
+import { getCollection } from "@/lib/db";
+import { Event } from "@/lib/db/types";
 
-const Events = async () => {
-  const events = await listAllEvents();
+const Events = () => {
+  const events = getCollection("events") as Event[]
   return (
     <MainLayout title="Events">
       <div className="grid grid-cols-1 mx-auto gap-6 mt-12 w-full sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">

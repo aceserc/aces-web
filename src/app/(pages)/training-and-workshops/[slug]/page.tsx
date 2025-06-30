@@ -1,7 +1,7 @@
 import { DetailPage } from "@/components/screens/detail-page";
 import NotFound from "@/components/screens/not-found";
-import { notionToMD } from "@/lib/notion";
-import { getTrainingBySlug, listAllTrainings } from "@/server-actions/trainings";
+import { getCollection, getCollectionItemBySlug } from "@/lib/db";
+import { Training } from "@/lib/db/types";
 import React from "react";
 
 type Props = {
@@ -12,10 +12,9 @@ type Props = {
 
 const Page = async ({ params }: Props) => {
   const { slug } = await params;
-  const data = await getTrainingBySlug(slug);
+  const data = getCollectionItemBySlug("trainings", slug) as Training
 
   if (!data) return <NotFound />;
-  const body = await notionToMD(data.id);
   return (
     <div className="mt-12">
       <DetailPage
@@ -23,8 +22,8 @@ const Page = async ({ params }: Props) => {
         title={data.title!}
         metaDescription={data?.description}
         createdAt={data?.created_at}
-        body={body}
-        thumbnail={data?.thumbnail}
+        body={data.body}
+        thumbnail={data?.cover_image || ""}
         duration={data?.duration}
       />
     </div>
@@ -35,7 +34,7 @@ export default Page;
 
 
 export async function generateStaticParams() {
-  const data = await listAllTrainings();
+  const data = getCollection("trainings") as Training[]
 
   return data.map((d) => ({
     slug: d.slug,

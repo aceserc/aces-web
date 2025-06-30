@@ -1,20 +1,19 @@
 import React from "react";
 import readingTime from "reading-time";
-import { Author } from "@/server-actions/blogs";
 import { Calendar, MapPin, Timer } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ViewImage from "../common/view-image";
 import { formatDistanceToNow, format } from "date-fns";
 import { Link } from "../ui/link";
 import { MDX } from "../ui/mdx";
-import { Avatar } from "../ui/avatar";
+// import { Avatar } from "../ui/avatar";
 
 type Props = {
   type: "blogs" | "notices" | "events" | "training";
   tags?: Array<string>;
   title: string;
   metaDescription?: string;
-  author?: Author;
+  // author?: Author;
   createdAt: string;
   body: string;
   thumbnail: string;
@@ -53,7 +52,7 @@ const DetailPage = (props: Props) => {
             {props.metaDescription}
           </p>
         )}
-        {props.author && props.type === "blogs" && (
+        {/* {props.author && props.type === "blogs" && (
           <div className="flex items-center justify-center gap-4 mt-4">
             <Link
               href={props.author.contact}
@@ -88,7 +87,7 @@ const DetailPage = (props: Props) => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         {props.createdAt && (
           <div className="flex items-center gap-1.5 text-muted-foreground">
             <p>

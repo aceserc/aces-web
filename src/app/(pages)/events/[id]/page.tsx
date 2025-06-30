@@ -1,8 +1,8 @@
 import React from "react";
 import NotFound from "@/components/screens/not-found";
-import { getEventBySlug, listAllEvents } from "@/server-actions/events";
 import { DetailPage } from "@/components/screens/detail-page";
-import { notionToMD } from "@/lib/notion";
+import { getCollection, getCollectionItemBySlug } from "@/lib/db";
+import { Event } from "@/lib/db/types";
 
 
 type Props = {
@@ -13,20 +13,19 @@ type Props = {
 
 const EventDetailPage = async ({ params }: Props) => {
   const { id } = await params;
-  const event = await getEventBySlug(id);
+  const event = getCollectionItemBySlug("events", id) as Event
 
   if (!event) return <NotFound />;
 
-  const body = await notionToMD(event.id);
 
   return (
     <div className="mt-12">
       <DetailPage
         type="events"
         title={event.title}
-        body={body}
-        createdAt={event.created_at}
-        thumbnail={event.cover_image}
+        body={event.body}
+        createdAt={event.created_at || ""}
+        thumbnail={event.cover_image || ""}
         location={event.location}
         registrationUrl={event.registration_url}
         duration={event.duration}
@@ -40,7 +39,7 @@ export default EventDetailPage;
 
 
 export async function generateStaticParams() {
-  const data = await listAllEvents();
+  const data = getCollection("events") as Event[]
 
   return data.map((d) => ({
     id: d.slug,

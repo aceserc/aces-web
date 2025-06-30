@@ -305,12 +305,12 @@ const main = async () => {
 
     fs.writeFileSync(
       `./src/.generated/notion/${config.id}.json`,
-      JSON.stringify({
-        pages: parsedProperties.map((page) => ({
+      JSON.stringify(
+        parsedProperties.map((page) => ({
           ...page,
           body: md[page.id],
-        })),
-      })
+        }))
+      )
     );
   }
 };
