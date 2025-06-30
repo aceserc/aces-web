@@ -1,7 +1,7 @@
 "use client";
 
 import { CONTACT_LINKS, DEVS_CONTACT_LINKS } from "@/constants/contact";
-import Image from "next-export-optimize-images/image";
+import Image from "next/image";
 import Link from "next/link";
 import React, { Fragment } from "react";
 

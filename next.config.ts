@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
-import withExportImages from "next-export-optimize-images";
+// import withExportImages from "next-export-optimize-images";
 
-const nextConfig: NextConfig = withExportImages({
+// const nextConfig: NextConfig = withExportImages({
+const nextConfig: NextConfig = {
   output: process.env.NODE_ENV === "production" ? "export" : "standalone",
   /* config options here */
   images: {
@@ -16,6 +17,6 @@ const nextConfig: NextConfig = withExportImages({
       },
     ],
   },
-});
+};
 
 export default nextConfig;

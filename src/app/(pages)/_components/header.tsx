@@ -15,7 +15,7 @@ import { ChevronDownIcon, MenuIcon, X } from "lucide-react";
 import { useIsScrolled } from "@/hooks/use-is-scrolled";
 import { useInnerSize } from "@/hooks/use-inner-size";
 import { CONTACT_LINKS } from "@/constants/contact";
-import Image from "next-export-optimize-images/image";
+import Image from "next/image";
 
 const HEADER_LINKS = [
   {

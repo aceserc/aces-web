@@ -8,7 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "@/components/ui/tooltip";
-import Image from "next-export-optimize-images/image";
+import Image from "next/image";
 import { getCollection } from "@/lib/db";
 import { Sponsor } from "@/lib/db/types";
 const Sponsors = () => {
