@@ -46,3 +46,4 @@ next-env.d.ts
 .notion-to-md
 
 export-images.config.js
+.generated

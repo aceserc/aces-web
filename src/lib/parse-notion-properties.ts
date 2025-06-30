@@ -1,6 +1,6 @@
 import { PageObjectResponse } from "@notionhq/client";
 
-type Schema = {
+export type ParseNotionPropertiesSchema = {
   [key: string]:
     | PageObjectResponse["properties"][string]["type"]
     | "cover_image"
@@ -10,7 +10,7 @@ type Schema = {
 
 export const parseNotionProperties = async <T>(
   data: PageObjectResponse,
-  schema: Schema
+  schema: ParseNotionPropertiesSchema
 ) => {
   const result: { [key: string]: unknown } = {};
 
