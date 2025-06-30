@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -25,7 +24,7 @@ export async function listAllGalleryImages() {
     (result): result is PageObjectResponse => result.object === "page"
   );
 
-  const sponsors = await Promise.all(
+  const data = await Promise.all(
     results.map((result) => {
       return parseNotionProperties<{
         tag: string;
@@ -39,5 +38,7 @@ export async function listAllGalleryImages() {
     })
   );
 
-  return sponsors;
+  await addRemoteImage(data.flatMap((d) => d.images));
+
+  return data;
 }

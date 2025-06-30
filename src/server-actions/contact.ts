@@ -1,5 +1,3 @@
-"use server";
-
 import { ContactValidationSchema } from "@/validations/contact";
 import { z } from "zod";
 import nodemailer from "nodemailer";

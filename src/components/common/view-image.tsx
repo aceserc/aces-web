@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import {
@@ -13,8 +13,9 @@ import {
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import { cn } from "@/lib/utils";
+import { Image } from "../ui/image";
 
-type ViewImageProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
+type ViewImageProps = Omit<React.ComponentProps<typeof Image>, "src"> & {
   src: string;
 }
 
@@ -27,15 +28,12 @@ const ViewImage: React.FC<ViewImageProps> = ({
   const [index, setIndex] = useState<number>(-1);
   return (
     <>
-      <img
-        src={src}
-        alt={alt}
+      <Image
+        src={src || "/404.png"}
+        alt={alt || ""}
         onClick={() => setIndex(1)}
         {...props}
         className={cn("cursor-zoom-in", className)}
-        onError={(e) => {
-          e.currentTarget.src = "/404.png";
-        }}
       />
 
       <Lightbox

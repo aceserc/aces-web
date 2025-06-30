@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -30,6 +29,8 @@ export async function listAllTestimonials() {
       });
     })
   );
+
+  await addRemoteImage(testimonials.map((t) => t.avatar));
 
   return testimonials;
 }

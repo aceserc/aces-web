@@ -49,7 +49,7 @@ const AboutPage = () => {
                         alt={contact.type}
                         width={42}
                         height={42}
-                        className="h-8 w-8 lg:w-10 lg:h-10 hover:scale-105 transition-transform"
+                        className="h-8 w-8 lg:w-10 lg:h-10 hover:scale-105 transition-transform bg-transparent"
                       />
                     </Link>
                   );

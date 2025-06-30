@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -35,7 +34,9 @@ export async function listAllEvents() {
     })
   );
 
-  return events.filter((event) => event.slug);
+  const filteredEvents = events.filter((event) => event.slug);
+  await addRemoteImage(filteredEvents.map((f) => f.cover_image));
+  return filteredEvents;
 }
 
 export type Event = {
@@ -85,7 +86,7 @@ export const getEventBySlug = async (slug: string) => {
     return undefined;
   }
 
-  return parseNotionProperties<Event>(ev, {
+  const data = await parseNotionProperties<Event>(ev, {
     title: "title",
     location: "select",
     registration_url: "url",
@@ -96,4 +97,8 @@ export const getEventBySlug = async (slug: string) => {
     created_at: "created_time",
     id: "id",
   });
+
+  await addRemoteImage([data.cover_image]);
+
+  return data;
 };

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# public
+/public/static/*
+
+.notion-to-md
+
+export-images.config.js

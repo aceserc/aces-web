@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -33,7 +32,11 @@ export async function listAllTrainings() {
     })
   );
 
-  return trainings.filter((training) => training.slug);
+  const filtered = trainings.filter((training) => training.slug);
+
+  await addRemoteImage(filtered.map((training) => training.thumbnail));
+
+  return filtered;
 }
 
 export type Training = {
@@ -81,7 +84,7 @@ export const getTrainingBySlug = async (slug: string) => {
     return undefined;
   }
 
-  return parseNotionProperties<Training>(ev, {
+  const data = await parseNotionProperties<Training>(ev, {
     title: "title",
     id: "id",
     description: "rich_text",
@@ -90,4 +93,7 @@ export const getTrainingBySlug = async (slug: string) => {
     thumbnail: "cover_image",
     duration: "rich_text",
   });
+
+  await addRemoteImage(data.thumbnail);
+  return data;
 };

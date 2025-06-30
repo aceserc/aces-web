@@ -1,7 +1,7 @@
 import { DetailPage } from "@/components/screens/detail-page";
 import NotFound from "@/components/screens/not-found";
 import { notionToMD } from "@/lib/notion";
-import { getTrainingBySlug } from "@/server-actions/trainings";
+import { getTrainingBySlug, listAllTrainings } from "@/server-actions/trainings";
 import React from "react";
 
 type Props = {
@@ -33,3 +33,11 @@ const Page = async ({ params }: Props) => {
 
 export default Page;
 
+
+export async function generateStaticParams() {
+  const data = await listAllTrainings();
+
+  return data.map((d) => ({
+    slug: d.slug,
+  }));
+}

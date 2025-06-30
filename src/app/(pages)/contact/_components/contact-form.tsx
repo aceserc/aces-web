@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { ContactValidationSchema } from "@/validations/contact";
 import { z } from "zod";
 import { useState } from "react";
-import { sendContactEmail } from "@/server-actions/contact";
+// import { sendContactEmail } from "@/server-actions/contact";
 import { SendHorizonal } from "lucide-react";
 
 const FormSchema = ContactValidationSchema
@@ -39,7 +39,8 @@ const ContactForm = () => {
     try {
       /** Handle form submission here */
       setIsLoading(true)
-      await sendContactEmail(values)
+      // await sendContactEmail(values)
+      console.log(values)
       toast.success("Thank you for your message. We will reply to you as soon as possible.");
       form.reset();
     } catch {

@@ -1,7 +1,7 @@
 import { DetailPage } from "@/components/screens/detail-page";
 import NotFound from "@/components/screens/not-found";
 import { notionToMD } from "@/lib/notion";
-import { getNoticeBySlug } from "@/server-actions/notices";
+import { getNoticeBySlug, listAllNotices } from "@/server-actions/notices";
 
 type Props = {
   params: Promise<{
@@ -33,3 +33,10 @@ const NoticesDetailsPage = async ({ params }: Props) => {
 
 export default NoticesDetailsPage;
 
+export async function generateStaticParams() {
+  const data = await listAllNotices();
+
+  return data.map((d) => ({
+    slug: d.slug,
+  }));
+}

@@ -15,6 +15,7 @@ import { ChevronDownIcon, MenuIcon, X } from "lucide-react";
 import { useIsScrolled } from "@/hooks/use-is-scrolled";
 import { useInnerSize } from "@/hooks/use-inner-size";
 import { CONTACT_LINKS } from "@/constants/contact";
+import Image from "next-export-optimize-images/image";
 
 const HEADER_LINKS = [
   {
@@ -122,7 +123,7 @@ const Header = () => {
               href={CONTACT_LINKS.discord.href}
               className="hidden sm:block"
             >
-              <img
+              <Image
                 src={CONTACT_LINKS.discord.icon}
                 alt="Discord"
                 height={32}
@@ -197,7 +198,7 @@ const Header = () => {
             </Button>
           </Link>
           <Link target="_blank" href={CONTACT_LINKS.discord.href}>
-            <img
+            <Image
               src={CONTACT_LINKS.discord.icon}
               alt="Discord"
               height={32}

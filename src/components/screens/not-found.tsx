@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
 // import img from "@/assets/images/404.png";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ChevronLeft, HomeIcon } from "lucide-react";

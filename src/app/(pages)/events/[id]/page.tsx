@@ -1,6 +1,6 @@
 import React from "react";
 import NotFound from "@/components/screens/not-found";
-import { getEventBySlug } from "@/server-actions/events";
+import { getEventBySlug, listAllEvents } from "@/server-actions/events";
 import { DetailPage } from "@/components/screens/detail-page";
 import { notionToMD } from "@/lib/notion";
 
@@ -38,3 +38,11 @@ const EventDetailPage = async ({ params }: Props) => {
 
 export default EventDetailPage;
 
+
+export async function generateStaticParams() {
+  const data = await listAllEvents();
+
+  return data.map((d) => ({
+    id: d.slug,
+  }));
+}

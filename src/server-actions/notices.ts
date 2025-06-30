@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -19,7 +18,7 @@ export async function listAllNotices() {
     (result): result is PageObjectResponse => result.object === "page"
   );
 
-  const Notices = await Promise.all(
+  const notices = await Promise.all(
     results.map((result) => {
       return parseNotionProperties<Notice>(result, {
         title: "title",
@@ -31,7 +30,9 @@ export async function listAllNotices() {
     })
   );
 
-  return Notices.filter((Notice) => Notice.slug);
+  const filtered = notices.filter((notice) => notice.slug);
+  await addRemoteImage(filtered.map((f) => f.cover_image));
+  return filtered;
 }
 
 export type Notice = {
@@ -77,11 +78,14 @@ export const getNoticeBySlug = async (slug: string) => {
     return undefined;
   }
 
-  return parseNotionProperties<Notice>(ev, {
+  const res = await parseNotionProperties<Notice>(ev, {
     title: "title",
     slug: "rich_text",
     cover_image: "cover_image",
     created_date: "created_time",
     id: "id",
   });
+
+  await addRemoteImage([res.cover_image]);
+  return res;
 };

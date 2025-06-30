@@ -23,6 +23,14 @@ export const parseNotionProperties = async <T>(
       continue;
     }
 
+    if (type === "cover_image") {
+      result[key] =
+        data.cover?.type === "external"
+          ? data.cover.external.url
+          : data.cover?.file.url || "";
+      continue;
+    }
+
     if (!property) {
       console.log(`Property ${key} not found`);
       result[key] = "";
@@ -90,13 +98,6 @@ export const parseNotionProperties = async <T>(
             property.type === "select" && property.select
               ? property.select.name
               : "";
-          break;
-
-        case "cover_image":
-          result[key] =
-            data.cover?.type === "external"
-              ? data.cover.external.url
-              : data.cover?.file.url || "";
           break;
 
         case "created_time":

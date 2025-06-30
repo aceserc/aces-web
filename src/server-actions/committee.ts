@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -35,6 +34,11 @@ export async function listAllMembers() {
       });
     })
   );
+
+  await addRemoteImage(
+    members.map((m) => m.avatar).filter((a) => a !== undefined)
+  );
+
   return members
     .filter((event) => event.committee)
     .map((c) => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { CONTACT_LINKS, DEVS_CONTACT_LINKS } from "@/constants/contact";
+import Image from "next-export-optimize-images/image";
 import Link from "next/link";
 import React, { Fragment } from "react";
 
@@ -46,7 +47,7 @@ const Footer = () => {
                       target="_blank"
                       className="hover:scale-110 transition-transform"
                     >
-                      <img src={item.icon} alt={key} width={24} height={24} />
+                      <Image src={item.icon} alt={key} width={24} height={24} />
                     </Link>
                   );
                 })}

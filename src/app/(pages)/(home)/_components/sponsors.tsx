@@ -9,6 +9,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import { listAllSponsors } from "@/server-actions/sponsors";
+import Image from "next-export-optimize-images/image";
 const Sponsors = async () => {
   const sponsors = await listAllSponsors();
   if (!sponsors || sponsors.length === 0) {
@@ -36,12 +37,14 @@ const Sponsors = async () => {
             >
               <TooltipTrigger>
                 <Link href={sponsor.website ?? "#"} target="_blank" className={cn(!sponsor.website && "cursor-default pointer-events-none")}>
-                  <img
+                  <Image
                     src={sponsor.logo}
                     alt={sponsor.name}
                     className="mx-4 md:mx-8 object-contain object-center aspect-square h-12 md:h-16 rounded-md"
                     loading="lazy"
                     fetchPriority="low"
+                    height={100}
+                    width={100}
                   />
                 </Link>
               </TooltipTrigger>

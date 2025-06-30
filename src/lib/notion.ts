@@ -1,7 +1,8 @@
 import { Client, APIErrorCode, isNotionClientError } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { NotionToMarkdown } from "notion-to-md";
-
+import { NotionConverter } from "notion-to-md";
+import { DefaultExporter } from "notion-to-md/plugins/exporter";
+import path from "path";
 export const notion = new Client({
   auth: process.env.NOTION_INTEGRATION_SECRET,
 });
@@ -80,11 +81,26 @@ export const getSinglePage = async (
 
 export const notionToMD = async (pageId: string): Promise<string> => {
   try {
-    const n2m = new NotionToMarkdown({ notionClient: notion });
-    const mdblocks = await n2m.pageToMarkdown(pageId);
-    const mdString = n2m.toMarkdownString(mdblocks);
-    console.log("mdString.parent", mdString.parent);
-    return mdString.parent;
+    // Create a NotionConverter instance
+    const buffer: Record<string, string> = {};
+    // Convert the page
+    const exporter = new DefaultExporter({
+      outputType: "buffer",
+      buffer: buffer,
+    });
+
+    const n2m = new NotionConverter(notion)
+      .withExporter(exporter)
+      .downloadMediaTo({
+        outputDir: "./public/static",
+        transformPath: (localPath) => `/static/${path.basename(localPath)}`,
+        enableFor: ["database_property", "block", "page_property"],
+        preserveExternalUrls: true,
+      });
+
+    await n2m.convert(pageId);
+
+    return buffer[pageId];
   } catch (error) {
     console.error("Markdown conversion failed:", error);
     return "";

@@ -7,6 +7,7 @@ import ViewImage from "../common/view-image";
 import { formatDistanceToNow, format } from "date-fns";
 import { Link } from "../ui/link";
 import { MDX } from "../ui/mdx";
+import { Avatar } from "../ui/avatar";
 
 type Props = {
   type: "blogs" | "notices" | "events" | "training";
@@ -59,10 +60,10 @@ const DetailPage = (props: Props) => {
               target="_blank"
               className="flex w-10 h-10 rounded-full overflow-hidden"
             >
-              <img
+              <Avatar
                 src={props.author.avatar}
-                alt="user"
-                className="w-full h-full rounded-full object-center object-cover"
+                alt={props.author.name}
+                size={"xl"}
               />
             </Link>
             <div className="text-left">

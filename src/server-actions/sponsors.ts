@@ -1,5 +1,4 @@
-"use server";
-
+import addRemoteImage from "@/lib/add-remote-image";
 import { notion } from "@/lib/notion";
 import { parseNotionProperties } from "@/lib/parse-notion-properties";
 import { PageObjectResponse } from "@notionhq/client";
@@ -32,6 +31,8 @@ export async function listAllSponsors() {
       });
     })
   );
+
+  await addRemoteImage(sponsors.map((s) => s.logo));
 
   return sponsors;
 }
