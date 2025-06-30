@@ -1,7 +1,6 @@
 import { ICONS } from "@/assets/icons/svg-repo";
 import generateUniqueRandomNumbers from "@/lib/generate-unique-random-numbers";
 import { cn } from "@/lib/utils";
-import Image from "next-export-optimize-images/image";
 import React from "react";
 
 const FloatingHeroIcons = () => {
@@ -51,7 +50,7 @@ const FloatingHeroIcons = () => {
           right: "1%",
         },
       ].map((style, i) => (
-        <Image
+        <img
           src={iconsToShow[i]}
           key={i}
           height={40}
