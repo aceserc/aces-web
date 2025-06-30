@@ -7,6 +7,7 @@ import { Image } from "@/components/ui/image";
 import { ACHIEVEMENTS, WHAT_WE_DO } from "@/constants/about";
 import { CheckCircle2, Hexagon } from "lucide-react";
 import { Testimonials } from "@/components/common/testimonails";
+import { Metadata } from "next";
 
 const AboutPage = () => {
   return (
@@ -133,3 +134,7 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+export const metadata: Metadata = {
+  title: "About | ACES"
+}

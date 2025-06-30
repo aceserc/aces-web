@@ -1,6 +1,7 @@
 import { getCollection } from "@/lib/db";
 import { Gallery } from "./_components";
 import { Gallery as GalleryType } from "@/lib/db/types";
+import { Metadata } from "next";
 
 async function Page() {
   const images = getCollection("gallery") as GalleryType[]
@@ -15,3 +16,7 @@ async function Page() {
 }
 
 export default Page;
+
+export const metadata: Metadata = {
+  title: "Gallery | ACES"
+}

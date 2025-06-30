@@ -2,6 +2,7 @@ import { EventCard } from "@/components/common/event-card";
 import { MainLayout } from "@/components/layout/main-layout";
 import { getCollection } from "@/lib/db";
 import { Event } from "@/lib/db/types";
+import { Metadata } from "next";
 
 const Events = () => {
   const events = getCollection("events") as Event[]
@@ -27,3 +28,7 @@ const Events = () => {
 };
 
 export default Events;
+
+export const metadata: Metadata = {
+  title: "Events | ACES"
+}
