@@ -1,6 +1,6 @@
 import { Image } from "@/components/ui/image";
+import { Training } from "@/lib/db/types";
 import { cn } from "@/lib/utils";
-import { Training } from "@/server-actions/trainings";
 import Link from "next/link";
 import React from "react";
 
@@ -18,7 +18,7 @@ const TrainingCard = (props: Props) => {
         <Link href={`/blogs/${props.slug}`} className="w-full h-full">
           <Image
             className="w-full rounded-md object-cover object-center h-full "
-            src={props?.thumbnail}
+            src={props?.cover_image || ""}
             alt={props.title}
             fetchPriority="low"
             loading="lazy"
@@ -35,7 +35,7 @@ const TrainingCard = (props: Props) => {
         </Link>
         <p className="text-sm text-muted-foreground">
           {props.description?.substring(0, descriptionLength)}
-          {props.description?.length > descriptionLength ? "..." : ""}
+          {(props.description?.length || 0) > descriptionLength ? "..." : ""}
         </p>
         <div className="flex items-center gap-2.5 mt-2">
           {props.duration && (

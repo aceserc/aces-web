@@ -1,15 +1,13 @@
 import { Avatar } from "@/components/ui/avatar";
+import { Committee } from "@/lib/db/types";
 import { cn } from "@/lib/utils";
-import { Member } from "@/server-actions/committee";
 import { ExternalLink, FacebookIcon, LinkedinIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-type Props = Member
+type Props = Committee
 
 const MemberCard = (props: Props) => {
-
-  console.log(props);
 
   const hasTopCommitteePost = props.role.toLowerCase() === "president" || props.role.toLowerCase() === "adviser";
   return (

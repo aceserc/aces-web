@@ -1,9 +1,10 @@
 import { MainLayout } from "@/components/layout/main-layout";
 import { TrainingCard } from "./_components/training-card";
 import { getCollection } from "@/lib/db";
+import { Training } from "@/lib/db/types";
 
 const Trainings = async () => {
-  const trainings = getCollection("trainings")
+  const trainings = getCollection("trainings") as Training[]
 
   return (
     <MainLayout >

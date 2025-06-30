@@ -1,6 +1,6 @@
 import { Image } from "@/components/ui/image";
+import { Notice } from "@/lib/db/types";
 import { cn } from "@/lib/utils";
-import { Notice } from "@/server-actions/notices";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ const NoticeCard = ({
     >
       <div className="w-full sm:min-w-[350px] max-w-full sm:w-[350px] h-[200px] xs:h-[280px] overflow-hidden shadow-inner flex items-center justify-center">
         <Image
-          src={props.cover_image}
+          src={props.cover_image || ""}
           alt={props.title}
           className="rounded-t-md w-full h-full object-top object-cover"
         />

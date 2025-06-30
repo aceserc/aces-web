@@ -1,9 +1,10 @@
 import { MainLayout } from "@/components/layout/main-layout";
 import { NoticeCard } from "./_components/notice-card";
 import { getCollection } from "@/lib/db";
+import { Notice } from "@/lib/db/types";
 
 const Notices = () => {
-  const notices = getCollection("notices")
+  const notices = getCollection("notices") as Notice[]
 
   return (
     <MainLayout title="Notices">
