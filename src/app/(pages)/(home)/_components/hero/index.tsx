@@ -1,8 +1,6 @@
 import React from "react";
 import Image from 'next-export-optimize-images/image'
 import { Button } from "@/components/ui/button";
-import heroBlob from "@/assets/svg/hero-blob.svg";
-import heroShade from "@/assets/svg/hero-shade.svg";
 import Link from "next/link";
 import { FloatingHeroIcons } from "./floating-hero-icons";
 
@@ -54,7 +52,7 @@ const Hero = () => {
         {/* hero blob */}
 
         <Image
-          src={heroBlob}
+          src={"/hero-blob.svg"}
           quality={100}
           height={400}
           width={400}
@@ -65,7 +63,7 @@ const Hero = () => {
         />
       </section>
       <Image
-        src={heroShade}
+        src={"/hero-shade.svg"}
         quality={100}
         height={400}
         width={400}
