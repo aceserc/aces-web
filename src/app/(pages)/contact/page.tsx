@@ -3,7 +3,7 @@ import { Facebook, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { FAQs } from "./_components/faqs";
 import { FAQS } from "@/constants/faqs";
-import { ContactForm } from "./_components/contact-form";
+// import { ContactForm } from "./_components/contact-form";
 import { Metadata } from "next";
 
 const CONTACT_DETAILS = [
@@ -36,7 +36,7 @@ const ContactPage = () => {
             <p className="text-lg opacity-80">We are a here to help.</p>
           </div>
           <hr className="opacity-50" />
-          <div className="grid mt-10 md:grid-cols-2 gap-6">
+          <div className="grid mt-10 md:grid-cols-1 gap-6 items-center justify-center text-center mx-auto">
             <div className="md:my-10">
               <h2 className="text-2xl font-semibold">
                 ACES
@@ -59,9 +59,9 @@ const ContactPage = () => {
                 ))}
               </div>
             </div>
-            <div className="sm:mt-10">
+            {/* <div className="sm:mt-10">
               <ContactForm />
-            </div>
+            </div> */}
           </div>
           <hr className="my-9" />
           <iframe
