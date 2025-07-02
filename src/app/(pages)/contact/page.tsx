@@ -37,7 +37,7 @@ const ContactPage = () => {
           </div>
           <hr className="opacity-50" />
           <div className="grid mt-10 md:grid-cols-1 gap-6 items-center justify-center text-center mx-auto">
-            <div className="md:my-10">
+            <div className="md:my-10 flex flex-col items-center justify-center text-center">
               <h2 className="text-2xl font-semibold">
                 ACES
               </h2>
@@ -46,7 +46,7 @@ const ContactPage = () => {
                 send email or call phone. We will get back to you as soon as
                 possible.
               </p>
-              <div className="mt-5 opacity-80">
+              <div className="mt-5 opacity-80 flex flex-col items-center justify-center">
                 {CONTACT_DETAILS.map((contact, index) => (
                   <Link
                     href={contact.href}
