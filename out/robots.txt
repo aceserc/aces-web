@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-
-Host: https://aceserc.org
-Sitemap: https://aceserc.org/sitemap.xml
