@@ -38,7 +38,7 @@ const WHAT_WE_DO = [
 
 const WhatWeDo = () => {
   return (
-    <section className="flex flex-col gap-10 items-center">
+    <section className="flex flex-col gap-6 sm:gap-10  items-center">
       <H2 className="text-4xl">What we do?</H2>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
         {WHAT_WE_DO.map((item, index) => {
