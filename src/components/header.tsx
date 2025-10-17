@@ -53,7 +53,7 @@ const Header = () => {
             <H3 className="tracking-wider">ACES</H3>
           </Link>
           {/* nav links for larger devices */}
-          <nav className="lg:flex gap-4 items-center hidden">
+          <nav className="lg:flex gap-4 items-center hidden text-lg">
             {HEADER_LINKS.map(({ label, href }) => (
               <Link
                 key={label}

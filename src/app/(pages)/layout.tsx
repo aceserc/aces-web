@@ -11,12 +11,10 @@ const ClientLayout = ({ children }: Props) => {
   return (
     <div className="w-full">
       <Header />
-      <main>
-        {children}
-        {process.env.NODE_ENV === "development" && <ReactScan />}
-      </main>
+      <main className="pt-20 mb-8">{children}</main>
       <Footer />
       <ScrollToTop />
+      {process.env.NODE_ENV === "development" && <ReactScan />}
     </div>
   );
 };
