@@ -4,7 +4,7 @@ import React, { ComponentProps } from "react";
 const H3 = ({ className, ...props }: ComponentProps<"h3">) => {
   return (
     <h3
-      className={cn(className, "text-2xl font-semibold tracking-tight")}
+      className={cn("text-2xl font-semibold tracking-tight", className)}
       {...props}
     />
   );
@@ -13,7 +13,7 @@ const H3 = ({ className, ...props }: ComponentProps<"h3">) => {
 const H4 = ({ className, ...props }: ComponentProps<"h4">) => {
   return (
     <h4
-      className={cn(className, "text-xl font-medium tracking-tight")}
+      className={cn("text-xl font-medium tracking-tight", className)}
       {...props}
     />
   );
@@ -22,7 +22,7 @@ const H4 = ({ className, ...props }: ComponentProps<"h4">) => {
 const Paragraph = ({ className, ...props }: ComponentProps<"p">) => {
   return (
     <p
-      className={cn(className, "leading-7 text-base text-muted-foreground")}
+      className={cn("leading-7 text-base text-muted-foreground", className)}
       {...props}
     />
   );

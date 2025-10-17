@@ -186,3 +186,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer override {
+  /* Override the container styles */
+  .container {
+    @apply mx-auto max-w-none px-4 sm:px-6 2xl:max-w-[1800px];
+  }
+}

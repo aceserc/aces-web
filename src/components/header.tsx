@@ -1,139 +1,172 @@
-import { Menu } from "lucide-react";
-import { ReactNode } from "react";
+"use client";
 
-import { siteConfig } from "@/config/site";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useMemo, useRef } from "react";
+import { usePathname } from "next/navigation";
 
-import LaunchUI from "@/components/logos/launch-ui";
-import { Button, type ButtonProps } from "@/components/ui/button";
-import {
-  Navbar as NavbarComponent,
-  NavbarLeft,
-  NavbarRight,
-} from "@/components/ui/navbar";
-import Navigation from "@/components/ui/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ChevronDownIcon, MenuIcon, X } from "lucide-react";
+import { useIsScrolled } from "@/hooks/use-is-scrolled";
+import { CONTACT_LINKS } from "@/constants/contact-links";
+import Image from "next/image";
+import { H3 } from "./ui/typography";
 
-interface NavbarLink {
-  text: string;
-  href: string;
-}
+const HEADER_LINKS = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "About",
+    href: "/about",
+  },
+  {
+    label: "Blogs",
+    href: "/blogs",
+  },
+  {
+    label: "Committee",
+    href: "/committee",
+  },
+  {
+    label: "Gallery",
+    href: "/gallery",
+  },
+];
 
-interface NavbarActionProps {
-  text: string;
-  href: string;
-  variant?: ButtonProps["variant"];
-  icon?: ReactNode;
-  iconRight?: ReactNode;
-  isButton?: boolean;
-}
+const Header = () => {
+  const isScrolled = useIsScrolled();
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
-interface NavbarProps {
-  logo?: ReactNode;
-  name?: string;
-  homeUrl?: string;
-  mobileLinks?: NavbarLink[];
-  actions?: NavbarActionProps[];
-  showNavigation?: boolean;
-  customNavigation?: ReactNode;
-  className?: string;
-}
-
-export default function Navbar({
-  logo = <LaunchUI />,
-  name = "Launch UI",
-  homeUrl = siteConfig.url,
-  mobileLinks = [
-    { text: "Getting Started", href: siteConfig.url },
-    { text: "Components", href: siteConfig.url },
-    { text: "Documentation", href: siteConfig.url },
-  ],
-  actions = [
-    { text: "Sign in", href: siteConfig.url, isButton: false },
-    {
-      text: "Get Started",
-      href: siteConfig.url,
-      isButton: true,
-      variant: "default",
-    },
-  ],
-  showNavigation = true,
-  customNavigation,
-  className,
-}: NavbarProps) {
   return (
-    <header className={cn("sticky top-0 z-50 -mb-4 px-4 pb-4", className)}>
-      <div className="fade-bottom bg-background/15 absolute left-0 h-24 w-full backdrop-blur-lg"></div>
-      <div className="max-w-container relative mx-auto">
-        <NavbarComponent>
-          <NavbarLeft>
-            <a
-              href={homeUrl}
-              className="flex items-center gap-2 text-xl font-bold"
+    <>
+      <div className="z-50 mt-4 fixed left-1/2 -translate-x-1/2 container transition-colors ">
+        <header
+          className={cn(
+            "flex rounded-md justify-between items-center px-6 py-4",
+            isScrolled && "bg-primary/5 backdrop-blur-md"
+          )}
+        >
+          <Link href="/">
+            <H3 className="tracking-wider">ACES</H3>
+          </Link>
+          {/* nav links for larger devices */}
+          <nav className="lg:flex gap-4 items-center hidden">
+            {HEADER_LINKS.map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className={cn(
+                  "underline-offset-3 hover:text-destructive/80 transition-colors ",
+                  pathname.split("/")[1] === href.split("/")[1] &&
+                    "text-destructive underline"
+                )}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex gap-3 items-center">
+            <Link href="/contact" className="hidden sm:block">
+              <Button variant="outline" className="!py-1 h-[36px]">
+                Contact
+              </Button>
+            </Link>
+            <Link
+              target="_blank"
+              href={CONTACT_LINKS.discord.href}
+              className="hidden sm:block"
             >
-              {logo}
-              {name}
-            </a>
-            {showNavigation && (customNavigation || <Navigation />)}
-          </NavbarLeft>
-          <NavbarRight>
-            {actions.map((action, index) =>
-              action.isButton ? (
-                <Button
-                  key={index}
-                  variant={action.variant || "default"}
-                  asChild
-                >
-                  <a href={action.href}>
-                    {action.icon}
-                    {action.text}
-                    {action.iconRight}
-                  </a>
-                </Button>
-              ) : (
-                <a
-                  key={index}
-                  href={action.href}
-                  className="hidden text-sm md:block"
-                >
-                  {action.text}
-                </a>
-              )
-            )}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="shrink-0 md:hidden"
-                >
-                  <Menu className="size-5" />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right">
-                <nav className="grid gap-6 text-lg font-medium">
-                  <a
-                    href={homeUrl}
-                    className="flex items-center gap-2 text-xl font-bold"
-                  >
-                    <span>{name}</span>
-                  </a>
-                  {mobileLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      {link.text}
-                    </a>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </NavbarRight>
-        </NavbarComponent>
+              <Image
+                src={CONTACT_LINKS.discord.icon}
+                alt="Discord"
+                height={32}
+                width={32}
+                className="hover:scale-110 transition-transform"
+              />
+            </Link>
+
+            {/* // hamburger menu */}
+            <button
+              onClick={() => {
+                if (mobileNavRef.current) {
+                  mobileNavRef.current.classList.remove("translate-x-full");
+                }
+              }}
+              className="lg:hidden ml-4 cursor-pointer"
+            >
+              <MenuIcon className="h-6 w-6" />
+            </button>
+          </div>
+        </header>
       </div>
-    </header>
+      {/* mobile nav */}
+      <div
+        ref={mobileNavRef}
+        className="flex gap-12 z-50 justify-between flex-col text-foreground/80 bg-background shadow-lg backdrop-blur-sm fixed top-0 right-0 h-screen w-[245px] py-16 pt-20 px-7 translate-x-full transition-transform"
+      >
+        {/* close button */}
+        <Button
+          onClick={() => {
+            if (mobileNavRef.current) {
+              mobileNavRef.current.classList.add("translate-x-full");
+            }
+          }}
+          variant={"ghost"}
+          className="absolute top-5 right-5 cursor-pointer"
+        >
+          <X />
+        </Button>
+
+        <nav className="flex flex-col gap-4">
+          {HEADER_LINKS.map(({ label, href }) => (
+            <Link
+              onClick={() => {
+                if (mobileNavRef.current) {
+                  mobileNavRef.current.classList.add("translate-x-full");
+                }
+              }}
+              key={label}
+              href={href}
+              className={cn(
+                "hover:text-foreground underline-offset-3",
+                pathname.split("/")[1] === href.split("/")[1] &&
+                  "text-destructive underline"
+              )}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex gap-3 items-center w-full">
+          <Link
+            onClick={() => {
+              if (mobileNavRef.current) {
+                mobileNavRef.current.classList.add("translate-x-full");
+              }
+            }}
+            href="/contact"
+            className="flex-grow"
+          >
+            <Button variant="outline" className="!py-1 h-[36px] w-full">
+              Contact
+            </Button>
+          </Link>
+          <Link target="_blank" href={CONTACT_LINKS.discord.href}>
+            <Image
+              src={CONTACT_LINKS.discord.icon}
+              alt="Discord"
+              height={32}
+              width={32}
+              className="hover:scale-110 transition-transform"
+            />
+          </Link>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export { Header };

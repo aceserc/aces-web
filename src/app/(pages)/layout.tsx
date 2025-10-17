@@ -1,4 +1,5 @@
 import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
 import { ReactScan } from "@/components/react-scan";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
@@ -9,7 +10,7 @@ type Props = {
 const ClientLayout = ({ children }: Props) => {
   return (
     <div className="w-full">
-      {/* <Header /> */}
+      <Header />
       <main>
         {children}
         {process.env.NODE_ENV === "development" && <ReactScan />}
