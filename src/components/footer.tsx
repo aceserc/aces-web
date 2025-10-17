@@ -15,9 +15,9 @@ import { Client } from "./ui/client";
 const Footer = () => {
   return (
     <footer className="relative py-8 border-t border bg-muted/20 rounded-t-md">
-      <div className="container mx-auto px-4 flex flex-col gap-4">
-        <div className="flex justify-between gap-4">
-          <div className="flex flex-col gap-2">
+      <div className="container mx-auto px-4 flex flex-col gap-4 items-center sm:items-start ">
+        <div className="flex justify-between gap-4 w-full">
+          <div className="flex flex-col gap-2 items-center sm:items-start w-full sm:w-auto">
             <div className="flex gap-2">
               <Image
                 src={"/logo.png"}
@@ -28,7 +28,7 @@ const Footer = () => {
               />
               <H3>ACES</H3>
             </div>
-            <Paragraph>
+            <Paragraph className="text-center sm:text-left">
               Association of Computer Engineering Students, <br />
               IOE Purwanchal Campus Dharan
             </Paragraph>
@@ -59,7 +59,46 @@ const Footer = () => {
               })}
             </div>
           </div>
-          <div>
+          <div className="hidden sm:flex flex-col gap-2">
+            <H4>Features</H4>
+            <ul>
+              {[
+                {
+                  label: "Home",
+                  href: "/",
+                },
+                {
+                  label: "About",
+                  href: "/about",
+                },
+                {
+                  label: "Notices",
+                  href: "/notices",
+                },
+                {
+                  label: "Blgs",
+                  href: "/blogs",
+                },
+                {
+                  label: "Committee",
+                  href: "/committee",
+                },
+              ].map((item, i) => {
+                return (
+                  <li key={i}>
+                    <Link
+                      className="text-muted-foreground ml-2 hover:underline"
+                      href={item.href}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div className="hidden sm:flex flex-col gap-2">
             <H4>Features</H4>
             <ul>
               {[
@@ -99,7 +138,7 @@ const Footer = () => {
           </div>
         </div>
         <Hr />
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between flex-col sm:flex-row gap-0 sm:gap-2 text-center sm:text-left w-full">
           <Client>
             <Paragraph>
               &copy; {new Date().getFullYear()} ACES. All rights reserved.
