@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Hero } from "./_components/hero";
-import { Hr } from "@/components/ui/separator";
 import { WhatWeDo } from "./_components/what-we-do";
 import { Committee } from "./_components/committee";
 
