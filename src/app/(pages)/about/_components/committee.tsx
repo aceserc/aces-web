@@ -32,7 +32,7 @@ const Committee = () => {
     });
 
   return (
-    <section className="flex flex-col gap-6 sm:gap-10 container">
+    <section className="flex flex-col gap-6 sm:gap-10 container bg-muted rounded-md p-4">
       <H2 className="text-center">ACES {latestCommitteeNumber}th Committee</H2>
       <Carousel>
         <CarouselContent className="-ml-4">

@@ -6,7 +6,7 @@ import { Committee } from "./_components/committee";
 const AboutPage = () => {
   return (
     <div className="mt-12 sm:mt-20 lg:mt-32">
-      <div className="container flex flex-col gap-12 md:gap-20 lg:gap-32">
+      <div className="container flex flex-col gap-12 ">
         <Hero />
         <Committee />
         <WhatWeDo />

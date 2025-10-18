@@ -8,7 +8,7 @@ import { CONTACT_LINKS } from "@/constants/contact-links";
 const Notices = async () => {
   const { posts, nextPage } = await facebook.listPosts();
   return (
-    <div className="container flex flex-col items-center justify-center mt-12 gap-8 ">
+    <div className="container flex flex-col items-center justify-center mt-4 sm:mt-12 gap-8 ">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full 2xl:grid-cols-4">
         {posts.map((post) => (
           <NoticeCard

@@ -11,7 +11,7 @@ import { titleCase } from "scule";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col lg:flex-row gap-12 max-w-6xl m-auto items-center border-b pb-2">
+    <div className="flex flex-col lg:flex-row gap-12 max-w-6xl m-auto items-center ">
       <div className="flex flex-col items-center space-x-2 lg:min-w-[400px]">
         <Image
           src="/logo.png"
