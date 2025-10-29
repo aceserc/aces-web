@@ -40,7 +40,7 @@ const HEADER_LINKS = [
 ];
 
 const Header = () => {
-  const isScrolled = useIsScrolled();
+  const isScrolled = true;
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
