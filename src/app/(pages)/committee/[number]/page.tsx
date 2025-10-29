@@ -15,7 +15,7 @@ type Props = {
 const CommitteePage = async ({ params }: Props) => {
   const { number } = await params;
 
-  const { pastCommittees } = await getCommittee();
+  const { pastCommittees, currentCommitteeNumber } = await getCommittee();
 
   const currentCommittee = pastCommittees[Number(number)];
 
@@ -28,7 +28,8 @@ const CommitteePage = async ({ params }: Props) => {
       <section className="flex items-center justify-center flex-col gap-8">
         <H1 className="border-b w-full text-center">
           ACES {number}
-          <sup>th</sup> Committee
+          <sup>th</sup> Committee{" "}
+          {currentCommitteeNumber === Number(number) ? "" : "(old)"}
         </H1>
         <Committee committee={currentCommittee} />
       </section>

@@ -26,7 +26,7 @@ const CommitteePage = async () => {
       <Hr />
       <section className="flex flex-col gap-8">
         <H2 className="text-center">Past Committees</H2>
-        <div className="flex gap-4 flex-wrap ">
+        <div className="flex gap-4 flex-wrap justify-center">
           {pastCommitteeNumbers.map((number) => (
             <Button key={number} variant="outline" asChild>
               <Link href={`/committee/${number}`}>

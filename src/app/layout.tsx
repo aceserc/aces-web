@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
 import { DEVS_CONTACT_LINKS } from "@/constants/contact-links";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -24,6 +25,7 @@ export default function RootLayout({
           <GoogleAnalytics
             gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
           />
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>
