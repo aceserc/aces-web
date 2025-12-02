@@ -21,14 +21,7 @@ const HEADER_LINKS = [
     label: "About",
     href: "/about",
   },
-  {
-    label: "Notices",
-    href: "/notices",
-  },
-  {
-    label: "Blogs",
-    href: "/blogs",
-  },
+
   {
     label: "Committee",
     href: "/committee",

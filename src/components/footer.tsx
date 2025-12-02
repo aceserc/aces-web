@@ -71,14 +71,7 @@ const Footer = () => {
                   label: "About",
                   href: "/about",
                 },
-                {
-                  label: "Notices",
-                  href: "/notices",
-                },
-                {
-                  label: "Blgs",
-                  href: "/blogs",
-                },
+
                 {
                   label: "Committee",
                   href: "/committee",
@@ -110,14 +103,7 @@ const Footer = () => {
                   label: "About",
                   href: "/about",
                 },
-                {
-                  label: "Notices",
-                  href: "/notices",
-                },
-                {
-                  label: "Blgs",
-                  href: "/blogs",
-                },
+
                 {
                   label: "Committee",
                   href: "/committee",
