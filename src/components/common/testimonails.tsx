@@ -42,12 +42,12 @@ const Testimonials = () => {
               key={i}
               className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
             >
-              <div className="flex flex-col bg-card p-6 rounded-lg border border-border shadow-sm h-full min-h-[280px]">
+              <div className="flex flex-col bg-card p-6 rounded-lg border border-border  h-full min-h-[280px]">
                 <Quote className="h-6 w-6 text-primary mb-4" />
                 <p className="text-muted-foreground text-sm md:text-base mb-6 flex-grow line-clamp-6">
                   {testimonial.body}
                 </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <div className="flex items-center gap-3 pt-4">
                   <Avatar
                     src={testimonial.avatar}
                     alt={testimonial.name}
