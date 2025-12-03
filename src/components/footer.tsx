@@ -61,39 +61,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="hidden sm:flex flex-col gap-2">
-            <H4>Features</H4>
-            <ul>
-              {[
-                {
-                  label: "Home",
-                  href: "/",
-                },
-                {
-                  label: "About",
-                  href: "/about",
-                },
-
-                {
-                  label: "Committee",
-                  href: "/committee",
-                },
-              ].map((item, i) => {
-                return (
-                  <li key={i}>
-                    <Link
-                      className="text-muted-foreground ml-2 hover:underline"
-                      href={item.href}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          <div className="hidden sm:flex flex-col gap-2">
-            <H4>Features</H4>
+            <H4>Links</H4>
             <ul>
               {[
                 {
