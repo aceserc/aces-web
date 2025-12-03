@@ -46,7 +46,10 @@ const ContactPage = () => {
                   className="flex items-start mt-3 space-x-2 text-500 hover:text-primary transition-colors "
                 >
                   <contact.icon className="size-5 mt-1" />
-                  <span className="underline text-lg">{contact.title}</span>
+                  <span
+                    className="underline text-lg"
+                    dangerouslySetInnerHTML={{ __html: contact.title }}
+                  />
                 </Link>
               ))}
             </div>
