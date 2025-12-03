@@ -1,10 +1,10 @@
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { H2 } from "@/components/ui/typography";
 
 type Props = {
   faqs: {
@@ -15,10 +15,8 @@ type Props = {
 
 const FAQs = ({ faqs }: Props) => {
   return (
-    <div className="flex flex-col gap-6">
-      <h3 className="text-2xl md:text-3xl xl:text-4xl font-semibold text-left">
-        Frequently Asked Questions!
-      </h3>
+    <div className="flex flex-col gap-6 w-full">
+      <H2 className="text-left">Frequently Asked Questions!</H2>
       <Accordion type="single" collapsible className="w-full max-w-4xl">
         {faqs.map((faq, index) => (
           <AccordionItem value={faq.answer} key={index}>

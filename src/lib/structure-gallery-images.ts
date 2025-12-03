@@ -1,4 +1,4 @@
-import { ImageType } from "@/app/(pages)/gallery/_components";
+import type { ImageType } from "@/app/(pages)/gallery/_components";
 
 export const structureGalleryImages = (images: ImageType[]) => {
   const galleryImages = [];

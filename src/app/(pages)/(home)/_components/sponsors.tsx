@@ -1,16 +1,16 @@
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import Marquee from "react-fast-marquee";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
-  TooltipTrigger
+  TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Image from "next/image";
-import { getCollection } from "@/lib/db";
-import { Sponsor } from "@/lib/db/types";
+import { getCollection } from "@/db";
+import type { Sponsor } from "@/db/types";
+import { cn } from "@/lib/utils";
+
 const Sponsors = () => {
   const sponsors = getCollection("sponsors") as Sponsor[];
   if (!sponsors || sponsors.length === 0) {
@@ -33,11 +33,15 @@ const Sponsors = () => {
       >
         {[...sponsors, ...sponsors, ...sponsors].map((sponsor, i) => (
           <TooltipProvider key={i}>
-            <Tooltip
-              delayDuration={0}
-            >
+            <Tooltip delayDuration={0}>
               <TooltipTrigger>
-                <Link href={sponsor.website ?? "#"} target="_blank" className={cn(!sponsor.website && "cursor-default pointer-events-none")}>
+                <Link
+                  href={sponsor.website ?? "#"}
+                  target="_blank"
+                  className={cn(
+                    !sponsor.website && "cursor-default pointer-events-none",
+                  )}
+                >
                   <Image
                     src={sponsor.logo}
                     alt={sponsor.name}
@@ -50,9 +54,7 @@ const Sponsors = () => {
                 </Link>
               </TooltipTrigger>
               <TooltipContent>
-                <p>
-                  {sponsor.name}
-                </p>
+                <p>{sponsor.name}</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

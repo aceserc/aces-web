@@ -1,0 +1,17 @@
+export const ICONS = {
+  figma: "https://api.iconify.design/logos:figma.svg",
+  flutter: "https://api.iconify.design/logos:flutter.svg",
+  gitlab: "https://api.iconify.design/logos:gitlab.svg",
+  java: "https://api.iconify.design/logos:java.svg",
+  kali: "https://api.iconify.design/logos:kali-linux.svg",
+  react: "https://api.iconify.design/logos:react.svg",
+  typescript: "https://api.iconify.design/logos:typescript-icon.svg",
+  vscode: "https://api.iconify.design/logos:visual-studio-code.svg",
+  github: "https://api.iconify.design/logos:github-icon.svg",
+  ubuntu: "https://api.iconify.design/logos:ubuntu.svg",
+  linux: "https://api.iconify.design/logos:linux-tux.svg",
+  python: "https://api.iconify.design/logos:python.svg",
+  cpp: "https://api.iconify.design/logos:c-plusplus.svg",
+  nextjs: "https://api.iconify.design/logos:nextjs-icon.svg",
+  arch: "https://api.iconify.design/logos:archlinux.svg",
+};

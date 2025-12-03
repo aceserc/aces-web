@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
-import { DEVS_CONTACT_LINKS } from "@/constants/contact";
-import { QueryProvider } from "@/provider/query-provider";
+import { DEVS_CONTACT_LINKS } from "@/constants/contact-links";
 
 export default function RootLayout({
   children,
@@ -14,25 +13,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`overflow-x-hidden`}
-        suppressHydrationWarning
-      >
-        <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <NextjsTopLoader />
-            <GoogleAnalytics
-              gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
-            />
-          </ThemeProvider>
-          <Toaster richColors position="top-right" />
-        </QueryProvider>
+      <body className={`overflow-x-hidden`} suppressHydrationWarning>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <NextjsTopLoader />
+          <GoogleAnalytics
+            gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID as string}
+          />
+          <Toaster richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
@@ -88,7 +82,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://aces.ioepc.edu.np/",
+    url: "https://aceserc.org",
     images: "/preview.png",
     countryName: "Nepal",
     title: "ACES - Association of Computer Engineering Students",
@@ -112,5 +106,5 @@ export const metadata: Metadata = {
     },
   },
 
-  metadataBase: new URL("https://aces-ioepc.vercel.app"),
+  metadataBase: new URL("https://aceserc.org"),
 };

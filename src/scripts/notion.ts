@@ -33,7 +33,7 @@ export const notionToMD = async (pageId: string, pathSuffix: string) => {
     const n2m = new NotionConverter(notion)
       .withExporter(exporter)
       .uploadMediaUsing({
-        async uploadHandler(url) {
+        async uploadHandler(url: any) {
           console.log("uploading", url);
           const response = await fetch(url);
           const arrayBuffer = await response.arrayBuffer();
@@ -57,7 +57,7 @@ export const notionToMD = async (pageId: string, pathSuffix: string) => {
           URL_MAPS[url] = returnPath;
           return returnPath;
         },
-        async cleanupHandler(entry) {
+        async cleanupHandler(entry: any) {
           if (entry.mediaInfo.uploadedUrl) {
             fs.unlinkSync(entry.mediaInfo.uploadedUrl);
           }
@@ -178,21 +178,6 @@ const CONFIG: Config[] = [
     },
   },
   {
-    dbId: process.env.NOTION_EVENTS_DATABASE_ID as string,
-    id: "events",
-    schema: {
-      title: "title",
-      location: "select",
-      registration_url: "url",
-      duration: "rich_text",
-      event_date: "date",
-      slug: "rich_text",
-      cover_image: "cover_image",
-      created_at: "created_time",
-      id: "id",
-    },
-  },
-  {
     dbId: process.env.NOTION_TESTIMONIALS_DATABASE_ID as string,
     id: "testimonials",
     schema: {
@@ -200,30 +185,6 @@ const CONFIG: Config[] = [
       role: "rich_text",
       contact: "url",
       avatar: "files",
-      id: "id",
-    },
-  },
-  {
-    dbId: process.env.NOTION_TRAININGS_DATABASE_ID as string,
-    id: "trainings",
-    schema: {
-      title: "title",
-      id: "id",
-      description: "rich_text",
-      created_at: "created_time",
-      slug: "rich_text",
-      cover_image: "cover_image",
-      duration: "rich_text",
-    },
-  },
-  {
-    dbId: process.env.NOTION_NOTICES_DATABASE_ID as string,
-    id: "notices",
-    schema: {
-      title: "title",
-      slug: "rich_text",
-      cover_image: "cover_image",
-      created_date: "created_time",
       id: "id",
     },
   },
@@ -269,14 +230,14 @@ const main = async () => {
     });
 
     const allPages = pages.results
-      .filter((page): page is PageObjectResponse => page.object === "page")
-      .filter((page) => page.id);
+      .filter((page: any): page is PageObjectResponse => page.object === "page")
+      .filter((page: any) => page.id);
 
     const md: Record<string, string> = {};
 
     // Then in your main processing, replace the current URL mapping logic:
     const parsedProperties = await Promise.all(
-      allPages.map(async (result) => {
+      allPages.map(async (result: any) => {
         const res = await notionToMD(result.id, config.id);
         md[result.id] = res.md;
 
@@ -306,7 +267,7 @@ const main = async () => {
     fs.writeFileSync(
       `./src/.generated/notion/${config.id}.json`,
       JSON.stringify(
-        parsedProperties.map((page) => ({
+        parsedProperties.map((page: any) => ({
           ...page,
           body: md[page.id],
         }))

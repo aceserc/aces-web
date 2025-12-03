@@ -1,5 +1,5 @@
-import React from "react";
 import { WHAT_WE_DO } from "@/constants/about";
+
 const About = () => {
   return (
     <section
@@ -19,7 +19,10 @@ const About = () => {
       </p>
       <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 xl:gap-9">
         {WHAT_WE_DO.map((item, i) => (
-          <div key={i} className="flex flex-col items-center bg-background h-full justify-center shadow group-hover:shadow-xl transition-all p-4 rounded-lg z-20 border border-transparent hover:border-border">
+          <div
+            key={i}
+            className="flex flex-col items-center bg-background h-full justify-center shadow group-hover:shadow-xl transition-all p-4 rounded-lg z-20 border border-transparent hover:border-border"
+          >
             <item.icon className="h-9 w-9 text-primary relative z-20" />
             <h4 className="text-xl font-bold mt-4 relative z-20">
               {item.title}

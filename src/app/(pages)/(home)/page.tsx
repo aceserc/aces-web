@@ -2,8 +2,6 @@ import { Testimonials } from "@/components/common/testimonails";
 import { About } from "./_components/about";
 import { Hero } from "./_components/hero";
 import { Sponsors } from "./_components/sponsors";
-import { UpcomingEvents } from "./_components/upcoming-events";
-
 
 const Home = () => {
   return (
@@ -15,7 +13,6 @@ const Home = () => {
         </div>
       </section>
       <About />
-      <UpcomingEvents />
       <Testimonials />
     </div>
   );

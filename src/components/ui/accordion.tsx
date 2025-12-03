@@ -1,11 +1,10 @@
 "use client";
 
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDownIcon, type LucideIcon } from "lucide-react";
 import { cva } from "class-variance-authority";
-
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, type LucideIcon } from "lucide-react";
 import { createContext, useContext } from "react";
+import { cn } from "@/lib/utils";
 
 type AccordionVariant = "default" | "secondary" | "bordered" | "card";
 
@@ -19,12 +18,12 @@ const accordionVariants = {
           "border border-muted hover:border-primary bg-muted rounded-lg mb-2 last:mb-0",
         bordered:
           "border border-border rounded-md mb-2 last:mb-0 overflow-hidden",
-        card: "rounded-lg mb-3 last:mb-0 shadow-sm hover:shadow transition-shadow"
-      }
+        card: "rounded-lg mb-3 last:mb-0 shadow-sm hover:shadow transition-shadow",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
+      variant: "default",
+    },
   }),
   accordionTrigger: cva(
     "flex flex-1 items-center text-left justify-between cursor-pointer disabled:cursor-default py-4 font-medium transition-all focus-visible:outline-none gap-4 focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 rounded-sm [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:transition-transform [&>svg]:duration-300 [&>svg]:ease-emphasized [&[data-state=open]>svg]:rotate-180",
@@ -33,14 +32,14 @@ const accordionVariants = {
         variant: {
           default: "hover:underline",
           secondary: "px-5",
-          bordered: "px-4 bg-muted/50 hover:bg-muted",
-          card: "px-4 bg-card [data-state=open]:rounded-b-none"
-        }
+          bordered: "px-4 bg-muted/50 hover:bg-muted ",
+          card: "px-4 bg-card [data-state=open]:rounded-b-none",
+        },
       },
       defaultVariants: {
-        variant: "default"
-      }
-    }
+        variant: "default",
+      },
+    },
   ),
   accordionContent: cva("pb-4 pt-0", {
     variants: {
@@ -48,13 +47,13 @@ const accordionVariants = {
         default: "",
         secondary: "px-5",
         bordered: "px-4 pt-4",
-        card: "px-4"
-      }
+        card: "px-4",
+      },
     },
     defaultVariants: {
-      variant: "default"
-    }
-  })
+      variant: "default",
+    },
+  }),
 };
 
 /** Context props for Accordion configuration */
@@ -64,7 +63,7 @@ type AccordionContextProps = {
 };
 
 const AccordionContext = createContext<AccordionContextProps | undefined>(
-  undefined
+  undefined,
 );
 
 /** Hook to access Accordion context */
@@ -72,7 +71,7 @@ function useAccordionContext() {
   const context = useContext(AccordionContext);
   if (!context) {
     throw new Error(
-      "useAccordionContext must be used within an AccordionProvider"
+      "useAccordionContext must be used within an AccordionProvider",
     );
   }
   return context;
@@ -123,7 +122,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         className={cn(
           accordionVariants.accordionTrigger({ variant }),
-          className
+          className,
         )}
         {...props}
       >
@@ -156,7 +155,7 @@ function AccordionContent({
       <div
         className={cn(
           accordionVariants.accordionContent({ variant }),
-          className
+          className,
         )}
       >
         {children}
@@ -184,5 +183,5 @@ export {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-  AccordionProvider
+  AccordionProvider,
 };

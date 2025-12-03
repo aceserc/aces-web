@@ -1,6 +1,8 @@
-import { ContactValidationSchema } from "@/validations/contact";
-import { z } from "zod";
+"use server";
+
 import nodemailer from "nodemailer";
+import type { z } from "zod";
+import { ContactValidationSchema } from "@/validations/contact";
 
 type ContactFormData = z.infer<typeof ContactValidationSchema>;
 

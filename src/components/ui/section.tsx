@@ -1,23 +1,18 @@
-import React from "react";
+import type * as React from "react";
 
-type Props = {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-};
+import { cn } from "@/lib/utils";
 
-const Section = ({ children, id, title }: Props) => {
+function Section({ className, ...props }: React.ComponentProps<"section">) {
   return (
-    <div id={id} className="rounded-lg w-full py-5 md:py-8">
-      <div className="flex flex-col gap-7 md:gap-12 items-center justify-center container">
-        <div className="flex flex-col items-center gap-2 justify-center ">
-          <h3 className="text-xl md:text-2xl font-bold">{title}</h3>
-          <hr className="w-1/2" />
-        </div>
-        {children}
-      </div>
-    </div>
+    <section
+      data-slot="section"
+      className={cn(
+        "bg-background text-foreground px-4 py-12 sm:py-24 md:py-32",
+        className,
+      )}
+      {...props}
+    />
   );
-};
+}
 
 export { Section };

@@ -1,7 +1,7 @@
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { ReactScan } from "@/components/react-scan";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
-import { Footer } from "./_components/footer";
-import Header from "./_components/header";
-import { ReactScan } from "@/components/common/react-scan";
 
 type Props = {
   children: React.ReactNode;
@@ -9,14 +9,12 @@ type Props = {
 
 const ClientLayout = ({ children }: Props) => {
   return (
-    <div className="min-h-screen w-full">
+    <div className="w-full">
       <Header />
-      <main className="pt-[70px] pb-20 min-h-[calc(100vh-60px)]">
-        {children}
-        <ReactScan />
-      </main>
+      <main className="pt-20 pb-16">{children}</main>
       <Footer />
       <ScrollToTop />
+      {process.env.NODE_ENV === "development" && <ReactScan />}
     </div>
   );
 };

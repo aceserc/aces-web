@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import type React from "react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 /** Style variants for the avatar component */
 const avatarVariants = cva("", {
@@ -13,18 +14,18 @@ const avatarVariants = cva("", {
       sm: "h-8 w-8",
       default: "h-10 w-10",
       lg: "h-12 w-12",
-      xl: "h-14 w-14"
+      xl: "h-14 w-14",
     },
     radius: {
       none: "rounded-none",
       md: "rounded-md",
-      default: "rounded-full"
-    }
+      default: "rounded-full",
+    },
   },
   defaultVariants: {
     size: "default",
-    radius: "default"
-  }
+    radius: "default",
+  },
 });
 
 /** Base container for avatar components */
@@ -62,7 +63,7 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback
       className={cn(
         "bg-muted flex h-full w-full items-center justify-center rounded-full",
-        className
+        className,
       )}
       {...props}
     />
@@ -102,7 +103,7 @@ function Avatar({
       className={cn(
         avatarVariants({ size, radius }),
         "relative border",
-        className
+        className,
       )}
       {...props}
     >

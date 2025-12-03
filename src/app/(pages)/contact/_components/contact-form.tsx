@@ -1,10 +1,12 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader, SendHorizonal } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import type { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -13,18 +15,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { sendContactEmail } from "@/server-actions/contact";
 import { ContactValidationSchema } from "@/validations/contact";
-import { z } from "zod";
-import { useState } from "react";
-// import { sendContactEmail } from "@/server-actions/contact";
-import { SendHorizonal } from "lucide-react";
 
-const FormSchema = ContactValidationSchema
+const FormSchema = ContactValidationSchema;
 type FormSchemaType = z.infer<typeof FormSchema>;
 
 const ContactForm = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,18 +38,18 @@ const ContactForm = () => {
   const onSubmit = async (values: FormSchemaType) => {
     try {
       /** Handle form submission here */
-      setIsLoading(true)
-      // await sendContactEmail(values)
-      console.log(values)
-      toast.success("Thank you for your message. We will reply to you as soon as possible.");
+      setIsLoading(true);
+      await sendContactEmail(values);
+      toast.success(
+        "Thank you for your message. We will reply to you as soon as possible.",
+      );
       form.reset();
     } catch {
       toast.error("Failed to contact. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
-
 
   return (
     <Form {...form}>
@@ -92,7 +92,11 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Subject*</FormLabel>
               <FormControl>
-                <Input placeholder="I would like to..." autoComplete="off" {...field} />
+                <Input
+                  placeholder="I would like to..."
+                  autoComplete="off"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -115,15 +119,32 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          loading={isLoading}
-          className="self-end hover:scale-[1.005] min-w-44 text-lg"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-        >
-          Submit <SendHorizonal />
-        </Button>
+        <div className="flex gap-2 self-end ">
+          <Button
+            type="reset"
+            variant={"outline"}
+            onClick={() => {
+              form.reset();
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            className="min-w-32"
+            disabled={form.formState.isSubmitting}
+          >
+            {isLoading ? (
+              <>
+                <Loader className="animate-spin" />
+              </>
+            ) : (
+              <>
+                Submit <SendHorizonal />
+              </>
+            )}
+          </Button>
+        </div>
       </form>
     </Form>
   );

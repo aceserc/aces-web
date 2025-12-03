@@ -1,20 +1,16 @@
 const generateUniqueRandomNumbers = (
   range: [number, number],
-  length: number
+  count: number,
 ): number[] => {
   const [min, max] = range;
-  if (length > max - min + 1) {
-    throw new Error("Length cannot be greater than range");
+  const numbers = new Set<number>();
+
+  while (numbers.size < count) {
+    const random = Math.floor(Math.random() * (max - min + 1)) + min;
+    numbers.add(random);
   }
 
-  const numbers = new Set();
-
-  while (numbers.size < length) {
-    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-    numbers.add(randomNumber);
-  }
-
-  return Array.from(numbers) as number[];
+  return Array.from(numbers);
 };
 
 export default generateUniqueRandomNumbers;

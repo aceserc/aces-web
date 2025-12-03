@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 /** Style variants for the badge component */
@@ -17,25 +17,25 @@ const badgeVariants = cva(
         "destructive-outline": "border-destructive text-destructive",
         outline: "text-foreground",
         success: "border-success bg-success text-success-foreground shadow",
-        warning: "border-warning bg-warning text-warning-foreground shadow"
+        warning: "border-warning bg-warning text-warning-foreground shadow",
       },
       size: {
         sm: "text-[10px] px-2 py-0.5",
         md: "text-xs px-2.5 py-0.5",
-        lg: "text-sm px-3 py-1"
+        lg: "text-sm px-3 py-1",
       },
       radius: {
         none: "rounded-none",
         md: "rounded-md",
-        full: "rounded-full"
-      }
+        full: "rounded-full",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "md",
-      radius: "md"
-    }
-  }
+      radius: "md",
+    },
+  },
 );
 
 type BadgeProps = React.HTMLAttributes<HTMLDivElement> &

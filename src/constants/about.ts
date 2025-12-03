@@ -26,14 +26,3 @@ export const WHAT_WE_DO = [
       "We organize an annual tech fest where students can showcase their projects and innovations. The tech fest is a platform for students to network with industry professionals and learn about the latest trends in technology.",
   },
 ];
-
-export const ACHIEVEMENTS = {
-  desc: "ACES, a community of Computer Engineering students, has achieved several milestones since its establishment. We strive for excellence in various domains, contributing significantly to the growth and development of our members.",
-  data: [
-    "Organizing a national level software hackathon.",
-    "Providing extensive training programs for students",
-    "Hosting numerous competitions to enhance students' skills and knowledge.",
-    "Conducting podcast sessions with experts in the technical field.",
-    "Organizing the annual Techfest, a platform for students to showcase their skills.",
-  ],
-};

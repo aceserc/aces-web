@@ -1,69 +1,49 @@
-import { MainLayout } from "@/components/layout/main-layout";
-import { MemberCard } from "./_components/member-card";
-import { getCollection } from "@/lib/db";
-import { Committee } from "@/lib/db/types"
-import { Metadata } from "next";
-const CommitteePage = () => {
-  const members = getCollection("committee") as Committee[]
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Hr } from "@/components/ui/separator";
+import { H1, H2 } from "@/components/ui/typography";
+import { getCommittee } from "@/lib/committee";
+import { Committee } from "./_component/committee";
 
-  let highestCommittee = 0;
+const CommitteePage = async () => {
+  const { currentCommitteeNumber, pastCommittees, currentCommittee } =
+    await getCommittee();
 
-  // group members by committee
-  const committees = members.reduce((acc, member) => {
-    const committee = Number(member.committee);
-    if (!acc[committee]) {
-      acc[committee] = [];
-    }
-    acc[committee].push(member);
-
-    if (committee > highestCommittee) {
-      highestCommittee = committee;
-    }
-
-    return acc;
-  }, {} as Record<number, Committee[]>);
-
-  // sort by weight lowest at top
-  const currentCommittee = committees[highestCommittee].sort((a, b) => a.weight - b.weight)
-  const president = currentCommittee.find(member => member.role.toLowerCase() === "president")
-  const adviser = currentCommittee.find(member => member.role.toLowerCase() === "adviser")
-  const restMembers = currentCommittee.filter(member => member.role.toLowerCase() !== "president" && member.role.toLowerCase() !== "adviser")
+  const pastCommitteeNumbers = Object.keys(pastCommittees)
+    .map(Number)
+    .sort((a, b) => b - a)
+    .filter((number) => number !== currentCommitteeNumber);
 
   return (
-    <MainLayout
-      title={
-        <>
-          ACES {highestCommittee}<sup>th</sup> Committee
-        </>
-      }
-      headingClassName="sm:text-center"
-    >
-      <div className="flex gap-4 xs:gap-9 flex-col w-full mt-12 ">
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-[700px] m-auto w-full">
-          {president && (
-            <MemberCard  {...president} />
-          )}
-          {adviser && (
-            <MemberCard
-              {...adviser}
-            />
-          )}
-        </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {(restMembers)?.map((member, i) => (
-            <MemberCard
-              key={i}
-              {...member}
-            />
+    <div className="container mt-8 space-y-12">
+      <section className="flex items-center justify-center flex-col gap-8">
+        <H1 className="border-b w-full text-center">
+          ACES {currentCommitteeNumber}
+          <sup>th</sup> Committee
+        </H1>
+        <Committee committee={currentCommittee} />
+      </section>
+      <Hr />
+      <section className="flex flex-col gap-8">
+        <H2 className="text-center">Past Committees</H2>
+        <div className="flex gap-4 flex-wrap justify-center">
+          {pastCommitteeNumbers.map((number) => (
+            <Button key={number} variant="outline" asChild>
+              <Link href={`/committee/${number}`}>
+                ACES {number}
+                <sup>th</sup> Committee
+              </Link>
+            </Button>
           ))}
         </div>
-      </div>
-    </MainLayout>
+      </section>
+    </div>
   );
 };
 
 export default CommitteePage;
 
 export const metadata: Metadata = {
-  title: "Committee | ACES"
-}
+  title: "Committee | ACES",
+};

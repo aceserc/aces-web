@@ -1,5 +1,4 @@
-"use client"
-import React from 'react'
+"use client";
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -12,16 +11,16 @@ import {
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/plugins/captions.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
-import { Images } from './images';
+import { Images } from "./images";
 
 export type ImageType = {
-  url: string,
-  tag: string
-}
+  url: string;
+  tag: string;
+};
 
 type Props = {
-  images: ImageType[]
-}
+  images: ImageType[];
+};
 
 const Gallery = ({ images }: Props) => {
   const [index, setIndex] = useState<number>(-1);
@@ -43,15 +42,14 @@ const Gallery = ({ images }: Props) => {
         open={index >= 0}
         close={() => setIndex(-1)}
         slides={
-          images
-            .map((image) => ({
-              src: image?.url,
-              title: image?.tag,
-            }))!
+          images.map((image) => ({
+            src: image?.url,
+            title: image?.tag,
+          })) || []
         }
       />
     </div>
-  )
-}
+  );
+};
 
-export { Gallery }
+export { Gallery };
