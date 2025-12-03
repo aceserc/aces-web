@@ -1,6 +1,3 @@
-import { Avatar } from "@/components/ui/avatar";
-import { Committee } from "@/db/types";
-import { cn } from "@/lib/utils";
 import {
   ExternalLink,
   FacebookIcon,
@@ -8,7 +5,9 @@ import {
   MailIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { Avatar } from "@/components/ui/avatar";
+import type { Committee } from "@/db/types";
+import { cn } from "@/lib/utils";
 
 type Props = Committee;
 
@@ -22,14 +21,14 @@ const MemberCard = (props: Props) => {
         "border border-gray-3 max-sm:w-full hover:drop-shadow-1 hover:-translate-y-0.5 transition-all flex items-center h-full",
         hasTopCommitteePost
           ? "px-5 xs:px-6 py-2 sm:py-3 rounded-xl md:min-w-[340px] shadow-sm"
-          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg"
+          : "px-4 xs:px-5 py-2 sm:py-3 rounded-lg",
       )}
     >
       <div className="flex items-center gap-8">
         <div
           className={cn(
             "rounded-full overflow-hidden shadow-inner border border-accent",
-            hasTopCommitteePost ? "w-20 h-20 sm:w-28 sm:h-28" : "w-20 h-20"
+            hasTopCommitteePost ? "w-20 h-20 sm:w-28 sm:h-28" : "w-20 h-20",
           )}
         >
           <Avatar
@@ -42,7 +41,7 @@ const MemberCard = (props: Props) => {
           <p
             className={cn(
               "opacity-70",
-              hasTopCommitteePost ? "text-sm xs:text-base" : "text-sm"
+              hasTopCommitteePost ? "text-sm xs:text-base" : "text-sm",
             )}
           >
             {props.name}
@@ -50,7 +49,7 @@ const MemberCard = (props: Props) => {
           <h4
             className={cn(
               "font-semibold  mb-1",
-              hasTopCommitteePost ? "text-lg xs:text-xl" : "xs:text-lg"
+              hasTopCommitteePost ? "text-lg xs:text-xl" : "xs:text-lg",
             )}
           >
             {props.role}

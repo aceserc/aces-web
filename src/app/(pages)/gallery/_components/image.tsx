@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { Image as Img } from "@/components/ui/image";
+import { cn } from "@/lib/utils";
 
 type ImageProps = {
   src: string;
@@ -25,7 +25,7 @@ const Image = ({
       role="button"
       className={cn(
         "rounded-md overflow-hidden flex items-center justify-center relative group cursor-pointer group",
-        className
+        className,
       )}
     >
       <Badge className="absolute top-2 left-2 scale-0 group-hover:scale-100 transition-all">

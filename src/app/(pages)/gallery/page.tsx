@@ -1,7 +1,7 @@
+import type { Metadata } from "next";
 import { getCollection } from "@/db";
+import type { Gallery as GalleryType } from "@/db/types";
 import { Gallery } from "./_components";
-import { Gallery as GalleryType } from "@/db/types";
-import { Metadata } from "next";
 
 async function Page() {
   const images = getCollection("gallery") as GalleryType[];
@@ -12,7 +12,7 @@ async function Page() {
         i.images.map((img) => ({
           url: img,
           tag: i.tag,
-        }))
+        })),
       )}
     />
   );

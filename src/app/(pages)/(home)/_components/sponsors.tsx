@@ -1,6 +1,5 @@
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import Marquee from "react-fast-marquee";
 import {
   Tooltip,
@@ -8,9 +7,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Image from "next/image";
 import { getCollection } from "@/db";
-import { Sponsor } from "@/db/types";
+import type { Sponsor } from "@/db/types";
+import { cn } from "@/lib/utils";
+
 const Sponsors = () => {
   const sponsors = getCollection("sponsors") as Sponsor[];
   if (!sponsors || sponsors.length === 0) {
@@ -39,7 +39,7 @@ const Sponsors = () => {
                   href={sponsor.website ?? "#"}
                   target="_blank"
                   className={cn(
-                    !sponsor.website && "cursor-default pointer-events-none"
+                    !sponsor.website && "cursor-default pointer-events-none",
                   )}
                 >
                   <Image

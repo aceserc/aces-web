@@ -1,5 +1,5 @@
 import { WHAT_WE_DO } from "@/constants/about";
-import React from "react";
+
 const About = () => {
   return (
     <section

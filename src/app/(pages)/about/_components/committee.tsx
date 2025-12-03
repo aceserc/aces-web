@@ -1,5 +1,11 @@
-import { getCollection } from "@/db";
-import { Committee as CommitteeType } from "@/db/types";
+import {
+  ExternalLink,
+  FacebookIcon,
+  LinkedinIcon,
+  MailIcon,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -7,22 +13,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
 import { H2, H4, Paragraph } from "@/components/ui/typography";
-import Link from "next/link";
+import { getCollection } from "@/db";
+import type { Committee as CommitteeType } from "@/db/types";
 import { cn } from "@/lib/utils";
-import {
-  MailIcon,
-  LinkedinIcon,
-  FacebookIcon,
-  ExternalLink,
-} from "lucide-react";
+
 const Committee = () => {
   const members = getCollection("committee") as CommitteeType[];
   const latestCommitteeNumber = Number(
     members.sort((a, b) => {
       return Number(b.committee) - Number(a.committee);
-    })[0].committee
+    })[0].committee,
   );
 
   const latestCommitteeMembers = members

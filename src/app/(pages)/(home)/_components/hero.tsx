@@ -1,7 +1,6 @@
-import React from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { FloatingHeroIcons } from "./floating-hero-icons";
 
 const Hero = () => {

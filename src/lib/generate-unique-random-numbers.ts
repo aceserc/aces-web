@@ -1,6 +1,6 @@
 const generateUniqueRandomNumbers = (
   range: [number, number],
-  count: number
+  count: number,
 ): number[] => {
   const [min, max] = range;
   const numbers = new Set<number>();

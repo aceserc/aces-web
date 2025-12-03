@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import Img from "next/image";
-import React from "react";
+import type React from "react";
+import { cn } from "@/lib/utils";
 
 type Props = React.ComponentProps<typeof Img>;
 

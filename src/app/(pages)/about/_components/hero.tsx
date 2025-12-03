@@ -1,13 +1,13 @@
-import Link from "next/link";
 import Image from "next/image";
-import { CONTACT_LINKS } from "@/constants/contact-links";
-import { H2, Paragraph } from "@/components/ui/typography";
+import Link from "next/link";
+import { titleCase } from "scule";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { titleCase } from "scule";
+import { H2, Paragraph } from "@/components/ui/typography";
+import { CONTACT_LINKS } from "@/constants/contact-links";
 
 const Hero = () => {
   return (

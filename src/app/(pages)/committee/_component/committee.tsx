@@ -1,5 +1,4 @@
-import { Committee as CommitteeType } from "@/db/types";
-import React from "react";
+import type { Committee as CommitteeType } from "@/db/types";
 import { MemberCard } from "./member-card";
 
 type Props = {
@@ -8,15 +7,15 @@ type Props = {
 
 const Committee = ({ committee }: Props) => {
   const president = committee.find(
-    (member) => member.role.toLowerCase() === "president"
+    (member) => member.role.toLowerCase() === "president",
   );
   const adviser = committee.find(
-    (member) => member.role.toLowerCase() === "adviser"
+    (member) => member.role.toLowerCase() === "adviser",
   );
   const restMembers = committee.filter(
     (member) =>
       member.role.toLowerCase() !== "president" &&
-      member.role.toLowerCase() !== "adviser"
+      member.role.toLowerCase() !== "adviser",
   );
 
   return (

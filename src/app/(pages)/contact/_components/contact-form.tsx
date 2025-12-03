@@ -1,10 +1,12 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader, SendHorizonal } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import type { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -13,12 +15,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
-import { ContactValidationSchema } from "@/validations/contact";
-import { z } from "zod";
-import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { sendContactEmail } from "@/server-actions/contact";
-import { Loader, SendHorizonal } from "lucide-react";
+import { ContactValidationSchema } from "@/validations/contact";
 
 const FormSchema = ContactValidationSchema;
 type FormSchemaType = z.infer<typeof FormSchema>;
@@ -41,7 +41,7 @@ const ContactForm = () => {
       setIsLoading(true);
       await sendContactEmail(values);
       toast.success(
-        "Thank you for your message. We will reply to you as soon as possible."
+        "Thank you for your message. We will reply to you as soon as possible.",
       );
       form.reset();
     } catch {

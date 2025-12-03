@@ -1,15 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { useMemo, useRef } from "react";
-import { usePathname } from "next/navigation";
-
 import { ChevronDownIcon, MenuIcon, X } from "lucide-react";
-import { useIsScrolled } from "@/hooks/use-is-scrolled";
-import { CONTACT_LINKS } from "@/constants/contact-links";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useMemo, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { CONTACT_LINKS } from "@/constants/contact-links";
+import { useIsScrolled } from "@/hooks/use-is-scrolled";
+import { cn } from "@/lib/utils";
 import { H3 } from "./ui/typography";
 
 const HEADER_LINKS = [
@@ -43,7 +42,7 @@ const Header = () => {
         <header
           className={cn(
             "flex rounded-md justify-between items-center px-6 py-4",
-            isScrolled && "bg-primary/5 backdrop-blur-md"
+            isScrolled && "bg-primary/5 backdrop-blur-md",
           )}
         >
           <Link href="/">
@@ -58,7 +57,7 @@ const Header = () => {
                 className={cn(
                   "underline-offset-3 hover:text-destructive/80 transition-colors ",
                   pathname.split("/")[1] === href.split("/")[1] &&
-                    "text-destructive underline"
+                    "text-destructive underline",
                 )}
               >
                 {label}
@@ -130,7 +129,7 @@ const Header = () => {
               className={cn(
                 "hover:text-foreground underline-offset-3",
                 pathname.split("/")[1] === href.split("/")[1] &&
-                  "text-destructive underline"
+                  "text-destructive underline",
               )}
             >
               {label}

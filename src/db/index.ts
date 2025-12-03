@@ -2,7 +2,7 @@ import committee from "@/.generated/notion/committee.json";
 import gallery from "@/.generated/notion/gallery.json";
 import sponsors from "@/.generated/notion/sponsors.json";
 import testimonials from "@/.generated/notion/testimonials.json";
-import { Committee, Gallery, Sponsor, Testimonial } from "./types";
+import type { Committee, Gallery, Sponsor, Testimonial } from "./types";
 
 export const COLLECTIONS = {
   committee: committee as Committee[],
@@ -19,7 +19,7 @@ export const getCollection = (collection: Collection) => {
 
 export const getCollectionItemBySlug = (
   collection: Collection,
-  slug: string
+  slug: string,
 ) => {
   return getCollection(collection).find((item) => {
     if ("slug" in item) {

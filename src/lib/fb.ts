@@ -51,7 +51,7 @@ class Facebook {
     } catch (error: any) {
       console.error(
         "Error fetching Facebook posts:",
-        error.response?.data || error.message
+        error.response?.data || error.message,
       );
       return { posts: [] };
     }

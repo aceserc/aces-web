@@ -1,7 +1,7 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { Committee } from "./_components/committee";
 import { Hero } from "./_components/hero";
 import { WhatWeDo } from "./_components/what-we-do";
-import { Committee } from "./_components/committee";
 
 const AboutPage = () => {
   return (

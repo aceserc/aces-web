@@ -1,17 +1,18 @@
 "use client";
 
-import { CONTACT_LINKS, DEVS_CONTACT_LINKS } from "@/constants/contact-links";
 import Image from "next/image";
-import { H3, H4, Paragraph } from "./ui/typography";
 import Link from "next/link";
-import { Hr } from "./ui/separator";
+import { titleCase } from "scule";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { titleCase } from "scule";
+import { CONTACT_LINKS, DEVS_CONTACT_LINKS } from "@/constants/contact-links";
 import { Client } from "./ui/client";
+import { Hr } from "./ui/separator";
+import { H3, H4, Paragraph } from "./ui/typography";
+
 const Footer = () => {
   return (
     <footer className="relative py-8 border-t border bg-muted/20 rounded-t-md">

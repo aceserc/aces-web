@@ -1,12 +1,12 @@
 import { getCollection } from "@/db";
-import { Committee } from "@/db/types";
+import type { Committee } from "@/db/types";
 
 const getCommittee = async () => {
   const members = getCollection("committee") as Committee[];
   const latestCommitteeNumber = Number(
     members.sort((a, b) => {
       return Number(b.committee) - Number(a.committee);
-    })[0].committee
+    })[0].committee,
   );
 
   const groupedByCommittee: Record<number, Committee[]> = members.reduce(
@@ -18,7 +18,7 @@ const getCommittee = async () => {
       acc[committeeNumber].push(cur);
       return acc;
     },
-    {} as Record<number, Committee[]>
+    {} as Record<number, Committee[]>,
   );
 
   // largest at top

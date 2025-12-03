@@ -1,11 +1,10 @@
 "use client";
 
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDownIcon, type LucideIcon } from "lucide-react";
 import { cva } from "class-variance-authority";
-
-import { cn } from "@/lib/utils";
+import { ChevronDownIcon, type LucideIcon } from "lucide-react";
 import { createContext, useContext } from "react";
+import { cn } from "@/lib/utils";
 
 type AccordionVariant = "default" | "secondary" | "bordered" | "card";
 
@@ -40,7 +39,7 @@ const accordionVariants = {
       defaultVariants: {
         variant: "default",
       },
-    }
+    },
   ),
   accordionContent: cva("pb-4 pt-0", {
     variants: {
@@ -64,7 +63,7 @@ type AccordionContextProps = {
 };
 
 const AccordionContext = createContext<AccordionContextProps | undefined>(
-  undefined
+  undefined,
 );
 
 /** Hook to access Accordion context */
@@ -72,7 +71,7 @@ function useAccordionContext() {
   const context = useContext(AccordionContext);
   if (!context) {
     throw new Error(
-      "useAccordionContext must be used within an AccordionProvider"
+      "useAccordionContext must be used within an AccordionProvider",
     );
   }
   return context;
@@ -123,7 +122,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         className={cn(
           accordionVariants.accordionTrigger({ variant }),
-          className
+          className,
         )}
         {...props}
       >
@@ -156,7 +155,7 @@ function AccordionContent({
       <div
         className={cn(
           accordionVariants.accordionContent({ variant }),
-          className
+          className,
         )}
       >
         {children}

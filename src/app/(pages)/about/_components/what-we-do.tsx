@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Hexagon } from "lucide-react";
 import { H2, H3, Paragraph } from "@/components/ui/typography";
 import { WHAT_WE_DO } from "@/constants/about";

@@ -1,9 +1,10 @@
 "use client";
 
-import { useIsScrolled } from "@/hooks/use-is-scrolled";
 import { ArrowUpFromLine } from "lucide-react";
 import React from "react";
+import { useIsScrolled } from "@/hooks/use-is-scrolled";
 import { Button } from "./button";
+
 const ScrollToTop = () => {
   const isScrolled = useIsScrolled(400);
 

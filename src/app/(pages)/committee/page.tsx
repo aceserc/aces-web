@@ -1,10 +1,11 @@
-import { H1, H2 } from "@/components/ui/typography";
-import { getCommittee } from "@/lib/committee";
-import { Metadata } from "next";
-import { Committee } from "./_component/committee";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Hr } from "@/components/ui/separator";
-import Link from "next/link";
+import { H1, H2 } from "@/components/ui/typography";
+import { getCommittee } from "@/lib/committee";
+import { Committee } from "./_component/committee";
+
 const CommitteePage = async () => {
   const { currentCommitteeNumber, pastCommittees, currentCommittee } =
     await getCommittee();

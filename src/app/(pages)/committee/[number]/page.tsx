@@ -1,11 +1,8 @@
-import { H1, H2 } from "@/components/ui/typography";
-import { getCommittee } from "@/lib/committee";
-import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Hr } from "@/components/ui/separator";
-import Link from "next/link";
-import { Committee } from "../_component/committee";
+import type { Metadata } from "next";
 import { NotFound } from "@/components/screens/not-found";
+import { H1 } from "@/components/ui/typography";
+import { getCommittee } from "@/lib/committee";
+import { Committee } from "../_component/committee";
 
 type Props = {
   params: Promise<{

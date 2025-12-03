@@ -1,8 +1,7 @@
 "use client";
 
+import { Quote } from "lucide-react";
 import React from "react";
-import { getCollection } from "@/db";
-import { Testimonial } from "@/db/types";
 import { Avatar } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -11,7 +10,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Quote } from "lucide-react";
+import { getCollection } from "@/db";
+import type { Testimonial } from "@/db/types";
 
 const Testimonials = () => {
   const testimonials = getCollection("testimonials") as Testimonial[];

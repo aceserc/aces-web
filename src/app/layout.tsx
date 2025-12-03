@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { ThemeProvider } from "next-themes";
+import { Toaster } from "sonner";
 import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
 import { DEVS_CONTACT_LINKS } from "@/constants/contact-links";
-import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,

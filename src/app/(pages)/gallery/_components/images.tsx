@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { Gallery } from "./gallery";
-import { ImageType } from ".";
+import type { FC } from "react";
 import { structureGalleryImages } from "@/lib/structure-gallery-images";
+import type { ImageType } from ".";
+import { Gallery } from "./gallery";
 
 interface ImagesProps {
   data: ImageType[];

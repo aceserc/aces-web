@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { ImageType } from ".";
+import type { ImageType } from ".";
 import { Image } from "./image";
 
 type Props = {
@@ -64,7 +64,7 @@ const Gallery = ({ images, layout, currentIndex, onClick }: Props) => {
                 index={index}
                 className={className}
               />
-            )
+            ),
           )}
         </div>
         <div className="sm:hidden grid grid-cols-2 grid-rows-3 gap-4 sm:gap-6 h-[500px]">
@@ -79,7 +79,7 @@ const Gallery = ({ images, layout, currentIndex, onClick }: Props) => {
                 index={index}
                 className={className}
               />
-            )
+            ),
           )}
         </div>
       </>
@@ -92,7 +92,7 @@ const Gallery = ({ images, layout, currentIndex, onClick }: Props) => {
         {layout === "normal" ? (
           <div
             className={cn(
-              "hidden sm:grid grid-rows-3 gap-4 sm:gap-6 h-[500px]"
+              "hidden sm:grid grid-rows-3 gap-4 sm:gap-6 h-[500px]",
             )}
           >
             {[
@@ -115,7 +115,7 @@ const Gallery = ({ images, layout, currentIndex, onClick }: Props) => {
         ) : (
           <div
             className={cn(
-              "hidden sm:grid grid-cols-4 grid-rows-3 gap-4 sm:gap-6 h-[500px]"
+              "hidden sm:grid grid-cols-4 grid-rows-3 gap-4 sm:gap-6 h-[500px]",
             )}
           >
             {[
