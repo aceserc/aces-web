@@ -14,7 +14,6 @@ const FloatingHeroIcons = () => {
     ICONS.vscode,
     ICONS.github,
     ICONS.ubuntu,
-    ICONS.linux,
     ICONS.python,
     ICONS.cpp,
     ICONS.nextjs,
