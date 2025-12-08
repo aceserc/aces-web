@@ -25,8 +25,10 @@ const Hero = () => {
                 <Button>Find Out More</Button>
               </Link>
 
-              <Button variant="secondary" disabled>
+              <Button variant="secondary" asChild>
+                <Link target="_blank" href="https://www.facebook.com/photo?fbid=1170921231880471&set=a.399023259070276">
                 Register Now
+                </Link>
               </Button>
             </div>
           </div>
