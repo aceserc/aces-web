@@ -154,8 +154,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-body: var(--font-body);
-  --font-heading: var(--font-heading);
+  --font-family-body: var(--font-body);
+  --font-family-heading: var(--font-heading);
+  --font-family-mono: var(--font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -185,7 +186,20 @@
   }
   body {
     letter-spacing: var(--tracking-normal);
-    @apply bg-background text-foreground font-body;
+    font-family: var(--font-body);
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
   }
 }
 
