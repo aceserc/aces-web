@@ -65,7 +65,7 @@ const Header = () => {
             ))}
           </nav>
           <div className="flex gap-3 items-center">
-            <AnimatedThemeToggler />
+            <AnimatedThemeToggler className="hidden sm:block" />
             <Link href="/contact" className="hidden sm:block">
               <Button variant="outline" className="!py-1 h-[36px]">
                 Contact

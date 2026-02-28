@@ -7,7 +7,7 @@ import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
 import { DEVS_CONTACT_LINKS } from "@/constants/contact-links";
 import {
   Bricolage_Grotesque,
-  Unbounded,
+  Lexend,
   JetBrains_Mono,
 } from "next/font/google";
 
@@ -17,7 +17,7 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-const unbounded = Unbounded({
+const lexend = Lexend({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${unbounded.variable} ${jetbrains.variable}`}
+      className={`${bricolage.variable} ${lexend.variable} ${jetbrains.variable}`}
       suppressHydrationWarning
     >
       <body className={`overflow-x-hidden`}>
