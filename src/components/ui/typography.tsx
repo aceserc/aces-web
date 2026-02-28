@@ -1,9 +1,9 @@
-import React, { type ComponentProps } from "react";
+import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
-const H1 = ({ className, ...props }: ComponentProps<"h2">) => {
+const H1 = ({ className, ...props }: ComponentProps<"h1">) => {
   return (
-    <h2
+    <h1
       className={cn(
         "text-4xl font-bold tracking-tight font-heading",
         className,

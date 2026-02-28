@@ -1,15 +1,15 @@
 "use client";
 
-import { ChevronDownIcon, MenuIcon, X } from "lucide-react";
+import { MenuIcon, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CONTACT_LINKS } from "@/constants/contact-links";
-import { useIsScrolled } from "@/hooks/use-is-scrolled";
 import { cn } from "@/lib/utils";
 import { H3 } from "./ui/typography";
+import AnimatedThemeToggler from "./ui/theme-toggle";
 
 const HEADER_LINKS = [
   {
@@ -65,11 +65,13 @@ const Header = () => {
             ))}
           </nav>
           <div className="flex gap-3 items-center">
+            <AnimatedThemeToggler />
             <Link href="/contact" className="hidden sm:block">
               <Button variant="outline" className="!py-1 h-[36px]">
                 Contact
               </Button>
             </Link>
+
             <Link
               target="_blank"
               href={CONTACT_LINKS.discord.href}
@@ -86,6 +88,7 @@ const Header = () => {
 
             {/* // hamburger menu */}
             <button
+              type="button"
               onClick={() => {
                 if (mobileNavRef.current) {
                   mobileNavRef.current.classList.remove("translate-x-full");
@@ -137,6 +140,7 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex gap-3 items-center w-full">
+          <AnimatedThemeToggler />
           <Link
             onClick={() => {
               if (mobileNavRef.current) {

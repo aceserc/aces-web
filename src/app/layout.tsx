@@ -5,6 +5,29 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import { NextjsTopLoader } from "@/components/ui/nextjs-top-loader";
 import { DEVS_CONTACT_LINKS } from "@/constants/contact-links";
+import {
+  Bricolage_Grotesque,
+  Unbounded,
+  JetBrains_Mono,
+} from "next/font/google";
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -12,8 +35,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`overflow-x-hidden`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${bricolage.variable} ${unbounded.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={`overflow-x-hidden`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
