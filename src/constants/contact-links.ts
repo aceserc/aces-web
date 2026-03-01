@@ -30,4 +30,5 @@ export const CONTACT_LINKS = {
 export const DEVS_CONTACT_LINKS = {
   "@jrTilak": "https://thapatilak.com.np/",
   "@dev-sandip": "https://github.com/dev-sandip",
+  "@suman": "https://sumankshetri.com.np/",
 } as const;
