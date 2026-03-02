@@ -16,10 +16,10 @@ import { H3, H4, Paragraph } from "./ui/typography";
 const Footer = () => {
   return (
     <footer className="relative py-10 border-t border-border bg-muted/20 rounded-t-2xl">
-      <div className="container flex flex-col gap-8 items-center sm:items-start">
-        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-8 w-full">
+      <div className="container flex flex-col gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-6 w-full">
           {/* Brand column */}
-          <div className="flex flex-col gap-3 items-center sm:items-start w-full sm:max-w-xs">
+          <div className="flex flex-col gap-3 items-center sm:items-start sm:max-w-xs">
             <div className="flex items-center gap-2.5">
               <Image
                 src={"/logo.png"}
@@ -36,7 +36,7 @@ const Footer = () => {
               IOE Purwanchal Campus Dharan
             </Paragraph>
 
-            <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
+            <div className="flex items-center gap-2">
               {Object.keys(CONTACT_LINKS).map((key, i) => {
                 const item = CONTACT_LINKS[key as keyof typeof CONTACT_LINKS];
                 return (
@@ -90,7 +90,7 @@ const Footer = () => {
 
         <Hr />
 
-        <div className="flex justify-between flex-col sm:flex-row gap-2 text-center sm:text-left w-full">
+        <div className="flex items-center justify-between flex-col sm:flex-row gap-2 text-center sm:text-left w-full">
           <Client>
             <Paragraph className="text-xs text-muted-foreground">
               &copy; {new Date().getFullYear()} ACES. All rights reserved.
