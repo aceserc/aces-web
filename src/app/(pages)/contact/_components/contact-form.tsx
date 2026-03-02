@@ -27,17 +27,11 @@ const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      body: "",
-    },
+    defaultValues: { name: "", email: "", subject: "", body: "" },
   });
 
   const onSubmit = async (values: FormSchemaType) => {
     try {
-      /** Handle form submission here */
       setIsLoading(true);
       await sendContactEmail(values);
       toast.success(
@@ -55,15 +49,17 @@ const ContactForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 animate-in-from-bottom delay-300"
+        className="flex flex-col gap-5 animate-in-from-bottom delay-300"
       >
-        <div className="flex gap-4 sm:gap-8 flex-col sm:flex-row items-center">
+        <div className="flex gap-4 flex-col sm:flex-row">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Name*</FormLabel>
+                <FormLabel className="text-sm text-muted-foreground tracking-widest font-mono">
+                  Name*
+                </FormLabel>
                 <FormControl>
                   <Input placeholder="John Doe" {...field} />
                 </FormControl>
@@ -76,7 +72,9 @@ const ContactForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Email*</FormLabel>
+                <FormLabel className="text-sm text-muted-foreground tracking-widest font-mono">
+                  Email*
+                </FormLabel>
                 <FormControl>
                   <Input type="email" placeholder="hey@gmail.com" {...field} />
                 </FormControl>
@@ -85,12 +83,15 @@ const ContactForm = () => {
             )}
           />
         </div>
+
         <FormField
           control={form.control}
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject*</FormLabel>
+              <FormLabel className="text-sm text-muted-foreground tracking-widest font-mono">
+                Subject*
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="I would like to..."
@@ -102,16 +103,19 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="body"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message*</FormLabel>
+              <FormLabel className="text-sm text-muted-foreground tracking-widest font-mono">
+                Message*
+              </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Hi there!..."
-                  className="min-h-28 resize-none"
+                  className="min-h-32 resize-none"
                   {...field}
                 />
               </FormControl>
@@ -119,14 +123,9 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
-        <div className="flex gap-2 self-end ">
-          <Button
-            type="reset"
-            variant={"outline"}
-            onClick={() => {
-              form.reset();
-            }}
-          >
+
+        <div className="flex gap-2 self-end pt-1">
+          <Button type="reset" variant="outline" onClick={() => form.reset()}>
             Cancel
           </Button>
           <Button
@@ -135,12 +134,10 @@ const ContactForm = () => {
             disabled={form.formState.isSubmitting}
           >
             {isLoading ? (
-              <>
-                <Loader className="animate-spin" />
-              </>
+              <Loader className="animate-spin" />
             ) : (
               <>
-                Submit <SendHorizonal />
+                Submit <SendHorizonal className="ml-1.5 size-4" />
               </>
             )}
           </Button>

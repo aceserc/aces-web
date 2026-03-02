@@ -1,68 +1,43 @@
-import { ICONS } from "@/assets/icons/icons";
-import generateUniqueRandomNumbers from "@/lib/generate-unique-random-numbers";
-import { cn } from "@/lib/utils";
+"use client";
 
-const FloatingHeroIcons = () => {
-  const HERO_ICONS = [
-    ICONS.figma,
-    ICONS.flutter,
-    ICONS.gitlab,
-    ICONS.java,
-    ICONS.kali,
-    ICONS.react,
-    ICONS.typescript,
-    ICONS.vscode,
-    ICONS.github,
-    ICONS.ubuntu,
-    ICONS.python,
-    ICONS.cpp,
-    ICONS.nextjs,
-    ICONS.arch,
-  ];
+const ICONS = [
+  {
+    src: "https://api.iconify.design/logos:python.svg",
+    style: { top: "12%", left: "23%" },
+  },
+  {
+    src: "https://api.iconify.design/logos:react.svg",
+    style: { top: "-2%", left: "67%" },
+  },
+  {
+    src: "https://api.iconify.design/logos:nextjs-icon.svg",
+    style: { top: "32%", right: "2%" },
+  },
+  {
+    src: "https://api.iconify.design/logos:typescript-icon.svg",
+    style: { bottom: "12%", right: "1%" },
+  },
+  {
+    src: "https://api.iconify.design/logos:java.svg",
+    style: { bottom: "5%", left: "30%" },
+  },
+];
 
-  const iconsToShow = generateUniqueRandomNumbers(
-    [0, HERO_ICONS.length - 1],
-    5,
-  ).map((i) => HERO_ICONS[i]);
+export const FloatingHeroIcons = () => {
   return (
     <>
-      {[
-        {
-          top: "12%",
-          left: "23%",
-        },
-        {
-          top: "32%",
-          right: "2%",
-        },
-        {
-          top: "-2%",
-          left: "67%",
-        },
-        {
-          bottom: "12%",
-          left: "4%",
-        },
-        {
-          bottom: "12%",
-          right: "1%",
-        },
-      ].map((style, i) => (
+      {ICONS.map((icon, i) => (
         <img
-          src={iconsToShow[i]}
           key={i}
+          src={icon.src}
           height={40}
           width={40}
           alt=""
-          style={style}
-          className={cn(
-            "object-contain animate-in delay-300 animate-fade-in zoom-in  object-center select-none absolute z-20 h-6 w-6 sm:w-8 sm:h-8 md:w-10 md:h-10",
-          )}
+          style={icon.style}
+          className="absolute object-contain animate-in delay-300 animate-fade-in zoom-in object-center"
           fetchPriority="low"
         />
       ))}
     </>
   );
 };
-
-export { FloatingHeroIcons };

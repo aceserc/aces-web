@@ -4,30 +4,31 @@ const About = () => {
   return (
     <section
       id="about"
-      className="container flex flex-col  py-8 sm:py-12 items-center gap-4 justify-center"
+      className="container flex flex-col py-16 sm:py-24 items-center gap-3 justify-center"
     >
-      <span className="text-center text-muted-foreground text-xl font-medium">
+      <span className="text-center text-muted-foreground text-sm font-medium uppercase tracking-widest">
         About
       </span>
-      <h3 className="text-center text-xl sm:text-2xl lg:text-4xl font-bold">
+      <h3 className="text-center text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
         What we do?
       </h3>
-      <p className="text-center text-sm sm:text-base max-w-2xl text-muted-foreground">
+      <p className="text-center text-sm sm:text-base max-w-xl text-muted-foreground mt-2 leading-relaxed">
         At ACES, IOE Purwanchal Campus, Dharan, we provide training, organize
         competitions, host podcasts, and conduct an annual Techfest to support
         the development of Computer Engineering students.
       </p>
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-6 xl:gap-9">
+
+      <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
         {WHAT_WE_DO.map((item, i) => (
           <div
             key={i}
-            className="flex flex-col items-center bg-background h-full justify-center shadow group-hover:shadow-xl transition-all p-4 rounded-lg z-20 border border-transparent hover:border-border"
+            className="flex flex-col items-start bg-card p-6 rounded-xl border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300 group"
           >
-            <item.icon className="h-9 w-9 text-primary relative z-20" />
-            <h4 className="text-xl font-bold mt-4 relative z-20">
-              {item.title}
-            </h4>
-            <p className="text-center text-muted-foreground max-w-xs mt-2 text-sm md:text-base relative z-20">
+            <div className="p-2.5 rounded-lg bg-accent mb-5 transition-colors duration-300 group-hover:bg-primary/10">
+              <item.icon className="h-5 w-5 text-accent-foreground group-hover:text-primary transition-colors duration-300" />
+            </div>
+            <h4 className="text-base font-semibold mb-2">{item.title}</h4>
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {item.description}
             </p>
           </div>

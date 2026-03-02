@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+fiest, run the generate notion script:
+
+```bash
+pnpm run generate
+```
+
+Second, run the development server:
 
 ```bash
 npm run dev

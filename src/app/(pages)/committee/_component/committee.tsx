@@ -19,8 +19,8 @@ const Committee = ({ committee }: Props) => {
   );
 
   return (
-    <div className="flex gap-4 xs:gap-9 flex-col w-full">
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-[700px] m-auto w-full">
+    <div className="flex gap-6 xs:gap-10 flex-col w-full">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 max-w-[720px] mx-auto w-full">
         {president && <MemberCard {...president} />}
         {adviser && <MemberCard {...adviser} />}
       </div>

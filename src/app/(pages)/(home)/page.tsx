@@ -5,16 +5,17 @@ import { Sponsors } from "./_components/sponsors";
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-5 sm:gap-7 md:gap-9 xl:gap-12">
-      <section id="hero" className="flex flex-col gap-24 xl:gap-32">
-        <div className="flex flex-col gap-4">
-          <Hero />
-          <Sponsors />
-        </div>
+    <main className="flex flex-col">
+      <section id="hero" className="flex flex-col gap-10 xl:gap-14">
+        <Hero />
+        <Sponsors />
       </section>
-      <About />
-      <Testimonials />
-    </div>
+
+      <div className="flex flex-col lg:px-15 xl:px-20">
+        <About />
+        <Testimonials />
+      </div>
+    </main>
   );
 };
 
