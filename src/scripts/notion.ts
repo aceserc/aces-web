@@ -195,6 +195,8 @@ const CONFIG: Config[] = [
       tag: "select",
       created_at: "date",
       images: "files_array",
+      title: "rich_text",
+      categories: "select",
     },
   },
   {
