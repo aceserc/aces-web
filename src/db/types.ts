@@ -16,6 +16,8 @@ export type Gallery = {
   tag: string;
   created_at: string;
   images: string[];
+  title: string;
+  categories: string;
 };
 
 export type Sponsor = {

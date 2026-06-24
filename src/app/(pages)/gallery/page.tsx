@@ -5,13 +5,14 @@ import { Gallery } from "./_components";
 
 async function Page() {
   const images = getCollection("gallery") as GalleryType[];
-  console.log(images);
   return (
     <Gallery
       images={images.flatMap((i) =>
         i.images.map((img) => ({
           url: img,
           tag: i.tag,
+          title: i.title,
+          categories: i.categories,
         })),
       )}
     />

@@ -24,11 +24,11 @@ const Image = ({
       onClick={() => onClick(index + currentIndex * 4)}
       role="button"
       className={cn(
-        "rounded-md overflow-hidden flex items-center justify-center relative group cursor-pointer group",
+        "rounded-md overflow-hidden flex items-center justify-center relative group cursor-pointer aspect-square",
         className,
       )}
     >
-      <Badge className="absolute top-2 left-2 scale-0 group-hover:scale-100 transition-all">
+      <Badge className="absolute top-2 left-2 scale-0 group-hover:scale-100 transition-all z-10">
         {title}
       </Badge>
       <Img
